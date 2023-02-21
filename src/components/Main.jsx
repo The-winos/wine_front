@@ -3,7 +3,7 @@ import { Navbar } from "./";
 
 const Main = () => {
   return (
-    <div id="mains">
+    <div id="main">
       <Navbar />
     </div>
   );
