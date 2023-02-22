@@ -7,10 +7,7 @@
     "start-dev": "NODE_ENV='development' react-scripts start",
     "start": "react-scripts start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jmelchiade/ReactBasicBoilerPlate.git"
-  },
+ 
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,8 +18,17 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.1"
   },
-  "bugs": {
-    "url": "https://github.com/jmelchiade/ReactBasicBoilerPlate/issues"
-  },
-  "homepage": "https://github.com/jmelchiade/ReactBasicBoilerPlate#readme"
+ 
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
