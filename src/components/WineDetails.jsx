@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useHref } from "react-router-dom";
 
 const WineDetails = ({wine}) => {
-  const navigate= useNavigate
+  const navigate= useNavigate();
   const ref= useHref();
   return (
   <div id="wineDetails">

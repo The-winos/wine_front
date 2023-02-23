@@ -81,3 +81,18 @@ export async function getAllWine() {
     console.error(error);
   }
 }
+
+export async function getWineById(wineId){
+  try {
+    const options={
+      headers:{
+        "Content-Type":"application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/wines/${wineId}`, options);
+    const result= await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
