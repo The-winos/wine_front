@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { Navbar, Home, Login, Admin, Followers, Following, Merchant, Profile, Register, WineDetails, WineFeed, Footer } from "./";
 import { Route, Routes } from "react-router-dom";
 
 
 const Main = () => {
+  const [loggedIn, setLoggedIn]= useState(false);
+  const [user, setUser]= useState({}); //in griffinBack it has it as useState({ admin: false });
+
+  const getLoggedInUser = async (token) => {
+    if (token) {
+      const loggedInUser = await authUser(token);
+      setUser(loggedInUser);
+      console.log(loggedIn, "loggedIn")
+    }
+  };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+      getLoggedInUser(token);
+    }
+  }, []);
+
   return (
     <div id="main">
- <Navbar />
+ <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
  <Routes>
   <Route path="/" element={<Home/>}></Route>
-  <Route path="/login" element={<Login/>}></Route>
+  <Route path="/login" element={<Login loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              user={user}
+              setUser={setUser} />}></Route>
   <Route path="/admin" element={<Admin/>}></Route>
   <Route path="/followers" element={<Followers/>}></Route>
   <Route path="/following" element= {<Following/>}></Route>
