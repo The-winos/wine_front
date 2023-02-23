@@ -59,7 +59,7 @@ const Main = () => {
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/singlewine" element={<SingleWine />}></Route>
+        <Route path="/singlewine/:wineId" element={<SingleWine user={user} loggedIn={loggedIn} />}></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route
           path="/winefeed"
