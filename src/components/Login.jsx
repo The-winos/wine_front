@@ -1,6 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { authUser } from "./API/index";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { authUser, loginUser } from "./API/index";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -57,7 +57,7 @@ const Login = () => {
       </form>
       <br />
       <h3>Create Account</h3>
-      <Link to="/address" className="link">
+      <Link to="/register" className="link">
         Register
       </Link>
     </div>
