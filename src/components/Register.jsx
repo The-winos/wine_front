@@ -1,11 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 
 const Register = () => {
-  const {
-    state: { address_id },
-  } = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -13,13 +10,16 @@ const Register = () => {
 
   async function handleRegister(event) {
     event.preventDefault();
-    const { token, message } = await registerUser(
+    const { token } = await registerUser(
       username,
       password,
       name,
-      false,
+      state,
+      role,
       email,
-      address_id
+      year_born,
+      follower_count,
+      following_count
     );
     localStorage.removeItem("token");
     localStorage.setItem("token", token);
