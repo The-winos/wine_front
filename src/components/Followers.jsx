@@ -2,7 +2,7 @@
 import React from "react";
 
 const Followers = () => {
-  return <div id="followers"></div>;
+  return <div id="followers"> I am followers</div>;
 };
 
 export default Followers;

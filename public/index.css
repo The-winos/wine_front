@@ -19,3 +19,14 @@ body {
 #navbar div {
   padding: 5px;
 }
+
+#footer {
+  display: flex;
+  min-height: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  padding: 2px;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
