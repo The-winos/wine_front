@@ -1,12 +1,9 @@
 import React, {useState} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Navbar = (props) => {
-  const setLoggedIn = props.setLoggedIn;
-  const loggedIn = props.loggedIn;
-  const user = props.user;
-  const setUser = props.setUser;
+const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
   const navigate = useNavigate();
+
   return (<>
     <div id="navbar">
       <div className="links">

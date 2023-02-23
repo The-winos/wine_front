@@ -1,17 +1,31 @@
-import React, { useEffect, useState} from "react";
-import { Navbar, Home, Login, Admin, Followers, Following, Merchant, Profile, Register, WineDetails, WineFeed, Footer } from "./";
+import React, { useEffect, useState } from "react";
+import {
+  Navbar,
+  Home,
+  Login,
+  Admin,
+  Followers,
+  Following,
+  Merchant,
+  Profile,
+  Register,
+  WineDetails,
+  WineFeed,
+  Footer,
+} from "./";
 import { Route, Routes } from "react-router-dom";
 
-
 const Main = () => {
-  const [loggedIn, setLoggedIn]= useState(false);
-  const [user, setUser]= useState({}); //in griffinBack it has it as useState({ admin: false });
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({}); //in griffinBack it has it as useState({ admin: false });
+  const [wineInfo, setWineInfo] = useState({});
+  const [allWine, setAllWine] = useState([]);
 
   const getLoggedInUser = async (token) => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
-      console.log(loggedIn, "loggedIn")
+      console.log(loggedIn, "loggedIn");
     }
   };
   useEffect(() => {
@@ -24,23 +38,40 @@ const Main = () => {
 
   return (
     <div id="main">
- <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
- <Routes>
-  <Route path="/" element={<Home/>}></Route>
-  <Route path="/login" element={<Login loggedIn={loggedIn}
+      <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/login"
+          element={
+            <Login
+              loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               user={user}
-              setUser={setUser} />}></Route>
-  <Route path="/admin" element={<Admin/>}></Route>
-  <Route path="/followers" element={<Followers/>}></Route>
-  <Route path="/following" element= {<Following/>}></Route>
-  <Route path="/merchant" element={<Merchant/>}></Route>
-  <Route path="/profile" element={<Profile/>}></Route>
-  <Route path="/register" element={<Register/>}></Route>
-  <Route path="/winedetails" element={<WineDetails/>}></Route>
-  <Route path= "/winefeed" element={<WineFeed/>}></Route>
- </Routes>
- <Footer/>
+              setUser={setUser}
+            />
+          }
+        ></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/followers" element={<Followers />}></Route>
+        <Route path="/following" element={<Following />}></Route>
+        <Route path="/merchant" element={<Merchant />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/winedetails" element={<WineDetails />}></Route>
+        <Route
+          path="/winefeed"
+          element={
+            <WineFeed
+              allWine={allWine}
+              setAllWine={setAllWine}
+              wineInfo={wineInfo}
+              setWineInfo={setWineInfo}
+            />
+          }
+        ></Route>
+      </Routes>
+      <Footer />
     </div>
   );
 };
