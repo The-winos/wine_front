@@ -7,18 +7,52 @@ body {
 
 #navbar {
   font-family: "Poller One", Arial, sans-serif;
-  flex-grow: 1;
-  max-height: 10%;
-  min-height: 40px;
-  background-color: #222222;
+  background-color: rgb(20, 20, 20);
   color: white;
   display: flex;
+  align-content: center;
   align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+
 }
 
-#navbar div {
-  padding: 5px;
+#username {
+  align-content: baseline;
+  position: absolute;
+  right: 10px;
+  font-size: 1.5rem;
 }
+
+.links {
+  display: flex;
+  justify-content: flex-end;
+  max-height: 100%;
+  padding: 3px;
+  color: white;
+  font-weight: bold;
+  font-size: larger;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+}
+
+.linkBar {
+  position: relative;
+  top: 30px;
+  padding: 20px;
+  text-decoration: none;
+  margin: 15px;
+  color: white;
+}
+.linkBar:hover {
+  color: yellow;
+  text-decoration: none;
+}
+
+/* #navbar div {
+  padding: 5px;
+} */
 
 #footer {
   display: flex;
