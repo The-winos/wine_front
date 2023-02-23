@@ -14,3 +14,13 @@ export async function authUser(token) {
     console.error(error);
   }
 }
+
+export async function getAllWine(){
+  try {
+    const response =await fetch(`${BASE_URL}/wines`);
+    const result = await response.json();
+    return result;
+  }catch(error){
+    console.error(error)
+  }
+}
