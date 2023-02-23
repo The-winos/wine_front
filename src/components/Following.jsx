@@ -2,7 +2,7 @@
 import React from "react";
 
 const Following = () => {
-  return <div id="following"></div>;
+  return <div id="following">I am following</div>;
 };
 
 export default Following;
