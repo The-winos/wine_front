@@ -11,5 +11,6 @@ export { default as Share } from "./Share";
 export { default as Tags } from "./Tags.jsx";
 export { default as WineDetails } from "./WineDetails.jsx";
 export { default as WineFeed } from "./WineFeed.jsx";
- export {default as Footer} from "./Footer";
- export {default as Home} from "./Home"
+export { default as Footer } from "./Footer";
+export { default as Home } from "./Home";
+export { default as SingleWine } from "./SingleWine";

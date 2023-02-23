@@ -12,6 +12,7 @@ import {
   WineDetails,
   WineFeed,
   Footer,
+  SingleWine
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
@@ -58,6 +59,7 @@ const Main = () => {
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/singlewine" element={<SingleWine />}></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route
           path="/winefeed"
