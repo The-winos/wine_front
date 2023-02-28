@@ -3,6 +3,7 @@ import { getAllWine } from "./API";
 import WineDetails from "./WineDetails";
 
 const WineList = ({allWine, setAllWine, setWineInfo, wineInfo}) => {
+
   useEffect(()=>{
     async function fetchAllWine(){
       const allTheWine = await getAllWine();

@@ -72,6 +72,22 @@ export async function registerUser(
   }
 }
 
+export async function getUserById(userId){
+  try {
+    const options={
+      headers:{
+        "Content-Type":"application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/users/${userId}`, options);
+    const result= await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 export async function getAllWine() {
   try {
     const response = await fetch(`${BASE_URL}/wines`);
