@@ -14,6 +14,7 @@ import {
   Footer,
   SingleWine,
   WineList,
+  ReviewDetails
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
@@ -23,6 +24,7 @@ const Main = () => {
   const [wineInfo, setWineInfo] = useState({});
   const [allWine, setAllWine] = useState([]);
   const [allReviews, setAllReviews]=useState([])
+  const [reviewInfo, setReviewInfo]=useState([])
 
   const getLoggedInUser = async (token) => {
     if (token) {
@@ -87,6 +89,8 @@ const Main = () => {
               setWineInfo={setWineInfo}
               allReviews={allReviews}
               setAllReviews={setAllReviews}
+              reviewInfo={reviewInfo}
+              setReviewInfo={setReviewInfo}
             />
           }
         ></Route>

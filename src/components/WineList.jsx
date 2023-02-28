@@ -18,13 +18,12 @@ const WineList = ({allWine, setAllWine, setWineInfo, wineInfo}) => {
       <div id="wines" className="wine">
         {allWine && allWine.length ? allWine.map((wine)=>{
           return(
-            <div>
-              <WineDetails
-              key={`allWines-${wine.id}`}
-              wine={wine}
-              setWineInfo={setWineInfo}
-              />
-            </div>
+            <div key={`allWines-${wine.id}`}>
+      <WineDetails
+        wine={wine}
+        setWineInfo={setWineInfo}
+      />
+    </div>
           );
         }):null}
       </div>
