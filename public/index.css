@@ -71,11 +71,33 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  background-color: #f8f9fa;
 }
 
 .card-text {
   margin-bottom: 0.5rem;
 }
+
+.card {
+  border: none;
+}
+
+button {
+  position: relative;
+  margin-top: 10px;
+}
+
+.card-text small {
+  margin: 0;
+  padding: 0;
+}
+.muted {
+  color: #999999;
+  font-size: 0.8em;
+}
+
+
+
 
 /* wine details */
 
@@ -88,3 +110,11 @@ body {
   padding-bottom: 20px;
 }
 /* wine list */
+
+/* winefeed */
+.tastingRoom {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* winefeed */

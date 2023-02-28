@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate, useHref } from "react-router-dom";
-import { Card } from "react-bootstrap";
 import Rating from "react-rating-stars-component";
 
 const WineDetails = ({ wine }) => {
@@ -8,8 +7,8 @@ const WineDetails = ({ wine }) => {
   const ref = useHref();
 
   return (
-    <Card style={{ maxWidth: "60%", margin: "0 auto" }}>
-      <div className="card mb-3" style={{ maxWidth: "800px" }}>
+
+      <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
         <div className="row no-gutters">
           <div className="col-md-4">
             <img
@@ -48,7 +47,6 @@ const WineDetails = ({ wine }) => {
           </div>
         </div>
       </div>
-    </Card>
   );
 };
 
