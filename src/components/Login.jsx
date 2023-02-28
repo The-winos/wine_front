@@ -58,7 +58,7 @@ const Login = () => {
       <br />
       <h3>Create Account</h3>
       <Link to="/register" className="link">
-        Register
+        Register Now
       </Link>
     </div>
   );

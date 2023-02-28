@@ -1,0 +1,20 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border: solid salmon 3px;
+  height: max-content;
+  width: max-content;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: auto;
+}
+.register-line {
+  display: flex;
+  padding: 0.5rem;
+}
+.register-header {
+  display: flex;
+  padding: 0.5rem;
+  font-size: large;
+}

@@ -10,7 +10,7 @@ const Register = () => {
 
   async function handleRegister(event) {
     event.preventDefault();
-    const { token } = await registerUser(
+    const token = await registerUser(
       username,
       password,
       name,
@@ -30,7 +30,86 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      <h2 className="register-header">Register</h2>
+      <div className="bg-light">
+        <div className="container">
+          <div className="row mt-5">
+            <div className="col-lg-4 bg-white m-auto">
+              <h3 className="text-center pt-3">Sign up</h3>
+              <p className="text-center text muted lead">
+                It's free and only takes a minute. Discover your community of
+                wine lovers!
+              </p>
+              <form action="#">
+                <div className="input-group mb-3">
+                  <span className="input-group-text">
+                    <i className="fa fa-user"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="First Name"
+                  ></input>
+                </div>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">
+                    <i className="fa fa-user"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Last Name"
+                  ></input>
+                </div>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">
+                    <i className="fa fa-envelope"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Email"
+                  ></input>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">
+                      <i className="fa fa-user"></i>
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Username"
+                    ></input>
+                  </div>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">
+                      <i className="fa fa-lock"></i>
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Password"
+                    ></input>
+                    <div className="input-group mb-3">
+                      <span className="input-group-text">
+                        <i className="fa fa-lock"></i>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Confirm Password"
+                      ></input>
+                    </div>
+                    <div className="d-grid">
+                      <button type="button" className="btn btn-success">
+                        Register
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <form onSubmit={handleRegister}>
         <input
           className="register-line"
@@ -79,9 +158,6 @@ const Register = () => {
             setPassword(event.target.value);
           }}
         />
-        <br />
-        <small>*password must be 8 characters or more</small>
-        <br />
 
         <button className="buttons" type="submit">
           Register
@@ -89,7 +165,7 @@ const Register = () => {
       </form>
 
       <br />
-      <h3>Exiting User</h3>
+      <h3>Already have an account?</h3>
       <Link to="/login" className="link">
         Login
       </Link>

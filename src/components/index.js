@@ -6,7 +6,7 @@ export { default as Following } from "./Following";
 export { default as Login } from "./Login";
 export { default as Merchant } from "./Merchant";
 export { default as Profile } from "./Profile";
-export { default as Register } from "./SearchBar";
+export { default as Register } from "./Register";
 export { default as Share } from "./Share";
 export { default as Tags } from "./Tags.jsx";
 export { default as WineDetails } from "./WineDetails.jsx";
