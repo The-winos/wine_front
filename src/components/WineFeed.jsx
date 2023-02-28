@@ -16,9 +16,9 @@ const WineFeed = ({allWine, setAllWine, setWineInfo, wineInfo, setAllReviews, al
 }, []);
 
   return (
-  <div id="winFeed">
-<h2 id="tastingRoom">Welcome to the Tasting Room</h2>
-<h3 id="tastingRoomInfo">See all the wine people have reviewed</h3>
+  <div id="wineFeed">
+<h2 className="tastingRoom">Welcome to the Tasting Room</h2>
+<h3 className="tastingRoom">See all the wines people have reviewed</h3>
 <div id="reviews" className="review">
   {allReviews && allReviews.length ? allReviews.map((review)=>{
     return(

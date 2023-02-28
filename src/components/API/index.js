@@ -81,6 +81,7 @@ export async function getUserById(userId){
     };
     const response = await fetch(`${BASE_URL}/users/${userId}`, options);
     const result= await response.json();
+
     return result;
   } catch (error) {
     console.error(error);
