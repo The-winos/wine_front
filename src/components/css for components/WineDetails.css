@@ -1,0 +1,15 @@
+/* WineDetails.css */
+
+.wine-details {
+  display: flex;
+  align-items: center;
+}
+
+.wine-img {
+  width: 40%;
+  margin-right: 1rem;
+}
+
+.wine-info {
+  flex: 1;
+}

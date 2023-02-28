@@ -12,7 +12,8 @@ import {
   WineDetails,
   WineFeed,
   Footer,
-  SingleWine
+  SingleWine,
+  WineList,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,6 +22,7 @@ const Main = () => {
   const [user, setUser] = useState({}); //in griffinBack it has it as useState({ admin: false });
   const [wineInfo, setWineInfo] = useState({});
   const [allWine, setAllWine] = useState([]);
+  const [allReviews, setAllReviews]=useState([])
 
   const getLoggedInUser = async (token) => {
     if (token) {
@@ -59,7 +61,21 @@ const Main = () => {
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/singlewine/:wineId" element={<SingleWine user={user} loggedIn={loggedIn} />}></Route>
+        <Route
+          path="/winelist"
+          element={
+            <WineList
+              allWine={allWine}
+              setAllWine={setAllWine}
+              wineInfo={wineInfo}
+              setWineInfo={setWineInfo}
+            />
+          }
+        ></Route>
+        <Route
+          path="/singlewine/:wineId"
+          element={<SingleWine user={user} loggedIn={loggedIn} />}
+        ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route
           path="/winefeed"
@@ -69,6 +85,8 @@ const Main = () => {
               setAllWine={setAllWine}
               wineInfo={wineInfo}
               setWineInfo={setWineInfo}
+              allReviews={allReviews}
+              setAllReviews={setAllReviews}
             />
           }
         ></Route>
