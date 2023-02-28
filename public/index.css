@@ -64,3 +64,27 @@ body {
   justify-content: center;
   margin: 10px;
 }
+
+/* wine details */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+
+/* wine details */
+
+/* wine list */
+
+#all-wine-title {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* wine list */
