@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { authUser } from "./API";
 import {
   Navbar,
   Home,
@@ -14,7 +15,7 @@ import {
   Footer,
   SingleWine,
   WineList,
-  ReviewDetails
+  ReviewDetails,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
@@ -23,8 +24,8 @@ const Main = () => {
   const [user, setUser] = useState({}); //in griffinBack it has it as useState({ admin: false });
   const [wineInfo, setWineInfo] = useState({});
   const [allWine, setAllWine] = useState([]);
-  const [allReviews, setAllReviews]=useState([])
-  const [reviewInfo, setReviewInfo]=useState([])
+  const [allReviews, setAllReviews] = useState([]);
+  const [reviewInfo, setReviewInfo] = useState([]);
 
   const getLoggedInUser = async (token) => {
     if (token) {
