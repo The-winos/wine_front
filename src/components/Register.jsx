@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 
-const Register = () => {
+const Register = ({ user, setLoggedIn }) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [state, setState] = useState("");
+  const [year_born, setYear_born] = useState("");
+  const [error, setError] = useState({});
+  const [token, setToken] = useState({});
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -15,16 +20,21 @@ const Register = () => {
       password,
       name,
       state,
-      role,
+      "user",
       email,
       year_born,
-      follower_count,
-      following_count
+      0,
+      0
     );
-    localStorage.removeItem("token");
-    localStorage.setItem("token", token);
-    if (token) {
-      useNavigate("login");
+    console.log(token, "Hello");
+    setToken(token);
+    if (token.error) {
+      const message = token.message;
+      setError(message);
+      localStorage.removeItem("token");
+    } else {
+      localStorage.setItem("token", token);
+      navigate("/profile");
     }
   }
 
@@ -39,7 +49,7 @@ const Register = () => {
                 It's free and only takes a minute. Discover your community of
                 wine lovers!
               </p>
-              <form action="#">
+              {/* <form action="#">
                 <div className="input-group mb-3">
                   <span className="input-group-text">
                     <i className="fa fa-user"></i>
@@ -105,7 +115,7 @@ const Register = () => {
                     </div>
                   </div>
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
         </div>
@@ -149,6 +159,30 @@ const Register = () => {
         <br />
         <input
           className="register-line"
+          type="text"
+          name="year born"
+          placeholder="year born *"
+          required
+          value={year_born}
+          onChange={function (event) {
+            setYear_born(event.target.value);
+          }}
+        />
+        <br />
+        <input
+          className="register-line"
+          type="text"
+          name="state"
+          placeholder="state *"
+          required
+          value={state}
+          onChange={function (event) {
+            setState(event.target.value);
+          }}
+        />
+        <br />
+        <input
+          className="register-line"
           type="password"
           name="password"
           placeholder="password *"
@@ -163,12 +197,16 @@ const Register = () => {
           Register
         </button>
       </form>
-
       <br />
       <h3>Already have an account?</h3>
       <Link to="/login" className="link">
         Login
       </Link>
+      {token.error ? (
+        <div>
+          <h4>{`${token.message}`}</h4>
+        </div>
+      ) : null}
     </div>
   );
 };
