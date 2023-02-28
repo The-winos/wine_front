@@ -96,3 +96,13 @@ export async function getWineById(wineId){
     console.error(error);
   }
 }
+
+export async function getAllReviews() {
+  try {
+    const response = await fetch(`${BASE_URL}/reviews`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
