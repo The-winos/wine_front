@@ -16,3 +16,4 @@ export { default as Home } from "./Home";
 export { default as SingleWine } from "./SingleWine";
 export { default as WineList } from "./WineList";
 export { default as ReviewDetails } from "./ReviewDetails";
+export { default as SingleWineReview } from "./SingleWineReview";

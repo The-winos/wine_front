@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getReviewsByWineId, getWineById } from "./API";
 import Rating from "react-rating-stars-component";
+import SingleWineReview from "./SingleWineReview";
 
 const SingleWine = ({ user, loggedIn }) => {
   const { wineId } = useParams();
@@ -66,7 +67,19 @@ const SingleWine = ({ user, loggedIn }) => {
   <span className="ml-2">{singleWine.region}</span>
 </p>
           </div>
+<div className="row" id="single-wine-reviews">
+{wineReviews && wineReviews.length ? wineReviews.map((review)=>{
+  return(
+    <div key={`wine-review-${review.id}`}>
+      <SingleWineReview
+      review={review}
 
+      />
+    </div>
+  )
+}):null
+}
+</div>
         </>
       ) : (
         <h1>Loading Your Wine</h1>
