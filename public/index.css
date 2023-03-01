@@ -142,3 +142,26 @@ button {
   padding-left: 140px;
 }
 /* singleWine */
+
+/* singleWineReview */
+.avatar-username {
+  text-align: center;
+  padding: 5px 0;
+}
+
+.review-date {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.rating {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.review-comment {
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+/* singleWineReview */
