@@ -118,3 +118,27 @@ button {
   padding-bottom: 20px;
 }
 /* winefeed */
+
+/* singleWine */
+#single-wine {
+  margin-top: 2rem;
+}
+
+#single-wine img {
+  max-width: 100%;
+}
+
+#single-wine h2 {
+  font-size: 2rem;
+}
+
+#single-wine p {
+  font-size: 1.2rem;
+}
+
+.single-wine-flavor,
+.single-wine-avgPrice,
+.single-wine-region {
+  padding-left: 140px;
+}
+/* singleWine */

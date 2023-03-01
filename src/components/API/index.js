@@ -123,3 +123,19 @@ export async function getAllReviews() {
     console.error(error);
   }
 }
+
+export async function getReviewsByWineId(wineId){
+  try {
+    const options={
+      headers:{
+        "Content-Type":"application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/wines/${wineId}/reviews`, options);
+    const result= await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+
+}
