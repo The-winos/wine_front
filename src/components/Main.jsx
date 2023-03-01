@@ -15,7 +15,6 @@ import {
   SingleWine,
   WineList,
   ReviewDetails,
-  SingleWineReview
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
