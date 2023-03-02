@@ -24,7 +24,7 @@ const Login = ({ setUser, setLoggedIn }) => {
 
     if (token) {
       setLoggedIn(true);
-      navigate("/");
+      navigate("/profile");
     }
   }
 
