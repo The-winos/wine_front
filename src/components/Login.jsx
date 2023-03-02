@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authUser, loginUser } from "./API/index";
 
-const Login = () => {
+const Login = ({ setUser, setLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
@@ -10,15 +10,17 @@ const Login = () => {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const { token, user, message } = await loginUser(username, password);
-    const userCart = await authUser(token);
+    const { token, user } = await loginUser(username, password);
+    console.log(token, "this is token");
+    const login = await authUser(token);
     console.log(user, token);
 
     localStorage.removeItem("token");
     localStorage.setItem("token", token);
     setUsername("");
     setPassword("");
-    setUser(user, userCart);
+    console.log(login, "what is this");
+    setUser(user, login);
 
     if (token) {
       setLoggedIn(true);
