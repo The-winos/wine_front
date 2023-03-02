@@ -11,7 +11,7 @@ const Register = ({ user, setLoggedIn }) => {
   const [state, setState] = useState("");
   const [year_born, setYear_born] = useState("");
   const [error, setError] = useState({});
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState("");
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -49,73 +49,6 @@ const Register = ({ user, setLoggedIn }) => {
                 It's free and only takes a minute. Discover your community of
                 wine lovers!
               </p>
-              {/* <form action="#">
-                <div className="input-group mb-3">
-                  <span className="input-group-text">
-                    <i className="fa fa-user"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="First Name"
-                  ></input>
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">
-                    <i className="fa fa-user"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Last Name"
-                  ></input>
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">
-                    <i className="fa fa-envelope"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Email"
-                  ></input>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text">
-                      <i className="fa fa-user"></i>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Username"
-                    ></input>
-                  </div>
-                  <div className="input-group mb-3">
-                    <span className="input-group-text">
-                      <i className="fa fa-lock"></i>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Password"
-                    ></input>
-                    <div className="input-group mb-3">
-                      <span className="input-group-text">
-                        <i className="fa fa-lock"></i>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Confirm Password"
-                      ></input>
-                    </div>
-                    <div className="d-grid">
-                      <button type="button" className="btn btn-success">
-                        Register
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form> */}
             </div>
           </div>
         </div>
