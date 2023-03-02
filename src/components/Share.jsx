@@ -2,7 +2,7 @@
 import React from "react";
 
 const Share = () => {
-  return <div id="Share"></div>;
+  return <div id="share"></div>;
 };
 
 export default Share;
