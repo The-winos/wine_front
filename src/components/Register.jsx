@@ -14,7 +14,7 @@ const Register = ({ user, setLoggedIn }) => {
   const [error, setError] = useState({});
   const [token, setToken] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState(false);
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -254,7 +254,11 @@ const Register = ({ user, setLoggedIn }) => {
                 </div>
 
                 <div className="d-grid">
-                  <button type="button" className="btn btn-success">
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onSubmit={handleRegister}
+                  >
                     Register
                   </button>
                 </div>
