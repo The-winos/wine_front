@@ -12,9 +12,15 @@ const Register = ({ user, setLoggedIn }) => {
   const [year_born, setYear_born] = useState("");
   const [error, setError] = useState({});
   const [token, setToken] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
 
   async function handleRegister(event) {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      setError({ message: "Passwords do not match" });
+      return;
+    }
     const token = await registerUser(
       username,
       password,
@@ -38,13 +44,13 @@ const Register = ({ user, setLoggedIn }) => {
     }
   }
 
-  const form = document.querySelector(".bg-white");
-  form.style.border = "3px solid #800020";
+  // const form = document.querySelector(".bg-white");
+  // form.style.border = "3px solid #800020";
 
-  form.style.borderRadius = "20px";
-  form.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
-  form.style.margin = "20px";
-  form.style.padding = "20px";
+  // form.style.borderRadius = "20px";
+  // form.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
+  // form.style.margin = "20px";
+  // form.style.padding = "20px";
 
   return (
     <div className="register-container">
@@ -53,10 +59,12 @@ const Register = ({ user, setLoggedIn }) => {
           <div className="row mt-5">
             <div className="col-lg-4 bg-white m-auto">
               <h3 className="text-center pt-3">Sign up</h3>
-              <p className="text-center text muted lead">
-                It's free and only takes a minute.{" "}
-                <div>Discover your community of wine lovers! &#127863;</div>
-              </p>
+              <div>
+                <span className="text-center text muted lead">
+                  It's free and only takes a minute.{" "}
+                  <div>Discover your community of wine lovers! &#127863;</div>
+                </span>
+              </div>
 
               <form action="#" onSubmit={handleRegister}>
                 <div className="input-group mb-3">
@@ -120,21 +128,23 @@ const Register = ({ user, setLoggedIn }) => {
                     <i className="fa fa-lock"></i>
                   </span>
                   <input
-                    type="password"
+                    type={passwordVisible ? "text" : "password"}
                     className="form-control"
                     placeholder="Password"
                     required
                     value={password}
-                    onChange={function (event) {
-                      setPassword(event.target.value);
-                    }}
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                   <button
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                     type="button"
-                    id="togglePassword"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
                   >
-                    <i class="fa fa-eye"></i>
+                    <i
+                      className={`fa ${
+                        passwordVisible ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
                   </button>
                 </div>
                 <div className="input-group mb-3">
@@ -145,13 +155,22 @@ const Register = ({ user, setLoggedIn }) => {
                     type="password"
                     className="form-control"
                     placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={function (event) {
+                      setConfirmPassword(event.target.value);
+                    }}
                   />
                   <button
-                    class="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary"
                     type="button"
                     id="toggleConfirmPassword"
+                    onClick={() => setConfirmPassword(!confirmPassword)}
                   >
-                    <i class="fa fa-eye"></i>
+                    <i
+                      className={`fa ${
+                        confirmPassword ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
                   </button>
                 </div>
                 <div className="input-group mb-3">
@@ -242,15 +261,28 @@ const Register = ({ user, setLoggedIn }) => {
       </div>
 
       <br />
-      <h3>Already have an account?</h3>
-      <Link to="/login" className="link">
-        Login
-      </Link>
-      {token.error ? (
-        <div>
-          <h4>{`${token.message}`}</h4>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-sm-8 col-md-6 col-lg-4">
+            <div>
+              <h3 className="row justify-content-center">
+                Already have an account?
+              </h3>
+              <span>
+                {" "}
+                <a href="/login" className="link row justify-content-center">
+                  Login
+                </a>
+              </span>
+            </div>
+            {token.error ? (
+              <div>
+                <h4>{`${token.message}`}</h4>
+              </div>
+            ) : null}
+          </div>
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };
