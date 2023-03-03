@@ -6,6 +6,7 @@ const Register = ({ user, setLoggedIn }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState("");
@@ -13,11 +14,11 @@ const Register = ({ user, setLoggedIn }) => {
   const [error, setError] = useState({});
   const [token, setToken] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState(false);
 
   async function handleRegister(event) {
     event.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== confirmPasswordValue) {
       setError({ message: "Passwords do not match" });
       return;
     }
@@ -152,23 +153,26 @@ const Register = ({ user, setLoggedIn }) => {
                     <i className="fa fa-lock"></i>
                   </span>
                   <input
-                    type="password"
+                    type={confirmPasswordValue ? "text" : "password"}
                     className="form-control"
                     placeholder="Confirm Password"
+                    required
                     value={confirmPassword}
                     onChange={function (event) {
                       setConfirmPassword(event.target.value);
                     }}
                   />
+
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
-                    id="toggleConfirmPassword"
-                    onClick={() => setConfirmPassword(!confirmPassword)}
+                    onClick={() =>
+                      setConfirmPasswordValue(!confirmPasswordValue)
+                    }
                   >
                     <i
                       className={`fa ${
-                        confirmPassword ? "fa-eye-slash" : "fa-eye"
+                        confirmPasswordValue ? "fa-eye-slash" : "fa-eye"
                       }`}
                     ></i>
                   </button>
