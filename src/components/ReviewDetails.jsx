@@ -60,6 +60,7 @@ fetchGetUserById();
 
 
         <h4 className="review-title">{review.name}</h4>
+        <small className="text-muted">By: {reviewUser.username}</small>
         <Rating
                   value={review.rating}
                   edit={false}
