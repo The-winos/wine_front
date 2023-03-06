@@ -4,7 +4,7 @@ import ReviewDetails from "./ReviewDetails";
 import WineDetails from "./WineDetails";
 
 
-const WineFeed = ({allWine, setAllWine, setWineInfo, wineInfo, setAllReviews, allReviews, setReviewInfo, reviewInfo}) => {
+const WineFeed = ({ setAllReviews, allReviews, setReviewInfo, reviewInfo}) => {
 
   useEffect(()=>{
   async function fetchAllReview(){

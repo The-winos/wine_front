@@ -84,10 +84,6 @@ const Main = () => {
           path="/winefeed"
           element={
             <WineFeed
-              allWine={allWine}
-              setAllWine={setAllWine}
-              wineInfo={wineInfo}
-              setWineInfo={setWineInfo}
               allReviews={allReviews}
               setAllReviews={setAllReviews}
               reviewInfo={reviewInfo}
