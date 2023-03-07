@@ -46,6 +46,7 @@ export async function registerUser(
   follower_count,
   following_count
 ) {
+  console.log("banana");
   const registerOptions = {
     method: "POST",
     headers: {
@@ -72,22 +73,21 @@ export async function registerUser(
   }
 }
 
-export async function getUserById(userId){
+export async function getUserById(userId) {
   try {
-    const options={
-      headers:{
-        "Content-Type":"application/json",
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
       },
     };
     const response = await fetch(`${BASE_URL}/users/${userId}`, options);
-    const result= await response.json();
+    const result = await response.json();
 
     return result;
   } catch (error) {
     console.error(error);
   }
 }
-
 
 export async function getAllWine() {
   try {
@@ -99,15 +99,15 @@ export async function getAllWine() {
   }
 }
 
-export async function getWineById(wineId){
+export async function getWineById(wineId) {
   try {
-    const options={
-      headers:{
-        "Content-Type":"application/json",
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
       },
     };
     const response = await fetch(`${BASE_URL}/wines/${wineId}`, options);
-    const result= await response.json();
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(error);
@@ -124,31 +124,33 @@ export async function getAllReviews() {
   }
 }
 
-export async function getReviewsByWineId(wineId){
+export async function getReviewsByWineId(wineId) {
   try {
-    const options={
-      headers:{
-        "Content-Type":"application/json",
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/wines/${wineId}/reviews`, options);
-    const result= await response.json();
+    const response = await fetch(
+      `${BASE_URL}/wines/${wineId}/reviews`,
+      options
+    );
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(error);
   }
-
 }
 
-export async function getReviewsByFollowers(userId){
+export async function getReviewsByFollowers(userId) {
   try {
-    const options={
-      headers:{
-        "Content-Type":"application/json",
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
       },
     };
     const response = await fetch(`${BASE_URL}/reviews/${userId}`, options);
-    const result =await response.json();
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(error);

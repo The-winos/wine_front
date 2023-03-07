@@ -6,23 +6,24 @@ const Register = ({ user, setLoggedIn }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState("");
   const [year_born, setYear_born] = useState("");
-  const [error, setError] = useState({});
+  const [error, setError] = useState("");
   const [token, setToken] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
   async function handleRegister(event) {
     event.preventDefault();
+
     if (password !== confirmPasswordValue) {
-      setError({ message: "Passwords do not match" });
+      setError("Passwords do not match");
       return;
     }
-    const token = await registerUser(
+
+    const response = await registerUser(
       username,
       password,
       name,
@@ -33,14 +34,12 @@ const Register = ({ user, setLoggedIn }) => {
       0,
       0
     );
-    console.log(token, "Hello");
-    setToken(token);
-    if (token.error) {
-      const message = token.message;
-      setError(message);
-      localStorage.removeItem("token");
+
+    if (response.error) {
+      setError(response.message);
     } else {
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", response.token);
+      setToken(response.token);
       navigate("/login");
     }
   }
@@ -153,22 +152,20 @@ const Register = ({ user, setLoggedIn }) => {
                     <i className="fa fa-lock"></i>
                   </span>
                   <input
-                    type={confirmPasswordValue ? "text" : "password"}
+                    type={passwordVisible ? "text" : "password"}
                     className="form-control"
                     placeholder="Confirm Password"
                     required
-                    value={confirmPassword}
-                    onChange={function (event) {
-                      setConfirmPassword(event.target.value);
+                    value={confirmPasswordValue}
+                    onChange={(event) => {
+                      setConfirmPasswordValue(event.target.value);
+                      setError({});
                     }}
                   />
-
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
-                    onClick={() =>
-                      setConfirmPasswordValue(!confirmPasswordValue)
-                    }
+                    onClick={() => setPasswordVisible(!passwordVisible)}
                   >
                     <i
                       className={`fa ${
@@ -255,7 +252,7 @@ const Register = ({ user, setLoggedIn }) => {
 
                 <div className="d-grid">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-success"
                     onSubmit={handleRegister}
                   >
