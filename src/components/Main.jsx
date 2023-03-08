@@ -59,7 +59,7 @@ const Main = () => {
           }
         ></Route>
         <Route path="/admin" element={<Admin />}></Route>
-        <Route path="/followers" element={<Followers />}></Route>
+        <Route path="/followers" element={<Followers user={user}/>}></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
