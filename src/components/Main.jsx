@@ -84,6 +84,7 @@ const Main = () => {
           path="/winefeed"
           element={
             <WineFeed
+              user={user}
               allReviews={allReviews}
               setAllReviews={setAllReviews}
               reviewInfo={reviewInfo}

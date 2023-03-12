@@ -4,7 +4,7 @@ import ReviewDetails from "./ReviewDetails";
 import WineDetails from "./WineDetails";
 
 
-const WineFeed = ({ setAllReviews, allReviews, setReviewInfo, reviewInfo}) => {
+const WineFeed = ({ user, setAllReviews, allReviews, setReviewInfo, reviewInfo}) => {
 
   useEffect(()=>{
   async function fetchAllReview(){
@@ -24,6 +24,7 @@ const WineFeed = ({ setAllReviews, allReviews, setReviewInfo, reviewInfo}) => {
     return(
       <div key={`allreviews-${review.id}`}>
         <ReviewDetails
+        user={user}
         review={review}
         setReviewInfo={setReviewInfo}
         />

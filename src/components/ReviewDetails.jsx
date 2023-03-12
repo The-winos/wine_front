@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserById, getWineById } from "./API";
 import Rating from "react-rating-stars-component";
+import FollowButton from "./FollowButton";
 
 
 
-const ReviewDetails = ({review}) => {
+const ReviewDetails = ({review, user}) => {
   const navigate=useNavigate();
   const [reviewUser, setReviewUser]=useState({})
   const [reviewWine, setReviewWine]=useState({})
@@ -61,6 +62,12 @@ fetchGetUserById();
 
         <h4 className="review-title">{review.name}</h4>
         <small className="text-muted">By: {reviewUser.username}</small>
+        <FollowButton
+        review={review}
+        reviewUser={reviewUser}
+        reviewWine={reviewWine}
+        user={user}
+        />
         <Rating
                   value={review.rating}
                   edit={false}
