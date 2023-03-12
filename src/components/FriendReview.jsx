@@ -2,9 +2,10 @@ import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserById, getWineById } from "./API";
 import Rating from "react-rating-stars-component";
+import FollowButton from "./FollowButton";
 
 
-const FriendReview = ({reviews}) => {
+const FriendReview = ({reviews, user}) => {
   const navigate=useNavigate();
   const [reviewFriend, setReviewFriend]= useState({})
   const [wineFriend, setWineFriend]= useState({})
@@ -56,6 +57,12 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
 
         <h4 className="review-title">{reviews.name}</h4>
         <small className="text-muted">By: {reviewFriend.username}</small>
+        <FollowButton
+        reviews={reviews}
+        wineFriend={wineFriend}
+        reviewFriend={reviewFriend}
+        user={user}
+        />
         <Rating
                   value={reviews.rating}
                   edit={false}

@@ -31,6 +31,7 @@ const Followers = ({user}) => {
               <FriendReview
                 reviews={reviews}
                 setRevFollInfo={setRevFollInfo}
+                user={user}
               />
           </div>
           );

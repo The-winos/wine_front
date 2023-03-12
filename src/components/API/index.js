@@ -156,3 +156,42 @@ export async function getReviewsByFollowers(userId) {
     console.error(error);
   }
 }
+
+export async function updateFollower(
+  user_id,
+  follower_id,
+){
+  try {
+    const options={
+      method:"PATCH",
+      headers:{
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        user_id,
+        follower_id,
+      }),
+    };
+    const response= await fetch(`${BASE_URL}/followers/${follower_id}`, options);
+    const result= await response.json();
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function getFollowersById(userId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/followers/${userId}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

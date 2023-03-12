@@ -18,3 +18,4 @@ export { default as WineList } from "./WineList";
 export { default as ReviewDetails } from "./ReviewDetails";
 export { default as SingleWineReview } from "./SingleWineReview";
 export { default as FriendReview } from "./FriendReview";
+export { default as FollowButton} from "./FollowButton"
