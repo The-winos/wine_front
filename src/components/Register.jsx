@@ -30,7 +30,7 @@ const Register = ({ user, setLoggedIn }) => {
       state,
       "user",
       email,
-      year_born,
+      birthday,
       0,
       0
     );
@@ -100,11 +100,11 @@ const Register = ({ user, setLoggedIn }) => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Username"
+                    placeholder="username (all lowercase)"
                     required
                     value={username}
                     onChange={function (event) {
-                      setUsername(event.target.value);
+                      setUsername(event.target.value.toLowerCase());
                     }}
                   />
                 </div>

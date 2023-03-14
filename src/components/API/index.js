@@ -42,7 +42,7 @@ export async function registerUser(
   state,
   role,
   email,
-  year_born,
+  birthday,
   follower_count,
   following_count
 ) {
@@ -59,7 +59,7 @@ export async function registerUser(
       state,
       role,
       email,
-      year_born,
+      birthday,
       follower_count,
       following_count,
     }),
