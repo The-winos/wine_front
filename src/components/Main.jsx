@@ -16,6 +16,7 @@ import {
   SingleWine,
   WineList,
   ReviewDetails,
+  AccountSettings,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 
@@ -59,7 +60,7 @@ const Main = () => {
           }
         ></Route>
         <Route path="/admin" element={<Admin />}></Route>
-        <Route path="/followers" element={<Followers user={user}/>}></Route>
+        <Route path="/followers" element={<Followers user={user} />}></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
@@ -80,6 +81,7 @@ const Main = () => {
           element={<SingleWine user={user} loggedIn={loggedIn} />}
         ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
+        <Route path="/accountsettings" element={<AccountSettings />}></Route>
         <Route
           path="/winefeed"
           element={
