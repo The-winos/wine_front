@@ -10,7 +10,7 @@ const Register = ({ user, setLoggedIn }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState("");
-  const [year_born, setYear_born] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -43,14 +43,6 @@ const Register = ({ user, setLoggedIn }) => {
       navigate("/login");
     }
   }
-
-  // const form = document.querySelector(".bg-white");
-  // form.style.border = "3px solid #800020";
-
-  // form.style.borderRadius = "20px";
-  // form.style.boxShadow = "0 5px 10px rgba(0,0,0,0.2)";
-  // form.style.margin = "20px";
-  // form.style.padding = "20px";
 
   return (
     <div className="register-container">
@@ -183,9 +175,9 @@ const Register = ({ user, setLoggedIn }) => {
                     className="form-control"
                     placeholder="DD-MM-YYYY"
                     required
-                    value={year_born}
+                    value={birthday}
                     onChange={function (event) {
-                      setYear_born(event.target.value);
+                      setBirthday(event.target.value);
                     }}
                   />
                 </div>
