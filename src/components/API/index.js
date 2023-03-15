@@ -219,7 +219,10 @@ export async function getReviewByUser(userId) {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/reviews/${userId}`, options);
+    const response = await fetch(
+      `${BASE_URL}/users/${userId}/reviews`,
+      options
+    );
     const result = await response.json();
     return result;
   } catch (error) {
