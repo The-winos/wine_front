@@ -19,7 +19,7 @@ const WineFeed = ({ user, setAllReviews, allReviews, setReviewInfo, reviewInfo})
 <h2 className="tastingRoom">Welcome to the Tasting Room</h2>
 <h3 className="tastingRoom">See all the wines people have reviewed</h3>
 <div id="reviews" className="review">
-  {allReviews && allReviews.length ? allReviews.map((review)=>{
+  {allReviews && allReviews.length ? allReviews.sort((a, b) => new Date(b.review_date) - new Date(a.review_date)).map((review)=>{
     return(
       <div key={`allreviews-${review.id}`}>
         <ReviewDetails
@@ -28,7 +28,7 @@ const WineFeed = ({ user, setAllReviews, allReviews, setReviewInfo, reviewInfo})
         setReviewInfo={setReviewInfo}
         />
       </div>
-    );
+    )
   }):null}
 </div>
 
