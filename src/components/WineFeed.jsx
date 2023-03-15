@@ -9,7 +9,6 @@ const WineFeed = ({ user, setAllReviews, allReviews, setReviewInfo, reviewInfo})
   useEffect(()=>{
   async function fetchAllReview(){
     const allTheReviews = await getAllReviews();
-    console.log(allTheReviews)
     setAllReviews(allTheReviews);
   }
   fetchAllReview();
