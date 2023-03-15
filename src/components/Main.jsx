@@ -63,7 +63,16 @@ const Main = () => {
         <Route path="/followers" element={<Followers user={user} />}></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              user={user}
+              allReviews={allReviews}
+              setAllReviews={setAllReviews}
+            />
+          }
+        ></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route
           path="/winelist"
