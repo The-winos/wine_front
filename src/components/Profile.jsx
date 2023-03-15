@@ -1,9 +1,29 @@
 //show user badges, number of posts, follower and following count
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getReviewByUser, getAllReviews } from "./API";
 
-const Profile = (user, setLoggedIn) => {
+const Profile = (user, allReviews, setAllReviews, loggedIn, setLoggedIn) => {
+  // const [reviews, setReviews] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchReviews() {
+  //     const allReviews = await getAllReviews();
+  //     setReviews(allReviews);
+  //   }
+  //   fetchReviews();
+  // }, []);
+
+  // useEffect(() => {
+  //   async function fetchUserReviews() {
+  //     const userReviews = await getReviewByUser();
+  //     console.log(userReviews);
+  //     setReviews(userReviews);
+  //   }
+  //   fetchUserReviews();
+  // }, []);
+
   return (
     <div className="profile-container">
       <div id="profile-main">
