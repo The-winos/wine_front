@@ -59,21 +59,25 @@ fetchGetUserById();
   <small className="wine-flavor muted">   {reviewWine.flavor}</small>
 </h4>
 
+<h4 className="review-title">{review.name}</h4>
+<div className="d-flex align-items-center">
+  <small className="text-muted">By: {reviewUser.username}</small>
+  <div className="ml-3">
+    <FollowButton
+      review={review}
+      reviewUser={reviewUser}
+      reviewWine={reviewWine}
+      user={user}
 
-        <h4 className="review-title">{review.name}</h4>
-        <small className="text-muted">By: {reviewUser.username}</small>
-        <FollowButton
-        review={review}
-        reviewUser={reviewUser}
-        reviewWine={reviewWine}
-        user={user}
-        />
-        <Rating
-                  value={review.rating}
-                  edit={false}
-                  size={20}
-                  activeColor="#ffd700"
-                />
+    />
+  </div>
+</div>
+<Rating
+    value={review.rating}
+    edit={false}
+    size={20}
+    activeColor="#ffd700"
+  />
         <p className="card-text">
           <small className="text-muted">Price: {formattedPrice}</small> <br />
           <small className="text-muted">Bought at: {review.location}</small>

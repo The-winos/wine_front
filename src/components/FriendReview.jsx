@@ -57,12 +57,7 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
 
         <h4 className="review-title">{reviews.name}</h4>
         <small className="text-muted">By: {reviewFriend.username}</small>
-        <FollowButton
-        reviews={reviews}
-        wineFriend={wineFriend}
-        reviewFriend={reviewFriend}
-        user={user}
-        />
+
         <Rating
                   value={reviews.rating}
                   edit={false}

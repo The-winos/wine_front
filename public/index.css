@@ -165,3 +165,24 @@ button {
   line-height: 1.4;
 }
 /* singleWineReview */
+
+/* follow button */
+
+/* Add this to your CSS file */
+.btn-follow {
+  border: none !important;
+  text-decoration: underline;
+  background-color: transparent !important;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+}
+
+.btn-follow:focus,
+.btn-follow:hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+
+/* follow button */
