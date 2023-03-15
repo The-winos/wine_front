@@ -211,3 +211,18 @@ export async function getAllUsers() {
     console.error(error);
   }
 }
+
+export async function getReviewByUser(userId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/reviews/${userId}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
