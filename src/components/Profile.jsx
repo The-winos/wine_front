@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getReviewByUser } from "./API";
+import UserReviewDetails from "./UserReviewDetails";
 
 const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
@@ -28,9 +29,14 @@ const Profile = ({ user }) => {
         {console.log(user.id, "is this id?")}
         <img
           src={user.avatar}
-          alt="wine image"
+          alt="avatar image"
           className="img-fluid"
-          style={{ minHeight: "5%", minWidth: "5%" }}
+          style={{
+            height: "200px",
+            width: "200px",
+            objectFit: "contain",
+            objectPosition: "center center",
+          }}
         />
 
         <h2>{user.name}</h2>
@@ -62,11 +68,33 @@ const Profile = ({ user }) => {
 
       <div>
         <h3>Your Reviews</h3>
+
         <div key={`userReview-${userReviews.id}`}>
+          <UserReviewDetails />
           {userReviews.map((userReviews) => (
             <div key={userReviews.id}>
               {userReviews.comment}
-              <h2>{userReviews.review_comment}</h2>
+
+              <h3>
+                {new Date(userReviews.review_date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </h3>
+              <img
+                src={userReviews.image_url}
+                alt="wine image"
+                className="img-fluid"
+                style={{
+                  height: "200px",
+                  width: "200px",
+                  objectFit: "contain",
+                  objectPosition: "center center",
+                }}
+              />
+              <h3>{userReviews.name}</h3>
+              <h3>{userReviews.review_comment}</h3>
             </div>
           ))}
         </div>
