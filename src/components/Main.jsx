@@ -19,6 +19,7 @@ import {
   AccountSettings,
 } from "./";
 import { Route, Routes } from "react-router-dom";
+import UserReviewDetails from "./UserReviewDetails";
 
 const Main = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -67,6 +68,16 @@ const Main = () => {
           path="/profile"
           element={
             <Profile
+              user={user}
+              allReviews={allReviews}
+              setAllReviews={setAllReviews}
+            />
+          }
+        ></Route>
+        <Route
+          path="/userreviewdetails"
+          element={
+            <UserReviewDetails
               user={user}
               allReviews={allReviews}
               setAllReviews={setAllReviews}
