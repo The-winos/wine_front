@@ -66,7 +66,7 @@ const Profile = ({ user }) => {
       </div>
 
       <div>
-        <h3>Your Reviews</h3>
+        <h3 className="profile-review-list">Your Reviews</h3>
 
         <div key={`userReview-${userReviews.id}`}>
           <UserReviewDetails

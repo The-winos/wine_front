@@ -37,7 +37,7 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
               <div key={userReviews.id}>
                 {userReviews.comment}
 
-                <h3>
+                <h3 className="user-review-date">
                   {new Date(userReviews.review_date).toLocaleDateString(
                     "en-US",
                     {
