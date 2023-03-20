@@ -3,10 +3,12 @@ import React, {useState, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import { getReviewsByFollowers } from "./API";
 import FriendReview from "./FriendReview";
+import { useNavigate } from "react-router-dom";
 
 const Followers = ({user}) => {
   const [reviewFollowers, setReviewFollowers]=useState([]);
   const [revFollInfo, setRevFollInfo]= useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     async function fetchFollowerRev(){
@@ -21,8 +23,11 @@ const Followers = ({user}) => {
 
   return (
     <div id="friendFeed">
-      <h2 className="FriendRev">Welcome to Happy Hour with friends!</h2>
-      <h3 className="FriendRev">See all your friends favorite-or not so favorite- wines!</h3>
+      <h2 className="tastingRoom">Welcome to Happy Hour with friends!</h2>
+      <h3 className="tastingRoom">See all your friends favorite-or not so favorite- wines!</h3>
+      <button onClick={()=>{
+        navigate("/review");
+      }} className="btn btn-primary"> Add a review!</button>
       <div id="freview" className="frev">
         {user && reviewFollowers.length ?
         reviewFollowers.map((reviews)=>{
