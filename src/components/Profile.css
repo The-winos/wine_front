@@ -1,0 +1,16 @@
+.buttons {
+  margin-top: 1rem;
+  padding: 0.6em 2em;
+  color: rgb(255, 255, 255);
+  background-color: crimson;
+  cursor: pointer;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  justify-content: center;
+  margin: 30px;
+  margin-left: 30px;
+  border-width: 2px grey;
+}

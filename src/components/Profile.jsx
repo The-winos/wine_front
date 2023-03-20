@@ -38,23 +38,22 @@ const Profile = ({ user }) => {
             objectPosition: "center center",
           }}
         />
-
-        <h2>{user.name}</h2>
+        <div>
+          <Link to={"/accountsettings"}>
+            <button type="accountsettings" className="buttons">
+              Account Settings
+            </button>
+          </Link>
+          <Link to={"/favorite"}>
+            <button type="favorite" className="buttons">
+              Favorites
+            </button>
+          </Link>
+        </div>
+        <h2 className="profile-username">{user.name}</h2>
       </div>
 
       <div>
-        <Link to={"/accountsettings"}>
-          <button type="accountsettings" className="buttons">
-            Account Settings
-          </button>
-        </Link>
-
-        <Link to={"/favorite"}>
-          <button type="favorite" className="buttons">
-            Favorites
-          </button>
-        </Link>
-
         {user && user.admin ? (
           <>
             <Link to={"/users"}>

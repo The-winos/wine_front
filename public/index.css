@@ -14,7 +14,6 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-
 }
 
 #username {
@@ -96,11 +95,7 @@ button {
   font-size: 0.8em;
 }
 
-
-
-
 /* wine details */
-
 
 /* wine list */
 
@@ -182,8 +177,48 @@ button {
 .btn-follow:hover {
   background-color: transparent !important;
   box-shadow: none !important;
-
 }
 
-
 /* follow button */
+
+/* Profile  */
+
+.buttons {
+  display: inline-block;
+  flex-wrap: wrap;
+  justify-content: end;
+  margin-top: 1rem;
+  padding: 0.6em 2em;
+  color: rgb(255, 255, 255);
+  background-color: maroon;
+  cursor: pointer;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  justify-content: center;
+  margin: 10px;
+  margin-left: 30px;
+  border-width: 2px grey;
+  min-width: fit-content;
+}
+.buttons:hover {
+  text-decoration: none;
+  background-color: blue;
+}
+
+.img-fluid {
+  display: flex;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  border-radius: 100px;
+  margin: 20px;
+}
+
+.profile-username {
+  display: flex;
+  margin: 10px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
