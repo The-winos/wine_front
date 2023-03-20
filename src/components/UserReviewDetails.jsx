@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getReviewByUser, getWineById } from "./API";
-import Profile from "./Profile";
+import { useParams } from "react-router-dom";
 
 const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
-  // const [wineUserDetails, setWineUserDetails] = {[]}
+  const { wineId } = useParams();
+  const [userWineDetails, setUserWineDetails] = useState([]);
+
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
@@ -18,19 +20,14 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
     fetchUserReviews();
   }, [user]);
 
-  // useEffect(() => {
-  //   const fetchUserWineDetails = async () => {
-  //     try {
-  //       const userWineDetails = await getWineById(user.id);
-  //       setUserReviews(reviews);
-  //       console.log(reviews, "user reviews");
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchUserReviews();
-  // }, [user]);
+  useEffect(() => {
+    async function fetchUserWineDetails() {
+      const userWineDetails = await getWineById(wineId);
+      setUserWineDetails(userWineDetails);
+      console.log(userWineDetails, "user wine post");
+    }
+    fetchUserWineDetails(userWineDetails);
+  }, [wineId]);
 
   return (
     <div>
@@ -67,6 +64,18 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
             );
           })
         : null}
+
+      <div>
+        {userWineDetails && userWineDetails.length
+          ? userWineDetails.map((userWineDetails) => {
+              return (
+                <div key={userWineDetails.id}>
+                  {/* add the necessary elements here */}
+                </div>
+              );
+            })
+          : null}
+      </div>
     </div>
   );
 };
