@@ -17,6 +17,7 @@ import {
   WineList,
   ReviewDetails,
   AccountSettings,
+  Review,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -102,6 +103,7 @@ const Main = () => {
         ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route path="/accountsettings" element={<AccountSettings />}></Route>
+        <Route path="/review" element={<Review/>}></Route>
         <Route
           path="/winefeed"
           element={
