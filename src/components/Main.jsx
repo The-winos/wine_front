@@ -103,7 +103,7 @@ const Main = () => {
         ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route path="/accountsettings" element={<AccountSettings />}></Route>
-        <Route path="/review" element={<Review/>}></Route>
+        <Route path="/review" element={<Review user={user}/>}></Route>
         <Route
           path="/winefeed"
           element={
