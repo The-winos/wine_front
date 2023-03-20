@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { getReviewByUser } from "./API";
+import { getReviewByUser, getWineById } from "./API";
+import Profile from "./Profile";
 
-const UserReviewDetails = ({ userReviews, user }) => {
+const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
+  // const [wineUserDetails, setWineUserDetails] = {[]}
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
@@ -15,6 +17,20 @@ const UserReviewDetails = ({ userReviews, user }) => {
 
     fetchUserReviews();
   }, [user]);
+
+  // useEffect(() => {
+  //   const fetchUserWineDetails = async () => {
+  //     try {
+  //       const userWineDetails = await getWineById(user.id);
+  //       setUserReviews(reviews);
+  //       console.log(reviews, "user reviews");
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchUserReviews();
+  // }, [user]);
 
   return (
     <div>
