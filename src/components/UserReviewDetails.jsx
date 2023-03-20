@@ -34,32 +34,39 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
 
   return (
     <div>
-      {userReviews.map((userReviews) => (
-        <div key={userReviews.id}>
-          {userReviews.comment}
+      {userReviews && userReviews.length
+        ? userReviews.map((userReviews) => {
+            return (
+              <div key={userReviews.id}>
+                {userReviews.comment}
 
-          <h3>
-            {new Date(userReviews.review_date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </h3>
-          <img
-            src={userReviews.image_url}
-            alt="wine image"
-            className="img-fluid"
-            style={{
-              height: "200px",
-              width: "200px",
-              objectFit: "contain",
-              objectPosition: "center center",
-            }}
-          />
-          <h3>{userReviews.name}</h3>
-          <h3>{userReviews.review_comment}</h3>
-        </div>
-      ))}
+                <h3>
+                  {new Date(userReviews.review_date).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    }
+                  )}
+                </h3>
+                <img
+                  src={userReviews.image_url}
+                  alt="wine image"
+                  className="img-fluid"
+                  style={{
+                    height: "200px",
+                    width: "200px",
+                    objectFit: "contain",
+                    objectPosition: "center center",
+                  }}
+                />
+                <h3>{userReviews.name}</h3>
+                <h3>{userReviews.review_comment}</h3>
+              </div>
+            );
+          })
+        : null}
     </div>
   );
 };
