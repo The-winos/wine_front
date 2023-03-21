@@ -70,8 +70,8 @@ return (
         <Rating value={review.rating} edit={false} size={20} activeColor="#ffd700" />
       </div>
       <p className="card-text">
-        <small className="text-muted">Price: {formattedPrice}</small> <br />
-        <small className="text-muted">Bought at: {review.location}</small>
+        <small className="text-muted">Price: {review.price !== 0 && review.price !== null ? formattedPrice : "N/A"}</small> <br />
+        <small className="text-muted">Bought at: {review.location!= null ? review.location : "Unknown"}</small>
       </p>
       <h5 className="review-comment">{review.review_comment}</h5>
     </div>
