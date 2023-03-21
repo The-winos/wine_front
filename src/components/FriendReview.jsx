@@ -65,8 +65,9 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
                   activeColor="#ffd700"
                 />
         <p className="card-text">
-          <small className="text-muted">Price: {formattedPrice}</small> <br />
-          <small className="text-muted">Bought at: {reviews.location}</small>
+          <small className="text-muted">Price: <small className="text-muted">Price: {reviews.price !== 0 && reviews.price !== null ? formattedPrice : "N/A" }</small>
+</small> <br />
+          <small className="text-muted">Bought at: {reviews.location != null ? reviews.location : "Unknown"}</small>
         </p>
         <h5 className="review-comment">{reviews.review_comment}</h5>
 <button onClick={()=>{

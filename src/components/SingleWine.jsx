@@ -60,10 +60,10 @@ const SingleWine = ({ user, loggedIn }) => {
 </p>
 <p className="text-muted mb-0 single-wine-avgPrice">
   <small>Average Price:&nbsp;</small>
-  <span className="ml-2">{formattedPrice}</span>
+  <span className="ml-2">{singleWine.price !== 0 && singleWine.price !== null ? formattedPrice :<small> No prices yet</small> }</span>
 </p>
 <p className="text-muted single-wine-region">
-  <small>Region:&nbsp;</small>
+  <small>Region:</small>
   <span className="ml-2">{singleWine.region}</span>
 </p>
           </div>
