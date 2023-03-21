@@ -11,6 +11,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
+        console.log(user.id, "should be 2?")
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
         console.log(reviews, "user reviews");
