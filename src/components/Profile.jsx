@@ -11,7 +11,6 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
-        console.log(user.id, "should be 2?")
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
         console.log(reviews, "user reviews");
@@ -26,8 +25,6 @@ const Profile = ({ user }) => {
   return (
     <div className="profile-container">
       <div id="profile-main">
-        {console.log(user, "is this working?")}
-        {console.log(user.id, "is this id?")}
         <img
           src={user.avatar}
           alt="avatar image"
@@ -65,17 +62,22 @@ const Profile = ({ user }) => {
           </>
         ) : null}
       </div>
-
       <div>
-        <h3 className="profile-review-list">Your Reviews</h3>
-
-        <div key={`userReview-${userReviews.id}`}>
-          <UserReviewDetails
-            user={user}
-            userReviews={userReviews}
-            setUserReviews={setUserReviews}
-          />
-        </div>
+        {userReviews && userReviews.length ? (
+          userReviews.map((userReviews) => {
+            return (
+              <div key={`userReview-${userReviews.id}`}>
+                <UserReviewDetails
+                  user={user}
+                  userReviews={userReviews}
+                  setUserReviews={setUserReviews}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
