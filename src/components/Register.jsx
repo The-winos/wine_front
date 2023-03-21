@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 
-const Register = ({ user, setLoggedIn }) => {
+const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -272,11 +272,11 @@ const Register = ({ user, setLoggedIn }) => {
                 </a>
               </span>
             </div>
-            {token.error ? (
-              <div>
-                <h4>{`${token.message}`}</h4>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

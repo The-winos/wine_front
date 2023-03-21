@@ -6,35 +6,10 @@ const Login = ({ setUser, setLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
   const navigate = useNavigate();
-
-  // async function handleLogin(event) {
-  //   event.preventDefault();
-  //   try {
-  //     const { token, user } = await loginUser(username, password);
-  //     console.log(token, "this is token");
-  //     const login = await authUser(token);
-  //     console.log(user, token);
-
-  //     localStorage.removeItem("token");
-  //     localStorage.setItem("token", token);
-  //     setUsername("");
-  //     setPassword("");
-  //     console.log(login, "login error");
-  //     setUser(user, login);
-
-  //     if (token) {
-  //       setLoggedIn(true);
-  //       navigate("/profile");
-  //     }
-  //   } catch (error) {}
-  //   setErrorMessage(error.message);
-  // }
 
   async function handleLogin(event) {
     event.preventDefault();
-
     const { token, user, message } = await loginUser(username, password);
     console.log(token, "this is token");
     const login = await authUser(token);
