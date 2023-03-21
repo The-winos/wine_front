@@ -160,7 +160,7 @@ export async function getReviewsByFollowers(userId) {
 export async function updateFollower(user_id, follower_id) {
   try {
     const options = {
-      method: "PATCH",
+      method: "POST",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -170,10 +170,7 @@ export async function updateFollower(user_id, follower_id) {
         follower_id,
       }),
     };
-    const response = await fetch(
-      `${BASE_URL}/followers/${follower_id}`,
-      options
-    );
+    const response = await fetch(`${BASE_URL}/followers/${user_id}`, options);
     const result = await response.json();
     return result;
   } catch (error) {
