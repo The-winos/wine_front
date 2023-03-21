@@ -85,7 +85,10 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route
+          path="/register"
+          element={<Register user={user} setLoggedIn={setLoggedIn} />}
+        ></Route>
         <Route
           path="/winelist"
           element={
@@ -103,7 +106,7 @@ const Main = () => {
         ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route path="/accountsettings" element={<AccountSettings />}></Route>
-        <Route path="/review" element={<Review user={user}/>}></Route>
+        <Route path="/review" element={<Review user={user} />}></Route>
         <Route
           path="/winefeed"
           element={
