@@ -61,14 +61,15 @@ fetchGetUserById();
 
 <h4 className="review-title">{review.name}</h4>
 <div className="d-flex align-items-center">
-  <small className="text-muted">By: {reviewUser.username}</small>
+  <small className="text-muted">By:
+    <a href={`/profile/${reviewUser.username}`}>{reviewUser.username}</a>
+  </small>
   <div className="ml-3">
     <FollowButton
       review={review}
       reviewUser={reviewUser}
       reviewWine={reviewWine}
       user={user}
-
     />
   </div>
 </div>
