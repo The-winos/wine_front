@@ -18,6 +18,7 @@ import {
   ReviewDetails,
   AccountSettings,
   Review,
+  ProfileUserId
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -75,16 +76,16 @@ const Main = () => {
             />
           }
         ></Route>
-        {/* <Route
-  path="/profile/:username"
+        <Route
+  path="/profileuserid/:id"
   element={
-    <Profile
+    <ProfileUserId
       user={user}
       allReviews={allReviews}
       setAllReviews={setAllReviews}
     />
   }
-/> */}
+/>
 
         <Route
           path="/userreviewdetails"
