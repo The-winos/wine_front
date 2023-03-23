@@ -73,6 +73,7 @@ const SingleWine = ({ user, loggedIn }) => {
     <div key={`wine-review-${review.id}`}>
       <SingleWineReview
       review={review}
+      user={user}
 
       />
     </div>

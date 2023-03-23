@@ -109,6 +109,7 @@ const Main = () => {
               setAllWine={setAllWine}
               wineInfo={wineInfo}
               setWineInfo={setWineInfo}
+              user={user}
             />
           }
         ></Route>

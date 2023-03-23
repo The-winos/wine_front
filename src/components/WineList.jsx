@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { getAllWine } from "./API";
 import WineDetails from "./WineDetails";
 
-const WineList = ({allWine, setAllWine, setWineInfo, wineInfo}) => {
+const WineList = ({allWine, setAllWine, setWineInfo, wineInfo, user}) => {
 
   useEffect(()=>{
     async function fetchAllWine(){
@@ -16,6 +16,7 @@ const WineList = ({allWine, setAllWine, setWineInfo, wineInfo}) => {
     return(
     <div id="wineFeed">
       <h2 id="all-wine-title">Find new Wines!</h2>
+      {console.log(user, "user here?")}
       <div id="wines" className="wine">
         {allWine && allWine.length ? allWine.map((wine)=>{
           return(
@@ -23,6 +24,7 @@ const WineList = ({allWine, setAllWine, setWineInfo, wineInfo}) => {
       <WineDetails
         wine={wine}
         setWineInfo={setWineInfo}
+        user={user}
       />
     </div>
           );
