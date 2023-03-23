@@ -75,6 +75,17 @@ const Main = () => {
             />
           }
         ></Route>
+        {/* <Route
+  path="/profile/:username"
+  element={
+    <Profile
+      user={user}
+      allReviews={allReviews}
+      setAllReviews={setAllReviews}
+    />
+  }
+/> */}
+
         <Route
           path="/userreviewdetails"
           element={
