@@ -18,7 +18,8 @@ import {
   ReviewDetails,
   AccountSettings,
   Review,
-  ProfileUserId
+  EditAccount,
+  ProfileUserId,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -77,15 +78,15 @@ const Main = () => {
           }
         ></Route>
         <Route
-  path="/profileuserid/:id"
-  element={
-    <ProfileUserId
-      user={user}
-      allReviews={allReviews}
-      setAllReviews={setAllReviews}
-    />
-  }
-/>
+          path="/profileuserid/:id"
+          element={
+            <ProfileUserId
+              user={user}
+              allReviews={allReviews}
+              setAllReviews={setAllReviews}
+            />
+          }
+        />
 
         <Route
           path="/userreviewdetails"
@@ -120,6 +121,10 @@ const Main = () => {
         <Route path="/winedetails" element={<WineDetails />}></Route>
         <Route path="/accountsettings" element={<AccountSettings />}></Route>
         <Route path="/review" element={<Review user={user} />}></Route>
+        <Route
+          path="/editaccount"
+          element={<EditAccount user={user} />}
+        ></Route>
         <Route
           path="/winefeed"
           element={
