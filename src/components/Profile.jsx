@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
 
@@ -68,6 +69,11 @@ const Profile = ({ user }) => {
             return (
               <div key={`userReview-${userReviews.id}`}>
                 <UserReviewDetails
+                  user={user}
+                  userReviews={userReviews}
+                  setUserReviews={setUserReviews}
+                />
+                <AccountSettings
                   user={user}
                   userReviews={userReviews}
                   setUserReviews={setUserReviews}
