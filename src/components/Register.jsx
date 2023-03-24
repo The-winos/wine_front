@@ -14,6 +14,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const [error, setError] = useState("");
   const [token, setToken] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -144,24 +145,26 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                     <i className="fa fa-lock"></i>
                   </span>
                   <input
-                    type={passwordVisible ? "text" : "password"}
+                    type={confirmPasswordVisible ? "text" : "password"}
                     className="form-control"
                     placeholder="Confirm Password"
                     required
                     value={confirmPasswordValue}
                     onChange={(event) => {
                       setConfirmPasswordValue(event.target.value);
-                      setError({});
+                      setError("");
                     }}
                   />
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
-                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    onClick={() =>
+                      setConfirmPasswordVisible(!confirmPasswordVisible)
+                    }
                   >
                     <i
                       className={`fa ${
-                        confirmPasswordValue ? "fa-eye-slash" : "fa-eye"
+                        confirmPasswordVisible ? "fa-eye-slash" : "fa-eye"
                       }`}
                     ></i>
                   </button>
