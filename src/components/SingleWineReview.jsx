@@ -6,7 +6,7 @@ import Rating from "react-rating-stars-component";
 
 
 
-const SingleWineReview = ({review}) => {
+const SingleWineReview = ({review, user}) => {
   const navigate=useNavigate();
   const [reviewUser, setReviewUser]=useState({})
   const [reviewWine, setReviewWine]=useState({})
@@ -37,6 +37,8 @@ fetchGetUserById();
 
 return (
   <div className="card single-wine-review mb-3" style={{ maxWidth: "60%",  margin: "0 auto" }}>
+    {console.log(user, "user")}
+    {console.log(reviewUser, "reviewUser")}
     <div className="card-header">
       <div className="row align-items-center">
         <div className="col-2">
@@ -47,14 +49,16 @@ return (
           />
         </div>
         <div className="col-8 avatar-username">
-          <span>{reviewUser.username}</span>
+        {user.id!=reviewUser.id ?
+          <span> <a href={`/profileuserid/${reviewUser.id}`}>{reviewUser.username}</a> </span> : <span> <a href={`/profile`}>{reviewUser.username}</a> </span>}
         </div>
         <div className="col-2 text-right">
           <span className="review-date">
-            {new Date(review.date).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            })}
+          {new Date(reviewUser.review_date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
           </span>
         </div>
       </div>
@@ -70,8 +74,8 @@ return (
         <Rating value={review.rating} edit={false} size={20} activeColor="#ffd700" />
       </div>
       <p className="card-text">
-        <small className="text-muted">Price: {formattedPrice}</small> <br />
-        <small className="text-muted">Bought at: {review.location}</small>
+        <small className="text-muted">Price: {review.price !== 0 && review.price !== null ? formattedPrice : "N/A"}</small> <br />
+        <small className="text-muted">Bought at: {review.location!= null ? review.location : "Unknown"}</small>
       </p>
       <h5 className="review-comment">{review.review_comment}</h5>
     </div>

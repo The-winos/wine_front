@@ -32,7 +32,11 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
 });
 
   return (
+
     <div className="card mb-3" style={{maxWidth:"60%", margin:"0 auto "}}>
+      {console.log(reviews, "this is reviews")}
+      {console.log(wineFriend, "this is wineFriend")}
+      {console.log(reviewFriend, "this is review friend")}
     <div className="row no-gutter">
       <div className="col-md-4" style={{ border: "none" }}>
         <img
@@ -56,7 +60,8 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
 
 
         <h4 className="review-title">{reviews.name}</h4>
-        <small className="text-muted">By: {reviewFriend.username}</small>
+        <small className="text-muted">By: {user.id!=reviewFriend.id ?
+           <a href={`/profileuserid/${reviewFriend.id}`}>{reviewFriend.username}</a>  :  <a href={`/profile`}>{reviewFriend.username}</a> }</small>
 
         <Rating
                   value={reviews.rating}
@@ -65,8 +70,9 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
                   activeColor="#ffd700"
                 />
         <p className="card-text">
-          <small className="text-muted">Price: {formattedPrice}</small> <br />
-          <small className="text-muted">Bought at: {reviews.location}</small>
+          <small className="text-muted">Price: <small className="text-muted">Price: {reviews.price !== 0 && reviews.price !== null ? formattedPrice : "N/A" }</small>
+</small> <br />
+          <small className="text-muted">Bought at: {reviews.location != null ? reviews.location : "Unknown"}</small>
         </p>
         <h5 className="review-comment">{reviews.review_comment}</h5>
 <button onClick={()=>{

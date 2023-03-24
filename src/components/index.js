@@ -22,3 +22,5 @@ export { default as FollowButton } from "./FollowButton";
 export { default as AccountSettings } from "./AccountSettings";
 export { default as Review } from "./Review";
 export { default as EditAccount } from "./EditAccount";
+export { default as Review } from "./Review";
+export { default as ProfileUserId } from "./ProfileUserId";

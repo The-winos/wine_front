@@ -61,14 +61,18 @@ fetchGetUserById();
 
 <h4 className="review-title">{review.name}</h4>
 <div className="d-flex align-items-center">
-  <small className="text-muted">By: {reviewUser.username}</small>
+  <small className="text-muted">By:
+
+        {user.id!=reviewUser.id ?
+           <a href={`/profileuserid/${reviewUser.id}`}>{reviewUser.username}</a>  :  <a href={`/profile`}>{reviewUser.username}</a> }
+
+  </small>
   <div className="ml-3">
     <FollowButton
       review={review}
       reviewUser={reviewUser}
       reviewWine={reviewWine}
       user={user}
-
     />
   </div>
 </div>
@@ -79,8 +83,11 @@ fetchGetUserById();
     activeColor="#ffd700"
   />
         <p className="card-text">
-          <small className="text-muted">Price: {formattedPrice}</small> <br />
-          <small className="text-muted">Bought at: {review.location}</small>
+
+        <small className="text-muted">Price: {review.price !== 0 && review.price !== null ? formattedPrice : "N/A" }</small>
+
+ <br />
+          <small className="text-muted">Bought at: {review.location != null ? review.location : "Unknown"}</small>
         </p>
         <h5 className="review-comment">{review.review_comment}</h5>
 <button onClick={()=>{
