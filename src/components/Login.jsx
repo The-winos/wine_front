@@ -6,6 +6,7 @@ const Login = ({ setUser, setLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   async function handleLogin(event) {
@@ -60,15 +61,25 @@ const Login = ({ setUser, setLoggedIn }) => {
                     <i className="fa fa-lock"></i>
                   </span>
                   <input
-                    type="password"
+                    type={passwordVisible ? "text" : "password"}
                     className="form-control"
                     placeholder="Password"
                     required
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                   />
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    <i
+                      className={`fa ${
+                        passwordVisible ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
+                  </button>
                 </div>
-
                 <div className="text-center mb-3">
                   <button type="submit" className="btn btn-primary w-100">
                     Log in
