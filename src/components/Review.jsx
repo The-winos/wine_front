@@ -12,8 +12,11 @@ const Review = ({user}) => {
   const[comment, setComment]=useState("");
   const[location, setLocation]=useState("");
 
+async function handleWine(event)
+{
+  event.preventDefault();
 
-
+}
 
   return <div id="review">Review</div>;
 };
