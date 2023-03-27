@@ -226,3 +226,73 @@ export async function getReviewByUser(userId) {
     console.error(error);
   }
 }
+
+export async function createWine(
+  author_id,
+  name,
+  image_url,
+  price,
+  rating,
+  region,
+  flavor //this is the ENUM for type of wine
+){
+  const options={
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+    },
+    body:JSON.stringify({
+      author_id,
+  name,
+  image_url,
+  price,
+  rating,
+  region,
+  flavor
+    }),
+  };
+  try {
+    const response= await fetch(`${BASE_URL}/wines`, options);
+    const result=await response.json();
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function createReview(
+  wine_id,
+  user_id,
+  name,
+  rating,
+  price,
+  review_comment,
+  image_url,
+  review_date,
+  location
+){
+  const options={
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+    },
+    body: JSON.stringify({
+      wine_id,
+      user_id,
+      name,
+      rating,
+      price,
+      review_comment,
+      image_url,
+      review_date,
+      location
+    }),
+  };
+  try {
+    const response=await fetch(`${BASE_URL}/reviews`, options);
+    const result=await response.json();
+    return result;
+  } catch (error) {
+    console.error(error)
+  }
+}
