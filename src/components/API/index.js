@@ -296,3 +296,16 @@ export async function createReview(
     console.error(error)
   }
 }
+
+export async function checkExistingWine(wineName) {
+  const response = await fetch(`${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`);
+  const wines = await response.json();
+
+  for (const wine of wines) {
+    if (wine.name.toLowerCase() === wineName.toLowerCase()) {
+      return true;
+    }
+  }
+
+  return false;
+}
