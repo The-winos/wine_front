@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { authUser } from "./API";
+import EditAccount from "./EditAccount";
 
 const AccountSettings = ({ user }) => {
   const [update, setUpdate] = useState(false);
@@ -15,14 +16,7 @@ const AccountSettings = ({ user }) => {
             setUserReviews={setUserReviews}
           ></EditForm>
         ) : null} */}
-        <button
-          id="admin-cancel-edit"
-          onClick={() => {
-            setUpdate(false);
-          }}
-        >
-          Cancel Edit
-        </button>
+        <EditAccount user={user} />
       </>
     </div>
   );

@@ -235,28 +235,28 @@ export async function createWine(
   rating,
   region,
   flavor //this is the ENUM for type of wine
-){
-  const options={
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
+) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    body:JSON.stringify({
+    body: JSON.stringify({
       author_id,
-  name,
-  image_url,
-  price,
-  rating,
-  region,
-  flavor
+      name,
+      image_url,
+      price,
+      rating,
+      region,
+      flavor,
     }),
   };
   try {
-    const response= await fetch(`${BASE_URL}/wines`, options);
-    const result=await response.json();
+    const response = await fetch(`${BASE_URL}/wines`, options);
+    const result = await response.json();
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
@@ -270,11 +270,11 @@ export async function createReview(
   image_url,
   review_date,
   location
-){
-  const options={
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
+) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       wine_id,
@@ -285,20 +285,22 @@ export async function createReview(
       review_comment,
       image_url,
       review_date,
-      location
+      location,
     }),
   };
   try {
-    const response=await fetch(`${BASE_URL}/reviews`, options);
-    const result=await response.json();
+    const response = await fetch(`${BASE_URL}/reviews`, options);
+    const result = await response.json();
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
 export async function checkExistingWine(wineName) {
-  const response = await fetch(`${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`);
+  const response = await fetch(
+    `${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`
+  );
   const wines = await response.json();
 
   for (const wine of wines) {
@@ -309,3 +311,21 @@ export async function checkExistingWine(wineName) {
 
   return false;
 }
+
+// export async function updateUser() {
+//   try {
+//     const options = {
+//       method: "PATCH",
+//       headers: {
+//         "Content-type": "application/json",
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//       body: JSON.stringify({}),
+//     };
+//     const response = await fetch(`${BASE_URL}/users/${id}`, options);
+//     const result = await response.json();
+//     return result;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
