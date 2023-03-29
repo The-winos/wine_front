@@ -235,20 +235,12 @@ export async function createWine(
   rating,
   region,
   flavor //this is the ENUM for type of wine
-<<<<<<< HEAD
 ) {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-=======
-){
-  const options={
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`
->>>>>>> main
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
       author_id,
@@ -261,14 +253,9 @@ export async function createWine(
     }),
   };
   try {
-<<<<<<< HEAD
     const response = await fetch(`${BASE_URL}/wines`, options);
     const result = await response.json();
-=======
-    const response= await fetch(`${BASE_URL}/wines`, options);
-    const result=await response.json();
-    console.log(result, "api result")
->>>>>>> main
+    console.log(result, "api result");
     return result;
   } catch (error) {
     console.error(error);
@@ -285,20 +272,12 @@ export async function createReview(
   image_url,
   review_date,
   location
-<<<<<<< HEAD
 ) {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-=======
-){
-  const options={
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`
->>>>>>> main
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify({
       wine_id,
@@ -326,15 +305,14 @@ export async function checkExistingWine(wineName) {
     `${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`
   );
   const wines = await response.json();
-  console.log(wines, "what is wines?")
-
+  console.log(wines, "what is wines?");
 
   for (const wine of wines) {
-    console.log(wine, "what is wine?")
-    console.log(wine.name, "wine.name")
-    console.log(wineName, "wineName")
+    console.log(wine, "what is wine?");
+    console.log(wine.name, "wine.name");
+    console.log(wineName, "wineName");
     if (wine.name.toLowerCase() === wineName.toLowerCase()) {
-      console.log("Wine found")
+      console.log("Wine found");
       return true;
     }
   }
