@@ -321,20 +321,40 @@ export async function checkExistingWine(wineName) {
   return false;
 }
 
-// export async function updateUser() {
-//   try {
-//     const options = {
-//       method: "PATCH",
-//       headers: {
-//         "Content-type": "application/json",
-//         Authorization: `Bearer ${localStorage.getItem("token")}`,
-//       },
-//       body: JSON.stringify({}),
-//     };
-//     const response = await fetch(`${BASE_URL}/users/${id}`, options);
-//     const result = await response.json();
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export async function updateUser(
+  username,
+  password,
+  name,
+  state,
+  role,
+  email,
+  birthday,
+  follower_count,
+  following_count
+) {
+  try {
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        name,
+        state,
+        role,
+        email,
+        birthday,
+        follower_count,
+        following_count,
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/users/${id}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
