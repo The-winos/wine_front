@@ -6,7 +6,6 @@ const EditAccount = () => {
   const [username, setUserName] = useState("");
   const [location, setLocation] = useState({});
   const [bio, setBio] = useState("");
-  const [update, setUpdate] = useState(false);
 
   async function handleUpdateAdmin(e) {
     e.preventDefault();
@@ -31,7 +30,7 @@ const EditAccount = () => {
   return (
     <div>
       <form className="admin-form">
-        <div id="text-fields">Book Title</div>
+        <div id="text-fields">Account Settings</div>
         <input
           placeholder="name"
           className="first-name"
