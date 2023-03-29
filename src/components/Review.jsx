@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
 import { useNavigate } from "react-router-dom";
 
 import { checkExistingWine, createReview, createWine } from "./API";
@@ -15,11 +16,13 @@ const Review = ({user}) => {
   const[reviewPrice, setReviewPrice]=useState("");
   const[reviewRating, setReviewRating]=useState("");
   const[comment, setComment]=useState("");
-  const[location, setLocation]=useState("");
+  const[theLocation, setTheLocation]=useState("");
+  const[isThereWine, setIsThereWine]=useState(false)// for review
+  const[noWine, setNoWine]=useState(false)
 
-async function handleWine(event)
+async function handleWine(e)
 {
-  event.preventDefault();
+  e.preventDefault();
   const wine = {
     name: wineName,
     image_url: wineImg,
@@ -29,18 +32,48 @@ async function handleWine(event)
     flavor: flavor,
   };
     const existingWine = await checkExistingWine(wineName);
+    console.log(existingWine, "existing wine")
     if (existingWine) {
-      // wine already exists, show review form
-      handleReview(existingWine.id);
+      setIsThereWine(true)
+      console.log(existingWine, " here is this a wine??")
+      const wineId=existingWine.author_id
+      handleReview(wineId);
+
     } else {
-      // wine doesn't exist, show wine form
-      createWine(user.id, wineName, wineImg, null, null, region, flavor).then((result) => {
-        handleReview(result.id);
-      });
+     setNoWine(true)
+     handleCreateWine()
+
+    }
+  }
+  function handleCreateWine(e){
+    e.preventDefault();
+    if (flavor== "Cabernet" || flavor== "Syrah"|| flavor=="Zinfandel" || flavor=="Pinot Noir"||flavor=="Merlot"||flavor=="Malbec"||flavor=="Tempranillo"|| flavor=="Red Blend"||flavor=="TreTerzi"||flavor=="Petite Sirah"){
+      setWineImg("https://img.freepik.com/free-photo/bottle-wine-isolated-white_167946-4.jpg?size=338&ext=jpg&ga=GA1.2.1034222811.1663818713")
+    } else {
+      setWineImg("https://preview.free3d.com/img/2015/09/1868291155406357898/jx90iyj3.jpg")
     }
   }
 
+  useEffect(() => {
+    async function creatingTheWine(){
+    if (wineImg) {
+      const newWine=await createWine(user.id, wineName, wineImg, null, null, region, flavor)
+        console.log(newWine, "api result")
+        setIsThereWine(true)
+        setNoWine(false)
+        console.log(newWine, " here is this a wine??")
+        const wineId=newWine.author_id
+        handleReview(wineId);
+      };
+    }creatingTheWine()
+
+}, [wineImg]);
+
+
+
   function handleReview(wineId) {
+    console.log(wineId, "this should be wineId")
+
     const review = {
       wine_id: wineId,
       user_id: user.id,
@@ -50,11 +83,10 @@ async function handleWine(event)
       review_comment: comment,
       image_url: null,
       review_date: new Date(),
-      location: location,
+      location: theLocation,
     };
-    createReview(review).then((result) => {
-      console.log(wineId)
-    });
+    console.log(review, "what is is this?")
+    createReview(review)
   }
 
   return (
@@ -77,9 +109,61 @@ async function handleWine(event)
         <button type="submit" className="btn btn-primary">
           Check for Existing Wine
         </button>
+
       </form>
+      <form onSubmit={handleCreateWine}>
+      {noWine ?
+        <>
+      <h2>Add Your Wine</h2>
+      <label htmlFor="wineRegion" className="form-label">
+            Region of wine:
+          </label>
+      <input
+            type="text"
+            className="form-control"
+            id="region"
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+          />
+          <label htmlFor="wineFlavor" className="form-label">
+            Type of this wine:
+          </label>
+          <select
+            className="form-select"
+            id="flavor"
+            value={flavor}
+            onChange={(e) => setFlavor(e.target.value)}
+          >
+            <option value="">Choose...</option>
+            <option value="Cabernet">Cabernet Sauvignon</option>
+            <option value="Syrah">Syrah</option>
+            <option value="Zinfandel">Zinfandel</option>
+            <option value="Pinot Noir">Pinot Noir</option>
+            <option value="Merlot">Merlot</option>
+            <option value="Malbec">Malbec</option>
+            <option value="Tempranillo">Tempranillo</option>
+            <option value="Riesling">Riesling</option>
+            <option value="Pinot Grigio">Pinot Grigio</option>
+            <option value="Sauvigon">Sauvigon Blanc</option>
+            <option value="Chardonnay">Chardonnay</option>
+            <option value="Moscato">Moscato</option>
+            <option value="TreTerzi">TreTerzi</option>
+            <option value="Petite Sirah">Petite Sirah </option>
+            <option value="Red Blend">Red Blend</option>
+            <option value="White Blend">White Blend</option>
+            <option value="Other">Other</option>
+
+          </select>
+          <button type="submit" className="btn btn-primary" onSubmit={handleCreateWine}>
+          Submit my wine
+        </button>
+
+</>
+      : null}
+</form>
 
 
+{isThereWine ?
         <form onSubmit={handleReview}>
           <h2>Add Your Review</h2>
           <div className="mb-3">
@@ -171,20 +255,7 @@ async function handleWine(event)
               required
             />
           </div>
-          <div className="mb-3">
-          <label htmlFor="reviewRating" className="form-label">
-            Rating
-          </label>
-          <div>
-            {[1, 2, 3, 4, 5].map((i) => (
-              <span
-                key={i}
-                className={`fa fa-star${i <= reviewRating ? " checked" : ""}`}
-                onClick={() => setReviewRating(i)}
-              ></span>
-            ))}
-          </div>
-        </div>
+
         <div className="mb-3">
           <label htmlFor="reviewComment" className="form-label">
             Review Comment
@@ -205,8 +276,8 @@ async function handleWine(event)
           <select
             className="form-select"
             id="reviewLocation"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={theLocation}
+            onChange={(e) => setTheLocation(e.target.value)}
           >
             <option value="">Choose...</option>
             <option value="Grocery">Grocery</option>
@@ -215,26 +286,13 @@ async function handleWine(event)
             <option value="Sams">Sams</option>
             <option value="Other">Other</option>
           </select>
-        </div>
-        {location === "Other" && (
-          <div className="mb-3">
-            <label htmlFor="otherLocation" className="form-label">
-              Other Location
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="otherLocation"
-              placeholder="Enter other location"
-              value={otherLocation}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </div>
-        )}
+
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
-      </form>
+      </div></form>
+
+        : null}
       </div>
   );
 };
