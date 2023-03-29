@@ -1,7 +1,13 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
+import { useNavigate } from "react-router-dom";
+
+import { checkExistingWine, createReview, createWine } from "./API";
 
 const Review = ({user}) => {
+  const navigate= useNavigate()
   const[wineName, setWineName]=useState("");
+  const[wineImg, setWineImg]=useState("")
   const[winePrice, setWinePrice]=useState("");
   const[wineRating, setWineRating]=useState("");
   const[region, setRegion]=useState("");
@@ -10,15 +16,288 @@ const Review = ({user}) => {
   const[reviewPrice, setReviewPrice]=useState("");
   const[reviewRating, setReviewRating]=useState("");
   const[comment, setComment]=useState("");
-  const[location, setLocation]=useState("");
+  const[theLocation, setTheLocation]=useState("");
+  const[isThereWine, setIsThereWine]=useState(false)// for review
+  const[noWine, setNoWine]=useState(false)
 
-async function handleWine(event)
+async function handleWine(e)
 {
-  event.preventDefault();
+  e.preventDefault();
+  const wine = {
+    name: wineName,
+    image_url: wineImg,
+    price: winePrice,
+    rating: wineRating, // <-- add this line
+    region: region,
+    flavor: flavor,
+  };
+    const existingWine = await checkExistingWine(wineName);
+    console.log(existingWine, "existing wine")
+    if (existingWine) {
+      setIsThereWine(true)
+      console.log(existingWine, " here is this a wine??")
+      const wineId=existingWine.author_id
+      handleReview(wineId);
 
-}
+    } else {
+     setNoWine(true)
+     handleCreateWine()
 
-  return <div id="review">Review</div>;
+    }
+  }
+  function handleCreateWine(e){
+    e.preventDefault();
+    if (flavor== "Cabernet" || flavor== "Syrah"|| flavor=="Zinfandel" || flavor=="Pinot Noir"||flavor=="Merlot"||flavor=="Malbec"||flavor=="Tempranillo"|| flavor=="Red Blend"||flavor=="TreTerzi"||flavor=="Petite Sirah"){
+      setWineImg("https://img.freepik.com/free-photo/bottle-wine-isolated-white_167946-4.jpg?size=338&ext=jpg&ga=GA1.2.1034222811.1663818713")
+    } else {
+      setWineImg("https://preview.free3d.com/img/2015/09/1868291155406357898/jx90iyj3.jpg")
+    }
+  }
+
+  useEffect(() => {
+    async function creatingTheWine(){
+    if (wineImg) {
+      const newWine=await createWine(user.id, wineName, wineImg, null, null, region, flavor)
+        console.log(newWine, "api result")
+        setIsThereWine(true)
+        setNoWine(false)
+        console.log(newWine, " here is this a wine??")
+        const wineId=newWine.author_id
+        handleReview(wineId);
+      };
+    }creatingTheWine()
+
+}, [wineImg]);
+
+
+
+  function handleReview(wineId) {
+    console.log(wineId, "this should be wineId")
+
+    const review = {
+      wine_id: wineId,
+      user_id: user.id,
+      name: reviewName,
+      rating: reviewRating,
+      price: reviewPrice,
+      review_comment: comment,
+      image_url: null,
+      review_date: new Date(),
+      location: theLocation,
+    };
+    console.log(review, "what is is this?")
+    createReview(review)
+  }
+
+  return (
+    <div className="container mt-5">
+      <h1>Submit a Review</h1>
+      <form onSubmit={handleWine}>
+        <div className="mb-3">
+          <label htmlFor="wineName" className="form-label">
+            Wine Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="wineName"
+            value={wineName}
+            onChange={(e) => setWineName(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Check for Existing Wine
+        </button>
+
+      </form>
+      <form onSubmit={handleCreateWine}>
+      {noWine ?
+        <>
+      <h2>Add Your Wine</h2>
+      <label htmlFor="wineRegion" className="form-label">
+            Region of wine:
+          </label>
+      <input
+            type="text"
+            className="form-control"
+            id="region"
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+          />
+          <label htmlFor="wineFlavor" className="form-label">
+            Type of this wine:
+          </label>
+          <select
+            className="form-select"
+            id="flavor"
+            value={flavor}
+            onChange={(e) => setFlavor(e.target.value)}
+          >
+            <option value="">Choose...</option>
+            <option value="Cabernet">Cabernet Sauvignon</option>
+            <option value="Syrah">Syrah</option>
+            <option value="Zinfandel">Zinfandel</option>
+            <option value="Pinot Noir">Pinot Noir</option>
+            <option value="Merlot">Merlot</option>
+            <option value="Malbec">Malbec</option>
+            <option value="Tempranillo">Tempranillo</option>
+            <option value="Riesling">Riesling</option>
+            <option value="Pinot Grigio">Pinot Grigio</option>
+            <option value="Sauvigon">Sauvigon Blanc</option>
+            <option value="Chardonnay">Chardonnay</option>
+            <option value="Moscato">Moscato</option>
+            <option value="TreTerzi">TreTerzi</option>
+            <option value="Petite Sirah">Petite Sirah </option>
+            <option value="Red Blend">Red Blend</option>
+            <option value="White Blend">White Blend</option>
+            <option value="Other">Other</option>
+
+          </select>
+          <button type="submit" className="btn btn-primary" onSubmit={handleCreateWine}>
+          Submit my wine
+        </button>
+
+</>
+      : null}
+</form>
+
+
+{isThereWine ?
+        <form onSubmit={handleReview}>
+          <h2>Add Your Review</h2>
+          <div className="mb-3">
+            <label htmlFor="reviewName" className="form-label">
+              Name of Review
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="reviewName"
+              value={reviewName}
+              onChange={(e) => setReviewName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="reviewRating" className="form-label">
+              Rating
+            </label>
+            <div className="rating" id="reviewRating">
+              <label>
+                <input
+                  type="radio"
+                  name="stars"
+                  value="1"
+                  onClick={(e) => setReviewRating(e.target.value)}
+                />
+                <span className="icon">★</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="stars"
+                  value="2"
+                  onClick={(e) => setReviewRating(e.target.value)}
+                />
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="stars"
+                  value="3"
+                  onClick={(e) => setReviewRating(e.target.value)}
+                />
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="stars"
+                  value="4"
+                  onClick={(e) => setReviewRating(e.target.value)}
+                />
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="stars"
+                  value="5"
+                  onClick={(e) => setReviewRating(e.target.value)}
+                />
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+                <span className="icon">★</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="reviewPrice" className="form-label">
+              Price
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="reviewPrice"
+              value={reviewPrice}
+              onChange={(e) => setReviewPrice(e.target.value)}
+              required
+            />
+          </div>
+
+        <div className="mb-3">
+          <label htmlFor="reviewComment" className="form-label">
+            Review Comment
+          </label>
+          <textarea
+            className="form-control"
+            id="reviewComment"
+            placeholder="Enter review comment"
+            rows="3"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="reviewLocation" className="form-label">
+            Bought At
+          </label>
+          <select
+            className="form-select"
+            id="reviewLocation"
+            value={theLocation}
+            onChange={(e) => setTheLocation(e.target.value)}
+          >
+            <option value="">Choose...</option>
+            <option value="Grocery">Grocery</option>
+            <option value="Costco">Costco</option>
+            <option value="Liquor Store">Liquor Store</option>
+            <option value="Sams">Sams</option>
+            <option value="Other">Other</option>
+          </select>
+
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </div></form>
+
+        : null}
+      </div>
+  );
 };
+
+
+
 
 export default Review;
