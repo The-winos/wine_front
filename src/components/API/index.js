@@ -235,30 +235,30 @@ export async function createWine(
   rating,
   region,
   flavor //this is the ENUM for type of wine
-){
-  const options={
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`
+) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    body:JSON.stringify({
+    body: JSON.stringify({
       author_id,
-  name,
-  image_url,
-  price,
-  rating,
-  region,
-  flavor
+      name,
+      image_url,
+      price,
+      rating,
+      region,
+      flavor,
     }),
   };
   try {
-    const response= await fetch(`${BASE_URL}/wines`, options);
-    const result=await response.json();
-    console.log(result, "api result")
+    const response = await fetch(`${BASE_URL}/wines`, options);
+    const result = await response.json();
+    console.log(result, "api result");
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
@@ -272,7 +272,7 @@ export async function createReview({
   image_url,
   review_date,
   location
-}){
+){
   const options={
     method:"POST",
     headers:{
@@ -288,34 +288,73 @@ export async function createReview({
       review_comment,
       image_url,
       review_date,
-      location
+      location,
     }),
   };
   try {
     const response=await fetch(`${BASE_URL}/reviews`, options);
     const result=await response.json();
-    console.log(result, "api result from Review")
     return result;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
 export async function checkExistingWine(wineName) {
   const response = await fetch(`${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`);
   const wines = await response.json();
-  console.log(wines, "what is wines?");
+  console.log(wines, "what is wines?")
+
 
   for (const wine of wines) {
-    console.log(wine, "what is wine?");
-    console.log(wine.name, "wine.name");
-    console.log(wineName, "wineName");
+    console.log(wine, "what is wine?")
+    console.log(wine.name, "wine.name")
+    console.log(wineName, "wineName")
     if (wine.name.toLowerCase() === wineName.toLowerCase()) {
-      console.log("Wine found");
-      return wine;
+      console.log("Wine found")
+      return true;
     }
   }
 
+
   console.log("No matching wine found");
-  return null;
+  return false;
+}
+
+export async function updateUser(
+  username,
+  password,
+  name,
+  state,
+  role,
+  email,
+  birthday,
+  follower_count,
+  following_count
+) {
+  try {
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        name,
+        state,
+        role,
+        email,
+        birthday,
+        follower_count,
+        following_count,
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/users/${id}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 }

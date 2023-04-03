@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const EditAccount = () => {
   const [name, setName] = useState({});
@@ -6,10 +6,31 @@ const EditAccount = () => {
   const [username, setUserName] = useState("");
   const [location, setLocation] = useState({});
   const [bio, setBio] = useState("");
+
+  async function handleUpdateAdmin(e) {
+    e.preventDefault();
+    // const updatedUser = await updateUser();
+
+    // const editedProducts = allBooks.map((product) => {
+    //   if (product.id == updatedProduct.id) {
+    //     return updatedProduct;
+    //   } else {
+    //     return product;
+    //   }
+    // });
+    // setAllBooks(editedProducts);
+    // setUpdate(false);
+    // {
+    //   toast.success("Check your logs. Product has updated.", {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // }
+  }
+
   return (
     <div>
       <form className="admin-form">
-        <div id="text-fields">Book Title</div>
+        <div id="text-fields">Account Settings</div>
         <input
           placeholder="name"
           className="first-name"
@@ -59,6 +80,14 @@ const EditAccount = () => {
           Submit
         </button>
       </form>
+      <button
+        id="admin-cancel-edit"
+        onClick={() => {
+          setUpdate(false);
+        }}
+      >
+        Cancel Edit
+      </button>
     </div>
   );
 };

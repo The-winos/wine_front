@@ -1,29 +1,24 @@
 import React, { useState } from "react";
 import { authUser } from "./API";
+import EditAccount from "./EditAccount";
 
-const AccountSettings = ({ user }) => {
+const AccountSettings = ({ users }) => {
   const [update, setUpdate] = useState(false);
+  function handleChooseEdit(e) {
+    setEditUser(e.target.users);
+    setUpdate(true);
+  }
 
   return (
     <div>
       <>
-        {/* {update && userReviews.id == editId ? (
-          <EditForm
-            book={userReviews}
-            setUpdate={setUpdate}
-            userReviews={userReviews}
-            setUserReviews={setUserReviews}
-          ></EditForm>
-        ) : null} */}
-        <button
-          id="admin-cancel-edit"
-          onClick={() => {
-            setUpdate(false);
-          }}
-        >
-          Cancel Edit
-        </button>
+        {update && userReviews.id == editId ? (
+          <EditAccount users={users} />
+        ) : null}
       </>
+      <button className="admin-buttons" id={users} onClick={handleChooseEdit}>
+        Update
+      </button>
     </div>
   );
 };

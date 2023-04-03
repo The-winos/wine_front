@@ -1,13 +1,16 @@
 //show user badges, number of posts, follower and following count
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
 
 const Profile = ({ user }) => {
+  // const useNavigate = useNavigate();
   const [userReviews, setUserReviews] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [editUser, setEditUser] = useState(false);
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -22,6 +25,8 @@ const Profile = ({ user }) => {
 
     fetchUserReviews();
   }, [user]);
+
+  //fetch API function that posts user object by id?
 
   return (
     <div className="profile-container">
@@ -53,7 +58,7 @@ const Profile = ({ user }) => {
       </div>
 
       <div>
-        {user && user.admin ? (
+        {/* {user && user.admin ? (
           <>
             <Link to={"/users"}>
               <button type="all users" className="buttons">
@@ -61,7 +66,7 @@ const Profile = ({ user }) => {
               </button>
             </Link>
           </>
-        ) : null}
+        ) : null} */}
       </div>
       <div>
         {userReviews && userReviews.length ? (
