@@ -262,7 +262,7 @@ export async function createWine(
   }
 }
 
-export async function createReview(
+export async function createReview({
   wine_id,
   user_id,
   name,
@@ -272,7 +272,7 @@ export async function createReview(
   image_url,
   review_date,
   location
-){
+}){
   const options={
     method:"POST",
     headers:{
