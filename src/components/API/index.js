@@ -294,6 +294,7 @@ export async function createReview(
   try {
     const response=await fetch(`${BASE_URL}/reviews`, options);
     const result=await response.json();
+    console.log(result, "api result from Review")
     return result;
   } catch (error) {
     console.error(error)
@@ -303,19 +304,18 @@ export async function createReview(
 export async function checkExistingWine(wineName) {
   const response = await fetch(`${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`);
   const wines = await response.json();
-  console.log(wines, "what is wines?")
-
+  console.log(wines, "what is wines?");
 
   for (const wine of wines) {
-    console.log(wine, "what is wine?")
-    console.log(wine.name, "wine.name")
-    console.log(wineName, "wineName")
+    console.log(wine, "what is wine?");
+    console.log(wine.name, "wine.name");
+    console.log(wineName, "wineName");
     if (wine.name.toLowerCase() === wineName.toLowerCase()) {
-      console.log("Wine found")
-      return true;
+      console.log("Wine found");
+      return wine;
     }
   }
 
   console.log("No matching wine found");
-  return false;
+  return null;
 }
