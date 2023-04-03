@@ -376,8 +376,3 @@ export async function updateUser(
    console.error(error);
  }
 }
-
-
-
-
-}
