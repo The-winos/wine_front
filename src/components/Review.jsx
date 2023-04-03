@@ -13,12 +13,13 @@ const Review = ({user}) => {
   const[region, setRegion]=useState("");
   const[flavor, setFlavor]=useState("");
   const[reviewName, setReviewName]=useState("");
-  const[reviewPrice, setReviewPrice]=useState("");
-  const[reviewRating, setReviewRating]=useState("");
+  const[reviewPrice, setReviewPrice]=useState(0);
+  const[reviewRating, setReviewRating]=useState(0);
   const[comment, setComment]=useState("");
   const[theLocation, setTheLocation]=useState("");
   const[isThereWine, setIsThereWine]=useState(false)// for review
   const[noWine, setNoWine]=useState(false)
+  const[wineId, setWineId]=useState(0)
 
 async function handleWine(e)
 {
@@ -27,7 +28,7 @@ async function handleWine(e)
     name: wineName,
     image_url: wineImg,
     price: winePrice,
-    rating: wineRating, // <-- add this line
+    rating: wineRating,
     region: region,
     flavor: flavor,
   };
@@ -36,12 +37,13 @@ async function handleWine(e)
     if (existingWine) {
       setIsThereWine(true)
       console.log(existingWine, " here is this a wine??")
-      const wineId=existingWine.author_id
-      handleReview(wineId);
+      setWineId(existingWine.id)
+      handleReview();
 
     } else {
      setNoWine(true)
-     handleCreateWine()
+    //  console.log(noWine, "This is noWine")
+    //  handleCreateWine()
 
     }
   }
@@ -61,9 +63,9 @@ async function handleWine(e)
         console.log(newWine, "api result")
         setIsThereWine(true)
         setNoWine(false)
-        console.log(newWine, " here is this a wine??")
-        const wineId=newWine.author_id
-        handleReview(wineId);
+        console.log(newWine, " here is this a NewWine??")
+        setWineId(newWine.id)
+        // handleReview();
       };
     }creatingTheWine()
 
@@ -71,10 +73,11 @@ async function handleWine(e)
 
 
 
-  function handleReview(wineId) {
-    console.log(wineId, "this should be wineId")
+  function handleReview(e) {
+e.preventDefault()
+console.log("WORDS!")
 
-    const review = {
+    createReview({
       wine_id: wineId,
       user_id: user.id,
       name: reviewName,
@@ -83,10 +86,7 @@ async function handleWine(e)
       review_comment: comment,
       image_url: null,
       review_date: new Date(),
-      location: theLocation,
-    };
-    console.log(review, "what is is this?")
-    createReview(review)
+      location: theLocation})
   }
 
   return (
@@ -287,7 +287,7 @@ async function handleWine(e)
             <option value="Other">Other</option>
           </select>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" onSubmit={handleReview}>
           Submit
         </button>
       </div></form>
