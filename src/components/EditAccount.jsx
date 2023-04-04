@@ -53,10 +53,9 @@ const EditAccount = ({ user }) => {
         }}
       />
       <form onSubmit={handleSubmit} className="admin-form">
-        <div id="text-fields">Account Settings</div>
-
+        <h6 id="text-fields">Name</h6>
         <input
-          placeholder="name"
+          placeholder={user.name}
           className="first-name"
           type="text"
           onChange={(event) => {
@@ -64,9 +63,12 @@ const EditAccount = ({ user }) => {
           }}
           value={name}
         />
+
+        <div></div>
+        <h6 id="text-fields">Username</h6>
         <input
-          placeholder="last name"
-          className="last-name"
+          placeholder={user.username}
+          className="username"
           type="text"
           onChange={(event) => {
             setLastName(event.target.value);
@@ -74,7 +76,7 @@ const EditAccount = ({ user }) => {
           value={lastName}
         />
 
-        <div id="text-fields">Location</div>
+        <h6 id="text-fields">Location</h6>
         <select
           placeholder="location"
           className="location"
@@ -97,18 +99,49 @@ const EditAccount = ({ user }) => {
           <option value="DC">District of Columbia</option>
           <option value="FL">Florida</option>
           <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
         </select>
-
-        <input
-          placeholder="username"
-          className="username"
-          type="text"
-          onChange={(event) => {
-            setUserName(event.target.value);
-          }}
-          value={username}
-        />
-        <input
+        <div></div>
+        <textarea
           placeholder="bio"
           className="bio"
           type="text"
