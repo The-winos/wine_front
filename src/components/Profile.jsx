@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
+import EditAccount from "./EditAccount";
 
 const Profile = ({ user }) => {
   // const useNavigate = useNavigate();
@@ -46,6 +47,7 @@ const Profile = ({ user }) => {
           }}
         />
         <div>
+          {/* <EditAccount user={user} /> */}
           <Link to={"/accountsettings"}>
             <button type="accountsettings" className="buttons">
               Account Settings
