@@ -9,26 +9,11 @@ const EditAccount = () => {
 
   async function handleUpdateAdmin(e) {
     e.preventDefault();
-    // const updatedUser = await updateUser();
-
-    // const editedProducts = allBooks.map((product) => {
-    //   if (product.id == updatedProduct.id) {
-    //     return updatedProduct;
-    //   } else {
-    //     return product;
-    //   }
-    // });
-    // setAllBooks(editedProducts);
-    // setUpdate(false);
-    // {
-    //   toast.success("Check your logs. Product has updated.", {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // }
   }
 
   return (
     <div>
+      {users}
       <form className="admin-form">
         <div id="text-fields">Account Settings</div>
         <input
