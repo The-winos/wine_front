@@ -14,7 +14,7 @@ const Login = ({ setUser, setLoggedIn }) => {
     const { token, user, message } = await loginUser(username, password);
     console.log(token, "this is token");
     const login = await authUser(token);
-    console.log(user, token);
+    console.log(user, token, "this is user and token");
 
     localStorage.removeItem("token");
     localStorage.setItem("token", token);

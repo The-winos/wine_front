@@ -17,6 +17,9 @@ const Profile = ({ user }) => {
       try {
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
+        {
+          console.log(user, "this is user");
+        }
         console.log(reviews, "user reviews");
       } catch (error) {
         console.error(error);
@@ -58,7 +61,7 @@ const Profile = ({ user }) => {
       </div>
 
       <div>
-        {/* {user && user.admin ? (
+        {user && user.admin ? (
           <>
             <Link to={"/users"}>
               <button type="all users" className="buttons">
@@ -66,7 +69,7 @@ const Profile = ({ user }) => {
               </button>
             </Link>
           </>
-        ) : null} */}
+        ) : null}
       </div>
       <div>
         {userReviews && userReviews.length ? (
