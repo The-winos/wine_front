@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { updateUser } from "./API";
 
 const EditAccount = ({ user }) => {
   const [name, setName] = useState(user.name || "");
@@ -6,13 +7,24 @@ const EditAccount = ({ user }) => {
   const [username, setUserName] = useState(user.username || "");
   const [location, setLocation] = useState(user.location || "");
   const [bio, setBio] = useState(user.bio || "");
+  const [update, setUpdate] = useState(false);
 
   async function handleUpdateAdmin(e) {
     e.preventDefault();
-    const editInfo = {
-      firstName: e.target.firstName.value,
-    };
   }
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userInfo = await updateUser();
+        setUpdate(userInfo);
+        console.log(user, "this is user");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserInfo();
+  }, [user]);
 
   return (
     <div>
