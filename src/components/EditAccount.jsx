@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { updateUser } from "./API";
 
 const EditAccount = ({ user }) => {
@@ -9,14 +9,10 @@ const EditAccount = ({ user }) => {
   const [bio, setBio] = useState(user.bio || "");
   const [update, setUpdate] = useState(false);
 
-  async function handleUpdateAdmin(e) {
-    e.preventDefault();
-  }
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const userInfo = await updateUser();
+        const userInfo = await updateUser(user.id);
         setUpdate(userInfo);
         console.log(user, "this is user");
       } catch (error) {
@@ -26,6 +22,23 @@ const EditAccount = ({ user }) => {
     fetchUserInfo();
   }, [user]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const updatedUser = {
+        name,
+        lastName,
+        username,
+        location,
+        bio,
+      };
+      const response = await updateUser(user.id, updatedUser);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <img
@@ -33,13 +46,13 @@ const EditAccount = ({ user }) => {
         alt="avatar image"
         className="img-fluid"
         style={{
-          height: "200px",
-          width: "200px",
+          height: "300px",
+          width: "300px",
           objectFit: "contain",
           objectPosition: "center center",
         }}
       />
-      <form className="admin-form">
+      <form onSubmit={handleSubmit} className="admin-form">
         <div id="text-fields">Account Settings</div>
 
         <input
@@ -49,22 +62,24 @@ const EditAccount = ({ user }) => {
           onChange={(event) => {
             setName(event.target.value);
           }}
-        ></input>
+          value={name}
+        />
         <input
-          placeholder="name"
+          placeholder="last name"
           className="last-name"
           type="text"
           onChange={(event) => {
             setLastName(event.target.value);
           }}
-        ></input>
+          value={lastName}
+        />
 
         <div id="text-fields">Location</div>
         <select
           placeholder="location"
           className="location"
           type="text"
-          value="location"
+          value={location}
           onChange={(event) => {
             setLocation(event.target.value);
           }}
@@ -82,61 +97,29 @@ const EditAccount = ({ user }) => {
           <option value="DC">District of Columbia</option>
           <option value="FL">Florida</option>
           <option value="GA">Georgia</option>
-          <option value="HI">Hawaii</option>
-          <option value="ID">Idaho</option>
-          <option value="IL">Illinois</option>
-          <option value="IN">Indiana</option>
-          <option value="IA">Iowa</option>
-          <option value="KS">Kansas</option>
-          <option value="KY">Kentucky</option>
-          <option value="LA">Louisiana</option>
-          <option value="ME">Maine</option>
-          <option value="MD">Maryland</option>
-          <option value="MA">Massachusetts</option>
-          <option value="MI">Michigan</option>
-          <option value="MN">Minnesota</option>
-          <option value="MS">Mississippi</option>
-          <option value="MO">Missouri</option>
-          <option value="MT">Montana</option>
-          <option value="NE">Nebraska</option>
-          <option value="NV">Nevada</option>
-          <option value="NH">New Hampshire</option>
-          <option value="NJ">New Jersey</option>
-          <option value="NM">New Mexico</option>
-          <option value="NY">New York</option>
-          <option value="NC">North Carolina</option>
-          <option value="ND">North Dakota</option>
-          <option value="OH">Ohio</option>
-          <option value="OK">Oklahoma</option>
-          <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
-          <option value="RI">Rhode Island</option>
-          <option value="SC">South Carolina</option>
-          <option value="SD">South Dakota</option>
-          <option value="TN">Tennessee</option>
-          <option value="TX">Texas</option>
-          <option value="UT">Utah</option>
-          <option value="VT">Vermont</option>
-          <option value="VA">Virginia</option>
-          <option value="WA">Washington</option>
-          <option value="WV">West Virginia</option>
-          <option value="WI">Wisconsin</option>
-          <option value="WY">Wyoming</option>
         </select>
 
-        <div id="bio-text-field">
-          Summary
-          <textarea
-            placeholder="bio"
-            className="bio"
-            type="text"
-            onChange={(event) => {
-              setBio(event.target.value);
-            }}
-          ></textarea>
-        </div>
-        <button id="admin-submit" onClick={handleUpdateAdmin} type="submit">
-          Submit
+        <input
+          placeholder="username"
+          className="username"
+          type="text"
+          onChange={(event) => {
+            setUserName(event.target.value);
+          }}
+          value={username}
+        />
+        <input
+          placeholder="bio"
+          className="bio"
+          type="text"
+          onChange={(event) => {
+            setBio(event.target.value);
+          }}
+          value={bio}
+        />
+
+        <button type="submit" className="buttons">
+          Save Changes
         </button>
       </form>
       <button
