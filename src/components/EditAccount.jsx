@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { updateUser } from "./API";
 
 const EditAccount = ({ user }) => {
@@ -53,7 +54,7 @@ const EditAccount = ({ user }) => {
         }}
       />
       <form onSubmit={handleSubmit} className="admin-form">
-        <h6 id="text-fields">Name</h6>
+        <h6 id="text-fields">Name:</h6>
         <input
           placeholder={user.name}
           className="first-name"
@@ -65,7 +66,7 @@ const EditAccount = ({ user }) => {
         />
 
         <div></div>
-        <h6 id="text-fields">Username</h6>
+        <h6 id="text-fields">Username:</h6>
         <input
           placeholder={user.username}
           className="username"
@@ -76,7 +77,7 @@ const EditAccount = ({ user }) => {
           value={lastName}
         />
 
-        <h6 id="text-fields">Location</h6>
+        <h6 id="text-fields">Location:</h6>
         <select
           placeholder="location"
           className="location"
@@ -141,6 +142,7 @@ const EditAccount = ({ user }) => {
           <option value="WY">Wyoming</option>
         </select>
         <div></div>
+        <h6>My Bio:</h6>
         <textarea
           placeholder="bio"
           className="bio"
@@ -155,14 +157,16 @@ const EditAccount = ({ user }) => {
           Save Changes
         </button>
       </form>
-      <button
-        id="admin-cancel-edit"
-        onClick={() => {
-          setUpdate(false);
-        }}
-      >
-        Cancel Edit
-      </button>
+      <Link to={"/profile"}>
+        <button
+          id="admin-cancel-edit"
+          onClick={() => {
+            setUpdate(false);
+          }}
+        >
+          Cancel Edit
+        </button>
+      </Link>
     </div>
   );
 };
