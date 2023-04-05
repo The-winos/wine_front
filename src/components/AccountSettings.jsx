@@ -5,10 +5,12 @@ import EditAccount from "./EditAccount";
 
 const AccountSettings = ({ users }) => {
   const [update, setUpdate] = useState(false);
+
   function handleChooseEdit(e) {
     setEditUser(e.target.users);
     setUpdate(true);
   }
+
   async function handleUpdateAdmin(e) {
     e.preventDefault();
   }
@@ -27,16 +29,7 @@ const AccountSettings = ({ users }) => {
           Update
         </button>
       </Link>
-      <div>
-        <button
-          id="admin-cancel-edit"
-          onClick={() => {
-            setUpdate(false);
-          }}
-        >
-          Cancel Edit
-        </button>
-      </div>
+      <div></div>
     </div>
   );
 };
