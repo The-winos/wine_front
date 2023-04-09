@@ -15,7 +15,7 @@ const EditAccount = ({ user }) => {
     async function fetchUserInfo() {
       if (userInfo) {
         const userBlock = await updateUser(user.id);
-        setUpdate(true);
+
         console.log(userBlock, "this is user");
       }
     }
@@ -33,6 +33,8 @@ const EditAccount = ({ user }) => {
         bio,
       };
       const response = await updateUser(user.id, updatedUser);
+      setUpdate(true);
+      console.log("BANANA");
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -54,7 +56,7 @@ const EditAccount = ({ user }) => {
       />
 
       <form onSubmit={handleSubmit} className="admin-form">
-        {update ? (
+        {update == true ? (
           <>
             <h6 id="text-fields">Name:</h6>
             <input
@@ -162,12 +164,7 @@ const EditAccount = ({ user }) => {
       </form>
 
       <Link to={"/profile"}>
-        <button
-          id="admin-cancel-edit"
-          onClick={() => {
-            setUpdate(false);
-          }}
-        >
+        <button id="admin-cancel-edit" onClick={() => {}}>
           Cancel Edit
         </button>
       </Link>

@@ -87,6 +87,9 @@ const Profile = ({ user }) => {
                   user={user}
                   userReviews={userReviews}
                   setUserReviews={setUserReviews}
+                  setEditUser={setEditUser}
+                  update={update}
+                  setUpdate={setUpdate}
                 />
               </div>
             );
