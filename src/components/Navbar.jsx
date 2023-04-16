@@ -10,7 +10,7 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
       <div id="username">
         {loggedIn ? <h5>Welcome, {`${user.username}`}</h5> : <h5>Please log in</h5>}
       </div>
-      <NavLink className="linkBar" to="/">Home</NavLink>
+
       {loggedIn ? (
         <>
         <NavLink to={"/"} className="linkBar" onClick={()=>{
@@ -19,6 +19,7 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
           setLoggedIn(false);
           setUser(null);
         }}>LogOut</NavLink>
+        <NavLink className="linkBar" to="/">Home</NavLink>
         <NavLink className="linkBar" to="/profile">
           <span id="profile-hover" data-hover="my account">
             </span>
