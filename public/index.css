@@ -104,6 +104,9 @@ button {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.search-bars-container {
+  text-align: center;
+}
 /* wine list */
 
 /* winefeed */
