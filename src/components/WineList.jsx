@@ -6,6 +6,8 @@ import Rating from "react-rating-stars-component"
 const WineList = ({allWine, setAllWine, setWineInfo, wineInfo, user}) => {
   const [filteredWines, setFilteredWines] = useState([]);
   const [selectedRating, setSelectedRating] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   useEffect(()=>{
     async function fetchAllWine(){
@@ -68,11 +70,33 @@ const WineList = ({allWine, setAllWine, setWineInfo, wineInfo, user}) => {
     setFilteredWines(filtered);
   }
 
+  useEffect(() => {
+    const results = allWine.filter((wine) =>
+      wine.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredWines(results);
+  }, [searchQuery, allWine]);
+
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+
+
   return(
     <div id="wineFeed">
-      <h2 id="all-wine-title">Find new Wines!</h2>
-      <div class="search-bars-container">
-        <label htmlFor="price-filter">Sort by price:  </label>
+    <h2 id="all-wine-title">Find new Wines!</h2>
+    <div className="search-bars-container">
+      <label htmlFor="name-filter">Find a wine:  </label>
+      <input type="text" value={searchQuery} onChange={handleChange} />
+      {/* {filteredWines.length > 0 && filteredWines.map((wine) => (
+        <div key={wine.id}>
+          <p>{wine.name}</p>
+        </div>
+      ))} */}
+
+
+        <label htmlFor="price-filter" >Sort by price:  </label>
         <select id="price-filter" name="price-filter" onChange={handlePriceFilter}>
           <option value="all">All</option>
           <option value="1-10">$1 - $10</option>
@@ -100,6 +124,7 @@ const WineList = ({allWine, setAllWine, setWineInfo, wineInfo, user}) => {
     <Rating count={1} value={1} edit={false} size={20} activeColor="#ffd700" />
   </option>
 </select>
+
 
       </div>
       <div id="wines" className="wine">
