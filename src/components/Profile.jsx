@@ -8,6 +8,7 @@ import UserReviewDetails from "./UserReviewDetails";
 
 const Profile = ({ user }) => {
   // const useNavigate = useNavigate();
+  const [update, setUpdate] = useState(false);
   const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
@@ -26,69 +27,74 @@ const Profile = ({ user }) => {
   //fetch API function that posts user object by id?
 
   return (
-    <div className="profile-container">
-      <div id="profile-main">
-        <img
-          src={user.avatar}
-          alt="avatar image"
-          className="img-fluid"
-          style={{
-            height: "200px",
-            width: "200px",
-            objectFit: "contain",
-            objectPosition: "center center",
-          }}
+    <>
+      {update ? (
+        <AccountSettings
+          user={user}
+          userReviews={userReviews}
+          setUserReviews={setUserReviews}
         />
-        <div>
-          {/* <EditAccount user={user} /> */}
-          <Link to={"/accountsettings"}>
-            <button type="accountsettings" className="buttons">
-              Account Settings
-            </button>
-          </Link>
-          <Link to={"/favorites"}>
-            <button type="favorite" className="buttons">
-              Favorites
-            </button>
-          </Link>
-        </div>
-        <h2 className="profile-username">{user.name}</h2>
-      </div>
+      ) : (
+        <div className="profile-container">
+          <div id="profile-main">
+            <img
+              src={user.avatar}
+              alt="avatar image"
+              className="img-fluid"
+              style={{
+                height: "200px",
+                width: "200px",
+                objectFit: "contain",
+                objectPosition: "center center",
+              }}
+            />
+            <div>
+              {/* <EditAccount user={user} /> */}
+              <Link to={"/accountsettings"}>
+                <button type="accountsettings" className="buttons">
+                  Account Settings
+                </button>
+              </Link>
+              <Link to={"/favorites"}>
+                <button type="favorite" className="buttons">
+                  Favorites
+                </button>
+              </Link>
+            </div>
+            <h2 className="profile-username">{user.name}</h2>
+          </div>
 
-      <div>
-        {user && user.admin ? (
-          <>
-            <Link to={"/users"}>
-              <button type="all users" className="buttons">
-                All Users
-              </button>
-            </Link>
-          </>
-        ) : null}
-      </div>
-      <div>
-        {userReviews && userReviews.length ? (
-          userReviews.map((userReviews) => {
-            return (
-              <div key={`userReview-${userReviews.id}`}>
-                <UserReviewDetails
-                  user={user}
-                  userReviews={userReviews}
-                  setUserReviews={setUserReviews}
-                />
-                <AccountSettings
-                  user={user}
-                  userReviews={userReviews}
-                  setUserReviews={setUserReviews}
-                />
-              </div>
-            );
-          })
-        ) : (
-          <></>
-        )}
-      </div>
-    </div>
+          <div>
+            {user && user.admin ? (
+              <>
+                <Link to={"/users"}>
+                  <button type="all users" className="buttons">
+                    All Users
+                  </button>
+                </Link>
+              </>
+            ) : null}
+          </div>
+          <div>
+            {userReviews && userReviews.length ? (
+              userReviews.map((userReviews) => {
+                return (
+                  <div key={`userReview-${userReviews.id}`}>
+                    <UserReviewDetails
+                      user={user}
+                      userReviews={userReviews}
+                      setUserReviews={setUserReviews}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
