@@ -120,7 +120,10 @@ const Main = () => {
           element={<SingleWine user={user} loggedIn={loggedIn} />}
         ></Route>
         <Route path="/winedetails" element={<WineDetails />}></Route>
-        <Route path="/accountsettings" element={<AccountSettings />}></Route>
+        <Route
+          path="/accountsettings"
+          element={<AccountSettings user={user} />}
+        ></Route>
         <Route path="/review" element={<Review user={user} />}></Route>
         <Route
           path="/editaccount"
@@ -138,7 +141,7 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/favorites" element={<Favorites user={user}/>}></Route>
+        <Route path="/favorites" element={<Favorites user={user} />}></Route>
       </Routes>
       <Footer />
     </div>
