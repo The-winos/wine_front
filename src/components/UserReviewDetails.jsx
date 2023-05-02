@@ -22,11 +22,8 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
 
   useEffect(() => {
     async function fetchUserWineDetails() {
-      console.log(userReviews, "orange");
-      console.log(userReviews.wine_id, "banana");
       const userWineDetails = await getWineById(userReviews.wine_id);
       setUserWineDetails(userWineDetails);
-      console.log(userWineDetails, "user wine post");
     }
     fetchUserWineDetails();
   }, []);
