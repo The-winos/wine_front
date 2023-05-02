@@ -1,27 +1,20 @@
 //show user badges, number of posts, follower and following count
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
-import EditAccount from "./EditAccount";
 
 const Profile = ({ user }) => {
   // const useNavigate = useNavigate();
   const [userReviews, setUserReviews] = useState([]);
-  const [update, setUpdate] = useState(false);
-  const [editUser, setEditUser] = useState(false);
 
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
-        {
-          console.log(user, "this is user");
-        }
-        console.log(reviews, "user reviews");
       } catch (error) {
         console.error(error);
       }
@@ -87,9 +80,6 @@ const Profile = ({ user }) => {
                   user={user}
                   userReviews={userReviews}
                   setUserReviews={setUserReviews}
-                  setEditUser={setEditUser}
-                  update={update}
-                  setUpdate={setUpdate}
                 />
               </div>
             );
