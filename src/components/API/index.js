@@ -115,6 +115,7 @@ export async function getWineById(wineId) {
    };
    const response = await fetch(`${BASE_URL}/wines/${wineId}`, options);
    const result = await response.json();
+   console.log(result)
    return result;
  } catch (error) {
    console.error(error);
