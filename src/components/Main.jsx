@@ -141,7 +141,7 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/favorites" element={<Favorites user={user} />}></Route>
+        <Route path="/favorites" element={<Favorites user={user} setWineInfo={setWineInfo}/>}></Route>
       </Routes>
       <Footer />
     </div>
