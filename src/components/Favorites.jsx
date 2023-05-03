@@ -30,26 +30,26 @@ const Favorites = (props) => {
       // }
 
   return <div id="favorites">
-{/* {favorites && favorites.length
-          ? favorites.map(async (favoriteWine) => {
+{/* {favorites && favorites.length */}
+          {/* ? favorites.map(async (favoriteWine) => { */}
 
-            return(
-              <>
-            {console.log(favoriteWine)}
-            {console.log(favoriteWine.id)}
-            {wine = await getWineById(favoriteWine.wine_id)}
-            {console.log(wine)}
-            <div key={`allWines-${wine.id}`}>
-                  <WineDetails
-                    wine={wine}
-                    setWineInfo={setWineInfo}
-                    user={user}
-                  />
+            {/* return( */}
+              {/* <> */}
+            {/* {console.log(favoriteWine)} */}
+            {/* {console.log(favoriteWine.id)} */}
+            {/* {wine = await getWineById(favoriteWine.wine_id)} */}
+            {/* {console.log(wine)} */}
+            {/* <div key={`allWines-${wine.id}`}> */}
+                  {/* <WineDetails */}
+                    {/* wine={wine} */}
+                    {/* setWineInfo={setWineInfo} */}
+                    {/* user={user} */}
+                  {/* /> */}
                   {/* <div>We should have a wine!</div> */}
-                </div></>)
+                {/* </div></>) */}
               
-            })
-          : <div>Loading your favorites...</div>}   */}
+            {/* }) */}
+          {/* : <div>Loading your favorites...</div>}   */}
           </div>;
 };
 
