@@ -1,7 +1,9 @@
-// import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 // import { updateUser } from "./API";
 
+
+const EditAccount = ()=>{return <div>Trying to temporarily avert an error!</div>}
 // const EditAccount = ({ user }) => {
 //   const [name, setName] = useState(user.name || "");
 //   const [lastName, setLastName] = useState(user.lastName || "");
@@ -25,4 +27,4 @@
 //   );
 // };
 
-// export default EditAccount;
+export default EditAccount;
