@@ -10,9 +10,9 @@ const AccountSettings = ({ user }) => {
   const [birthday, setBirthday] = useState(user.birthday || "");
   const [bio, setBio] = useState(user.bio || "");
   const [password, setPassword] = useState(user.password || "");
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(true);
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (
       username === user.username &&
@@ -26,22 +26,23 @@ const AccountSettings = ({ user }) => {
       // no changes made, do not update user
       return;
     }
+
     try {
-      const updatedUser = {
+      const response = await updateUser(
         username,
         password,
         state,
-        avatar,
         email,
         birthday,
-        bio,
-      };
-      const response = await updateUser(user.id, updatedUser);
-      setUpdate(true);
+        0,
+        0
+      );
+      console.log(response);
     } catch (error) {
       console.error(error);
+      setUpdate(true);
     }
-  };
+  }
 
   return (
     <div>
@@ -157,8 +158,12 @@ const AccountSettings = ({ user }) => {
               }}
               value={bio}
             />
-
-            <button type="submit" className="buttons">
+            <div></div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onSubmit={handleSubmit}
+            >
               Save Changes
             </button>
           </>
