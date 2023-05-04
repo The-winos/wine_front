@@ -258,3 +258,7 @@ button {
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+.short-input {
+  width: 10px;
+}
