@@ -3,19 +3,21 @@ import { Link } from "react-router-dom";
 import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
-  const [username, setUsername] = useState(user.username || "");
-  const [state, setState] = useState(user.state || "");
-  const [avatar, setAvatar] = useState(user.avatar || "");
-  const [email, setEmail] = useState(user.email || "");
-  const [birthday, setBirthday] = useState(user.birthday || "");
-  const [bio, setBio] = useState(user.bio || "");
-  const [password, setPassword] = useState(user.password || "");
+  const [name, setName] = useState(user.name);
+  const [state, setState] = useState(user.state);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [email, setEmail] = useState(user.email);
+  const [birthday, setBirthday] = useState(user.birthday);
+  const [bio, setBio] = useState(user.bio);
+  const [password, setPassword] = useState(user.password);
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (
-      username === user.username &&
+      name === user.name &&
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
@@ -28,16 +30,20 @@ const AccountSettings = ({ user }) => {
     }
 
     try {
-      const response = await updateUser(
-        username,
+      const updateInfo = await updateUser(
+        user.id,
+        user.username,
         password,
+        name,
         state,
+        user.role,
         email,
         birthday,
-        0,
-        0
+        user.follower_count,
+        user.following_count
       );
-      console.log(response);
+      console.log(user, "this is user");
+      console.log(updateInfo, "update user");
     } catch (error) {
       console.error(error);
       setUpdate(true);
@@ -63,14 +69,14 @@ const AccountSettings = ({ user }) => {
       <form onSubmit={handleSubmit} className="admin-form">
         {update ? (
           <>
-            <h6 id="text-fields">Username:</h6>
+            <h6 id="text-fields">Name:</h6>
             <input
-              placeholder={user.username}
+              placeholder={user.name}
               className="first-name"
               type="text"
-              value={username}
+              value={name}
               onChange={(event) => {
-                setUsername(event.target.value);
+                setName(event.target.value);
               }}
             />
             <h6 id="text-fields">Password:</h6>
@@ -83,6 +89,40 @@ const AccountSettings = ({ user }) => {
                 setPassword(event.target.value);
               }}
             />
+            <div className="container">
+              <h6 id="text-fields">New Password:</h6>
+              <div className="row mb-3">
+                <div className="col-md-4">
+                  <span className="input-group-text">
+                    <i className="fa fa-lock"></i>
+                  </span>
+                </div>
+                <div className="col-md-4">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    className="form-control password"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(event) => setNewPassword(event.target.value)}
+                    style={{ width: "100%" }}
+                  />
+                </div>
+                <div className="col-md-4">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary col-md-12"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    <i
+                      className={`fa ${
+                        passwordVisible ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <h6 id="text-fields">Location:</h6>
             <div>{user.state}</div>
             <select
