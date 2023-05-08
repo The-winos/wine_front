@@ -35,6 +35,7 @@ const Favorites = (props) => {
 
   return (
     <div id="favorites">
+              <h1>{user.username}'s Favorite Wines</h1>
       {wines && wines.length ? (
         wines.map((wine) => (
           <div key={`allWines-${wine.id}`}>
