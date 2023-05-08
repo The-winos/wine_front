@@ -7,7 +7,6 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [state, setState] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -27,7 +26,6 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
     const response = await registerUser(
       username,
       password,
-      name,
       state,
       "user",
       email,
@@ -60,32 +58,6 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
               </div>
 
               <form action="#" onSubmit={handleRegister}>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">
-                    <i className="fa fa-user"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="First Name"
-                    required
-                    value={name}
-                    onChange={function (event) {
-                      setName(event.target.value);
-                    }}
-                  />
-                </div>
-                <div className="input-group mb-3">
-                  <span className="input-group-text">
-                    <i className="fa fa-user"></i>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Last Name"
-                    required
-                  />
-                </div>
                 <div className="input-group mb-3">
                   <span className="input-group-text">
                     <i className="fa fa-user"></i>

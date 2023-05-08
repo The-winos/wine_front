@@ -18,7 +18,6 @@ import {
   ReviewDetails,
   AccountSettings,
   Review,
-  EditAccount,
   ProfileUserId,
   Favorites,
   FavoritesUserId,
@@ -131,10 +130,6 @@ const Main = () => {
         ></Route>
         <Route path="/review" element={<Review user={user} />}></Route>
         <Route
-          path="/editaccount"
-          element={<EditAccount user={user} />}
-        ></Route>
-        <Route
           path="/winefeed"
           element={
             <WineFeed
@@ -146,7 +141,10 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/favorites" element={<Favorites user={user} setWineInfo={setWineInfo}/>}></Route>
+        <Route
+          path="/favorites"
+          element={<Favorites user={user} setWineInfo={setWineInfo} />}
+        ></Route>
       </Routes>
       <Footer />
     </div>

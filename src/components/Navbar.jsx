@@ -36,7 +36,7 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
         <NavLink className= "linkBar" to="/login">Login</NavLink>
       )}
       <NavLink className="linkBar" to="/winefeed">The Tasting Room</NavLink>
-      <NavLink className="linkBar" to="/followers">Friend's wine</NavLink>
+      <NavLink className="linkBar" to="/followers">Happy Hour</NavLink>
       <NavLink className="linkBar" to="/winelist">Wine List</NavLink>
       </div>
     </div>

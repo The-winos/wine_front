@@ -21,7 +21,8 @@ export { default as FriendReview } from "./FriendReview";
 export { default as FollowButton } from "./FollowButton";
 export { default as AccountSettings } from "./AccountSettings";
 export { default as Review } from "./Review";
-export { default as EditAccount } from "./EditAccount";
 export { default as ProfileUserId } from "./ProfileUserId";
 export { default as Favorites } from "./Favorites";
+
 export { default as FavoritesUserId } from "./FavoritesUserId"
+
