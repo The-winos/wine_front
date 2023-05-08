@@ -46,7 +46,7 @@ fetchGetUserById();
           }}
         />
         <div>
-          <Link to={"/favorites"}>
+          <Link to={`/favoritesuserid/${id}`}>
             <button type="favorite" className="buttons">
               Favorites
             </button>
