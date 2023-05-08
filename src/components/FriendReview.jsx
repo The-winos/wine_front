@@ -3,12 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { getUserById, getWineById } from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
+import {
+  handlePriceFilter,
+  handleRatingFilter,
+  handleSearch,
+} from "./SearchBar";
 
 
 const FriendReview = ({reviews, user}) => {
   const navigate=useNavigate();
   const [reviewFriend, setReviewFriend]= useState({})
   const [wineFriend, setWineFriend]= useState({})
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [filteredReviews, setFilteredReviews] = useState([]);
+  const [selectedRating, setSelectedRating] = useState("all");
+  const [searchName, setSearchName] = useState("");
+  const [searchRegion, setSearchRegion] = useState("");
+  const [searchType, setSearchType] = useState("");
+
 
   useEffect(()=>{
     async function fetchUser(){
