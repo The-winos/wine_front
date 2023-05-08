@@ -20,7 +20,6 @@ const Login = ({ setUser, setLoggedIn }) => {
     localStorage.setItem("token", token);
     setUsername("");
     setPassword("");
-    console.log(login, "login error");
     setUser(user, login);
 
     if (token) {

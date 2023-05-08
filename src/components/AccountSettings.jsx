@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { updateUser } from "./API";
 
@@ -9,10 +9,10 @@ const AccountSettings = ({ user }) => {
   const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState(user.birthday);
   const [bio, setBio] = useState(user.bio);
-  const [password, setPassword] = useState(user.password);
   const [newPassword, setNewPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
+  const [formattedBirthday, setFormattedBirthday] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -21,7 +21,7 @@ const AccountSettings = ({ user }) => {
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
-      birthday === user.birthday &&
+      formattedBirthday === user.birthday && // Use formattedBirthday instead of birthday
       bio === user.bio &&
       password === user.password
     ) {
@@ -38,7 +38,7 @@ const AccountSettings = ({ user }) => {
         state,
         user.role,
         email,
-        birthday,
+        formattedBirthday, // Use formattedBirthday instead of birthday
         user.follower_count,
         user.following_count
       );
@@ -49,6 +49,23 @@ const AccountSettings = ({ user }) => {
       setUpdate(true);
     }
   }
+
+  useEffect(() => {
+    const parseDate = (dateString) => {
+      if (!dateString) {
+        return null;
+      }
+      const date = new Date(dateString);
+      date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+      return date;
+    };
+
+    const parsedBirthday = parseDate(birthday);
+    const formattedDate = parsedBirthday
+      ? parsedBirthday.toISOString().split("T")[0]
+      : "";
+    setFormattedBirthday(formattedDate);
+  }, [birthday]);
 
   return (
     <div>
@@ -65,7 +82,7 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-      {console.log(user, "this is user")}
+
       <form onSubmit={handleSubmit} className="admin-form">
         {update ? (
           <>
@@ -79,14 +96,25 @@ const AccountSettings = ({ user }) => {
                 setName(event.target.value);
               }}
             />
-            <h6 id="text-fields">Password:</h6>
+            <h6 id="text-fields">Birthday:</h6>
             <input
-              placeholder={user.password}
+              placeholder={user.birthday}
               className="first-name"
               type="text"
-              value={password}
+              value={formattedBirthday}
               onChange={(event) => {
-                setPassword(event.target.value);
+                setFormattedBirthday(event.target.value);
+              }}
+            />
+
+            <h6 id="text-fields">Password:</h6>
+            <input
+              placeholder={user.token}
+              className="first-name"
+              type="text"
+              value={newPassword}
+              onChange={(event) => {
+                setNewPassword(event.target.value);
               }}
             />
             <div className="container">
