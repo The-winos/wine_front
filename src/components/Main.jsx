@@ -21,6 +21,7 @@ import {
   EditAccount,
   ProfileUserId,
   Favorites,
+  FavoritesUserId,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -88,6 +89,10 @@ const Main = () => {
             />
           }
         />
+        <Route path="/favoritesuserid/:id" 
+        element={
+          <FavoritesUserId user={user}/>
+        }/>
 
         <Route
           path="/userreviewdetails"
