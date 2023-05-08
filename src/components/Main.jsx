@@ -90,7 +90,7 @@ const Main = () => {
         />
         <Route path="/favoritesuserid/:id" 
         element={
-          <FavoritesUserId user={user}/>
+          <FavoritesUserId user={user} setWineInfo={setWineInfo}/>
         }/>
 
         <Route
