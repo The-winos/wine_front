@@ -23,11 +23,12 @@ const Favorites = (props) => {
 
   useEffect(() => {
     const fetchWines = async () => {
+      if (favorites.length) {
       const winePromises = favorites.map((favorite) => {
         return getWineById(favorite.wine_id);
       });
       const wines = await Promise.all(winePromises);
-      setWines(wines);
+      setWines(wines);}
     };
 
     fetchWines();
@@ -43,7 +44,7 @@ const Favorites = (props) => {
           </div>
         ))
       ) : (
-        <div>Loading your favorites...</div>
+        <div>{user.username} has no favorites yet...</div>
       )}
     </div>
   );
