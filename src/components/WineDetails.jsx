@@ -15,8 +15,8 @@ const WineDetails = ({ wine }) => {
               src={wine.image_url}
               alt="wine image"
               className="img-fluid"
-              style={{ maxHeight: "90%", maxWidth: "90%" }}
-            />
+              style={{ maxHeight: "90%", maxWidth: "90%" }} />
+              <button className="bg-transparent" style={{ position:"absolute", border: "none", top: "1em", right: "1em" }}>♥</button>
           </div>
           <div className="col-md-8">
             <div className="card-body">
