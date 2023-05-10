@@ -55,7 +55,6 @@ export const handleSearch = (event, searchItem) => {
   console.log(value, "this is value")
   switch (event.target.name) {
     case "search-name":
-      console.log(event.target.name, "name?")
       searchItem(value);
 
       break;
@@ -63,6 +62,9 @@ export const handleSearch = (event, searchItem) => {
       searchItem(value);
       break;
     case "search-type":
+      searchItem(value);
+      break;
+      case "search-user":
       searchItem(value);
       break;
     default:

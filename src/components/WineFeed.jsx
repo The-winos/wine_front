@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllReviews, getAllWine, getWineById } from "./API";
+import { getAllReviews, getAllWine, getUserById, getWineById } from "./API";
 import ReviewDetails from "./ReviewDetails";
 import WineDetails from "./WineDetails";
 import {
@@ -23,6 +23,7 @@ const WineFeed = ({
   const [searchName, setSearchName] = useState("");
   const [searchRegion, setSearchRegion] = useState("");
   const [searchType, setSearchType] = useState("");
+  const [searchUsername, setSearchUsername]= useState("");
 
   useEffect(() => {
     async function fetchAllReview() {
@@ -48,6 +49,25 @@ const WineFeed = ({
 
     filterReviews();
   }, [searchName]);
+
+  useEffect(() => {
+    const filterReviews = async () => {
+      const results = await Promise.all(
+        allReviews.map(async (wine) => {
+          console.log(wine, "this is wine")
+          const userObj = await getUserById(wine.user_id);
+          console.log(userObj, "userObj")
+          if (userObj.username.toLowerCase().includes(searchUsername.toLowerCase())) {
+            return wine;
+          }
+        })
+      );
+      setFilteredReviews(results.filter((wine) => wine !== undefined));
+    };
+
+
+    filterReviews();
+  }, [searchUsername]);
 
   useEffect(() => {
     const filterReviews = async () => {
@@ -121,6 +141,16 @@ const WineFeed = ({
               value={searchType}
               onChange={(event) => {
                 handleSearch(event, setSearchType);
+              }}
+            />
+              <label htmlFor="type-filter">Search Reviews by Usernames: </label>
+            <input
+              type="text"
+              id="type-filter"
+              name="search-user"
+              value={searchUsername}
+              onChange={(event) => {
+                handleSearch(event, setSearchUsername);
               }}
             />
           </div>
