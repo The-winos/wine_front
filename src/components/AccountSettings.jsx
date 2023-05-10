@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState("");
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState(user.birthday);
   const [bio, setBio] = useState(user.bio);
+  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
@@ -34,7 +35,6 @@ const AccountSettings = ({ user }) => {
         user.id,
         user.username,
         password,
-        name,
         state,
         user.role,
         email,
@@ -67,6 +67,19 @@ const AccountSettings = ({ user }) => {
     setFormattedBirthday(formattedDate);
   }, [birthday]);
 
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setName(storedName);
+    }
+  }, []);
+
+  const handleNameChange = (event) => {
+    const newName = event.target.value;
+    setName(newName);
+    localStorage.setItem("name", newName);
+  };
+
   return (
     <div>
       <div>
@@ -88,13 +101,11 @@ const AccountSettings = ({ user }) => {
           <>
             <h6 id="text-fields">Name:</h6>
             <input
-              placeholder={user.name}
+              placeholder="Enter your name"
               className="first-name"
               type="text"
               value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
+              onChange={handleNameChange}
             />
             <h6 id="text-fields">Birthday:</h6>
             <input
@@ -241,7 +252,7 @@ const AccountSettings = ({ user }) => {
 
       <Link to={"/profile"}>
         <button id="admin-cancel-edit" onClick={() => {}}>
-          Cancel Edit
+          Back to Profile
         </button>
       </Link>
     </div>
