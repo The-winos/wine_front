@@ -106,6 +106,7 @@ const AccountSettings = ({ user }) => {
                 setFormattedBirthday(event.target.value);
               }}
             />
+            {console.log(user.birthday)}
 
             <h6 id="text-fields">Password:</h6>
             <input
