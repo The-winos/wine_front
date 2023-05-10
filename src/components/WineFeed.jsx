@@ -64,8 +64,6 @@ const WineFeed = ({
       );
       setFilteredReviews(results.filter((wine) => wine !== undefined));
     };
-
-
     filterReviews();
   }, [searchUsername]);
 
@@ -143,7 +141,7 @@ const WineFeed = ({
                 handleSearch(event, setSearchType);
               }}
             />
-              <label htmlFor="type-filter">Search Reviews by Usernames: </label>
+              <label htmlFor="type-filter">Search Reviews by Username: </label>
             <input
               type="text"
               id="type-filter"
