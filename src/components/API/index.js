@@ -354,7 +354,7 @@ export async function updateUser(
         following_count,
       }),
     };
-    const response = await fetch(`${BASE_URL}/users/${id}`, options);
+    const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
     return result;
   } catch (error) {

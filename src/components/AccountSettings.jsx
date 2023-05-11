@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState(user.birthday);
   const [bio, setBio] = useState(user.bio);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(user.password);
   const [newPassword, setNewPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
@@ -35,6 +35,7 @@ const AccountSettings = ({ user }) => {
         user.id,
         user.username,
         password,
+        name,
         state,
         user.role,
         email,
@@ -67,19 +68,6 @@ const AccountSettings = ({ user }) => {
     setFormattedBirthday(formattedDate);
   }, [birthday]);
 
-  useEffect(() => {
-    const storedName = localStorage.getItem("name");
-    if (storedName) {
-      setName(storedName);
-    }
-  }, []);
-
-  const handleNameChange = (event) => {
-    const newName = event.target.value;
-    setName(newName);
-    localStorage.setItem("name", newName);
-  };
-
   return (
     <div>
       <div>
@@ -99,15 +87,21 @@ const AccountSettings = ({ user }) => {
       <form onSubmit={handleSubmit} className="admin-form">
         {update ? (
           <>
-            <h6 id="text-fields">Name:</h6>
+            <h3>{user.name}</h3>
+            <h6>Update Name</h6>
             <input
               placeholder="Enter your name"
               className="first-name"
               type="text"
               value={name}
-              onChange={handleNameChange}
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
             />
-            <h6 id="text-fields">Birthday:</h6>
+            <div></div>
+            <h3>Birthday {user.birthday}</h3>
+            <h6>Update Birthday</h6>
+
             <input
               placeholder={user.birthday}
               className="first-name"
@@ -120,15 +114,6 @@ const AccountSettings = ({ user }) => {
             {console.log(user.birthday)}
 
             <h6 id="text-fields">Password:</h6>
-            <input
-              placeholder={user.token}
-              className="first-name"
-              type="text"
-              value={newPassword}
-              onChange={(event) => {
-                setNewPassword(event.target.value);
-              }}
-            />
             <div className="container">
               <h6 id="text-fields">New Password:</h6>
               <div className="row mb-3">
@@ -163,8 +148,7 @@ const AccountSettings = ({ user }) => {
               </div>
             </div>
 
-            <h6 id="text-fields">Location:</h6>
-            <div>{user.state}</div>
+            <h6>State {user.state}</h6>
             <select
               placeholder="location"
               className="location"
