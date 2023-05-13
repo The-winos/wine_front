@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
   const navigate = useNavigate();
+  const [admin, setAdmin]= useState(false)
 
   return (<>
     <div id="navbar">
@@ -13,6 +14,7 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
 
       {loggedIn ? (
         <>
+        {console.log(user, "this is user, look for role")}
         <NavLink to={"/"} className="linkBar" onClick={()=>{
           navigate("/login");
           localStorage.removeItem("token");
@@ -26,9 +28,9 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
             Profile
         </NavLink>
 
-        {loggedIn && user.merchant || user.admin ?(
+        {loggedIn && user.role=="merchant" || user.role=="admin" ?(
           <NavLink className="linkBar" to= "/admin">
-            <span id="admin-hover" data-hover="Admin"></span>ADMIN
+            <span id="admin-hover" data-hover="Admin"></span>Admin
           </NavLink>
         ): null}
         </>
