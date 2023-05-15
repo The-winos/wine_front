@@ -362,6 +362,7 @@ export async function updateUser(
   }
 }
 
+//fetches all favorites
 export async function getFavorites(userId) {
   try {
     const options = {
@@ -370,6 +371,48 @@ export async function getFavorites(userId) {
       },
     };
     const response = await fetch(`${BASE_URL}/favorites/${userId}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//adds a Wine to favorites
+
+export async function addFavorite(user_id, wine_id) {
+  try {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        user_id,
+        wine_id,
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/favorites/`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//removes a Wine from favorites
+
+export async function removeFavorite(favoriteId) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await fetch(`${BASE_URL}/favorites/${favoriteId}`, options);
     const result = await response.json();
     return result;
   } catch (error) {

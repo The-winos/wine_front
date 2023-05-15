@@ -1,12 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
 import { useNavigate, useHref } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 
-const WineDetails = ({ wine }) => {
+const WineDetails = ({ wine, favorites }) => {
   const navigate = useNavigate();
   const ref = useHref();
 
+
+
+  
+  
   return (
+
 
       <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
         <div className="row no-gutters">
@@ -47,6 +53,7 @@ const WineDetails = ({ wine }) => {
           </div>
         </div>
       </div>
+      
   );
 };
 

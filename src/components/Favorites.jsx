@@ -3,23 +3,11 @@ import { getFavorites, getWineById } from "./API";
 import { WineDetails } from "./"
 
 const Favorites = (props) => {
-  const [favorites, setFavorites] = useState([]);
+  const favorites = props.favorites
+  const setFavorites = props.setFavorites
   const [wines, setWines] = useState([]);
   const user = props.user;
   const setWineInfo = props.setWineInfo;
-
-  useEffect(() => {
-    const fetchUserFavorites = async () => {
-      try {
-        const fetchedFavorites = await getFavorites(user.id);
-        setFavorites(fetchedFavorites);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserFavorites();
-  }, [user]);
 
   useEffect(() => {
     const fetchWines = async () => {
@@ -40,7 +28,7 @@ const Favorites = (props) => {
       {wines && wines.length ? (
         wines.map((wine) => (
           <div key={`allWines-${wine.id}`}>
-            <WineDetails wine={wine} setWineInfo={setWineInfo} user={user} />
+            <WineDetails wine={wine} setWineInfo={setWineInfo} user={user} favorites={favorites} />
           </div>
         ))
       ) : (
