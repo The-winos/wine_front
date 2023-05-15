@@ -22,7 +22,7 @@ const AccountSettings = ({ user }) => {
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
-      formattedBirthday === user.birthday && // Use formattedBirthday instead of birthday
+      birthday === user.birthday &&
       bio === user.bio &&
       password === user.password
     ) {
@@ -63,7 +63,11 @@ const AccountSettings = ({ user }) => {
 
     const parsedBirthday = parseDate(birthday);
     const formattedDate = parsedBirthday
-      ? parsedBirthday.toISOString().split("T")[0]
+      ? parsedBirthday.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })
       : "";
     setFormattedBirthday(formattedDate);
   }, [birthday]);
@@ -99,19 +103,19 @@ const AccountSettings = ({ user }) => {
               }}
             />
             <div></div>
-            <h3>Birthday {user.birthday}</h3>
+            <h3>Birthday {formattedBirthday}</h3>
             <h6>Update Birthday</h6>
 
             <input
-              placeholder={user.birthday}
+              placeholder={formattedBirthday}
               className="first-name"
               type="text"
-              value={formattedBirthday}
+              value={birthday}
               onChange={(event) => {
-                setFormattedBirthday(event.target.value);
+                setBirthday(event.target.value);
               }}
             />
-            {console.log(user.birthday)}
+            {console.log(formattedBirthday)}
 
             <h6 id="text-fields">Password:</h6>
             <div className="container">
