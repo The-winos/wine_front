@@ -7,7 +7,7 @@ import {
 } from "./SearchBar";
 import WineDetails from "./WineDetails";
 
-const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user }) => {
+const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites }) => {
   const [filteredWines, setFilteredWines] = useState([]);
   const [selectedRating, setSelectedRating] = useState("all");
   const [searchName, setSearchName] = useState("");
@@ -160,6 +160,7 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user }) => {
                     wine={wine}
                     setWineInfo={setWineInfo}
                     user={user}
+                    favorites={favorites}
                   />
                 </div>
               );
