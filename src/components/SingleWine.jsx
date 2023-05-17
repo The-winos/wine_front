@@ -21,7 +21,6 @@ const SingleWine = ({ user, loggedIn }) => {
   useEffect(()=>{
     async function fetchWineReviews(){
       const wineReviews= await getReviewsByWineId(wineId);
-      console.log(wineReviews, "wineReviews")
       setWineReviews(wineReviews)
     }
     fetchWineReviews();

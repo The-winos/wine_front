@@ -33,17 +33,14 @@ async function handleWine(e)
     flavor: flavor,
   };
     const existingWine = await checkExistingWine(wineName);
-    console.log(existingWine, "existing wine")
     if (existingWine) {
       setIsThereWine(true)
-      console.log(existingWine, " here is this a wine??")
       setWineId(existingWine.id)
-      handleReview();
+      handleReview(e);
 
     } else {
      setNoWine(true)
-    //  console.log(noWine, "This is noWine")
-    //  handleCreateWine()
+
 
     }
   }
@@ -60,12 +57,11 @@ async function handleWine(e)
     async function creatingTheWine(){
     if (wineImg) {
       const newWine=await createWine(user.id, wineName, wineImg, null, null, region, flavor)
-        console.log(newWine, "api result")
         setIsThereWine(true)
         setNoWine(false)
-        console.log(newWine, " here is this a NewWine??")
+
         setWineId(newWine.id)
-        // handleReview();
+
       };
     }creatingTheWine()
 
