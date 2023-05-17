@@ -131,6 +131,7 @@ const Main = () => {
               wineInfo={wineInfo}
               setWineInfo={setWineInfo}
               user={user}
+              favorites={favorites}
             />
           }
         ></Route>

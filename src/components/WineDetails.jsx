@@ -6,7 +6,12 @@ import Rating from "react-rating-stars-component";
 const WineDetails = ({ wine, favorites }) => {
   const navigate = useNavigate();
   const ref = useHref();
-
+  
+  console.log(favorites)
+  console.log(wine)
+  function checkOnFaves (wineID) {
+  for (let i=0; i < favorites.length; i++) {
+  if (favorites[i].wine_id === wineID) { return true}}}
 
 
   
@@ -22,7 +27,12 @@ const WineDetails = ({ wine, favorites }) => {
               alt="wine image"
               className="img-fluid"
               style={{ maxHeight: "90%", maxWidth: "90%" }} />
-              <button className="bg-transparent" style={{ position:"absolute", border: "none", top: "1em", right: "1em" }}>♥</button>
+              {checkOnFaves(wine.id)?  <button className="bg-transparent" style={{ position:"absolute", border: "none", top: "1em", right: "1em" }}><span class="material-symbols-outlined">
+heart_check
+</span></button>: <button className="bg-transparent" style={{ position:"absolute", border: "none", top: "1em", right: "1em" }}><span class="material-symbols-outlined">
+favorite
+</span></button>}
+             
           </div>
           <div className="col-md-8">
             <div className="card-body">
