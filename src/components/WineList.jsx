@@ -18,7 +18,6 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user }) => {
   useEffect(() => {
     async function fetchAllWine() {
       const allTheWine = await getAllWine();
-      console.log(allTheWine);
       setAllWine(allTheWine);
       setFilteredWines(allTheWine); // initialize filteredWines with all wines
     }
@@ -31,25 +30,25 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user }) => {
         return wine;
       }
     });
-    console.log(results, "results");
+
     setFilteredWines(results);
   }, [searchName]);
+
   useEffect(() => {
     const results = allWine.filter((wine) => {
       if (wine.region.toLowerCase().includes(searchRegion.toLowerCase())) {
         return wine;
       }
     });
-    console.log(results, "results");
     setFilteredWines(results);
   }, [searchRegion]);
+
   useEffect(() => {
     const results = allWine.filter((wine) => {
       if (wine.flavor.toLowerCase().includes(searchType.toLowerCase())) {
         return wine;
       }
     });
-    console.log(results, "results");
     setFilteredWines(results);
   }, [searchType]);
 
@@ -140,7 +139,7 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user }) => {
           </button>
         </div>
       ) : (
-        <div class="d-flex justify-content-center p-2">
+        <div className="d-flex justify-content-center p-2">
   <button
     onClick={() => {
       setSearchOpen(true);

@@ -14,7 +14,6 @@ const SingleWineReview = ({review, user}) => {
   useEffect(()=>{
     async function fetchGetUserById(){
       const theUser= await getUserById(review.user_id)
-      console.log(theUser)
       setReviewUser(theUser);
 }
 fetchGetUserById();
@@ -23,7 +22,6 @@ fetchGetUserById();
   useEffect(()=>{
     async function fetchGetWineForReview(){
       const theWine= await getWineById(review.wine_id)
-      console.log(theWine)
       setReviewWine(theWine);
     }
     fetchGetWineForReview();
@@ -37,8 +35,6 @@ fetchGetUserById();
 
 return (
   <div className="card single-wine-review mb-3" style={{ maxWidth: "60%",  margin: "0 auto" }}>
-    {console.log(user, "user")}
-    {console.log(reviewUser, "reviewUser")}
     <div className="card-header">
       <div className="row align-items-center">
         <div className="col-2">

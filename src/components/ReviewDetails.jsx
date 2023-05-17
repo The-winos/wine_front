@@ -14,7 +14,6 @@ const ReviewDetails = ({review, user}) => {
   useEffect(()=>{
     async function fetchGetUserById(){
       const theUser= await getUserById(review.user_id)
-      console.log(theUser)
       setReviewUser(theUser);
 }
 fetchGetUserById();
@@ -23,7 +22,6 @@ fetchGetUserById();
   useEffect(()=>{
     async function fetchGetWineForReview(){
       const theWine= await getWineById(review.wine_id)
-      console.log(theWine)
       setReviewWine(theWine);
     }
     fetchGetWineForReview();

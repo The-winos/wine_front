@@ -34,12 +34,12 @@ const Main = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [reviewInfo, setReviewInfo] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  
+
   const getLoggedInUser = async (token) => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
-      console.log(loggedIn, "loggedIn");
+
     }
   };
   useEffect(() => {

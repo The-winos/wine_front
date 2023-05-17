@@ -14,7 +14,6 @@ const Navbar = ({setLoggedIn, loggedIn, user, setUser}) => {
 
       {loggedIn ? (
         <>
-        {console.log(user, "this is user, look for role")}
         <NavLink to={"/"} className="linkBar" onClick={()=>{
           navigate("/login");
           localStorage.removeItem("token");

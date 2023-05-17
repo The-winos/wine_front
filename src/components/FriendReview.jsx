@@ -37,9 +37,6 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
   return (
 
     <div className="card mb-3" style={{maxWidth:"60%", margin:"0 auto "}}>
-      {console.log(reviews, "this is reviews")}
-      {console.log(wineFriend, "this is wineFriend")}
-      {console.log(reviewFriend, "this is review friend")}
     <div className="row no-gutter">
       <div className="col-md-4" style={{ border: "none" }}>
         <img

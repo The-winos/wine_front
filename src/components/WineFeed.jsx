@@ -54,9 +54,7 @@ const WineFeed = ({
     const filterReviews = async () => {
       const results = await Promise.all(
         allReviews.map(async (wine) => {
-          console.log(wine, "this is wine")
           const userObj = await getUserById(wine.user_id);
-          console.log(userObj, "userObj")
           if (userObj.username.toLowerCase().includes(searchUsername.toLowerCase())) {
             return wine;
           }
