@@ -139,7 +139,7 @@ const Main = () => {
           path="/singlewine/:wineId"
           element={<SingleWine user={user} loggedIn={loggedIn} />}
         ></Route>
-        <Route path="/winedetails" element={<WineDetails favorites={favorites}/>}></Route>
+        <Route path="/winedetails" element={<WineDetails favorites={favorites} user={user}/>}></Route>
         <Route
           path="/accountsettings"
           element={<AccountSettings user={user} />}
