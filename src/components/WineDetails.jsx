@@ -8,10 +8,6 @@ const WineDetails = ({ wine, favorites, user }) => {
   const navigate = useNavigate();
   const ref = useHref();
 
-  console.log(favorites);
-  console.log(wine);
-  console.log(user);
-
   function checkOnFaves(wineID) {
     for (let i = 0; i < favorites.length; i++) {
       if (favorites[i].wine_id === wineID) {
@@ -21,7 +17,7 @@ const WineDetails = ({ wine, favorites, user }) => {
   }
 
   function handleRemoveFavorite(wineID) {
-    console.log("I'm trying to remove wine ", wineID);
+
     let favoriteId;
     for (let i = 0; i < favorites.length; i++) {
       if (favorites[i].wine_id === wineID) {
