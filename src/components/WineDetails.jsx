@@ -30,6 +30,7 @@ const WineDetails = ({ wine, favorites, user }) => {
       }
     }
     removeFavorite(favoriteId);
+    navigate(`/favorites`);
   }
 
   return (
