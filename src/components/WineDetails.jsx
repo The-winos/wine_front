@@ -20,19 +20,19 @@ const WineDetails = ({ wine, favorites, user }) => {
     }
   }
 
-  function handleRemoveFavorite (wineID) {
-    console.log("I'm trying to remove wine ", wineID)
-    let favoriteId
-    for (let i=0; i<favorites.length; i++) {
-      if(favorites[i].wine_id === wineID) {
-        favoriteId = favorites[i].id
-        break
+  function handleRemoveFavorite(wineID) {
+    console.log("I'm trying to remove wine ", wineID);
+    let favoriteId;
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].wine_id === wineID) {
+        favoriteId = favorites[i].id;
+        break;
       }
     }
-    removeFavorite(favoriteId)
+    removeFavorite(favoriteId);
   }
 
-   return (
+  return (
     <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
       <div className="row no-gutters">
         <div className="col-md-4">
@@ -43,9 +43,10 @@ const WineDetails = ({ wine, favorites, user }) => {
             style={{ maxHeight: "90%", maxWidth: "90%" }}
           />
           {checkOnFaves(wine.id) ? (
-            <button onClick={() => {
-              handleRemoveFavorite(wine.id);
-            }}
+            <button
+              onClick={() => {
+                handleRemoveFavorite(wine.id);
+              }}
               className="bg-transparent"
               style={{
                 position: "absolute",
@@ -57,9 +58,11 @@ const WineDetails = ({ wine, favorites, user }) => {
               <span className="material-symbols-outlined">heart_check</span>
             </button>
           ) : (
-            <button onClick={() => {
-              addFavorite(user.id, wine.id); navigate(`/favorites`);
-            }}
+            <button
+              onClick={() => {
+                addFavorite(user.id, wine.id);
+                navigate(`/favorites`);
+              }}
               className="bg-transparent"
               style={{
                 position: "absolute",
