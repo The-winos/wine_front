@@ -1,23 +1,26 @@
 //same as profile but add admin functions to receive user reports, edit posts, edit users, edit badges?
 import React from "react";
 import { useEffect, useState } from "react";
-import { getAllUsers, getUserById } from "./API";
+import { getAllUsers, getUserById, updateUser } from "./API";
 
 const Admin = ({ user }) => {
   const [allUsers, setAllUser] = useState([]);
   const [userButton, setUserButton] = useState(false);
-  const [updateUser, setUpdateUser] = useState(false);
+  const [updateTheUser, setUpdateTheUser] = useState(false);
   const [updatingUser, setUpdatingUser] = useState({});
-  const [username, setUsername] = useState(updatingUser.username);
-  const [name, setName] = useState(updatingUser.name);
-  const [birthday, setBirthday] = useState(updatingUser.birthday);
-  const [state, setState] = useState(updatingUser.state);
-  const [bio, setBio] = useState(updatingUser.bio);
-  const [password, setPassword] = useState(updatingUser.password);
-  const [newPassword, setNewPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [update, setUpdate] = useState(true);
-  const [formattedBirthday, setFormattedBirthday] = useState("");
+const [username, setUsername] = useState(updatingUser.username || "");
+const [name, setName] = useState(updatingUser.name || "");
+const [email, setEmail] = useState(updatingUser.email || "");
+const [birthday, setBirthday] = useState(updatingUser.birthday || "");
+const [state, setState] = useState(updatingUser.state || "");
+const [bio, setBio] = useState(updatingUser.bio || "");
+const [role, setRole] = useState(updatingUser.role || "");
+const [password, setPassword] = useState(updatingUser.password || "");
+const [newPassword, setNewPassword] = useState("");
+const [passwordVisible, setPasswordVisible] = useState(false);
+const [update, setUpdate] = useState(true);
+const [formattedBirthday, setFormattedBirthday] = useState("");
+
 
   useEffect(() => {
     async function fetchAllUsers() {
@@ -50,7 +53,7 @@ const Admin = ({ user }) => {
   }, [birthday]);
 
   async function handleUserClick(userId) {
-    setUpdateUser(true);
+    setUpdateTheUser(true);
     const userToUpdate = await getUserById(userId);
     setUpdatingUser(userToUpdate);
   }
@@ -71,13 +74,23 @@ const Admin = ({ user }) => {
     }
 
     try {
+      setUpdatingUser({
+        ...updatingUser,
+        username: username !== '' ? username : updatingUser.username,
+        name: name !== '' ? name : updatingUser.name,
+        state: state !== '' ? state : updatingUser.state,
+        role: role !== '' ? role : updatingUser.role,
+        email: email !== '' ? email : updatingUser.email,
+        birthday: formattedBirthday !== '' ? formattedBirthday : updatingUser.birthday
+      });
+
       const updateInfo = await updateUser(
         user.id,
         username,
         password,
         name,
         state,
-        user.role,
+        role,
         email,
         formattedBirthday,
         user.follower_count,
@@ -89,13 +102,15 @@ const Admin = ({ user }) => {
     }
   }
 
+
   return (
     <div id="admin">
       <h2 className="d-flex justify-content-center ">
         Welcome to the Admin Portal
       </h2>
       <>
-        {updateUser ? (
+      <form onSubmit={handleSubmit} className="admin-form">
+        {updateTheUser ? (
           <>
             <h3 className="d-flex justify-content-center">
               You are updating {updatingUser.username}
@@ -128,10 +143,28 @@ const Admin = ({ user }) => {
                   }}
                 />
               </div>
+              <div className="col">
+                <h5>{updatingUser.role}</h5>
+                <h6>Update Level</h6>
+                <select
+                  placeholder="role"
+                  className="role"
+                  type="text"
+                  value={role}
+                  onChange={(event) => {
+                    setRole(event.target.value);
+                  }}
+                >
+                  <option value=""></option>
+                  <option value="user">User</option>
+                  <option value="merchant">Merchant</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
             </div>
             <div className="row">
               <div className="col">
-                <h5>Birthday {formattedBirthday}</h5>
+
                 <h6>Update Birthday</h6>
 
                 <input
@@ -141,6 +174,20 @@ const Admin = ({ user }) => {
                   value={birthday}
                   onChange={(event) => {
                     setBirthday(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="col">
+
+                <h6>Update Email</h6>
+
+                <input
+                  placeholder={updatingUser.email}
+                  className="email"
+                  type="text"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
                   }}
                 />
               </div>
@@ -256,7 +303,7 @@ const Admin = ({ user }) => {
               }}
               value={bio}
             />
-            <div></div>
+
             <button
               type="submit"
               className="btn btn-primary"
@@ -266,12 +313,13 @@ const Admin = ({ user }) => {
             </button>
           </>
         ) : null}
+        </form>
         {userButton ? (
           <>
             <button
               onClick={() => {
                 setUserButton(false);
-                setUpdateUser(false);
+                setUpdateTheUser(false);
               }}
               className="btn btn-primary pb-2"
             >

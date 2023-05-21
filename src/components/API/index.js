@@ -356,6 +356,7 @@ export async function updateUser(
     };
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
+    console.log(result, "what's happening")
     return result;
   } catch (error) {
     console.error(error);
