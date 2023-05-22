@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
@@ -7,7 +9,9 @@ const AccountSettings = ({ user }) => {
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(user.birthday);
+  const [birthday, setBirthday] = useState(
+    user.birthday ? new Date(user.birthday) : null
+  );
   const [bio, setBio] = useState(user.bio);
   const [password, setPassword] = useState(user.password);
   const [newPassword, setNewPassword] = useState("");
@@ -15,14 +19,18 @@ const AccountSettings = ({ user }) => {
   const [update, setUpdate] = useState(true);
   const [formattedBirthday, setFormattedBirthday] = useState("");
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if birthday is selected
+    const formattedBirthday = birthday ? birthday.toISOString() : null;
+
     if (
       name === user.name &&
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
-      birthday === user.birthday &&
+      formattedBirthday === user.birthday &&
       bio === user.bio &&
       password === user.password
     ) {
@@ -39,15 +47,16 @@ const AccountSettings = ({ user }) => {
         state,
         user.role,
         email,
-        formattedBirthday !== "" ? formattedBirthday : null, // Pass null if formattedBirthday is empty
+        formattedBirthday,
         user.follower_count,
         user.following_count
       );
+      // Rest of your code...
     } catch (error) {
       console.error(error);
       setUpdate(true);
     }
-  }
+  };
 
   useEffect(() => {
     const parseDate = (dateString) => {
@@ -101,44 +110,40 @@ const AccountSettings = ({ user }) => {
               }}
             />
             <div></div>
-            <h3>Birthday {formattedBirthday}</h3>
             <h6>Update Birthday</h6>
-
-            <input
-              placeholder={formattedBirthday}
-              className="first-name"
-              type="text"
-              value={birthday}
-              onChange={(event) => {
-                setBirthday(event.target.value);
-              }}
+            <DatePicker
+              selected={birthday}
+              onChange={(date) => setBirthday(date)}
+              placeholderText="Select a date"
+              dateFormat="MM/dd/yyyy"
+              isClearable
             />
-            {console.log(formattedBirthday)}
 
             <h6 id="text-fields">Update Password:</h6>
-            <div className="col-md-4"></div>
-            <div className="form-group">
-              <div className="input-group">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  className="form-control"
-                  id="newPassword"
-                  placeholder="Password"
-                  value={newPassword}
-                  onChange={(event) => setNewPassword(event.target.value)}
-                />
-                <div className="input-group-append">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary"
-                    onClick={() => setPasswordVisible(!passwordVisible)}
-                  >
-                    <i
-                      className={`fa ${
-                        passwordVisible ? "fa-eye-slash" : "fa-eye"
-                      }`}
-                    ></i>
-                  </button>
+            <div className="col-md-4">
+              <div className="form-group">
+                <div className="input-group">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    className="form-control col"
+                    id="newPassword"
+                    placeholder="Password"
+                    value={newPassword}
+                    onChange={(event) => setNewPassword(event.target.value)}
+                  />
+                  <div className="input-group-append">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => setPasswordVisible(!passwordVisible)}
+                    >
+                      <i
+                        className={`fa ${
+                          passwordVisible ? "fa-eye-slash" : "fa-eye"
+                        }`}
+                      ></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
