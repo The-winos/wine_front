@@ -336,27 +336,33 @@ export async function updateUser(
   following_count
 ) {
   try {
+    const body = {
+      username,
+      password,
+      name,
+      state,
+      role,
+      email,
+      follower_count,
+      following_count,
+    };
+
+    if (birthday !== null) {
+      body.birthday = birthday;
+    }
+
     const options = {
       method: "PATCH",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({
-        username,
-        password,
-        name,
-        state,
-        role,
-        email,
-        birthday,
-        follower_count,
-        following_count,
-      }),
+      body: JSON.stringify(body),
     };
+
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
-    console.log(result, "what's happening")
+    console.log(result, "what's happening");
     return result;
   } catch (error) {
     console.error(error);
@@ -413,7 +419,10 @@ export async function removeFavorite(favoriteId) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    const response = await fetch(`${BASE_URL}/favorites/${favoriteId}`, options);
+    const response = await fetch(
+      `${BASE_URL}/favorites/${favoriteId}`,
+      options
+    );
     const result = await response.json();
     return result;
   } catch (error) {
