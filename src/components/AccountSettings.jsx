@@ -39,12 +39,10 @@ const AccountSettings = ({ user }) => {
         state,
         user.role,
         email,
-        formattedBirthday, // Use formattedBirthday instead of birthday
+        formattedBirthday !== "" ? formattedBirthday : null, // Pass null if formattedBirthday is empty
         user.follower_count,
         user.following_count
       );
-      console.log(user, "this is user");
-      console.log(updateInfo, "update user");
     } catch (error) {
       console.error(error);
       setUpdate(true);
@@ -70,7 +68,7 @@ const AccountSettings = ({ user }) => {
         })
       : "";
     setFormattedBirthday(formattedDate);
-  }, [birthday]);
+  }, []);
 
   return (
     <div>
@@ -94,7 +92,7 @@ const AccountSettings = ({ user }) => {
             <h3>{user.name}</h3>
             <h6>Update Name</h6>
             <input
-              placeholder="Enter your name"
+              placeholder="Enter name"
               className="first-name"
               type="text"
               value={name}
@@ -117,29 +115,22 @@ const AccountSettings = ({ user }) => {
             />
             {console.log(formattedBirthday)}
 
-            <h6 id="text-fields">Password:</h6>
-            <div className="container">
-              <h6 id="text-fields">New Password:</h6>
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <span className="input-group-text">
-                    <i className="fa fa-lock"></i>
-                  </span>
-                </div>
-                <div className="col-md-4">
-                  <input
-                    type={passwordVisible ? "text" : "password"}
-                    className="form-control password"
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={(event) => setNewPassword(event.target.value)}
-                    style={{ width: "100%" }}
-                  />
-                </div>
-                <div className="col-md-4">
+            <h6 id="text-fields">Update Password:</h6>
+            <div className="col-md-4"></div>
+            <div className="form-group">
+              <div className="input-group">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  className="form-control"
+                  id="newPassword"
+                  placeholder="Password"
+                  value={newPassword}
+                  onChange={(event) => setNewPassword(event.target.value)}
+                />
+                <div className="input-group-append">
                   <button
                     type="button"
-                    className="btn btn-outline-secondary col-md-12"
+                    className="btn btn-outline-secondary"
                     onClick={() => setPasswordVisible(!passwordVisible)}
                   >
                     <i
