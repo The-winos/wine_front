@@ -83,7 +83,7 @@ const AccountSettings = ({ user }) => {
     <div>
       <div>
         <img
-          src={user.avatar}
+          src={`/images/${user.avatar}`}
           alt="avatar image"
           className="img-fluid"
           style={{

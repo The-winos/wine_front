@@ -8,18 +8,19 @@ const Admin = ({ user }) => {
   const [userButton, setUserButton] = useState(false);
   const [updateTheUser, setUpdateTheUser] = useState(false);
   const [updatingUser, setUpdatingUser] = useState({});
-const [username, setUsername] = useState(updatingUser.username || "");
-const [name, setName] = useState(updatingUser.name || "");
-const [email, setEmail] = useState(updatingUser.email || "");
-const [birthday, setBirthday] = useState(updatingUser.birthday || "");
-const [state, setState] = useState(updatingUser.state || "");
-const [bio, setBio] = useState(updatingUser.bio || "");
-const [role, setRole] = useState(updatingUser.role || "");
+const [username, setUsername] = useState("");
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [birthday, setBirthday] = useState("");
+const [state, setState] = useState("");
+const [bio, setBio] = useState("");
+const [role, setRole] = useState("");
 const [password, setPassword] = useState(updatingUser.password || "");
 const [newPassword, setNewPassword] = useState("");
 const [passwordVisible, setPasswordVisible] = useState(false);
 const [update, setUpdate] = useState(true);
 const [formattedBirthday, setFormattedBirthday] = useState("");
+const[avatar, setAvatar]=useState("")
 
 
   useEffect(() => {
@@ -55,6 +56,15 @@ const [formattedBirthday, setFormattedBirthday] = useState("");
   async function handleUserClick(userId) {
     setUpdateTheUser(true);
     const userToUpdate = await getUserById(userId);
+    setUsername(userToUpdate.username)
+    setName(userToUpdate.name)
+    setBirthday(userToUpdate.birthday)
+    setRole(userToUpdate.role)
+    setEmail(userToUpdate.email)
+    setState(userToUpdate.state)
+    if(userToUpdate.bio){
+    setState(userToUpdate.bio)}
+    setAvatar(userToUpdate.avatar)
     setUpdatingUser(userToUpdate);
   }
 
@@ -83,15 +93,17 @@ const [formattedBirthday, setFormattedBirthday] = useState("");
         email: email !== '' ? email : updatingUser.email,
         birthday: formattedBirthday !== '' ? formattedBirthday : updatingUser.birthday
       });
-
+console.log(username, "is it getting username?")
       const updateInfo = await updateUser(
         user.id,
         username,
         password,
         name,
         state,
+        avatar,
         role,
         email,
+        bio,
         formattedBirthday,
         user.follower_count,
         user.following_count
@@ -119,16 +131,27 @@ const [formattedBirthday, setFormattedBirthday] = useState("");
             <div className="row">
               <div className="col">
                 <h5>{updatingUser.username}</h5>
-                <h6>Update Username</h6>
-                <input
-                  placeholder="update username"
-                  className="username"
+                <h6>Update Avatar</h6>
+                <img
+          src={updatingUser.avatar}
+          alt="avatar image"
+          className="img-fluid"
+          style={{
+            height: "100px",
+            width: "100px",
+            objectFit: "contain",
+            objectPosition: "center center",
+          }}
+        />
+                {/* <input
+                  placeholder="update avatar"
+                  className="avatar"
                   type="text"
                   value={username}
                   onChange={(event) => {
                     setUsername(event.target.value);
                   }}
-                />
+                /> */}
               </div>
               <div className="col">
                 <h5>{updatingUser.name}</h5>

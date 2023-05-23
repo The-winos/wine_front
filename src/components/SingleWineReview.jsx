@@ -39,7 +39,7 @@ return (
       <div className="row align-items-center">
         <div className="col-2">
           <img
-            src={reviewUser.avatar}
+            src={`/images/${reviewUser.avatar}`}
             alt="user picture"
             className="img-fluid rounded-circle"
           />
