@@ -35,7 +35,7 @@ fetchGetUserById();
     <div className="profile-container">
       <div id="profile-main">
         <img
-          src={userProfile.avatar}
+          src={`/images/${userProfile.avatar}`}
           alt="avatar image"
           className="img-fluid"
           style={{

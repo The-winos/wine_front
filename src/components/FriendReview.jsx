@@ -46,7 +46,7 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
         style={{maxHeight:"90%", maxWidth: "90%"}}
         />
         <img
-      src={reviewFriend.avatar}
+      src={`/images/${reviewFriend.avatar}`}
       alt="user picture"
       className="img-fluid"
       style={{maxHeight:"50px", maxWidth:"50px", position: "absolute", top: 0, right: 0}}

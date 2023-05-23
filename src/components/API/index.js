@@ -329,8 +329,10 @@ export async function updateUser(
   password,
   name,
   state,
+  avatar,
   role,
   email,
+  bio,
   birthday,
   follower_count,
   following_count
@@ -341,10 +343,12 @@ export async function updateUser(
       password,
       name,
       state,
+      avatar,
       role,
       email,
+      bio,
       follower_count,
-      following_count,
+      following_count
     };
 
     if (birthday !== null) {

@@ -7,6 +7,7 @@ import FollowButton from "./FollowButton";
 
 
 const ReviewDetails = ({review, user}) => {
+  const avatarUrl = `/images/${user.avatar}`;
   const navigate=useNavigate();
   const [reviewUser, setReviewUser]=useState({})
   const [reviewWine, setReviewWine]=useState({})
@@ -45,7 +46,7 @@ fetchGetUserById();
         style={{maxHeight:"90%", maxWidth: "90%"}}
         />
         <img
-      src={reviewUser.avatar}
+      src={`/images/${reviewUser.avatar}`}
       alt="user picture"
       className="img-fluid"
       style={{maxHeight:"50px", maxWidth:"50px", position: "absolute", top: 0, right: 0}}

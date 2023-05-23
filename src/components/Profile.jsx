@@ -38,7 +38,7 @@ const Profile = ({ user }) => {
         <div className="profile-container">
           <div id="profile-main">
             <img
-              src={user.avatar}
+              src={`/images/${user.avatar}`}
               alt="avatar image"
               className="img-fluid"
               style={{
