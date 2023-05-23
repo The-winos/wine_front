@@ -30,6 +30,7 @@ const AccountSettings = ({ user }) => {
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
+      bio === user.bio &&
       formattedBirthday === user.birthday &&
       bio === user.bio &&
       password === user.password
@@ -45,8 +46,9 @@ const AccountSettings = ({ user }) => {
         password,
         name,
         state,
-        user.role,
+        role,
         email,
+        bio,
         formattedBirthday,
         user.follower_count,
         user.following_count
