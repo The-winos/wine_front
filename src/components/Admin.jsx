@@ -133,7 +133,7 @@ console.log(username, "is it getting username?")
                 <h5>{updatingUser.username}</h5>
                 <h6>Update Avatar</h6>
                 <img
-          src={updatingUser.avatar}
+          src={`/images/${updatingUser.avatar}`}
           alt="avatar image"
           className="img-fluid"
           style={{
