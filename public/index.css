@@ -262,3 +262,9 @@ button {
 .short-input {
   width: 10px;
 }
+
+/* account settings */
+.container {
+  display: flex;
+  justify-content: center;
+}
