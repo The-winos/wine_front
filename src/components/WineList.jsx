@@ -152,20 +152,25 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites 
       )}
 
       <div id="wines" className="wine">
-        {filteredWines && filteredWines.length
-          ? filteredWines.map((wine) => {
-              return (
-                <div key={`allWines-${wine.id}`}>
-                  <WineDetails
-                    wine={wine}
-                    setWineInfo={setWineInfo}
-                    user={user}
-                    favorites={favorites}
-                  />
-                </div>
-              );
-            })
-          : null}
+      <div className="container">
+  <div className="row">
+    {filteredWines && filteredWines.length ? (
+      filteredWines.map((wine) => (
+        <div className="col-md-4" key={`allWines-${wine.id}`}>
+          <WineDetails
+            wine={wine}
+            setWineInfo={setWineInfo}
+            user={user}
+            favorites={favorites}
+          />
+        </div>
+      ))
+    ) : (
+      <p>No wines found.</p>
+    )}
+  </div>
+</div>
+
       </div>
     </div>
   );

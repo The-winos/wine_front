@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getReviewByUser, getWineById } from "./API";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
 import Rating from "react-rating-stars-component";
 
 const UserIdReviewDetails = ({ userReviews, userProfile, setUserReviews }) => {
+  const navigate = useNavigate()
   const { id } = useParams();
   const [userWineDetails, setUserWineDetails] = useState([]);
 
