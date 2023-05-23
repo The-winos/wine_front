@@ -211,18 +211,27 @@ const AccountSettings = ({ user }) => {
               <option value="WI">Wisconsin</option>
               <option value="WY">Wyoming</option>
             </select>
-            <div></div>
-            <h6>My Bio:</h6>
-            <textarea
-              placeholder="bio"
-              className="bio"
-              type="text"
-              onChange={(event) => {
-                setBio(event.target.value);
-              }}
-              value={bio}
-            />
-            <div></div>
+            <div className="row justify-content-center">
+              <div className="col-lg-6">
+                <div className="mt-3"></div>
+                <h6 className="row justify-content-center">My Bio:</h6>
+                <textarea
+                  placeholder="bio"
+                  className="form-control border-0 p-0"
+                  style={{
+                    height: "auto",
+                    resize: "none",
+                    overflow: "hidden",
+                    background: "transparent",
+                  }}
+                  onChange={(event) => {
+                    setBio(event.target.value);
+                  }}
+                  value={bio}
+                />
+              </div>
+            </div>
+            <div className="mt-3"></div>
             <button
               type="submit"
               className="btn btn-primary"
@@ -235,6 +244,7 @@ const AccountSettings = ({ user }) => {
       </form>
 
       <Link to={"/profile"}>
+        <div className="mt-3"></div>
         <button id="admin-cancel-edit" onClick={() => {}}>
           Back to Profile
         </button>
