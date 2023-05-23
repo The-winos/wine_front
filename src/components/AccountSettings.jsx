@@ -80,7 +80,7 @@ const AccountSettings = ({ user }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <div>
         <img
           src={`/images/${user.avatar}`}
@@ -95,7 +95,7 @@ const AccountSettings = ({ user }) => {
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="admin-form">
+      <form onSubmit={handleSubmit} className="account-admin-form">
         {update ? (
           <>
             <h3>{user.name}</h3>
@@ -120,7 +120,7 @@ const AccountSettings = ({ user }) => {
             />
 
             <h6 id="text-fields">Update Password:</h6>
-            <div className="col-md-4">
+            <div className="col-md-11">
               <div className="form-group">
                 <div className="input-group">
                   <input
