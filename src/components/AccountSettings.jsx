@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
+  //replace states with useRef
   const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
