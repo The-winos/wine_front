@@ -33,45 +33,51 @@ fetchGetUserById();
 
   return (
     <div className="profile-container">
-      <div id="profile-main">
-        <img
-          src={`/images/${userProfile.avatar}`}
-          alt="avatar image"
-          className="img-fluid"
-          style={{
-            height: "200px",
-            width: "200px",
-            objectFit: "contain",
-            objectPosition: "center center",
-          }}
-        />
-        <div>
-          <Link to={`/favoritesuserid/${id}`}>
-            <button type="favorite" className="buttons">
-              Favorites
-            </button>
-          </Link>
-        </div>
-        <h2 className="profile-username">{userProfile.name}</h2>
-        <h2 className="profile-username">I follow {userProfile.following_count} people</h2>
-        <h2 className="profile-username">{userProfile.follower_count} people follow me!</h2>
-      </div>
+      <div id="profile-main" className="d-flex align-items-center">
+  <img
+    src={`/images/${userProfile.avatar}`}
+    alt="avatar image"
+    className="img-fluid"
+    style={{
+      height: "200px",
+      width: "200px",
+      objectFit: "contain",
+      objectPosition: "center center",
+    }}
+  />
+  <div className="ml-4">
 
-      <div>
-        <h3 className="profile-review-list">{userProfile.username}'s Reviews</h3>
+    <h2 className="profile-username">{userProfile.name}</h2>
+    <h5 className="profile-username">I follow {userProfile.following_count} people</h5>
+    <h5 className="profile-username">{userProfile.follower_count} people follow me!</h5>
+  </div>
+</div>
+<Link to={`/favoritesuserid/${id}`}>
+      <button type="favorite" className="buttons">
+        Favorites
+      </button>
+    </Link>
 
-        {userReviews && userReviews.length ? (
-          userReviews.map((userReviews) => {
-            return (
-              <div key={`useridReview-${userReviews.id}`}>
+
+    <div className="text-center">
+  <h3 className="profile-review-list mx-auto">{userProfile.username}'s Reviews</h3>
+
+  {userReviews && userReviews.length ? (
+    userReviews.map((userReviews) => {
+      return (
+        <div key={`useridReview-${userReviews.id}`}>
           <UserIdReviewDetails
             userReviews={userReviews}
             setUserReviews={setUserReviews}
             userProfile={userProfile}
           />
         </div>
-            )})): null}
-      </div>
+      );
+    })
+  ) : null}
+</div>
+
+
     </div>
   );
 };

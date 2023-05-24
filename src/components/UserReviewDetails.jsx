@@ -38,7 +38,7 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
         })}
       </h3>
       <img
-        src={userWineDetails.image_url}
+        src={`/images/${userWineDetails.image_url}`}
         alt="wine image"
         className="img-fluid"
         style={{

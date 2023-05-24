@@ -36,7 +36,7 @@ async function handleWine(e)
     if (existingWine) {
       setIsThereWine(true)
       setWineId(existingWine.id)
-      handleReview(e);
+
 
     } else {
      setNoWine(true)
@@ -73,22 +73,31 @@ async function handleWine(e)
 
 
 
-  function handleReview(e) {
-e.preventDefault()
+function handleReview(e) {
+  e.preventDefault();
 
+  createReview({
+    wine_id: wineId,
+    user_id: user.id,
+    name: reviewName,
+    rating: reviewRating,
+    price: reviewPrice * 100,
+    review_comment: comment,
+    image_url: null,
+    review_date: new Date(),
+    location: theLocation
+  }).then(() => {
+    // Review created successfully, navigate to the desired route
+    navigate("/winefeed");
+  });
+}
+const handlePriceChange = (e) => {
+  const userInput = e.target.value;
+  const priceInDollars = parseFloat(userInput);
+  const priceInPennies = priceInDollars * 100;
+  setReviewPrice(priceInPennies);
+};
 
-    createReview({
-      wine_id: wineId,
-      user_id: user.id,
-      name: reviewName,
-      rating: reviewRating,
-      price: reviewPrice,
-      review_comment: comment,
-      image_url: null,
-      review_date: new Date(),
-      location: theLocation})
-      navigate("/winefeed")
-  }
 
   return (
     <div className="container mt-5">
@@ -246,18 +255,18 @@ e.preventDefault()
           </div>
 
           <div className="mb-3">
-            <label htmlFor="reviewPrice" className="form-label">
-              Price
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="reviewPrice"
-              value={reviewPrice}
-              onChange={(e) => setReviewPrice(e.target.value)}
-              required
-            />
-          </div>
+  <label htmlFor="reviewPrice" className="form-label">
+    Price
+  </label>
+  <input
+    type="number"
+    className="form-control"
+    id="reviewPrice"
+    value={reviewPrice}
+    onChange={(e) => setReviewPrice(e.target.value)}
+  />
+</div>
+
 
         <div className="mb-3">
           <label htmlFor="reviewComment" className="form-label">
