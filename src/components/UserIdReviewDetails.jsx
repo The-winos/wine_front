@@ -50,10 +50,10 @@ const UserIdReviewDetails = ({ userReviews, userProfile, setUserReviews }) => {
     <div className="row no-gutter">
       <div className="col-md-4" style={{ border: "none" }}>
         <img
-        src={userWineDetails.image_url}
+        src={`/images/${userWineDetails.image_url}`}
         alt="wine image"
         className="img-fluid"
-        style={{maxHeight:"90%", maxWidth: "90%"}}
+        style={{maxHeight:"250px", maxWidth: "90%"}}
         />
       </div>
      <div className="col-md-8">

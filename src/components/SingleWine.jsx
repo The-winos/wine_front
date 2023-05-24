@@ -37,50 +37,57 @@ const SingleWine = ({ user, loggedIn }) => {
   return (
     <div className="row" id="single-wine">
       {singleWine ? (
-        <>
-          <div className="col-md-4">
-            <img
-              className="img-fluid"
-              src={singleWine.image_url}
-              alt="wine image"
-            />
-          </div>
-          <div className="col-md-8">
-            <h2 className="fw-bold mb-3">{singleWine.name}</h2>
-            <Rating
-              value={singleWine.rating}
-              edit={false}
-              size={20}
-              activeColor="#ffd700"
-            />
-          <p className="text-muted mt-3 mb-0 single-wine-flavor">
-  <small>Type:&nbsp;</small>
-  <span className="ml-2">{singleWine.flavor}</span>
-</p>
-<p className="text-muted mb-0 single-wine-avgPrice">
-  <small>Average Price:&nbsp;</small>
-  <span className="ml-2">{singleWine.price !== 0 && singleWine.price !== null ? formattedPrice :<small> No prices yet</small> }</span>
-</p>
-<p className="text-muted single-wine-region">
-  <small>Region:</small>
-  <span className="ml-2">{singleWine.region}</span>
-</p>
-          </div>
-<div className="row" id="single-wine-reviews">
-{wineReviews && wineReviews.length ? wineReviews.map((review)=>{
-  return(
-    <div key={`wine-review-${review.id}`}>
-      <SingleWineReview
-      review={review}
-      user={user}
+       <>
+       <div className="col-md-3 ml-4">
+         <img
+           className="img-fluid"
+           src={`/images/${singleWine.image_url}`}
+           alt="wine image"
+           style={{
+             height: "auto",
+             width: "25%",
+             margin: "0 auto",
+           }}
+         />
+       </div>
+       <div className="col-md-8">
+         <h2 className="fw-bold mb-3">{singleWine.name}</h2>
+         <Rating
+           value={singleWine.rating}
+           edit={false}
+           size={20}
+           activeColor="#ffd700"
+         />
+         <p className="text-muted mt-3 mb-0 single-wine-flavor">
+           <small>Type:&nbsp;</small>
+           <span className="ml-2">{singleWine.flavor}</span>
+         </p>
+         <p className="text-muted mb-0 single-wine-avgPrice">
+           <small>Average Price:&nbsp;</small>
+           <span className="ml-2">
+             {singleWine.price !== 0 && singleWine.price !== null ? formattedPrice : <small>No prices yet</small>}
+           </span>
+         </p>
+         <p className="text-muted single-wine-region">
+           <small>Region:</small>
+           <span className="ml-2">{singleWine.region}</span>
+         </p>
+       </div>
+       <div className="row" id="single-wine-reviews">
+         {wineReviews && wineReviews.length ? (
+           wineReviews.map((review) => {
+             return (
+               <div key={`wine-review-${review.id}`}>
+                 <SingleWineReview review={review} user={user} />
+               </div>
+             );
+           })
+         ) : (
+           null
+         )}
+       </div>
+     </>
 
-      />
-    </div>
-  )
-}):null
-}
-</div>
-        </>
       ) : (
         <h1>Loading Your Wine</h1>
       )}

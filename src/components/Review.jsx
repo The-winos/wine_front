@@ -36,7 +36,7 @@ async function handleWine(e)
     if (existingWine) {
       setIsThereWine(true)
       setWineId(existingWine.id)
-      handleReview(e);
+
 
     } else {
      setNoWine(true)
@@ -47,9 +47,13 @@ async function handleWine(e)
   function handleCreateWine(e){
     e.preventDefault();
     if (flavor== "Cabernet" || flavor== "Syrah"|| flavor=="Zinfandel" || flavor=="Pinot Noir"||flavor=="Merlot"||flavor=="Malbec"||flavor=="Tempranillo"|| flavor=="Red Blend"||flavor=="TreTerzi"||flavor=="Petite Sirah"){
-      setWineImg("https://img.freepik.com/free-photo/bottle-wine-isolated-white_167946-4.jpg?size=338&ext=jpg&ga=GA1.2.1034222811.1663818713")
-    } else {
-      setWineImg("https://preview.free3d.com/img/2015/09/1868291155406357898/jx90iyj3.jpg")
+      setWineImg("3-reddish-purple_wine.png")
+    }
+  if(flavor=="White Zinfandel" || flavor=="Rose"){
+    setWineImg("2-purple_wine.png")
+  }
+    else {
+      setWineImg("1-green_wine.png")
     }
   }
 
@@ -69,21 +73,31 @@ async function handleWine(e)
 
 
 
-  function handleReview(e) {
-e.preventDefault()
-console.log("WORDS!")
+function handleReview(e) {
+  e.preventDefault();
 
-    createReview({
-      wine_id: wineId,
-      user_id: user.id,
-      name: reviewName,
-      rating: reviewRating,
-      price: reviewPrice,
-      review_comment: comment,
-      image_url: null,
-      review_date: new Date(),
-      location: theLocation})
-  }
+  createReview({
+    wine_id: wineId,
+    user_id: user.id,
+    name: reviewName,
+    rating: reviewRating,
+    price: reviewPrice * 100,
+    review_comment: comment,
+    image_url: null,
+    review_date: new Date(),
+    location: theLocation
+  }).then(() => {
+    // Review created successfully, navigate to the desired route
+    navigate("/winefeed");
+  });
+}
+const handlePriceChange = (e) => {
+  const userInput = e.target.value;
+  const priceInDollars = parseFloat(userInput);
+  const priceInPennies = priceInDollars * 100;
+  setReviewPrice(priceInPennies);
+};
+
 
   return (
     <div className="container mt-5">
@@ -147,6 +161,8 @@ console.log("WORDS!")
             <option value="Petite Sirah">Petite Sirah </option>
             <option value="Red Blend">Red Blend</option>
             <option value="White Blend">White Blend</option>
+            <option value="Rose">Rosé</option>
+            <option value="White Zinfandel">White Zinfandel</option>
             <option value="Other">Other</option>
 
           </select>
@@ -239,18 +255,18 @@ console.log("WORDS!")
           </div>
 
           <div className="mb-3">
-            <label htmlFor="reviewPrice" className="form-label">
-              Price
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="reviewPrice"
-              value={reviewPrice}
-              onChange={(e) => setReviewPrice(e.target.value)}
-              required
-            />
-          </div>
+  <label htmlFor="reviewPrice" className="form-label">
+    Price
+  </label>
+  <input
+    type="number"
+    className="form-control"
+    id="reviewPrice"
+    value={reviewPrice}
+    onChange={(e) => setReviewPrice(e.target.value)}
+  />
+</div>
+
 
         <div className="mb-3">
           <label htmlFor="reviewComment" className="form-label">

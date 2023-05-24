@@ -30,13 +30,14 @@ const WineDetails = ({ wine, favorites, user }) => {
   }
 
   return (
-    <div className="card mb-3" style={{ maxWidth: "75%", margin: "0 auto" }}>
+    <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
   <div className="card-header">
+    {console.log(wine, "wine obj")}
     <img
-      src={wine.image_url}
+      src={`/images/${wine.image_url}`}
       alt="wine image"
       className="img-fluid"
-      style={{ maxHeight: "90%", maxWidth: "90%" }}
+      style={{ maxHeight: "30%", maxWidth: "30%" }}
     />
     {checkOnFaves(wine.id) ? (
       <button

@@ -38,12 +38,12 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
 
     <div className="card mb-3" style={{maxWidth:"60%", margin:"0 auto "}}>
     <div className="row no-gutter">
-      <div className="col-md-4" style={{ border: "none" }}>
+      <div className="col-md-3 d-flex align-items-center justify-content-center" style={{ border: "none" }}>
         <img
-        src={wineFriend.image_url}
+        src={`/images/${wineFriend.image_url}`}
         alt="wine image"
         className="img-fluid"
-        style={{maxHeight:"90%", maxWidth: "90%"}}
+        style={{maxHeight:"250px", maxWidth: "90%"}}
         />
         <img
       src={`/images/${reviewFriend.avatar}`}
@@ -52,7 +52,7 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
       style={{maxHeight:"50px", maxWidth:"50px", position: "absolute", top: 0, right: 0}}
       />
       </div>
-     <div className="col-md-8">
+     <div className="col-md-9">
       <div className="card-body">
       <h4 className="wine-name">{wineFriend.name}
   <small className="wine-flavor muted">   {wineFriend.flavor}</small>
