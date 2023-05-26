@@ -35,7 +35,7 @@ const Login = ({ setUser, setLoggedIn }) => {
   return (
     <div className="register-container">
       <div className="bg-light">
-        <div className="container">
+        <div className="register-container">
           <div className="row mt-15">
             <div className="col-lg-4 bg-white m-auto">
               <h3 className="text-center pt-3">Log in</h3>
