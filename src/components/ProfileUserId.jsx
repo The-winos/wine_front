@@ -51,7 +51,11 @@ fetchGetUserById();
     <h5 className="profile-username">I follow {userProfile.following_count} people</h5>
     <h5 className="profile-username">{userProfile.follower_count} people follow me!</h5>
   </div>
+
 </div>
+<div className="col-md-4 mx-3">
+  {userProfile.bio ? userProfile.bio : null}
+  </div>
 <Link to={`/favoritesuserid/${id}`}>
       <button type="favorite" className="buttons">
         Favorites
