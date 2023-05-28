@@ -1,57 +1,50 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateUser } from "./API";
-
 const AccountSettings = ({ user }) => {
-  //replace states with useRef
-  const [name, setName] = useRef(user.name);
-  const [state, setState] = useRef(user.state);
-  const [avatar, setAvatar] = useRef(user.avatar);
-  const [email, setEmail] = useRef(user.email);
-  const [birthday, setBirthday] = useRef(
+  const [name, setName] = useState(user.name);
+  const [state, setState] = useState(user.state);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [email, setEmail] = useState(user.email);
+  const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
-  const [bio, setBio] = useRef(user.bio);
-  const [password, setPassword] = useRef(user.password);
-  const [newPassword, setNewPassword] = useRef("");
-  const [passwordVisible, setPasswordVisible] = useRef(false);
+  const [bio, setBio] = useState(user.bio);
+  const [password, setPassword] = useState(user.password);
+  const [newPassword, setNewPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
-  const [formattedBirthday, setFormattedBirthday] = useRef("");
-
+  const [formattedBirthday, setFormattedBirthday] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     // Check if birthday is selected
-    const formattedBirthday = birthdayRef.current
-      ? birthday.current.toISOString()
-      : null;
-
+    const formattedBirthday = birthday ? birthday.toISOString() : null;
     if (
-      nameRef.current === user.name &&
-      stateRef.current === user.state &&
-      avatarRef.current === user.avatar &&
-      emailRef.current === user.email &&
-      bioRef.current === user.bio &&
+      name === user.name &&
+      state === user.state &&
+      avatar === user.avatar &&
+      email === user.email &&
+      bio === user.bio &&
       formattedBirthday === user.birthday &&
-      bioRef.current === user.bio &&
-      passwordRef.current === user.password
+      bio === user.bio &&
+      password === user.password
     ) {
       // no changes made, do not update user
       return;
     }
-
     try {
       const updateInfo = await updateUser(
         user.id,
         user.username,
-        passwordRef.current,
-        nameRef.current,
-        stateRef.current,
+        password,
+        name,
+        state,
+        user.role,
         role,
-        emailRef.current,
-        bioRef.current,
+        email,
+        bio,
         formattedBirthday,
         user.follower_count,
         user.following_count
@@ -62,7 +55,6 @@ const AccountSettings = ({ user }) => {
       setUpdate(true);
     }
   };
-
   useEffect(() => {
     const parseDate = (dateString) => {
       if (!dateString) {
@@ -72,8 +64,7 @@ const AccountSettings = ({ user }) => {
       date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
       return date;
     };
-
-    const parsedBirthday = parseDate(birthday.current);
+    const parsedBirthday = parseDate(birthday);
     const formattedDate = parsedBirthday
       ? parsedBirthday.toLocaleDateString("en-US", {
           year: "numeric",
@@ -83,7 +74,6 @@ const AccountSettings = ({ user }) => {
       : "";
     setFormattedBirthday(formattedDate);
   }, []);
-
   return (
     <div className="container">
       <div>
@@ -99,7 +89,6 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-
       <form onSubmit={handleSubmit} className="account-admin-form">
         {update ? (
           <>
@@ -109,9 +98,9 @@ const AccountSettings = ({ user }) => {
               placeholder="Enter name"
               className="first-name"
               type="text"
-              value={name.current}
+              value={name}
               onChange={(event) => {
-                setName(name.current);
+                setName(event.target.value);
               }}
             />
             <div></div>
@@ -123,7 +112,6 @@ const AccountSettings = ({ user }) => {
               dateFormat="MM/dd/yyyy"
               isClearable
             />
-
             <h6 id="text-fields">Update Password:</h6>
             <div className="col-md-11">
               <div className="form-group">
@@ -133,8 +121,8 @@ const AccountSettings = ({ user }) => {
                     className="form-control col"
                     id="newPassword"
                     placeholder="Password"
-                    value={password.current}
-                    onChange={(event) => setNewPassword(password.current)}
+                    value={newPassword}
+                    onChange={(event) => setNewPassword(event.target.value)}
                   />
                   <div className="input-group-append">
                     <button
@@ -152,13 +140,12 @@ const AccountSettings = ({ user }) => {
                 </div>
               </div>
             </div>
-
-            <h6>Location: {user.state}</h6>
+            <h6>State {user.state}</h6>
             <select
               placeholder="location"
               className="location"
               type="text"
-              value={state.current}
+              value={state}
               onChange={(event) => {
                 setState(event.target.value);
               }}
@@ -230,7 +217,7 @@ const AccountSettings = ({ user }) => {
                     background: "transparent",
                   }}
                   onChange={(event) => {
-                    setBio(bio.current);
+                    setBio(event.target.value);
                   }}
                   value={bio}
                 />
@@ -247,7 +234,6 @@ const AccountSettings = ({ user }) => {
           </>
         ) : null}
       </form>
-
       <Link to={"/profile"}>
         <div className="mt-3"></div>
         <button id="admin-cancel-edit" onClick={() => {}}>
