@@ -6,35 +6,37 @@ import { updateUser } from "./API";
 
 const AccountSettings = ({ user }) => {
   //replace states with useRef
-  const [name, setName] = useState(user.name);
-  const [state, setState] = useState(user.state);
-  const [avatar, setAvatar] = useState(user.avatar);
-  const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(
+  const [name, setName] = useRef(user.name);
+  const [state, setState] = useRef(user.state);
+  const [avatar, setAvatar] = useRef(user.avatar);
+  const [email, setEmail] = useRef(user.email);
+  const [birthday, setBirthday] = useRef(
     user.birthday ? new Date(user.birthday) : null
   );
-  const [bio, setBio] = useState(user.bio);
-  const [password, setPassword] = useState(user.password);
-  const [newPassword, setNewPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [bio, setBio] = useRef(user.bio);
+  const [password, setPassword] = useRef(user.password);
+  const [newPassword, setNewPassword] = useRef("");
+  const [passwordVisible, setPasswordVisible] = useRef(false);
   const [update, setUpdate] = useState(true);
-  const [formattedBirthday, setFormattedBirthday] = useState("");
+  const [formattedBirthday, setFormattedBirthday] = useRef("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Check if birthday is selected
-    const formattedBirthday = birthday ? birthday.toISOString() : null;
+    const formattedBirthday = birthdayRef.current
+      ? birthday.current.toISOString()
+      : null;
 
     if (
-      name === user.name &&
-      state === user.state &&
-      avatar === user.avatar &&
-      email === user.email &&
-      bio === user.bio &&
+      nameRef.current === user.name &&
+      stateRef.current === user.state &&
+      avatarRef.current === user.avatar &&
+      emailRef.current === user.email &&
+      bioRef.current === user.bio &&
       formattedBirthday === user.birthday &&
-      bio === user.bio &&
-      password === user.password
+      bioRef.current === user.bio &&
+      passwordRef.current === user.password
     ) {
       // no changes made, do not update user
       return;
@@ -44,12 +46,12 @@ const AccountSettings = ({ user }) => {
       const updateInfo = await updateUser(
         user.id,
         user.username,
-        password,
-        name,
-        state,
+        passwordRef.current,
+        nameRef.current,
+        stateRef.current,
         role,
-        email,
-        bio,
+        emailRef.current,
+        bioRef.current,
         formattedBirthday,
         user.follower_count,
         user.following_count
@@ -71,7 +73,7 @@ const AccountSettings = ({ user }) => {
       return date;
     };
 
-    const parsedBirthday = parseDate(birthday);
+    const parsedBirthday = parseDate(birthday.current);
     const formattedDate = parsedBirthday
       ? parsedBirthday.toLocaleDateString("en-US", {
           year: "numeric",
@@ -107,9 +109,9 @@ const AccountSettings = ({ user }) => {
               placeholder="Enter name"
               className="first-name"
               type="text"
-              value={name}
+              value={name.current}
               onChange={(event) => {
-                setName(event.target.value);
+                setName(name.current);
               }}
             />
             <div></div>
@@ -131,8 +133,8 @@ const AccountSettings = ({ user }) => {
                     className="form-control col"
                     id="newPassword"
                     placeholder="Password"
-                    value={newPassword}
-                    onChange={(event) => setNewPassword(event.target.value)}
+                    value={password.current}
+                    onChange={(event) => setNewPassword(password.current)}
                   />
                   <div className="input-group-append">
                     <button
@@ -151,12 +153,12 @@ const AccountSettings = ({ user }) => {
               </div>
             </div>
 
-            <h6>State {user.state}</h6>
+            <h6>Location: {user.state}</h6>
             <select
               placeholder="location"
               className="location"
               type="text"
-              value={state}
+              value={state.current}
               onChange={(event) => {
                 setState(event.target.value);
               }}
@@ -228,7 +230,7 @@ const AccountSettings = ({ user }) => {
                     background: "transparent",
                   }}
                   onChange={(event) => {
-                    setBio(event.target.value);
+                    setBio(bio.current);
                   }}
                   value={bio}
                 />
