@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { getAllUsers, getUserById, updateUser } from "./API";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const Admin = ({ user }) => {
@@ -44,7 +46,6 @@ const Admin = ({ user }) => {
       date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
       return date;
     };
-
     const parsedBirthday = parseDate(birthday);
     const formattedDate = parsedBirthday
       ? parsedBirthday.toLocaleDateString("en-US", {
@@ -54,14 +55,16 @@ const Admin = ({ user }) => {
         })
       : "";
     setFormattedBirthday(formattedDate);
-  }, [birthday]);
+  }, []);
+
+
 
   async function handleUserClick(userId) {
     setUpdateTheUser(true);
     const userToUpdate = await getUserById(userId);
     setUsername(userToUpdate.username);
     setName(userToUpdate.name);
-    setBirthday(userToUpdate.birthday);
+    setBirthday(userToUpdate.birthday ? new Date(userToUpdate.birthday) : null);
     setRole(userToUpdate.role);
     setEmail(userToUpdate.email);
     setState(userToUpdate.state);
@@ -110,7 +113,7 @@ const Admin = ({ user }) => {
         role,
         email,
         bio,
-        formattedBirthday,
+        birthday,
         user.follower_count,
         user.following_count
       );
@@ -326,17 +329,14 @@ const Admin = ({ user }) => {
               </div>
               <div className="row">
                 <div className="col">
-                  <h6>Update Birthday</h6>
-
-                  <input
-                    placeholder={formattedBirthday}
-                    className="first-name"
-                    type="text"
-                    value={birthday}
-                    onChange={(event) => {
-                      setBirthday(event.target.value);
-                    }}
-                  />
+                <h6>Update Birthday</h6>
+                <DatePicker
+  selected={birthday}
+  onChange={(date) => setBirthday(date)}
+  placeholderText="Select a date"
+  dateFormat="MM/dd/yyyy"
+  isClearable
+/>
                 </div>
                 <div className="col">
                   <h6>Update Email</h6>
