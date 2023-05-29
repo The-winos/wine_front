@@ -337,6 +337,7 @@ export async function updateUser(
   follower_count,
   following_count
 ) {
+
   try {
     const body = {
       username,
@@ -347,12 +348,15 @@ export async function updateUser(
       role,
       email,
       bio,
+      birthday,
       follower_count,
       following_count
     };
 
-    if (birthday !== null) {
+    if (birthday !== "") {
       body.birthday = birthday;
+    } else {
+      delete body.birthday;
     }
 
     const options = {
@@ -372,6 +376,7 @@ export async function updateUser(
     console.error(error);
   }
 }
+
 
 //fetches all favorites
 export async function getFavorites(userId) {
