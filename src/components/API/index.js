@@ -377,6 +377,57 @@ export async function updateUser(
   }
 }
 
+export async function updateUserPassword(userId, password) {
+  try {
+    const body = {
+      password,
+    };
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(`${BASE_URL}/users/${userId}/password`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateAdminUserPassword(userId, password) {
+  try {
+    const body = {
+      password,
+    };
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(
+      `${BASE_URL}/users/${userId}/admin/password`,
+      options
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+
 
 //fetches all favorites
 export async function getFavorites(userId) {

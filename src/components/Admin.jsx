@@ -1,7 +1,7 @@
 //same as profile but add admin functions to receive user reports, edit posts, edit users, edit badges?
 import React from "react";
 import { useEffect, useState } from "react";
-import { getAllUsers, getUserById, updateUser } from "./API";
+import { getAllUsers, getUserById, updateUser, updateAdminUserPassword } from "./API";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from "react-datepicker";
@@ -20,8 +20,7 @@ const Admin = ({ user }) => {
   const [states, setState] = useState("");
   const [bio, setBio] = useState("");
   const [role, setRole] = useState("");
-  const [password, setPassword] = useState(updatingUser.password || "");
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
   const [formattedBirthday, setFormattedBirthday] = useState("");
@@ -103,6 +102,13 @@ const Admin = ({ user }) => {
         birthday:
           formattedBirthday !== "" ? formattedBirthday : updatingUser.birthday,
       });
+
+      // Password update logic
+      if (password !== "") {
+        await updateAdminUserPassword(updatingUser.id, password);
+        setPassword("");
+      }
+
       const updateInfo = await updateUser(
         user.id,
         username,
@@ -118,13 +124,12 @@ const Admin = ({ user }) => {
         user.following_count
       );
       setUpdateTheUser(false);
-      toast.success('User updated');
-
+      toast.success("User updated");
     } catch (error) {
       console.error(error);
-
     }
   }
+
 
   return (
     <div id="admin">
@@ -417,41 +422,39 @@ const Admin = ({ user }) => {
                   </select>
                 </div>
               </div>
-
+              <>
               <h6 id="text-fields">Password:</h6>
-              <div className="container">
-                <h6 id="text-fields">New Password:</h6>
-                <div className="row mb-3">
-                  <div className="col-md-4">
-                    <span className="input-group-text">
-                      <i className="fa fa-lock"></i>
-                    </span>
-                  </div>
-                  <div className="col-md-4">
-                    <input
-                      type={passwordVisible ? "text" : "password"}
-                      className="form-control password"
-                      placeholder="New Password"
-                      value={newPassword}
-                      onChange={(event) => setNewPassword(event.target.value)}
-                      style={{ width: "100%" }}
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary col-md-12"
-                      onClick={() => setPasswordVisible(!passwordVisible)}
-                    >
-                      <i
-                        className={`fa ${
-                          passwordVisible ? "fa-eye-slash" : "fa-eye"
-                        }`}
-                      ></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
+              </>
+              <div className="container-fluid">
+  <h6 id="text-fields">New Password:</h6>
+  <div className="row mb-3">
+    <div className="col-sm-1">
+      <span className="input-group-text">
+        <i className="fa fa-lock"></i>
+      </span>
+    </div>
+    <div className="col-md-5">
+      <input
+        type={passwordVisible ? "text" : "password"}
+        className="form-control password"
+        placeholder="Update Password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+    </div>
+    <div className="col-md-1">
+      <button
+        type="button"
+        className="btn btn-outline-secondary col-md-12"
+        onClick={() => setPasswordVisible(!passwordVisible)}
+      >
+        <i className={`fa ${passwordVisible ? "fa-eye-slash" : "fa-eye"}`}></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
               <div className="col-md-6 p-3">
                 <h6>User's Bio:</h6>
                 <textarea
