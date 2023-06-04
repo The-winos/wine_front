@@ -214,7 +214,8 @@ const AccountSettings = ({ user }) => {
                 <h6 className="row justify-content-center">My Bio:</h6>
                 <TextareaAutosize
                   placeholder="bio"
-                  className="form-control border-0 p-0 form-control-lg"
+                  className="form-control border-0 p-0 form-control-lg textarea-bio"
+                  minRows={3}
                   style={{ width: "100%" }}
                   onChange={(event) => {
                     setBio(event.target.value);
