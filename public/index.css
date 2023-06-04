@@ -267,13 +267,12 @@ button {
   display: flex;
   justify-content: center;
 }
-/* 
-.custom-textarea {
-  height: auto;
-  overflow: hidden;
-  min-height: 500px;
-  width: fit-content;
-} */
+
+.form-control.textarea-bio {
+  max-height: 200px; /* Adjust the value as needed */
+  resize: horizontal;
+  width: 100%;
+}
 
 /* admin */
 .avatar {
