@@ -337,7 +337,6 @@ export async function updateUser(
   follower_count,
   following_count
 ) {
-
   try {
     const body = {
       username,
@@ -350,10 +349,10 @@ export async function updateUser(
       bio,
       birthday,
       follower_count,
-      following_count
+      following_count,
     };
 
-    if (birthday !== "") {
+    if (birthday !== "" && birthday !== null) {
       body.birthday = birthday;
     } else {
       delete body.birthday;
@@ -392,7 +391,10 @@ export async function updateUserPassword(userId, password) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(`${BASE_URL}/users/${userId}/password`, options);
+    const response = await fetch(
+      `${BASE_URL}/users/${userId}/password`,
+      options
+    );
     const result = await response.json();
     return result;
   } catch (error) {
@@ -430,11 +432,6 @@ export async function updateAdminUserPassword(userId, password) {
     console.error(error);
   }
 }
-
-
-
-
-
 //fetches all favorites
 export async function getFavorites(userId) {
   try {

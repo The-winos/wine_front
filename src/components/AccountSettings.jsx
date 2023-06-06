@@ -27,7 +27,9 @@ const AccountSettings = ({ user }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Check if birthday is selected
-    const formattedBirthday = birthday ? birthday.toISOString() : null;
+    const formattedBirthday = birthday
+      ? birthday.toLocaleDateString("en-US")
+      : null;
     if (
       name === user.name &&
       state === user.state &&
@@ -48,8 +50,6 @@ const AccountSettings = ({ user }) => {
         password,
         name,
         state,
-        user.role,
-        role,
         email,
         bio,
         formattedBirthday,
@@ -167,6 +167,7 @@ const AccountSettings = ({ user }) => {
                   placeholder="bio"
                   className="form-control border-0 p-0 form-control-lg textarea-bio"
                   minRows={3}
+                  maxRows={50}
                   style={{ width: "100%" }}
                   onChange={(event) => {
                     setBio(event.target.value);
