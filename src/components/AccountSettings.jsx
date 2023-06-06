@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import TextareaAutosize from "react-textarea-autosize";
+// import "react-textarea-autosize/dist/react-textarea-autosize.css";
+
 import { updateUser } from "./API";
+
 import OptionsStates from "./OptionsStates";
+
 const AccountSettings = ({ user }) => {
   const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state);
@@ -157,15 +163,11 @@ const AccountSettings = ({ user }) => {
               <div className="col-lg-6">
                 <div className="mt-3"></div>
                 <h6 className="row justify-content-center">My Bio:</h6>
-                <textarea
+                <TextareaAutosize
                   placeholder="bio"
-                  className="form-control border-0 p-0"
-                  style={{
-                    height: "auto",
-                    resize: "none",
-                    overflow: "hidden",
-                    background: "transparent",
-                  }}
+                  className="form-control border-0 p-0 form-control-lg textarea-bio"
+                  minRows={3}
+                  style={{ width: "100%" }}
                   onChange={(event) => {
                     setBio(event.target.value);
                   }}
