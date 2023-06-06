@@ -56,8 +56,6 @@ const Admin = ({ user }) => {
     setFormattedBirthday(formattedDate);
   }, []);
 
-
-
   async function handleUserClick(userId) {
     setUpdateTheUser(true);
     const userToUpdate = await getUserById(userId);
@@ -73,6 +71,7 @@ const Admin = ({ user }) => {
     setAvatar(userToUpdate.avatar);
     setUpdatingUser(userToUpdate);
   }
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -104,31 +103,54 @@ const Admin = ({ user }) => {
       });
 
       // Password update logic
-      if (password !== "") {
-        await updateAdminUserPassword(updatingUser.id, password);
-        setPassword("");
+      if (password != "") {
+        try {
+          const hashedPassword = await updateAdminUserPassword(
+            updatingUser.id,
+            password
+          );
+          const updateInfo = await updateUser(
+            user.id,
+            username,
+            hashedPassword,
+            name,
+            states,
+            avatar,
+            role,
+            email,
+            bio,
+            birthday,
+            user.follower_count,
+            user.following_count
+          );
+          console.log(hashedPassword, "hashed password");
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        const updateInfo = await updateUser(
+          user.id,
+          username,
+          password,
+          name,
+          states,
+          avatar,
+          role,
+          email,
+          bio,
+          birthday,
+          user.follower_count,
+          user.following_count
+        );
       }
 
-      const updateInfo = await updateUser(
-        user.id,
-        username,
-        password,
-        name,
-        states,
-        avatar,
-        role,
-        email,
-        bio,
-        birthday,
-        user.follower_count,
-        user.following_count
-      );
       setUpdateTheUser(false);
       toast.success("User updated");
     } catch (error) {
       console.error(error);
     }
   }
+
 
 
   return (
