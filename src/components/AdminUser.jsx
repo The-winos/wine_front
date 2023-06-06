@@ -33,6 +33,7 @@ const AdminUser = ({ allUsers, user }) => {
     setRole(userToUpdate.role);
     setEmail(userToUpdate.email);
     setState(userToUpdate.state);
+    setPassword(userToUpdate.password)
     if (userToUpdate.bio) {
       setBio(userToUpdate.bio);
     }

@@ -395,7 +395,7 @@ export async function updateUserPassword(userId, password) {
       `${BASE_URL}/users/${userId}/password`,
       options
     );
-    const result = await response.json();
+    const result = await response.text();
     return result;
   } catch (error) {
     console.error(error);
