@@ -24,30 +24,19 @@ const AccountSettings = ({ user }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
   const [formattedBirthday, setFormattedBirthday] = useState("");
-  const handleSubmit = async (event) => {
+
+  const handlePasswordUpdate = async (event) => {
     event.preventDefault();
     // Check if birthday is selected
     const formattedBirthday = birthday
       ? birthday.toLocaleDateString("en-US")
       : null;
-    if (
-      name === user.name &&
-      state === user.state &&
-      avatar === user.avatar &&
-      email === user.email &&
-      bio === user.bio &&
-      formattedBirthday === user.birthday &&
-      bio === user.bio &&
-      password === user.password
-    ) {
-      // no changes made, do not update user
-      return;
-    }
+
     try {
       const updateInfo = await updateUser(
         user.id,
         user.username,
-        password,
+        newPassword,
         name,
         state,
         email,
@@ -62,6 +51,7 @@ const AccountSettings = ({ user }) => {
       setUpdate(true);
     }
   };
+
   useEffect(() => {
     const parseDate = (dateString) => {
       if (!dateString) {
@@ -81,6 +71,7 @@ const AccountSettings = ({ user }) => {
       : "";
     setFormattedBirthday(formattedDate);
   }, []);
+
   return (
     <div className="container">
       <div>
@@ -96,7 +87,7 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-      <form onSubmit={handleSubmit} className="account-admin-form">
+      <form onSubmit={handlePasswordUpdate} className="account-admin-form">
         {update ? (
           <>
             <h3>{user.name}</h3>
@@ -119,7 +110,7 @@ const AccountSettings = ({ user }) => {
               dateFormat="MM/dd/yyyy"
               isClearable
             />
-            <h6 id="text-fields">Update Password:</h6>
+            <h6>Update Password:</h6>
             <div className="col-md-11">
               <div className="form-group">
                 <div className="input-group">
@@ -157,7 +148,7 @@ const AccountSettings = ({ user }) => {
                 setState(event.target.value);
               }}
             >
-             <OptionsStates/>
+              <OptionsStates />
             </select>
             <div className="row justify-content-center">
               <div className="col-lg-6">
@@ -177,11 +168,7 @@ const AccountSettings = ({ user }) => {
               </div>
             </div>
             <div className="mt-3"></div>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onSubmit={handleSubmit}
-            >
+            <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
           </>
