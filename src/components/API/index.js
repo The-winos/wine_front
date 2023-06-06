@@ -421,13 +421,17 @@ export async function updateAdminUserPassword(userId, password) {
       `${BASE_URL}/users/${userId}/admin/password`,
       options
     );
-    const result = await response.json();
-    return result;
+
+    if (!response.ok) {
+      throw new Error("Failed to update password");
+    }
+
+    const result = await response.text();
+    return result.password;
   } catch (error) {
     console.error(error);
   }
 }
-
 //fetches all favorites
 export async function getFavorites(userId) {
   try {
