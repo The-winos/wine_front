@@ -324,7 +324,6 @@ export async function checkExistingWine(wineName) {
 }
 
 export async function updateUser(
-  id,
   username,
   password,
   name,
@@ -368,6 +367,44 @@ export async function updateUser(
     };
 
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
+    const result = await response.json();
+    console.log(result, "what's happening");
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function updateWine(
+  wineId,
+  author_id,
+  name,
+  image_url,
+  price,
+  region,
+  flavor
+) {
+  try {
+    const body = {
+      author_id,
+      name,
+      image_url,
+      price,
+      region,
+      flavor
+    };
+
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(`${BASE_URL}/wines/${wineId}`, options);
     const result = await response.json();
     console.log(result, "what's happening");
     return result;

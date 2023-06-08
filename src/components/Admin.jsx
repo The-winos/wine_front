@@ -11,16 +11,15 @@ import AdminWine from "./AdminWine";
 
 
 const Admin = ({ user }) => {
-  const [allUsers, setAllUser] = useState([]);
-  const [allWine, setAllWine]= useState([])
 
-  useEffect(() => {
-    async function fetchAllUsers() {
-      const allTheUsers = await getAllUsers();
-      setAllUser(allTheUsers);
-    }
-    fetchAllUsers();
-  }, []);
+  const [allWine, setAllWine]= useState([]);
+  const [userButton, setUserButton]=useState(false);
+  const [updateTheUser, setUpdateTheUser] = useState(false);
+  const [wineButton, setWineButton]=useState(false);
+  const [updatingTheWine, setUpdatingTheWine] = useState(false);
+
+
+
 
   useEffect(()=>{
     async function fetchAllWine(){
@@ -38,9 +37,69 @@ const Admin = ({ user }) => {
         Welcome to the Admin Portal
       </h2>
       <>
+      <div className="d-flex justify-content-center pb-2">
+  {!userButton ? (
+    <>
+    <button
+      onClick={() => {
+        setUserButton(true);
+        setWineButton(false);
+        setUpdatingTheWine(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Open Users
+    </button>
 
-            <AdminUser allUsers={allUsers}  user={user} />
-            <AdminWine allWine={allWine} user={user}/>
+    </>
+  ) : (<>
+    <button
+      onClick={() => {
+        setUserButton(false);
+        setUpdateTheUser(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Close Users
+    </button>
+
+    </>
+  )}
+  {!wineButton ? (
+    <>
+    <button
+      onClick={() => {
+        setWineButton(true);
+        setUserButton(false);
+        setUpdateTheUser(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Open Wines
+    </button>
+
+    </>
+  ) : (<>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUpdatingTheWine(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Close Wines
+    </button>
+
+    </>
+  )}
+</div>
+
+
+<AdminUser userButton={userButton} updateTheUser={updateTheUser} setUpdateTheUser={setUpdateTheUser}/>
+
+
+
+            <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton}/>
 
 
 
