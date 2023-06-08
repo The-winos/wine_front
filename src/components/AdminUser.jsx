@@ -1,28 +1,34 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getUserById, updateUser, updateAdminUserPassword } from "./API";
+import { getUserById, updateUser, updateAdminUserPassword, getAllUsers } from "./API";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from "react-toastify";
 import OptionsStates from "./OptionsStates";
 import OptionAvatars from "./OptionAvatars";
 
-const AdminUser = ({ allUsers, user }) => {
+const AdminUser = ({userButton, updateTheUser, setUpdateTheUser }) => {
+  const [allUsers, setAllUser] = useState([]);
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [formattedBirthday, setFormattedBirthday] = useState("");
   const [changeAvatar, setChangeAvatar] = useState(false);
-  const [userButton, setUserButton] = useState(false);
-  const [updateTheUser, setUpdateTheUser] = useState(false);
   const [updatingUser, setUpdatingUser] = useState({});
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [states, setState] = useState("");
+  const [birthday, setBirthday] = useState(null);
+  const [state, setState] = useState("");
   const [bio, setBio] = useState("");
   const [role, setRole] = useState("");
   const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    async function fetchAllUsers() {
+      const allTheUsers = await getAllUsers();
+      setAllUser(allTheUsers);
+    }
+    fetchAllUsers();
+  }, []);
 
   async function handleUserClick(userId) {
     setUpdateTheUser(true);
@@ -33,7 +39,6 @@ const AdminUser = ({ allUsers, user }) => {
     setRole(userToUpdate.role);
     setEmail(userToUpdate.email);
     setState(userToUpdate.state);
-    setPassword(userToUpdate.password)
     if (userToUpdate.bio) {
       setBio(userToUpdate.bio);
     }
@@ -51,16 +56,16 @@ const AdminUser = ({ allUsers, user }) => {
       date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
       return date;
     };
-    const parsedBirthday = parseDate(birthday);
-    const formattedDate = parsedBirthday
-      ? parsedBirthday.toLocaleDateString("en-US", {
+
+    const formattedDate = birthday
+      ? birthday.toLocaleDateString("en-US", {
           year: "numeric",
           month: "2-digit",
           day: "2-digit",
         })
       : "";
-    setFormattedBirthday(formattedDate);
-  }, []);
+    // setFormattedBirthday(formattedDate); // Remove this line
+  }, [birthday]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -68,7 +73,7 @@ const AdminUser = ({ allUsers, user }) => {
     if (
       username === updatingUser.username &&
       name === updatingUser.name &&
-      states === updatingUser.state &&
+      state === updatingUser.state &&
       avatar === updatingUser.avatar &&
       email === updatingUser.email &&
       birthday === updatingUser.birthday &&
@@ -83,34 +88,32 @@ const AdminUser = ({ allUsers, user }) => {
         ...updatingUser,
         username: username !== "" ? username : updatingUser.username,
         name: name !== "" ? name : updatingUser.name,
-        states: states !== "" ? states : updatingUser.state,
+        state: state !== "" ? state : updatingUser.state,
         role: role !== "" ? role : updatingUser.role,
         email: email !== "" ? email : updatingUser.email,
         bio: bio !== "" ? bio : updatingUser.bio || null,
-        birthday:
-          formattedBirthday !== "" ? formattedBirthday : updatingUser.birthday,
+        birthday: birthday !== "" ? birthday : updatingUser.birthday
       });
 
       // Password update logic
-      if (password != "") {
+      if (password !== "") {
         try {
           const hashedPassword = await updateAdminUserPassword(
             updatingUser.id,
             password
           );
           const updateInfo = await updateUser(
-            user.id,
             username,
             hashedPassword,
             name,
-            states,
+            state,
             avatar,
             role,
             email,
             bio,
             birthday,
-            user.follower_count,
-            user.following_count
+            updatingUser.follower_count,
+            updatingUser.following_count
           );
 
         } catch (error) {
@@ -118,18 +121,17 @@ const AdminUser = ({ allUsers, user }) => {
         }
       } else {
         const updateInfo = await updateUser(
-          user.id,
           username,
           password,
           name,
-          states,
+          state,
           avatar,
           role,
           email,
           bio,
           birthday,
-          user.follower_count,
-          user.following_count
+          updatingUser.follower_count,
+          updatingUser.following_count
         );
         setUsername("")
         setPassword("")
@@ -258,7 +260,7 @@ const AdminUser = ({ allUsers, user }) => {
                   placeholder="location"
                   className="location"
                   type="text"
-                  value={states}
+                  value={state}
                   onChange={(event) => {
                     setState(event.target.value);
                   }}
@@ -325,15 +327,6 @@ const AdminUser = ({ allUsers, user }) => {
       ) : null}
       {userButton ? (
         <>
-          <button
-            onClick={() => {
-              setUserButton(false);
-              setUpdateTheUser(false);
-            }}
-            className="btn btn-primary pb-2"
-          >
-            Close Users
-          </button>
           {allUsers && allUsers.length ? (
             <>
               <div className="text-center py-2">
@@ -379,18 +372,7 @@ const AdminUser = ({ allUsers, user }) => {
           )}
         </>
       ) : (
-        <>
-          <div className="d-flex justify-content-center pb-2">
-            <button
-              onClick={() => {
-                setUserButton(true);
-              }}
-              className="btn btn-primary"
-            >
-              Open Users
-            </button>
-          </div>
-        </>
+       null
       )}
     </>
   );
