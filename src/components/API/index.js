@@ -508,6 +508,21 @@ export async function addFavorite(user_id, wine_id) {
   }
 }
 
+export async function getSaved(userId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/saved/${userId}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 //removes a Wine from favorites
 
 export async function removeFavorite(favoriteId) {
@@ -523,6 +538,25 @@ export async function removeFavorite(favoriteId) {
       `${BASE_URL}/favorites/${favoriteId}`,
       options
     );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function deleteItem(routeType, itemId) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
+
     const result = await response.json();
     return result;
   } catch (error) {
