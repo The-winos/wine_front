@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getUserById, updateUser, updateAdminUserPassword, getAllUsers, deleteItem } from "./API";
+import { getUserById, updateUser, updateAdminUserPassword, getAllUsers, deleteItem, getSaved } from "./API";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +8,7 @@ import OptionsStates from "./OptionsStates";
 import OptionAvatars from "./OptionAvatars";
 import { getReviewByUser } from "./API";
 import { getFavorites } from "./API";
+import { getFollowersById } from "./API";
 
 const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
   const [allUsers, setAllUser] = useState([]);
@@ -161,17 +162,33 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
       if (confirmDeletion) {
 
         const reviews = await getReviewByUser(id);
-
+        if(reviews.length){
         await Promise.all(reviews.map((review) => deleteItem("reviews", review.id)));
-      }
+      }}
+
       const favorites= await getFavorites(id)
+      if(favorites.length){
       await Promise.all(favorites.map((favorite)=>{
         deleteItem("favorites", favorite.id)
-      }))
+      }))}
+
+      const saved= await getSaved(id)
+      if(saved.length){
+      await Promise.all(saved.map((save)=>{
+        deleteItem("saved", save.id)
+      }))}
+
+      const followers= await getFollowersById(id)
+      if(followers.length){
+        await Promise.all(followers.map((follow)=>{
+          deleteItem("followers", follow.follower_id)
+        }))
+      }
 
       // Make API call to delete the user
       const result = await deleteItem(type, id);
       console.log(result);
+      setUpdateTheUser(false);
       toast.success(result.username, " deleted");
     } catch (error) {
       console.error(error);
