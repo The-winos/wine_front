@@ -529,3 +529,22 @@ export async function removeFavorite(favoriteId) {
     console.error(error);
   }
 }
+
+export async function deleteItem(routeType, itemId) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

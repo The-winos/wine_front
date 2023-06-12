@@ -95,7 +95,7 @@ const Admin = ({ user }) => {
 </div>
 
 
-<AdminUser userButton={userButton} updateTheUser={updateTheUser} setUpdateTheUser={setUpdateTheUser}/>
+<AdminUser user={user} userButton={userButton} updateTheUser={updateTheUser} setUpdateTheUser={setUpdateTheUser}/>
 
 
 
