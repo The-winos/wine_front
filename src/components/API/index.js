@@ -186,7 +186,21 @@ export async function getFollowersById(userId) {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/followers/${userId}`, options);
+    const response = await fetch(`${BASE_URL}/followers/user/${userId}`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function getFollowingById(followId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/followers/follower/${followId}`, options);
     const result = await response.json();
     return result;
   } catch (error) {
@@ -546,6 +560,7 @@ export async function removeFavorite(favoriteId) {
 }
 
 export async function deleteItem(routeType, itemId) {
+  console.log(routeType, "RouteType")
   try {
     const options = {
       method: "DELETE",
@@ -556,6 +571,28 @@ export async function deleteItem(routeType, itemId) {
     };
 
     const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
+
+    const result = await response.json();
+    console.log(result, "deleteItem")
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function deleteFollow(routeType, itemId) {
+
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
+    console.log(response, "response")
 
     const result = await response.json();
     return result;
