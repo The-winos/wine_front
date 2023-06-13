@@ -9,6 +9,8 @@ import OptionAvatars from "./OptionAvatars";
 import { getReviewByUser } from "./API";
 import { getFavorites } from "./API";
 import { getFollowersById } from "./API";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
   const [allUsers, setAllUser] = useState([]);
@@ -155,16 +157,58 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
     }
   }
 
+  function showConfirmation(message) {
+    return new Promise((resolve, reject) => {
+      const confirmed = window.confirm(message);
+      if (confirmed) {
+        resolve(true);
+      } else {
+        return;
+      }
+    });
+  }
+
+  // Function to show a dialog with multiple options
+  function showReviewAction(message, options) {
+    return new Promise((resolve) => {
+      const optionIndexes = options.map((option, index) => index + 1);
+      const selectedOption = parseInt(window.prompt(`${message}\n\n${options.map((option, index) => `${index + 1}. ${option.label}`).join("\n")}`));
+
+      if (optionIndexes.includes(selectedOption)) {
+        resolve(options[selectedOption - 1].value);
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+
+
+
+
+
   async function handleDelete(type, id) {
     try {
-      const confirmDeletion = window.confirm("Do you want to delete the associated reviews as well?");
+      if (user.username !== updatingUser.username) {
+        const confirmDeletion = await showConfirmation(`Are you sure you want to delete user ${updatingUser.username}`);
+        if (!confirmDeletion) {
+          return;
+        }
 
-      if (confirmDeletion) {
+        if (confirmDeletion) {
+          const reviewAction = await showReviewAction("Choose an action:", [
+            { label: "Delete Reviews", value: "Delete Reviews" },
+            { label: "Reassign Reviews to Deleted User", value: "Reassign Reviews to Deleted User" },
+            { label: "Cancel", value: "Cancel" },
+          ]);
 
-        const reviews = await getReviewByUser(id);
-        if(reviews.length){
-        await Promise.all(reviews.map((review) => deleteItem("reviews", review.id)));
-      }}
+          if (reviewAction === "Delete Reviews") {
+            const reviews = await getReviewByUser(id);
+            await Promise.all(reviews.map((review) => deleteItem("reviews", review.id)));
+          } else if (reviewAction === "Cancel") {
+            return;
+          }
+        }
 
       const favorites= await getFavorites(id)
       if(favorites.length){
@@ -199,7 +243,10 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
       const result = await deleteItem(type, id);
       console.log(result);
       setUpdateTheUser(false);
-      toast.success(result.username, " deleted");
+      toast.success(result.username, " deleted");}
+      else{
+        toast.error(`${user.username} you cannot delete yourself.`);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -437,6 +484,7 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
       ) : (
        null
       )}
+      <ToastContainer />
     </>
   );
 };
