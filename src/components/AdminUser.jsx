@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getUserById, updateUser, updateAdminUserPassword, getAllUsers, deleteItem, getSaved } from "./API";
+import { getUserById, updateUser, updateAdminUserPassword, getAllUsers, deleteItem, getSaved, getFollowingById } from "./API";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -179,11 +179,21 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
       }))}
 
       const followers= await getFollowersById(id)
+      console.log(followers, "followers")
       if(followers.length){
         await Promise.all(followers.map((follow)=>{
-          deleteItem("followers", follow.follower_id)
+          deleteItem("followers/user", follow.id)
+
         }))
-      }
+      }console.log("followers success")
+
+      const followings= await getFollowingById(id)
+      console.log(followings, "following")
+      if(followings.length){
+        await Promise.all(followings.map((follow)=>{
+          deleteItem("followers/follower", follow.id)
+        }))
+      }console.log("following success")
 
       // Make API call to delete the user
       const result = await deleteItem(type, id);
