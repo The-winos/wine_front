@@ -18,39 +18,30 @@ const AccountSettings = ({ user }) => {
   const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
-  const [bio, setBio] = useState(user.bio);
+  const [bio, setBio] = useState("");
   const [password, setPassword] = useState(user.password);
   const [newPassword, setNewPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [update, setUpdate] = useState(true);
   const [formattedBirthday, setFormattedBirthday] = useState("");
 
-  const handlePasswordUpdate = async (event) => {
-    event.preventDefault();
-    // Check if birthday is selected
-    const formattedBirthday = birthday
-      ? birthday.toLocaleDateString("en-US")
-      : null;
-
-    try {
-      const updateInfo = await updateUser(
-        user.id,
-        user.username,
-        newPassword,
-        name,
-        state,
-        email,
-        bio,
-        formattedBirthday,
-        user.follower_count,
-        user.following_count
-      );
-      // Rest of your code...
-    } catch (error) {
-      console.error(error);
-      setUpdate(true);
+  async function handleUserClick(userId) {
+    setUpdateTheUser(true);
+    const userToUpdate = await getUserById(userId);
+    setUsername(userToUpdate.username);
+    setName(userToUpdate.name);
+    setBirthday(userToUpdate.birthday ? new Date(userToUpdate.birthday) : null);
+    setRole(userToUpdate.role);
+    setEmail(userToUpdate.email);
+    setState(userToUpdate.state);
+    if (userToUpdate.bio) {
+      setBio(userToUpdate.bio);
+    } else {
+      setBio("");
     }
-  };
+    setAvatar(userToUpdate.avatar);
+    setUpdatingUser(userToUpdate);
+  }
 
   useEffect(() => {
     const parseDate = (dateString) => {
@@ -72,6 +63,92 @@ const AccountSettings = ({ user }) => {
     setFormattedBirthday(formattedDate);
   }, []);
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (
+      username === updatingUser.username &&
+      name === updatingUser.name &&
+      states === updatingUser.state &&
+      avatar === updatingUser.avatar &&
+      email === updatingUser.email &&
+      birthday === updatingUser.birthday &&
+      bio === updatingUser.bio &&
+      password === updatingUser.password
+    ) {
+      return;
+    }
+
+    try {
+      setUpdatingUser({
+        ...updatingUser,
+        username: username !== "" ? username : updatingUser.username,
+        name: name !== "" ? name : updatingUser.name,
+        states: states !== "" ? states : updatingUser.state,
+        role: role !== "" ? role : updatingUser.role,
+        email: email !== "" ? email : updatingUser.email,
+        bio: bio !== "" ? bio : updatingUser.bio || null,
+        birthday:
+          formattedBirthday !== "" ? formattedBirthday : updatingUser.birthday,
+      });
+
+      // Password update logic
+      if (password != "") {
+        try {
+          const hashedPassword = await updateAdminUserPassword(
+            updatingUser.id,
+            password
+          );
+          const updateInfo = await updateUser(
+            user.id,
+            username,
+            hashedPassword,
+            name,
+            states,
+            avatar,
+            role,
+            email,
+            bio,
+            birthday,
+            user.follower_count,
+            user.following_count
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        const updateInfo = await updateUser(
+          user.id,
+          username,
+          password,
+          name,
+          states,
+          avatar,
+          role,
+          email,
+          bio,
+          birthday,
+          user.follower_count,
+          user.following_count
+        );
+        setUsername("");
+        setPassword("");
+        setName("");
+        setState("");
+        setAvatar("");
+        setRole("");
+        setEmail("");
+        setBio("");
+        setBirthday("");
+      }
+
+      setUpdateTheUser(false);
+      toast.success("User updated");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="container">
       <div>
@@ -87,7 +164,7 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-      <form onSubmit={handlePasswordUpdate} className="account-admin-form">
+      <form onSubmit={handleSubmit} className="accountSettings-form">
         {update ? (
           <>
             <h3>{user.name}</h3>
