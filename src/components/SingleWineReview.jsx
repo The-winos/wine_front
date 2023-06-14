@@ -45,8 +45,8 @@ return (
           />
         </div>
         <div className="col-8 avatar-username">
-        {user.id!=reviewUser.id ?
-          <span> <a href={`/profileuserid/${reviewUser.id}`}>{reviewUser.username}</a> </span> : <span> <a href={`/profile`}>{reviewUser.username}</a> </span>}
+        {user.id!=reviewUser.id && reviewUser.username != "Deleted User" ?
+          <span> <a href={`/profileuserid/${reviewUser.id}`}>{reviewUser.username}</a> </span> :(<>{reviewUser.username != "Deleted User" ?  (<span> <a href={`/profile`}>{reviewUser.username}</a> </span>): <span>{reviewUser.username}</span>}</>)}
         </div>
         <div className="col-2 text-right">
           <span className="review-date">

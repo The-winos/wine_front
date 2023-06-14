@@ -455,27 +455,28 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
               </div>
 
               {allUsers
-                .sort((a, b) => a.username.localeCompare(b.username))
-                .map((user) => {
-                  return (
-                    <div key={`userlist-${user.id}`}>
-                      <h5
-                        style={{
-                          color:
-                            user.role === "admin"
-                              ? "red"
-                              : user.role === "merchant"
-                              ? "blue"
-                              : "black",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleUserClick(user.id)}
-                      >
-                        {user.username}
-                      </h5>
-                    </div>
-                  );
-                })}
+  .filter((user) => user.username !== "Deleted User") // Exclude "Deleted User"
+  .sort((a, b) => a.username.localeCompare(b.username))
+  .map((user) => {
+    return (
+      <div key={`userlist-${user.id}`}>
+        <h5
+          style={{
+            color:
+              user.role === "admin"
+                ? "red"
+                : user.role === "merchant"
+                ? "blue"
+                : "black",
+            cursor: "pointer",
+          }}
+          onClick={() => handleUserClick(user.id)}
+        >
+          {user.username}
+        </h5>
+      </div>
+    );
+  })}
             </>
           ) : (
             <h2>No users found</h2>

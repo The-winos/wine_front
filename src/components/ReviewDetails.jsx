@@ -63,15 +63,16 @@ fetchGetUserById();
         <div className="d-flex align-items-center">
           <small className="text-muted">
             By:
-            {user.id !== reviewUser.id ? (
+            {user.id !== reviewUser.id && reviewUser.username != "Deleted User" ? (
               <a href={`/profileuserid/${reviewUser.id}`}>{reviewUser.username}</a>
-            ) : (
-              <a href={`/profile`}>{reviewUser.username}</a>
+            ) : ( <>{reviewUser.username != "Deleted User" ?
+              (<a href={`/profile`}>{reviewUser.username}</a>): <small>{reviewUser.username}</small>}</>
             )}
           </small>
-          <div className="ml-3">
+          {reviewUser.username != "Deleted User" ?
+         ( <div className="ml-3">
             <FollowButton review={review} reviewUser={reviewUser} reviewWine={reviewWine} user={user} />
-          </div>
+          </div>): null}
         </div>
         <Rating value={review.rating} edit={false} size={20} activeColor="#ffd700" />
         <p className="card-text">

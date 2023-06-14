@@ -5,7 +5,7 @@ body {
   margin: 0;
 }
 
-#navbar {
+/* #navbar {
   font-family: "Poller One", Arial, sans-serif;
   background-color: rgb(20, 20, 20);
   color: white;
@@ -14,9 +14,9 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-}
+} */
 
-#username {
+/* #username {
   align-content: baseline;
   position: absolute;
   right: 10px;
@@ -47,7 +47,7 @@ body {
 .linkBar:hover {
   color: yellow;
   text-decoration: none;
-}
+} */
 
 /* #navbar div {
   padding: 5px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getFollowersById, updateFollower } from "./API";
 import Button from 'react-bootstrap/Button';
 
-const FollowButton = ({ review, reviewUser, reviewWine, user }) => {
+const FollowButton = ({ review, reviewUser, user }) => {
 
   const [isFollowing, setIsFollowing] = useState(false);
   const [following, setFollowing] = useState(null);
