@@ -3,6 +3,7 @@ import { getReviewByUser, getUserById } from "./API";
 import { Link, useParams } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
 import UserIdReviewDetails from "./UserIdReviewDetails";
+import FollowButton from "./FollowButton";
 
 const ProfileUserId = ({ user }) => {
   const { id } = useParams();
@@ -47,7 +48,15 @@ fetchGetUserById();
   />
   <div className="ml-4">
 
-    <h2 className="profile-username">{userProfile.name}</h2>
+  <div className="d-flex align-items-center">
+  <h2 className="profile-username">{userProfile.name}</h2>
+  <div className="ml-3">
+    <FollowButton review={userReviews} reviewUser={userProfile} user={user} />
+  </div>
+</div>
+
+
+
     <h5 className="profile-username">I follow {userProfile.following_count} people</h5>
     <h5 className="profile-username">{userProfile.follower_count} people follow me!</h5>
   </div>
