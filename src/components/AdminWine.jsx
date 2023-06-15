@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getWineById, updateWine } from "./API";
+import { deleteItem, getFavorites, getSaved, getWineById, updateWine, getReviewsByWineId, getFavoritesByWine } from "./API";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton}) => {
   const [author, setAuthor] = useState("");
@@ -58,6 +60,51 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
       setFlavor("");
       setUpdatingTheWine(false);
       toast.success("Wine updated");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function showConfirmation(message) {
+    return new Promise((resolve, reject) => {
+      const confirmed = window.confirm(message);
+      if (confirmed) {
+        resolve(true);
+      } else {
+        return;
+      }
+    });
+  }
+
+  //must delete reviews, favorites and saved prior to delete
+  async  function handleDelete(type, id){
+    try {
+      const confirmDeletion = await showConfirmation(`Are you sure you want to delete wine ${updatingWine.name}`);
+      if (!confirmDeletion){
+        return;
+      }
+      const reviews= await getReviewsByWineId(id);
+      await Promise.all(reviews.map((review) => deleteItem("reviews", review.id)));
+
+      const favorites= await getFavoritesByWine(id)
+      console.log(favorites, "any favorites?")
+      if(favorites.length){
+      await Promise.all(favorites.map((favorite)=>{
+        deleteItem("favorites", favorite.id)
+      }))}
+
+      const saved= await getSaved(id)
+      if(saved.length){
+      await Promise.all(saved.map((save)=>{
+        deleteItem("saved", save.id)
+      }))}
+
+      const result = await deleteItem(type, id);
+      console.log(result);
+      setUpdatingTheWine(false)
+      toast.success(`${updatingWine.name} deleted`)
+
+
     } catch (error) {
       console.error(error);
     }
@@ -158,7 +205,15 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
             <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
+            <button
+        type="button"
+        className="btn btn-danger ml-2"
+        onClick={() => handleDelete('wines', updatingWine.id)}
+      >
+        Delete
+      </button>
           </form>
+          <ToastContainer />
         </>
       ) : null}
 
@@ -183,6 +238,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
         </>
       ) : null}
       </>):null}
+      <ToastContainer />
     </>
   );
 };

@@ -183,10 +183,6 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
   }
 
 
-
-
-
-
   async function handleDelete(type, id) {
     try {
       if (user.username !== updatingUser.username) {
@@ -229,7 +225,7 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
           deleteItem("followers/user", follow.id)
 
         }))
-      }console.log("followers success")
+      }
 
       const followings= await getFollowingById(id)
       console.log(followings, "following")
@@ -237,13 +233,13 @@ const AdminUser = ({user, userButton, updateTheUser, setUpdateTheUser }) => {
         await Promise.all(followings.map((follow)=>{
           deleteItem("followers/follower", follow.id)
         }))
-      }console.log("following success")
+      }
 
       // Make API call to delete the user
       const result = await deleteItem(type, id);
       console.log(result);
       setUpdateTheUser(false);
-      toast.success(result.username, " deleted");}
+      toast.success(`${updatingUser.username} deleted`);}
       else{
         toast.error(`${user.username} you cannot delete yourself.`);
       }

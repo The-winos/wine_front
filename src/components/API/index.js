@@ -493,6 +493,23 @@ export async function getFavorites(userId) {
     };
     const response = await fetch(`${BASE_URL}/favorites/${userId}`, options);
     const result = await response.json();
+    console.log(result, "favorite result")
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getFavoritesByWine(wineId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/favorites/wine/${wineId}`, options);
+    const result = await response.json();
+    console.log(result, "favorite result")
     return result;
   } catch (error) {
     console.error(error);
