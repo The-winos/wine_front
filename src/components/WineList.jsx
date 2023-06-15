@@ -153,7 +153,7 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites 
 
       <div id="wines" className="wine">
       <div className="container">
-  <div className="row">
+  <div className="row ">
     {filteredWines && filteredWines.length ? (
       filteredWines.map((wine) => (
         <div className="col-md-4" key={`allWines-${wine.id}`}>
