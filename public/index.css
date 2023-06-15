@@ -5,6 +5,17 @@ body {
   margin: 0;
 }
 
+.custom-navbar {
+  background-color: #f6c28f;
+}
+
+.nav-link-spaced {
+  padding-left: 20px !important;
+}
+
+
+
+
 /* #navbar {
   font-family: "Poller One", Arial, sans-serif;
   background-color: rgb(20, 20, 20);
