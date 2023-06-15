@@ -51,7 +51,6 @@ fetchGetUserById();
   <div className="d-flex align-items-center">
   <h2 className="profile-username">{userProfile.name}</h2>
   <div className="ml-3">
-    <FollowButton review={userReviews} reviewUser={userProfile} user={user} />
   </div>
 </div>
 

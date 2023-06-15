@@ -3,76 +3,32 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
+  background-color: #f6dec5 !important;
 }
 
 .custom-navbar {
   background-color: #f6c28f;
+  color: #2a0e01;
 }
 
 .nav-link-spaced {
   padding-left: 20px !important;
 }
 
-
-
-
-/* #navbar {
-  font-family: "Poller One", Arial, sans-serif;
-  background-color: rgb(20, 20, 20);
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f6c28f;
+  padding: 20px 0;
   color: white;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-} */
-
-/* #username {
-  align-content: baseline;
-  position: absolute;
-  right: 10px;
-  font-size: 1.5rem;
+  text-align: center;
+  color: #2a0e01;
 }
 
-.links {
-  display: flex;
-  justify-content: flex-end;
-  max-height: 100%;
-  padding: 3px;
-  color: white;
-  font-weight: bold;
-  font-size: larger;
-  flex-direction: row;
-  align-items: center;
-  text-decoration: none;
-}
 
-.linkBar {
-  position: relative;
-  top: 30px;
-  padding: 20px;
-  text-decoration: none;
-  margin: 15px;
-  color: white;
-}
-.linkBar:hover {
-  color: yellow;
-  text-decoration: none;
-} */
-
-/* #navbar div {
-  padding: 5px;
-} */
-
-#footer {
-  display: flex;
-  min-height: 20px;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: white;
-  padding: 2px;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
+.content {
+  margin-bottom: 120px !important; /* Adjust the margin value as needed */
 }
 
 /* wine details */
@@ -122,6 +78,9 @@ button {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 48;
 }
+.wine{
+  padding-bottom: 3rem;
+  }
 
 /* wine list */
 
@@ -131,7 +90,16 @@ button {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.review{
+padding-bottom: 5rem;
+}
 /* winefeed */
+
+/* following feed */
+.friendFeed {
+  padding-bottom: 4rem;
+}
+/* following feed */
 
 /* singleWine */
 #single-wine {
@@ -199,6 +167,21 @@ button {
 }
 
 /* follow button */
+/* HOME START*/
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-image {
+  transform: rotate(-5deg);
+  width: 15px;
+  height: auto;
+  margin: 0 10px;
+}
+/* HOME END*/
+
 
 /* Profile  */
 

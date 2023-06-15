@@ -579,24 +579,3 @@ export async function deleteItem(routeType, itemId) {
     console.error(error);
   }
 }
-
-export async function deleteFollow(routeType, itemId) {
-
-  try {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-
-    const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
-    console.log(response, "response")
-
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-}

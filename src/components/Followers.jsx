@@ -103,7 +103,7 @@ const Followers = ({ user }) => {
   }, [searchType]);
 
   return (
-    <div id="friendFeed">
+    <div id="friendFeed" className="friendFeed">
       <h2 className="tastingRoom">Welcome to Happy Hour with friends!</h2>
       <h3 className="tastingRoom">
         See all your friends favorite-or not so favorite- wines!
