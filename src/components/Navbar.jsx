@@ -4,28 +4,29 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 
+
 const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
   const navigate = useNavigate();
   const [admin, setAdmin] = useState(false);
 
   return (
-    <Navbar bg="light" expand="lg" sticky="top">
+    <Navbar className="custom-navbar" expand="lg" sticky="top">
       <Container fluid>
-        <Nav className="mr-auto" style={{ width: "70%" }}>
-          <NavLink className="nav-link flex-grow-1" to="/">
+        <Nav className="mr-auto">
+          <NavLink className="nav-link" to="/">
             Home
           </NavLink>
-          <NavLink className="nav-link flex-grow-1" to="/winefeed">
+          <NavLink className="nav-link" to="/winefeed">
             The Tasting Room
           </NavLink>
-          <NavLink className="nav-link flex-grow-1" to="/followers">
+          <NavLink className="nav-link" to="/followers">
             Happy Hour
           </NavLink>
-          <NavLink className="nav-link flex-grow-1" to="/winelist">
+          <NavLink className="nav-link" to="/winelist">
             Wine List
           </NavLink>
           {loggedIn && (user.role === "merchant" || user.role === "admin") && (
-            <NavLink className="nav-link flex-grow-1" to="/admin">
+            <NavLink className="nav-link" to="/admin">
               Admin
             </NavLink>
           )}
