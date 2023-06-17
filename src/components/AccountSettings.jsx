@@ -6,11 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import TextareaAutosize from "react-textarea-autosize";
 // import "react-textarea-autosize/dist/react-textarea-autosize.css";
 
-import { updateUser } from "./API";
+import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
+  const [username, setUsername] = useState("");
   const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
@@ -69,7 +70,7 @@ const AccountSettings = ({ user }) => {
     if (
       username === updatingUser.username &&
       name === updatingUser.name &&
-      states === updatingUser.state &&
+      state === updatingUser.state &&
       avatar === updatingUser.avatar &&
       email === updatingUser.email &&
       birthday === updatingUser.birthday &&
@@ -95,7 +96,7 @@ const AccountSettings = ({ user }) => {
       // Password update logic
       if (password != "") {
         try {
-          const hashedPassword = await updateAdminUserPassword(
+          const hashedPassword = await updateUserPassword(
             updatingUser.id,
             password
           );
@@ -110,8 +111,8 @@ const AccountSettings = ({ user }) => {
             email,
             bio,
             birthday,
-            user.follower_count,
-            user.following_count
+            updatingUser.follower_count,
+            updatingUser.following_count
           );
         } catch (error) {
           console.error(error);
@@ -128,8 +129,8 @@ const AccountSettings = ({ user }) => {
           email,
           bio,
           birthday,
-          user.follower_count,
-          user.following_count
+          updatingUser.follower_count,
+          updatingUser.following_count
         );
         setUsername("");
         setPassword("");
@@ -147,6 +148,17 @@ const AccountSettings = ({ user }) => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  function showConfirmation(message) {
+    return new Promise((resolve, reject) => {
+      const confirmed = window.confirm(message);
+      if (confirmed) {
+        resolve(true);
+      } else {
+        return;
+      }
+    });
   }
 
   return (
