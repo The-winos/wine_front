@@ -85,7 +85,7 @@ const AccountSettings = ({ user }) => {
         ...updatingUser,
         username: username !== "" ? username : updatingUser.username,
         name: name !== "" ? name : updatingUser.name,
-        states: states !== "" ? states : updatingUser.state,
+        state: state !== "" ? states : updatingUser.state,
         role: role !== "" ? role : updatingUser.role,
         email: email !== "" ? email : updatingUser.email,
         bio: bio !== "" ? bio : updatingUser.bio || null,
@@ -161,8 +161,29 @@ const AccountSettings = ({ user }) => {
     });
   }
 
+  // Function to show a dialog with multiple options
+  function showReviewAction(message, options) {
+    return new Promise((resolve) => {
+      const optionIndexes = options.map((option, index) => index + 1);
+      const selectedOption = parseInt(
+        window.prompt(
+          `${message}\n\n${options
+            .map((option, index) => `${index + 1}. ${option.label}`)
+            .join("\n")}`
+        )
+      );
+
+      if (optionIndexes.includes(selectedOption)) {
+        resolve(options[selectedOption - 1].value);
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
   return (
     <div className="container">
+      {" "}
       <div>
         <img
           src={`/images/${user.avatar}`}
@@ -176,9 +197,9 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-      <form onSubmit={handleSubmit} className="accountSettings-form">
+      <>
         {update ? (
-          <>
+          <form onSubmit={handleSubmit} className="accountSettings-form">
             <h3>{user.name}</h3>
             <h6>Update Name</h6>
             <input
@@ -260,15 +281,17 @@ const AccountSettings = ({ user }) => {
             <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
-          </>
+          </form>
         ) : null}
-      </form>
-      <Link to={"/profile"}>
-        <div className="mt-3"></div>
-        <button id="admin-cancel-edit" onClick={() => {}}>
-          Back to Profile
-        </button>
-      </Link>
+        <>
+          <Link to={"/profile"}>
+            <div className="mt-3"></div>
+            <button id="admin-cancel-edit" onClick={() => {}}>
+              Back to Profile
+            </button>
+          </Link>
+        </>
+      </>
     </div>
   );
 };
