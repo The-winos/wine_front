@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { getUserById, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import TextareaAutosize from "react-textarea-autosize";
-// import "react-textarea-autosize/dist/react-textarea-autosize.css";
 
 import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
+  const [updateTheUser, setUpdateTheUser] = useState(false);
+  const [updatingUser, setUpdatingUser] = useState({});
   const [username, setUsername] = useState("");
   const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state);
@@ -23,7 +23,7 @@ const AccountSettings = ({ user }) => {
   const [password, setPassword] = useState(user.password);
   const [newPassword, setNewPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [update, setUpdate] = useState(true);
+  // const [update, setUpdate] = useState(true);
   const [formattedBirthday, setFormattedBirthday] = useState("");
 
   async function handleUserClick(userId) {
@@ -85,8 +85,8 @@ const AccountSettings = ({ user }) => {
         ...updatingUser,
         username: username !== "" ? username : updatingUser.username,
         name: name !== "" ? name : updatingUser.name,
-        state: state !== "" ? states : updatingUser.state,
-        role: role !== "" ? role : updatingUser.role,
+        state: state !== "" ? state : updatingUser.state,
+        // role: role !== "" ? role : updatingUser.role,
         email: email !== "" ? email : updatingUser.email,
         bio: bio !== "" ? bio : updatingUser.bio || null,
         birthday:
@@ -105,9 +105,9 @@ const AccountSettings = ({ user }) => {
             username,
             hashedPassword,
             name,
-            states,
+            state,
             avatar,
-            role,
+            // role,
             email,
             bio,
             birthday,
@@ -123,7 +123,7 @@ const AccountSettings = ({ user }) => {
           username,
           password,
           name,
-          states,
+          state,
           avatar,
           role,
           email,
@@ -150,36 +150,36 @@ const AccountSettings = ({ user }) => {
     }
   }
 
-  function showConfirmation(message) {
-    return new Promise((resolve, reject) => {
-      const confirmed = window.confirm(message);
-      if (confirmed) {
-        resolve(true);
-      } else {
-        return;
-      }
-    });
-  }
+  // function showConfirmation(message) {
+  //   return new Promise((resolve, reject) => {
+  //     const confirmed = window.confirm(message);
+  //     if (confirmed) {
+  //       resolve(true);
+  //     } else {
+  //       return;
+  //     }
+  //   });
+  // }
 
   // Function to show a dialog with multiple options
-  function showReviewAction(message, options) {
-    return new Promise((resolve) => {
-      const optionIndexes = options.map((option, index) => index + 1);
-      const selectedOption = parseInt(
-        window.prompt(
-          `${message}\n\n${options
-            .map((option, index) => `${index + 1}. ${option.label}`)
-            .join("\n")}`
-        )
-      );
+  // function showReviewAction(message, options) {
+  //   return new Promise((resolve) => {
+  //     const optionIndexes = options.map((option, index) => index + 1);
+  //     const selectedOption = parseInt(
+  //       window.prompt(
+  //         `${message}\n\n${options
+  //           .map((option, index) => `${index + 1}. ${option.label}`)
+  //           .join("\n")}`
+  //       )
+  //     );
 
-      if (optionIndexes.includes(selectedOption)) {
-        resolve(options[selectedOption - 1].value);
-      } else {
-        resolve(null);
-      }
-    });
-  }
+  //     if (optionIndexes.includes(selectedOption)) {
+  //       resolve(options[selectedOption - 1].value);
+  //     } else {
+  //       resolve(null);
+  //     }
+  //   });
+  // }
 
   return (
     <div className="container">
@@ -198,7 +198,7 @@ const AccountSettings = ({ user }) => {
         />
       </div>
       <>
-        {update ? (
+        {updateTheUser ? (
           <form onSubmit={handleSubmit} className="accountSettings-form">
             <h3>{user.name}</h3>
             <h6>Update Name</h6>
@@ -236,7 +236,7 @@ const AccountSettings = ({ user }) => {
                     <button
                       type="button"
                       className="btn btn-outline-secondary"
-                      onClick={() => setPasswordVisible(!passwordVisible)}
+                      onClick={() => handleUserClick(user.id)}
                     >
                       <i
                         className={`fa ${
@@ -264,11 +264,9 @@ const AccountSettings = ({ user }) => {
               <div className="col-lg-6">
                 <div className="mt-3"></div>
                 <h6 className="row justify-content-center">My Bio:</h6>
-                <TextareaAutosize
+                <textarea
                   placeholder="bio"
                   className="form-control border-0 p-0 form-control-lg textarea-bio"
-                  minRows={3}
-                  maxRows={50}
                   style={{ width: "100%" }}
                   onChange={(event) => {
                     setBio(event.target.value);
