@@ -93,7 +93,7 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
       email === updatingUser.email &&
       birthday === updatingUser.birthday &&
       bio === updatingUser.bio &&
-      password===""
+      password === ""
     ) {
       return;
     }
@@ -395,46 +395,38 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
                 </select>
               </div>
             </div>
-            <>
-
-            </>
+            <></>
             <div className="container-fluid">
-              <h6 id="text-fields">New Password:</h6>
-              <div className="row mb-3">
-                <div className="col-sm-1">
-                  <span className="input-group-text">
-                    <i className="fa fa-lock"></i>
-                  </span>
-                </div>
-                <div className="col-md-5">
-  <input
-    type={passwordVisible ? "text" : "password"}
-    className={`form-control password ${password ? 'has-value' : ''}`}
-    value={password}
-    onChange={(event) => setPassword(event.target.value)}
-  />
-  <label htmlFor="password" className={`placeholder-label ${password ? 'hide' : ''}`}>
-    Update Password
-  </label>
+  <h6 id="text-fields">New Password:</h6>
+  <div className="row mb-3">
+    <div className="col-sm-1">
+      <span className="input-group-text">
+        <i className="fa fa-lock"></i>
+      </span>
+    </div>
+    <div className="col-md-4">
+      <input
+        type="password"
+        className="password form-control"
+        placeholder="Enter New Password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+    </div>
+    <div className="col-sm-1">
+      <button
+        type="button"
+        className="btn btn-outline-secondary col-md-12"
+        onClick={() => setPasswordVisible(!passwordVisible)}
+      >
+        <i
+          className={`fa ${passwordVisible ? "fa-eye-slash" : "fa-eye"}`}
+        ></i>
+      </button>
+    </div>
+  </div>
 </div>
 
-
-
-                <div className="col-md-1">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary col-md-12"
-                    onClick={() => setPasswordVisible(!passwordVisible)}
-                  >
-                    <i
-                      className={`fa ${
-                        passwordVisible ? "fa-eye-slash" : "fa-eye"
-                      }`}
-                    ></i>
-                  </button>
-                </div>
-              </div>
-            </div>
 
             <div className="col-md-6 p-3">
               <h6>User's Bio:</h6>

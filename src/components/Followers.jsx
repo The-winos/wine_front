@@ -104,10 +104,12 @@ const Followers = ({ user }) => {
 
   return (
     <div id="friendFeed" className="friendFeed">
-      <h2 className="tastingRoom">Welcome to Happy Hour with friends!</h2>
-      <h3 className="tastingRoom">
+      <div id="all-wine-title">
+      <h2>Welcome to Happy Hour with friends!</h2>
+      <h5>
         See all your friends favorite-or not so favorite- wines!
-      </h3>
+      </h5>
+      </div>
       <div className="d-flex justify-content-center p-2">
         {searchOpen ? (
           <>

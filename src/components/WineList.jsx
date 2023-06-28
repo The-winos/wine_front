@@ -54,7 +54,10 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites 
 
   return (
     <div id="wineFeed">
-      <h2 id="all-wine-title">Find new Wines!</h2>
+      <div id="all-wine-title">
+      <h2 >Wines</h2>
+      <h5>All the wines reviewed by our amazing wine sippers!</h5>
+      </div>
       {searchOpen ? (
         <div className="search-bars-container">
           <div className="search-box p-3">
