@@ -186,7 +186,10 @@ export async function getFollowersById(userId) {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/followers/user/${userId}`, options);
+    const response = await fetch(
+      `${BASE_URL}/followers/user/${userId}`,
+      options
+    );
     const result = await response.json();
     return result;
   } catch (error) {
@@ -200,7 +203,10 @@ export async function getFollowingById(followId) {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/followers/follower/${followId}`, options);
+    const response = await fetch(
+      `${BASE_URL}/followers/follower/${followId}`,
+      options
+    );
     const result = await response.json();
     return result;
   } catch (error) {
@@ -339,7 +345,8 @@ export async function checkExistingWine(wineName) {
 
 export async function updateUser(
   username,
-  password,
+  oldPassword,
+  newPassword,
   name,
   state,
   avatar,
@@ -353,7 +360,8 @@ export async function updateUser(
   try {
     const body = {
       username,
-      password,
+      oldPassword,
+      newPassword,
       name,
       state,
       avatar,
@@ -382,7 +390,7 @@ export async function updateUser(
 
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
-    console.log(result, "what's happening");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -405,9 +413,8 @@ export async function updateWine(
       image_url,
       price,
       region,
-      flavor
+      flavor,
     };
-
 
     const options = {
       method: "PATCH",
@@ -493,7 +500,7 @@ export async function getFavorites(userId) {
     };
     const response = await fetch(`${BASE_URL}/favorites/${userId}`, options);
     const result = await response.json();
-    console.log(result, "favorite result")
+    console.log(result, "favorite result");
     return result;
   } catch (error) {
     console.error(error);
@@ -507,9 +514,12 @@ export async function getFavoritesByWine(wineId) {
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(`${BASE_URL}/favorites/wine/${wineId}`, options);
+    const response = await fetch(
+      `${BASE_URL}/favorites/wine/${wineId}`,
+      options
+    );
     const result = await response.json();
-    console.log(result, "favorite result")
+    console.log(result, "favorite result");
     return result;
   } catch (error) {
     console.error(error);
@@ -577,7 +587,7 @@ export async function removeFavorite(favoriteId) {
 }
 
 export async function deleteItem(routeType, itemId) {
-  console.log(routeType, "RouteType")
+  console.log(routeType, "RouteType");
   try {
     const options = {
       method: "DELETE",
@@ -590,7 +600,7 @@ export async function deleteItem(routeType, itemId) {
     const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
 
     const result = await response.json();
-    console.log(result, "deleteItem")
+    console.log(result, "deleteItem");
     return result;
   } catch (error) {
     console.error(error);
