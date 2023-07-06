@@ -10,7 +10,7 @@ import {
   handleSearch,
 } from "./SearchBar";
 
-const Followers = ({ user }) => {
+const Followers = ({ user, favorites }) => {
   const [reviewFollowers, setReviewFollowers] = useState([]);
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -247,7 +247,7 @@ const Followers = ({ user }) => {
             .map((reviews) => {
               return (
                 <div key={`followerReview-${reviews.id}`}>
-                  <FriendReview reviews={reviews} user={user} />
+                  <FriendReview reviews={reviews} user={user} favorites={favorites} />
                 </div>
               );
             })

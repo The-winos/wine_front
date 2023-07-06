@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserById, getWineById } from "./API";
+import { getUserById, getWineById, addFavorite, removeFavorite } from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
 
 
 
-const FriendReview = ({reviews, user}) => {
+const FriendReview = ({reviews, user, favorites}) => {
   const navigate=useNavigate();
   const [reviewFriend, setReviewFriend]= useState({})
   const [wineFriend, setWineFriend]= useState({})
@@ -34,23 +34,73 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
   minimumFractionDigits: 2,
 });
 
-  return (
+function checkOnFaves(wineID) {
+  for (let i = 0; i < favorites.length; i++) {
+    if (favorites[i].wine_id === wineID) {
+      return true;
+    }
+  }
+}
 
-    <div className="card mb-3" style={{maxWidth:"60%", margin:"0 auto "}}>
+function handleRemoveFavorite(wineID) {
+
+  let favoriteId;
+  for (let i = 0; i < favorites.length; i++) {
+    if (favorites[i].wine_id === wineID) {
+      favoriteId = favorites[i].id;
+      break;
+    }
+  }
+  removeFavorite(favoriteId);
+  navigate(`/favorites`);
+}
+
+return (
+  <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
     <div className="row no-gutter">
-      <div className="col-md-3 d-flex align-items-center justify-content-center" style={{ border: "none" }}>
+      <div className="col-md-3" style={{ border: "none", position: "relative" }}>
         <img
-        src={`/images/${wineFriend.image_url}`}
-        alt="wine image"
-        className="img-fluid"
-        style={{maxHeight:"250px", maxWidth: "90%"}}
+          src={`/images/${wineFriend.image_url}`}
+          alt="wine image"
+          className="img-fluid"
+          style={{ maxHeight: "250px", maxWidth: "90%" }}
         />
-        <img
-      src={`/images/${reviewFriend.avatar}`}
-      alt="user picture"
-      className="img-fluid"
-      style={{maxHeight:"50px", maxWidth:"50px", position: "absolute", top: 0, right: 0}}
-      />
+        {checkOnFaves(wineFriend.id) ? (
+          <button
+            onClick={() => {
+              handleRemoveFavorite(wineFriend.id);
+            }}
+            className="bg-transparent"
+            style={{
+              position: "absolute",
+              border: "none",
+              top: "1em",
+              right: "1em",
+              zIndex: "1",
+            }}
+          >
+            <span className="material-symbols-outlined">heart_check</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              addFavorite(user.id, wineFriend.id);
+              navigate(`/favorites`);
+            }}
+            className="bg-transparent"
+            style={{
+              position: "absolute",
+              border: "none",
+              top: "1em",
+              right: "1em",
+              zIndex: "1",
+            }}
+          >
+            <span className="material-symbols-outlined">favorite</span>
+          </button>
+        )}
+
+
       </div>
      <div className="col-md-9">
       <div className="card-body">
@@ -62,6 +112,12 @@ const formattedPrice = (reviews.price / 100).toLocaleString("en-US", {
         <h4 className="review-title">{reviews.name}</h4>
         <small className="text-muted">By: {user.id!=reviewFriend.id ?
            <a href={`/profileuserid/${reviewFriend.id}`}>{reviewFriend.username}</a>  :  <a href={`/profile`}>{reviewFriend.username}</a> }</small>
+           <img
+          src={`/images/${reviewFriend.avatar}`}
+          alt="user picture"
+          className="img-fluid"
+          style={{ maxHeight: "50px", maxWidth: "50px", position: "absolute", top: 0, right: 0 }}
+        />
 
         <Rating
                   value={reviews.rating}

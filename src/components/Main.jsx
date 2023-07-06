@@ -80,7 +80,7 @@ const Main = () => {
           }
         ></Route>
         <Route path="/admin" element={<Admin user={user}/>}></Route>
-        <Route path="/followers" element={<Followers user={user} />}></Route>
+        <Route path="/followers" element={<Followers user={user} favorites={favorites}/>}></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route
