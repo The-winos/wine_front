@@ -19,24 +19,25 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" activeClassName="active" exact to="/">
               Home
             </NavLink>
-            <NavLink className="nav-link" to="/winefeed">
-              The Tasting Room
-            </NavLink>
-            <NavLink className="nav-link" to="/followers">
-              Happy Hour
-            </NavLink>
-            <NavLink className="nav-link" to="/winelist">
-              Wine List
-            </NavLink>
-            <NavLink className="nav-link" to="/profile">
+            <NavLink className="nav-link" activeClassName="active" to="/profile">
               My Account
             </NavLink>
+            <NavLink className="nav-link" activeClassName="active" to="/winefeed">
+              The Tasting Room
+            </NavLink>
+            <NavLink className="nav-link" activeClassName="active" to="/followers">
+              Happy Hour
+            </NavLink>
+            <NavLink className="nav-link" activeClassName="active" to="/winelist">
+              Wine List
+            </NavLink>
+
             {loggedIn &&
               (user.role === "merchant" || user.role === "admin") && (
-                <NavLink className="nav-link" to="/admin">
+                <NavLink className="nav-link" activeClassName="active" to="/admin">
                   Admin
                 </NavLink>
               )}
@@ -61,7 +62,7 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
             </div>
           )}
           {!loggedIn && (
-            <NavLink className="nav-link" to="/login">
+            <NavLink className="nav-link" activeClassName="active" to="/login">
               Login
             </NavLink>
           )}

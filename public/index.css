@@ -11,6 +11,10 @@ body {
   color: #2a0e01;
 }
 
+.nav-link.active {
+  text-decoration: underline;
+}
+
 .nav-link-spaced {
   padding-left: 20px !important;
 }

@@ -154,6 +154,7 @@ const Main = () => {
               setAllReviews={setAllReviews}
               reviewInfo={reviewInfo}
               setReviewInfo={setReviewInfo}
+              favorites={favorites}
             />
           }
         ></Route>
