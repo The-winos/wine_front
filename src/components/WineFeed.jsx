@@ -15,6 +15,7 @@ const WineFeed = ({
   allReviews,
   setReviewInfo,
   reviewInfo,
+  favorites
 }) => {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -99,8 +100,10 @@ const WineFeed = ({
 
   return (
     <div id="wineFeed">
-      <h2 className="tastingRoom">Welcome to the Tasting Room</h2>
-      <h3 className="tastingRoom">See all the wines people have reviewed</h3>
+      <div id="all-wine-title">
+      <h2>Welcome to the Tasting Room</h2>
+      <h5>See all the wines people have reviewed</h5>
+      </div>
 
       <div className="d-flex justify-content-center p-2">
         {searchOpen ? (
@@ -236,6 +239,7 @@ const WineFeed = ({
                       user={user}
                       review={review}
                       setReviewInfo={setReviewInfo}
+                      favorites={favorites}
                     />
                   </div>
                 );

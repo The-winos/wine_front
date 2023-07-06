@@ -217,27 +217,31 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
         </>
       ) : null}
 
-      {allWine && allWine.length ? (
-        <>
-          {/* put key here if you want one */}
-          {wineButton ?(<>
-          {allWine
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((wine) => {
-              return (
-                <div key={`winelist-${wine.id}`}>
-                  <h5
-                    style={{ cursor: "pointer" }}
-                    onClick={() => handleWineClick(wine.id)}
-                  >
-                    {wine.name}
-                  </h5>
-                </div>
-              );
-            })}
-        </>
-      ) : null}
-      </>):null}
+{allWine && allWine.length ? (
+  <div className="wine-list-container">
+
+    {wineButton ? (
+      <>
+        {allWine
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((wine) => {
+            return (
+              <div key={`winelist-${wine.id}`}>
+                <h5
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleWineClick(wine.id)}
+                >
+                  {wine.name}
+                </h5>
+              </div>
+            );
+          })}
+      </>
+    ) : null}
+  </div>
+) : null}
+
+
       <ToastContainer />
     </>
   );

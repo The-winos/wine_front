@@ -11,6 +11,10 @@ body {
   color: #2a0e01;
 }
 
+.nav-link.active {
+  text-decoration: underline;
+}
+
 .nav-link-spaced {
   padding-left: 20px !important;
 }
@@ -256,6 +260,10 @@ padding-bottom: 5rem;
   width: 10px;
 }
 
+.profile-container{
+  padding-bottom: 4rem !important;
+}
+
 /* account settings */
 .container {
   display: flex;
@@ -275,4 +283,9 @@ padding-bottom: 5rem;
 
 .selected {
   border: 2px solid blue;
+}
+
+.wine-list-container{
+  padding-bottom: 4rem !important;
+
 }
