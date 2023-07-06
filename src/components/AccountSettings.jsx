@@ -19,32 +19,13 @@ const AccountSettings = ({ user }) => {
     user.birthday ? new Date(user.birthday) : null
   );
   const [bio, setBio] = useState(user.bio);
-  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
-  // const [update, setUpdate] = useState(true);
-  const [formattedBirthday, setFormattedBirthday] = useState("");
 
-  // async function handleUserClick(userId) {
-  //   setUpdateTheUser(true);
-  //   const userToUpdate = await getUserById(userId);
-  //   setUsername(userToUpdate.username);
-  //   setName(userToUpdate.name);
-  //   setBirthday(userToUpdate.birthday ? new Date(userToUpdate.birthday) : null);
-  //   setRole(userToUpdate.role);
-  //   setEmail(userToUpdate.email);
-  //   setState(userToUpdate.state);
-  //   if (userToUpdate.bio) {
-  //     setBio(userToUpdate.bio);
-  //   } else {
-  //     setBio("");
-  //   }
-  //   setAvatar(userToUpdate.avatar);
-  //   setUpdatingUser(userToUpdate);
-  // }
+  const [formattedBirthday, setFormattedBirthday] = useState("");
 
   useEffect(() => {
     const parseDate = (dateString) => {
@@ -125,7 +106,8 @@ const AccountSettings = ({ user }) => {
         const updateInfo = await updateUser(
           user.id,
           username,
-          password,
+          oldPassword,
+          newPassword,
           name,
           state,
           avatar,
@@ -137,7 +119,8 @@ const AccountSettings = ({ user }) => {
           user.following_count
         );
         setUsername("");
-        setPassword("");
+        setOldPassword("");
+        setNewPassword("");
         setName("");
         setState("");
         setAvatar("");
@@ -289,14 +272,29 @@ const AccountSettings = ({ user }) => {
             <div className="col-md-6">
               <div className="form-group">
                 <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="confirmPassword"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(event) => setConfirmPassword(event.target.value)}
-                />
+                <div className="input-group">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(event) => setConfirmPassword(event.target.value)}
+                  />
+                  <div className="input-group-append">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => setNewPasswordVisible(!newPasswordVisible)}
+                    >
+                      {newPasswordVisible ? (
+                        <i className="fa fa-eye-slash"></i>
+                      ) : (
+                        <i className="fa fa-eye"></i>
+                      )}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
