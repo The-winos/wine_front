@@ -86,8 +86,6 @@ fetchGetUserById();
           ) : (
             <button
               onClick={() => {
-                console.log(user.id, "userId")
-                console.log(reviewWine.id, "wineId")
                 addFavorite(user.id, reviewWine.id);
               }}
               className="bg-transparent"
