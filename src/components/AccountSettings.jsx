@@ -1,10 +1,10 @@
-import React, { getUserById, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { updateUser, updateUserPassword } from "./API";
+import { updateUser, updateUserPassword, getUserById } from "./API";
 
 import OptionsStates from "./OptionsStates";
 
@@ -48,6 +48,7 @@ const AccountSettings = ({ user }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const userToUpdate = await getUserById(user.Id);
 
     if (
       username === user.username &&
@@ -137,6 +138,7 @@ const AccountSettings = ({ user }) => {
     } catch (error) {
       console.error(error);
     }
+    setUpdatingUser(userToUpdate);
   }
 
   return (
@@ -307,7 +309,7 @@ const AccountSettings = ({ user }) => {
         <>
           <Link to={"/profile"}>
             <div className="mt-3"></div>
-            <button id="admin-cancel-edit" onClick={() => {}}>
+            <button id="admin-cancel-edit" onClick={(handleSubmit) => {}}>
               Back to Profile
             </button>
           </Link>
