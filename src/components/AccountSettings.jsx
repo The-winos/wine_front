@@ -48,7 +48,7 @@ const AccountSettings = ({ user }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const userToUpdate = await getUserById(user.Id);
+    // const userToUpdate = await getUserById(user.Id);
 
     if (
       username === user.username &&
@@ -58,7 +58,6 @@ const AccountSettings = ({ user }) => {
       email === user.email &&
       birthday === user.birthday &&
       bio === user.bio &&
-      oldPassword === "" &&
       newPassword === ""
     ) {
       return;
@@ -138,7 +137,7 @@ const AccountSettings = ({ user }) => {
     } catch (error) {
       console.error(error);
     }
-    setUpdatingUser(userToUpdate);
+    setUpdatingUser(updateInfo);
   }
 
   return (
@@ -309,7 +308,7 @@ const AccountSettings = ({ user }) => {
         <>
           <Link to={"/profile"}>
             <div className="mt-3"></div>
-            <button id="admin-cancel-edit" onClick={(handleSubmit) => {}}>
+            <button id="admin-cancel-edit" onClick={handleSubmit}>
               Back to Profile
             </button>
           </Link>
