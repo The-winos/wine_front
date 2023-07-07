@@ -24,7 +24,6 @@ const AccountSettings = ({ user }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
-
   const [formattedBirthday, setFormattedBirthday] = useState("");
 
   useEffect(() => {
@@ -58,7 +57,8 @@ const AccountSettings = ({ user }) => {
       email === user.email &&
       birthday === user.birthday &&
       bio === user.bio &&
-      password === ""
+      oldPassword === "" &&
+      newPassword === ""
     ) {
       return;
     }
@@ -69,15 +69,18 @@ const AccountSettings = ({ user }) => {
         username: username !== "" ? username : updatingUser.username,
         name: name !== "" ? name : updatingUser.name,
         state: state !== "" ? state : updatingUser.state,
-        // role: role !== "" ? role : updatingUser.role,
         email: email !== "" ? email : updatingUser.email,
         bio: bio !== "" ? bio : updatingUser.bio || null,
         birthday:
           formattedBirthday !== "" ? formattedBirthday : updatingUser.birthday,
+        oldPassword:
+          oldPassword !== "" ? oldPassword : updatingUser.oldPassword,
+        newPassword:
+          newPassword !== "" ? newPassword : updatingUser.newPassword,
       });
 
       // Password update logic
-      if (password != "") {
+      if (oldPassword != "") {
         try {
           //revise updateUserPassword API to include forgetting password
           //user required to input old password for security verification
@@ -135,37 +138,6 @@ const AccountSettings = ({ user }) => {
       console.error(error);
     }
   }
-
-  // function showConfirmation(message) {
-  //   return new Promise((resolve, reject) => {
-  //     const confirmed = window.confirm(message);
-  //     if (confirmed) {
-  //       resolve(true);
-  //     } else {
-  //       return;
-  //     }
-  //   });
-  // }
-
-  // Function to show a dialog with multiple options
-  // function showReviewAction(message, options) {
-  //   return new Promise((resolve) => {
-  //     const optionIndexes = options.map((option, index) => index + 1);
-  //     const selectedOption = parseInt(
-  //       window.prompt(
-  //         `${message}\n\n${options
-  //           .map((option, index) => `${index + 1}. ${option.label}`)
-  //           .join("\n")}`
-  //       )
-  //     );
-
-  //     if (optionIndexes.includes(selectedOption)) {
-  //       resolve(options[selectedOption - 1].value);
-  //     } else {
-  //       resolve(null);
-  //     }
-  //   });
-  // }
 
   return (
     <div className="container">
