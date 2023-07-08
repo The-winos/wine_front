@@ -17,6 +17,7 @@ const AccountSettings = ({ user }) => {
   const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
+
   const [bio, setBio] = useState(user.bio);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
