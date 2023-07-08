@@ -56,7 +56,11 @@ const Profile = ({ user }) => {
                 </button>
               </Link>
               <Link to={"/favorites"}>
-                <button type="favorite" className="buttons">
+                <button
+                  // onClick={() => setUpdate(true)}
+                  type="favorite"
+                  className="buttons"
+                >
                   Favorites
                 </button>
               </Link>
