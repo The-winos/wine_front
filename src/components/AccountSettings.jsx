@@ -9,24 +9,19 @@ import { updateUser, updateUserPassword, getUserById } from "./API";
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
-  const [updatingUser, setUpdatingUser] = useState({});
   const [username, setUsername] = useState(user.username);
   const [name, setName] = useState(user.name);
   const [state, setState] = useState(user.state || "");
-
   const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState(user.email);
   const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
   const [bio, setBio] = useState(user.bio);
-  const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [newPasswordVisible, setNewPasswordVisible] = useState(false);
-  const [formattedBirthday, setFormattedBirthday] = useState("");
-  const [passwordVerification, setPasswordVerification] = useState("");
 
   useEffect(() => {
     const parseDate = (dateString) => {
@@ -37,43 +32,36 @@ const AccountSettings = ({ user }) => {
       date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
       return date;
     };
-    const parsedBirthday = parseDate(birthday);
-    const formattedDate = parsedBirthday
-      ? parsedBirthday.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        })
-      : "";
-    setFormattedBirthday(formattedDate);
-  }, [birthday]);
+    const parsedBirthday = parseDate(user.birthday);
+    setBirthday(parsedBirthday);
+  }, [user.birthday, setBirthday]);
+
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     try {
+  //       const initialUser = await getUserById(user.id);
+  //       setUsername(initialUser.username);
+  //       setName(initialUser.name);
+  //       setState(initialUser.state || "");
+  //       setAvatar(initialUser.avatar);
+  //       setEmail(initialUser.email);
+  //       setBirthday(
+  //         initialUser.birthday ? new Date(initialUser.birthday) : null
+  //       );
+  //       setBio(initialUser.bio);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+
+  //   fetchUser();
+  // }, [user.id]); // Add user.id as a dependency
 
   const handleLocationChange = (selectedState) => {
     setState(selectedState);
   };
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const initialUser = await getUserById(user.id);
-        setUsername(initialUser.username);
-        setName(initialUser.name);
-        setState(initialUser.state || "");
-        setAvatar(initialUser.avatar);
-        setEmail(initialUser.email);
-        setBirthday(
-          initialUser.birthday ? new Date(initialUser.birthday) : null
-        );
-        setBio(initialUser.bio);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchUser();
-  }, []);
-
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (
@@ -82,52 +70,31 @@ const AccountSettings = ({ user }) => {
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
-      formattedBirthday === user.birthday &&
+      birthday === user.birthday &&
       bio === user.bio &&
       newPassword === ""
     ) {
       return;
     }
 
-    if (oldPassword !== "" && passwordVerification !== oldPassword) {
+    if (oldPassword !== "" && oldPassword !== user.password) {
       toast.error("Old password verification failed");
       return;
     }
 
     try {
-      const updateInfo = await updateUser(user.id, {
+      const hashedOldPassword = await updateUserPassword(user.id, oldPassword);
+      await updateUser(user.id, {
         username: username || user.username,
         name: name || user.name,
         state: state || user.state,
+        avatar: avatar || user.avatar,
         email: email || user.email,
         bio: bio || null,
-        birthday: formattedBirthday || user.birthday,
-        oldPassword: oldPassword || updatingUser.oldPassword,
-        newPassword: newPassword || updatingUser.newPassword,
+        birthday: birthday || user.birthday,
+        oldPassword: hashedOldPassword,
+        newPassword: newPassword || null,
       });
-
-      // Password update logic
-      if (oldPassword !== "") {
-        try {
-          const hashedOldPassword = await updateUserPassword(
-            user.id,
-            oldPassword
-          );
-          const updateInfo = await updateUser(user.id, {
-            username: username || user.username,
-            name: name || user.name,
-            state: state || user.state,
-            avatar: avatar || user.avatar,
-            email: email || user.email,
-            bio: bio || null,
-            birthday: formattedBirthday || user.birthday,
-            oldPassword: hashedOldPassword,
-            newPassword: newPassword || updatingUser.newPassword,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      }
 
       setUsername("");
       setOldPassword("");
@@ -138,13 +105,13 @@ const AccountSettings = ({ user }) => {
       setEmail("");
       setBio("");
       setBirthday("");
-      setPasswordVerification("");
+      setConfirmPassword("");
       toast.success("User updated");
-      setUpdatingUser(updateInfo);
     } catch (error) {
       console.error(error);
+      toast.error("Error updating user. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -161,7 +128,7 @@ const AccountSettings = ({ user }) => {
           }}
         />
       </div>
-      {console.log("User Object:", user)}
+
       <form onSubmit={handleSubmit} className="accountSettings-form">
         <h3>{user.name}</h3>
         <h6>Update Name</h6>
@@ -183,6 +150,7 @@ const AccountSettings = ({ user }) => {
           dateFormat="MM/dd/yyyy"
           isClearable
         />
+
         <h6>Update Password:</h6>
         <div className="row">
           <div className="col-md-6">
@@ -217,49 +185,16 @@ const AccountSettings = ({ user }) => {
         <div className="row">
           <div className="col-md-6">
             <div className="form-group">
-              <label htmlFor="passwordVerification">Verify Old Password</label>
-              <div className="input-group">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  className="form-control"
-                  id="passwordVerification"
-                  placeholder="Verify Old Password"
-                  value={passwordVerification}
-                  onChange={(event) =>
-                    setPasswordVerification(event.target.value)
-                  }
-                />
-                <div className="input-group-append">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary"
-                    onClick={() => setPasswordVisible(!passwordVisible)}
-                  >
-                    {passwordVisible ? (
-                      <i className="fa fa-eye-slash"></i>
-                    ) : (
-                      <i className="fa fa-eye"></i>
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <div className="form-group">
               <label htmlFor="newPassword">New Password</label>
               <div className="input-group">
                 <input
-                  type={newPasswordVisible ? "text" : "password"}
+                  type={passwordVisible ? "text" : "password"}
                   className="form-control"
                   id="newPassword"
                   placeholder="New Password"
                   value={newPassword}
                   onChange={(event) => setNewPassword(event.target.value)}
                 />
-                {/* ... */}
               </div>
             </div>
           </div>
@@ -277,12 +212,10 @@ const AccountSettings = ({ user }) => {
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
                 />
-                {/* ... */}
               </div>
             </div>
           </div>
         </div>
-
         <h6>Location: {user.state}</h6>
         <h6>Update location:</h6>
         <select
