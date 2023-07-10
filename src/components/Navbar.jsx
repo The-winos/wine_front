@@ -19,7 +19,7 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <NavLink className="nav-link" activeClassName="active" exact to="/">
+            <NavLink className="nav-link" activeClassName="active" to="/">
               Home
             </NavLink>
             <NavLink className="nav-link" activeClassName="active" to="/profile">

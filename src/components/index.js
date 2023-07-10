@@ -27,4 +27,6 @@ export { default as FavoritesUserId } from "./FavoritesUserId";
 export { default as AdminUser} from "./AdminUser";
 export { default as OptionsStates} from "./OptionsStates";
 export { default as OptionAvatars} from "./OptionAvatars";
-export { default as AdminWine} from "./AdminWine"
+export { default as AdminWine} from "./AdminWine";
+export { default as FooterContact} from "./FooterContact";
+export { default as FooterAboutUs} from "./FooterAboutUs"
