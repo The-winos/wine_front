@@ -345,8 +345,7 @@ export async function checkExistingWine(wineName) {
 
 export async function updateUser(
   username,
-  oldPassword,
-  newPassword,
+  password,
   name,
   state,
   avatar,
@@ -360,8 +359,7 @@ export async function updateUser(
   try {
     const body = {
       username,
-      oldPassword,
-      newPassword,
+      password,
       name,
       state,
       avatar,
@@ -390,6 +388,7 @@ export async function updateUser(
 
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
+    console.log(result,  "result")
 
     return result;
   } catch (error) {

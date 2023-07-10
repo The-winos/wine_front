@@ -115,6 +115,7 @@ const AccountSettings = ({ user }) => {
   };
 
   return (
+    <div id="accountSettings">
     <div className="container">
       <div>
         <img
@@ -256,6 +257,7 @@ const AccountSettings = ({ user }) => {
           Back to Profile
         </button>
       </Link>
+    </div>
     </div>
   );
 };
