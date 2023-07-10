@@ -6,7 +6,7 @@ Deployment: Stay tuned
 
 To start the project locally:
 
-When first opening the project make sure to install the necessesary dependencies with the command "npm i" in the CLI. To view the site, in your CLI use the command "npm run start" and in your browser visit http://localhost:3000.
+When first opening the project make sure to install the necessesary dependencies with the command "npm i" in the CLI. To view the site, in your CLI use the command "npm run start-dev" and in your browser visit http://localhost:3000.
 
 Team Members:
 •Jessica Piesco
