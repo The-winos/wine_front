@@ -253,7 +253,7 @@ const AccountSettings = ({ user }) => {
       </form>
       <Link to={"/profile"}>
         <div className="mt-3"></div>
-        <button id="admin-cancel-edit" onClick={handleSubmit}>
+        <button id="admin-cancel-edit">
           Back to Profile
         </button>
       </Link>
