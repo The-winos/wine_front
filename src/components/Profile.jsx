@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
+import Rating from "react-rating-stars-component";
 
 const Profile = ({ user }) => {
   const [update, setUpdate] = useState(false);
@@ -55,6 +56,11 @@ const Profile = ({ user }) => {
                   Favorites
                 </button>
               </Link>
+              <Link to={"/favorites"}>
+                <button type="saved" className="buttons">
+                  Saved
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -83,6 +89,7 @@ const Profile = ({ user }) => {
                           user={user}
                           userReviews={userReview}
                           setUserReviews={setUserReviews}
+                          RatingComponent={Rating}
                         />
                       </div>
                     </div>
