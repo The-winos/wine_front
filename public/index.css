@@ -29,6 +29,10 @@ body {
   color: #2a0e01;
 }
 
+.aboutfooter{
+  padding-bottom: 5rem;
+}
+
 
 .content {
   margin-bottom: 120px !important; /* Adjust the margin value as needed */
@@ -264,11 +268,11 @@ padding-bottom: 5rem;
 }
 
 /* account settings */
-.container {
+/* .container {
   display: flex;
   justify-content: center;
 
-}
+} */
 #accountSettings{
   padding-bottom: 6rem !important;
 }

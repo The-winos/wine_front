@@ -9,7 +9,7 @@ const Footer = () => {
 
             <ul className="list-unstyled">
               <li>
-                <NavLink className="sub-helplinks" to="/aboutus">
+                <NavLink className="sub-helplinks" to="/footeraboutus">
                   About Us
                 </NavLink>
               </li>
