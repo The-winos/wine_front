@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getReviewByUser, getWineById } from "./API";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
+  const navigate = useNavigate();
   const { wineId } = useParams();
   const [userWineDetails, setUserWineDetails] = useState([]);
+  const [reviewWine, setReviewWine] = useState({});
 
   useEffect(() => {
     const fetchUserReviews = async () => {
