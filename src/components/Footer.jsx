@@ -25,7 +25,7 @@ const Footer = () => {
 
             <ul className="list-unstyled">
               <li>
-                <NavLink className="sub-helplinks" to="/privacypolicy">
+                <NavLink className="sub-helplinks" to="/privacy">
                   Privacy Policy
                 </NavLink>
               </li>

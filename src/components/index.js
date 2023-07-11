@@ -29,4 +29,5 @@ export { default as OptionsStates} from "./OptionsStates";
 export { default as OptionAvatars} from "./OptionAvatars";
 export { default as AdminWine} from "./AdminWine";
 export { default as FooterContact} from "./FooterContact";
-export { default as FooterAboutUs} from "./FooterAboutUs"
+export { default as FooterAboutUs} from "./FooterAboutUs";
+export { default as FooterPrivacy} from "./FooterPrivacy"
