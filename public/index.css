@@ -24,10 +24,14 @@ body {
   bottom: 0;
   width: 100%;
   background-color: #f6c28f;
-  padding: 20px 0;
+  padding: 5px 0;
   color: white;
-  text-align: center;
   color: #2a0e01;
+}
+
+
+.aboutfooter{
+  padding-bottom: 5rem;
 }
 
 .content {
@@ -299,11 +303,14 @@ button {
 }
 
 /* account settings */
-.container {
+/* .container {
   display: flex;
   justify-content: center;
-}
+
+} */
+
 #accountSettings {
+
   padding-bottom: 6rem !important;
 }
 

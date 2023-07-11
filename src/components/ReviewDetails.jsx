@@ -52,7 +52,6 @@ fetchGetUserById();
       }
     }
     removeFavorite(favoriteId);
-    navigate(`/favorites`);
   }
 
 
@@ -78,7 +77,7 @@ fetchGetUserById();
                 border: "none",
                 top: "1em",
                 right: "1em",
-                zIndex: "1",
+                zIndex: "0",
               }}
             >
               <span className="material-symbols-outlined">heart_check</span>
@@ -94,7 +93,7 @@ fetchGetUserById();
                 border: "none",
                 top: "1em",
                 right: "1em",
-                zIndex: "1",
+                zIndex: "0",
               }}
             >
               <span className="material-symbols-outlined">favorite</span>
