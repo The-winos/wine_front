@@ -1,13 +1,12 @@
-//show user badges, number of posts, follower and following count
-
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
+import Rating from "react-rating-stars-component";
 
 const Profile = ({ user }) => {
-  // const useNavigate = useNavigate();
+  const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
   const [userReviews, setUserReviews] = useState([]);
 
@@ -23,8 +22,6 @@ const Profile = ({ user }) => {
 
     fetchUserReviews();
   }, [user]);
-
-  //fetch API function that posts user object by id?
 
   return (
     <>
@@ -48,24 +45,27 @@ const Profile = ({ user }) => {
                 objectPosition: "center center",
               }}
             />
+            <h2 className="profile-username m-4">{user.name}</h2>
             <div>
-              {/* <EditAccount user={user} /> */}
               <Link to={"/accountsettings"}>
-                <button type="accountsettings" className="buttons">
+                <button
+                  type="accountsettings"
+                  className="btn btn-primary pb-2 mx-2"
+                >
                   Account Settings
                 </button>
               </Link>
               <Link to={"/favorites"}>
-                <button
-                  // onClick={() => setUpdate(true)}
-                  type="favorite"
-                  className="buttons"
-                >
+                <button type="favorite" className="btn btn-primary pb-2 mx-2">
                   Favorites
                 </button>
               </Link>
+              <Link to={"/favorites"}>
+                <button type="saved" className="btn btn-primary pb-2 mx-2">
+                  Saved
+                </button>
+              </Link>
             </div>
-            <h2 className="profile-username">{user.name}</h2>
           </div>
 
           <div>
@@ -79,16 +79,24 @@ const Profile = ({ user }) => {
               </>
             ) : null}
           </div>
-          <div>
+          <div className="row justify-content-center">
             {userReviews && userReviews.length ? (
-              userReviews.map((userReviews) => {
+              userReviews.map((userReview) => {
                 return (
-                  <div key={`userReview-${userReviews.id}`}>
-                    <UserReviewDetails
-                      user={user}
-                      userReviews={userReviews}
-                      setUserReviews={setUserReviews}
-                    />
+                  <div
+                    key={`userReview-${userReview.id}`}
+                    className="col-md-6 mb-4"
+                  >
+                    <div className="card">
+                      <div className="card-body">
+                        <UserReviewDetails
+                          user={user}
+                          userReviews={userReview}
+                          setUserReviews={setUserReviews}
+                          RatingComponent={Rating}
+                        />
+                      </div>
+                    </div>
                   </div>
                 );
               })

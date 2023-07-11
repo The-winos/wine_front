@@ -29,10 +29,10 @@ body {
   color: #2a0e01;
 }
 
+
 .aboutfooter{
   padding-bottom: 5rem;
 }
-
 
 .content {
   margin-bottom: 120px !important; /* Adjust the margin value as needed */
@@ -69,6 +69,42 @@ button {
   font-size: 0.8em;
 }
 
+/* profile */
+
+/* .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  background-color: #f8f9fa;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+.card {
+  border: none;
+}
+
+.buttons {
+  position: relative;
+  margin-top: 10px;
+}
+
+.card-text small {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  padding: 20px;
+}
+
+.profile-username {
+  text-align: center;
+} */
+
 /* wine details */
 
 /* wine list */
@@ -85,9 +121,9 @@ button {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 48;
 }
-.wine{
+.wine {
   padding-bottom: 3rem;
-  }
+}
 
 /* wine list */
 
@@ -97,8 +133,8 @@ button {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.review{
-padding-bottom: 5rem;
+.review {
+  padding-bottom: 5rem;
 }
 /* winefeed */
 
@@ -189,7 +225,6 @@ padding-bottom: 5rem;
 }
 /* HOME END*/
 
-
 /* Profile  */
 
 .buttons {
@@ -263,7 +298,7 @@ padding-bottom: 5rem;
   width: 10px;
 }
 
-.profile-container{
+.profile-container {
   padding-bottom: 4rem !important;
 }
 
@@ -273,7 +308,9 @@ padding-bottom: 5rem;
   justify-content: center;
 
 } */
-#accountSettings{
+
+#accountSettings {
+
   padding-bottom: 6rem !important;
 }
 
@@ -292,7 +329,6 @@ padding-bottom: 5rem;
   border: 2px solid blue;
 }
 
-.wine-list-container{
+.wine-list-container {
   padding-bottom: 4rem !important;
-
 }
