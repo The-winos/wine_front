@@ -47,17 +47,20 @@ const Profile = ({ user }) => {
             <h2 className="profile-username m-4">{user.name}</h2>
             <div>
               <Link to={"/accountsettings"}>
-                <button type="accountsettings" className="buttons">
+                <button
+                  type="accountsettings"
+                  className="btn btn-primary pb-2 mx-2"
+                >
                   Account Settings
                 </button>
               </Link>
               <Link to={"/favorites"}>
-                <button type="favorite" className="buttons">
+                <button type="favorite" className="btn btn-primary pb-2 mx-2">
                   Favorites
                 </button>
               </Link>
               <Link to={"/favorites"}>
-                <button type="saved" className="buttons">
+                <button type="saved" className="btn btn-primary pb-2 mx-2">
                   Saved
                 </button>
               </Link>

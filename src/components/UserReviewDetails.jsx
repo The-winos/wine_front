@@ -70,6 +70,14 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
           </>
         )}
       </div>
+      <button
+        onClick={() => {
+          navigate(`/singlewine/${reviewWine.id}`);
+        }}
+        className="btn btn-primary"
+      >
+        Edit Review
+      </button>
     </div>
   );
 };
