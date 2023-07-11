@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
 import { getReviewByUser } from "./API";
 import UserReviewDetails from "./UserReviewDetails";
 import Rating from "react-rating-stars-component";
 
 const Profile = ({ user }) => {
+  const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
   const [userReviews, setUserReviews] = useState([]);
 
