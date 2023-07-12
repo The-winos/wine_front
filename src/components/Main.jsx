@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { authUser } from "./API";
+import { authUser, getSaved } from "./API";
 import {
   Navbar,
   Home,
@@ -20,6 +20,7 @@ import {
   Review,
   ProfileUserId,
   Favorites,
+  Saved,
   FavoritesUserId,
   FooterAboutUs,
   FooterContact,
@@ -38,6 +39,7 @@ const Main = () => {
   const [allReviews, setAllReviews] = useState([]);
   const [reviewInfo, setReviewInfo] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [saved, setSaved] = useState([]);
 
   const getLoggedInUser = async (token) => {
     if (token) {
@@ -65,6 +67,19 @@ const Main = () => {
     };
 
     fetchUserFavorites();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchUserSaved = async () => {
+      try {
+        const fetchedSaved = await getSaved(user.id);
+        setSaved(fetchedSaved);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserSaved();
   }, [user]);
 
   return (
@@ -165,6 +180,10 @@ const Main = () => {
         <Route
           path="/favorites"
           element={<Favorites user={user} setWineInfo={setWineInfo} favorites={favorites} setFavorites={setFavorites}/>}
+        ></Route>
+        <Route
+          path="/saved"
+          element={<Saved user={user} setWineInfo={setWineInfo} saved={saved} setSaved={setSaved}/>}
         ></Route>
         <Route
           path="/footeraboutus"

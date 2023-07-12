@@ -2,15 +2,22 @@ import React from "react";
 import { useEffect } from "react";
 import { useNavigate, useHref } from "react-router-dom";
 import Rating from "react-rating-stars-component";
-import { addFavorite, removeFavorite } from "./API";
+import { addFavorite, removeFavorite, removeSaved } from "./API";
 
-const WineDetails = ({ wine, favorites, user }) => {
+const WineDetails = ({ wine, favorites, user, saved }) => {
   const navigate = useNavigate();
   const ref = useHref();
 
   function checkOnFaves(wineID) {
     for (let i = 0; i < favorites.length; i++) {
       if (favorites[i].wine_id === wineID) {
+        return true;
+      }
+    }
+  }
+  function checkOnSaved(wineID) {
+    for (let i = 0; i < saved.length; i++) {
+      if (saved[i].wine_id === wineID) {
         return true;
       }
     }
@@ -26,6 +33,17 @@ const WineDetails = ({ wine, favorites, user }) => {
       }
     }
     removeFavorite(favoriteId);
+  }
+  function handleRemoveSaved(wineID) {
+
+    let savedId;
+    for (let i = 0; i < saved.length; i++) {
+      if (saved[i].wine_id === wineID) {
+        savedId = saved[i].id;
+        break;
+      }
+    }
+    removeSaved(savedId);
   }
 
   return (

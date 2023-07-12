@@ -23,6 +23,7 @@ export { default as AccountSettings } from "./AccountSettings";
 export { default as Review } from "./Review";
 export { default as ProfileUserId } from "./ProfileUserId";
 export { default as Favorites } from "./Favorites";
+export { default as Saved} from "./Saved";
 export { default as FavoritesUserId } from "./FavoritesUserId";
 export { default as AdminUser} from "./AdminUser";
 export { default as OptionsStates} from "./OptionsStates";

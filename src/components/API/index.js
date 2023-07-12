@@ -499,7 +499,21 @@ export async function getFavorites(userId) {
     };
     const response = await fetch(`${BASE_URL}/favorites/${userId}`, options);
     const result = await response.json();
-    console.log(result, "favorite result");
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getSaved(userId) {
+  try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(`${BASE_URL}/saved/${userId}`, options);
+    const result = await response.json();
     return result;
   } catch (error) {
     console.error(error);
@@ -548,6 +562,27 @@ export async function addFavorite(user_id, wine_id) {
   }
 }
 
+export async function addSaved(user_id, wine_id) {
+  try {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        user_id,
+        wine_id,
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/saved/`, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function getSaved(userId) {
   try {
     const options = {
@@ -576,6 +611,26 @@ export async function removeFavorite(favoriteId) {
     };
     const response = await fetch(
       `${BASE_URL}/favorites/${favoriteId}`,
+      options
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function removeSaved(savedId) {
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    const response = await fetch(
+      `${BASE_URL}/saved/${savedId}`,
       options
     );
     const result = await response.json();
