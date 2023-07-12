@@ -30,7 +30,7 @@ const Footer = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="sub-helplinks" to="/termsofservice">
+                <NavLink className="sub-helplinks" to="/terms">
                   Terms of Service
                 </NavLink>
               </li>

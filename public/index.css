@@ -28,6 +28,13 @@ body {
   color: white;
   color: #2a0e01;
 }
+#footerTerms{
+        background-color: rgb(249, 247, 232);
+        overflow: auto;
+        padding: 10px;
+        max-height: 500px;
+        margin: 2rem;
+      }
 
 
 .aboutfooter{

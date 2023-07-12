@@ -19,37 +19,37 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <NavLink className="nav-link" activeClassName="active" to="/">
+            <Nav.Link as={NavLink} to="/">
               Home
-            </NavLink>
-            <NavLink className="nav-link" activeClassName="active" to="/profile">
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/profile">
               My Account
-            </NavLink>
-            <NavLink className="nav-link" activeClassName="active" to="/winefeed">
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/winefeed">
               The Tasting Room
-            </NavLink>
-            <NavLink className="nav-link" activeClassName="active" to="/followers">
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/followers">
               Happy Hour
-            </NavLink>
-            <NavLink className="nav-link" activeClassName="active" to="/winelist">
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/winelist">
               Wine List
-            </NavLink>
+            </Nav.Link>
 
             {loggedIn &&
               (user.role === "merchant" || user.role === "admin") && (
-                <NavLink className="nav-link" activeClassName="active" to="/admin">
+                <Nav.Link as={NavLink} to="/admin">
                   Admin
-                </NavLink>
+                </Nav.Link>
               )}
           </Nav>
         </Navbar.Collapse>
-        <Nav className="float-right mr-4">
-          {loggedIn && (
-            <div className="ml-auto">
+        <Nav className="ml-auto">
+          {loggedIn ? (
+            <div className="d-flex align-items-center">
               <span className="nav-link">Welcome, {user.username}</span>
-              <NavLink
-                to={"/login"}
-                className="nav-link"
+              <Nav.Link
+                as={NavLink}
+                to="/login"
                 onClick={() => {
                   navigate("/login");
                   localStorage.removeItem("token");
@@ -58,13 +58,12 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
                 }}
               >
                 Log Out
-              </NavLink>
+              </Nav.Link>
             </div>
-          )}
-          {!loggedIn && (
-            <NavLink className="nav-link" activeClassName="active" to="/login">
+          ) : (
+            <Nav.Link as={NavLink} to="/login">
               Login
-            </NavLink>
+            </Nav.Link>
           )}
         </Nav>
       </Container>
