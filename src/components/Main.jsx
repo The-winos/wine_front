@@ -23,7 +23,8 @@ import {
   FavoritesUserId,
   FooterAboutUs,
   FooterContact,
-  FooterPrivacy
+  FooterPrivacy,
+  FooterTerms
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -176,6 +177,10 @@ const Main = () => {
         <Route
           path="/privacy"
           element={<FooterPrivacy user={user} />}
+        ></Route>
+        <Route
+          path="/terms"
+          element={<FooterTerms user={user} />}
         ></Route>
       </Routes>
       <Footer />
