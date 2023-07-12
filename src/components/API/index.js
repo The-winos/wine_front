@@ -583,21 +583,6 @@ export async function addSaved(user_id, wine_id) {
   }
 }
 
-export async function getSaved(userId) {
-  try {
-    const options = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(`${BASE_URL}/saved/${userId}`, options);
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 //removes a Wine from favorites
 
 export async function removeFavorite(favoriteId) {
