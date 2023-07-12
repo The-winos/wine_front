@@ -47,30 +47,47 @@ const Profile = ({ user }) => {
             />
             <div className="ms-4">
               <h2 className="profile-username">{user.name}</h2>
-              <h6 className="profile-username">
-                <span className="me-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="currentColor"
-                    className="bi bi-geo-alt"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M6 1a4 4 0 0 1 4 4c0 2.77-2.7 5.935-4 7.745C4.7 11.935 2 8.77 2 5a4 4 0 0 1 4-4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M8 9a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H7a.5.5 0 0 1 0-1H8v-2.5A.5.5 0 0 1 8 9z"
-                    />
-                  </svg>
-                </span>
-                {user.state}
-              </h6>
-              <h4>Followers {user.follower_count}</h4>
-              {console.log(user)}
+              <div className="d-flex align-items-center">
+                <h6 className="profile-username me-3">
+                  <span className="me-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      className="bi bi-geo-alt"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M6 1a4 4 0 0 1 4 4c0 2.77-2.7 5.935-4 7.745C4.7 11.935 2 8.77 2 5a4 4 0 0 1 4-4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        d="M8 9a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H7a.5.5 0 0 1 0-1H8v-2.5A.5.5 0 0 1 8 9z"
+                      />
+                    </svg>
+                  </span>
+                  {user.state}
+                </h6>
+                <div className="d-flex align-items-center">
+                  <img
+                    src={`/images/${user.avatar}`}
+                    alt="follower avatar"
+                    className="img-thumbnail me-2"
+                    style={{
+                      height: "30px",
+                      width: "30px",
+                      objectFit: "contain",
+                    }}
+                  />
+                  <span className="me-1">Followers: {user.follower_count}</span>
+                  <span className="mx-2">|</span>
+                  <span className="me-1">
+                    Following: {user.following_count}
+                  </span>
+                </div>
+              </div>
             </div>
             <div>
               <Link to={"/accountsettings"}>
