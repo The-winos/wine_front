@@ -506,6 +506,7 @@ export async function getFavorites(userId) {
 }
 
 export async function getSaved(userId) {
+  console.log(userId, "api userID")
   try {
     const options = {
       headers: {

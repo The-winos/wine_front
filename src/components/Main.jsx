@@ -45,6 +45,7 @@ const Main = () => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
+      console.log(loggedInUser, "user in main, mainfunction")
 
     }
   };
@@ -58,11 +59,14 @@ const Main = () => {
 
   useEffect(() => {
     const fetchUserFavorites = async () => {
-      try {
-        const fetchedFavorites = await getFavorites(user.id);
-        setFavorites(fetchedFavorites);
-      } catch (error) {
-        console.error(error);
+      if (user) {
+        try {
+          const fetchedFavorites = await getFavorites(user.id);
+          setFavorites(fetchedFavorites);
+          console.log(fetchedFavorites, "Main Fav");
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 
@@ -71,16 +75,21 @@ const Main = () => {
 
   useEffect(() => {
     const fetchUserSaved = async () => {
-      try {
-        const fetchedSaved = await getSaved(user.id);
-        setSaved(fetchedSaved);
-      } catch (error) {
-        console.error(error);
+      if (user) {
+        console.log(user, "userId in main");
+        try {
+          const fetchedSaved = await getSaved(user.id);
+          setSaved(fetchedSaved);
+          console.log(fetchedSaved, "Main saved");
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
 
     fetchUserSaved();
   }, [user]);
+
 
   return (
     <div id="main">
