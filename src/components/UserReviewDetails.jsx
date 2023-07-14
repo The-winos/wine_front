@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getReviewByUser, getWineById } from "./API";
 import { useParams, useNavigate } from "react-router-dom";
+import Rating from "react-rating-stars-component";
 
 const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
   const navigate = useNavigate();
@@ -65,9 +66,12 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
               }}
             />
             <h6 className="card-subtitle mb-2">{userWineDetails.name}</h6>
-            <p className="card-text">
-              Rating: {renderRatingStars(userReviews.rating)}
-            </p>
+            <Rating
+              value={userReviews.rating}
+              edit={false}
+              size={20}
+              activeColor="#ffd700"
+            />
             <p className="card-text">{userReviews.review_comment}</p>
           </>
         )}
