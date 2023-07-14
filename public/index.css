@@ -28,16 +28,15 @@ body {
   color: white;
   color: #2a0e01;
 }
-#footerTerms{
-        background-color: rgb(249, 247, 232);
-        overflow: auto;
-        padding: 10px;
-        max-height: 500px;
-        margin: 2rem;
-      }
+#footerTerms {
+  background-color: rgb(249, 247, 232);
+  overflow: auto;
+  padding: 10px;
+  max-height: 500px;
+  margin: 2rem;
+}
 
-
-.aboutfooter{
+.aboutfooter {
   padding-bottom: 5rem;
 }
 
@@ -317,9 +316,15 @@ button {
 } */
 
 #accountSettings {
-
   padding-bottom: 6rem !important;
 }
+
+/* .profile-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+} */
 
 .form-control.textarea-bio {
   max-height: 200px; /* Adjust the value as needed */
