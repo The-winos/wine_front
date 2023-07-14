@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
-import { getReviewByUser } from "./API";
+import {
+  getReviewByUser,
+  getAllUsers,
+  getFollowersById,
+  getFollowingById,
+} from "./API";
+import OptionAvatars from "./OptionAvatars";
 import UserReviewDetails from "./UserReviewDetails";
 import Rating from "react-rating-stars-component";
 
 const Profile = ({ user }) => {
-  const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
   const [userReviews, setUserReviews] = useState([]);
+  const [followerAvatars, setFollowerAvatars] = useState([]);
+  const [followingAvatars, setFollowingAvatars] = useState([]);
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -21,6 +28,46 @@ const Profile = ({ user }) => {
     };
 
     fetchUserReviews();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchFollowers = async () => {
+      try {
+        const followersData = await getFollowersById(user.id);
+        console.log("Followers Data:", followersData);
+        if (Array.isArray(followersData)) {
+          const followerAvatars = followersData.map(
+            (follower) => follower.avatar
+          );
+          setFollowerAvatars(followerAvatars);
+        } else {
+          console.error("Followers data is not an array:", followersData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchFollowers();
+  }, [user]);
+
+  useEffect(() => {
+    const fetchFollowing = async () => {
+      try {
+        const followingData = await getFollowingById(user.id);
+        console.log("Following Data:", followingData);
+        if (Array.isArray(followingData)) {
+          const followingAvatars = followingData.map((follow) => follow.avatar);
+          setFollowingAvatars(followingAvatars);
+        } else {
+          console.error("Following data is not an array:", followingData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchFollowing();
   }, [user]);
 
   return (
@@ -71,21 +118,42 @@ const Profile = ({ user }) => {
                   {user.state}
                 </h6>
                 <div className="d-flex align-items-center">
-                  <img
-                    src={`/images/${user.avatar}`}
-                    alt="follower avatar"
-                    className="img-thumbnail me-2"
-                    style={{
-                      height: "30px",
-                      width: "30px",
-                      objectFit: "contain",
-                    }}
-                  />
-                  <span className="me-1">Followers: {user.follower_count}</span>
-                  <span className="mx-2">|</span>
                   <span className="me-1">
-                    Following: {user.following_count}
+                    Followers:
+                    {/* {followerAvatars.length} */}
                   </span>
+                  {followerAvatars.map((followerAvatar, index) => (
+                    <img
+                      key={`followerAvatar-${index}`}
+                      src={`/images/${followerAvatar}`}
+                      alt="follower avatar"
+                      className="img-thumbnail me-2"
+                      style={{
+                        height: "30px",
+                        width: "30px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  ))}
+
+                  <span className="mx-2"></span>
+                  <span className="me-1">
+                    Following:
+                    {/* {followingAvatars.length} */}
+                  </span>
+                  {followingAvatars.map((followingAvatar, index) => (
+                    <img
+                      key={`followingAvatar-${index}`}
+                      src={`/images/${followingAvatar}`}
+                      alt="following avatar"
+                      className="img-thumbnail me-2"
+                      style={{
+                        height: "30px",
+                        width: "30px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -149,6 +217,10 @@ const Profile = ({ user }) => {
           </div>
         </div>
       )}
+      <OptionAvatars
+        followerAvatars={followerAvatars}
+        followingAvatars={followingAvatars}
+      />
     </>
   );
 };
