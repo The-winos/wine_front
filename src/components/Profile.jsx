@@ -103,7 +103,7 @@ const Profile = ({ user }) => {
                   Favorites
                 </button>
               </Link>
-              <Link to={"/favorites"}>
+              <Link to={"/saved"}>
                 <button type="saved" className="btn btn-primary pb-2 mx-2">
                   Saved
                 </button>
