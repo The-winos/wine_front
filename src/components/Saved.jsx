@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { Col, Row } from "react-bootstrap";
+import { getWineById } from "./API";
+import WineDetails from "./WineDetails";
 
 const Saved = ({saved, setSaved, user, setWineInfo}) => {
   const [wines, setWines] = useState([]);
