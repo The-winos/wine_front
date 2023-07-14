@@ -57,56 +57,95 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
     <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
   <div className="card-header" style={{ position: "relative" }}>
     {console.log(wine, "wine obj")}
-    <div style={{ position: "relative", display: "inline-block" }}>
-      <img
-        src={`/images/${wine.image_url}`}
-        alt="wine image"
-        className="img-fluid"
-        style={{ maxHeight: "30%", maxWidth: "30%" }}
-      />
-      {checkOnFaves(wine.id) && (
+    <img
+      src={`/images/${wine.image_url}`}
+      alt="wine image"
+      className="img-fluid"
+      style={{ maxHeight: "30%", maxWidth: "30%" }}
+    />
+    {checkOnFaves(wine.id) ? (
+      <div
+        className="position-absolute"
+        style={{ top: "1em", right: "1em" }}
+      >
         <img
           src="/images/5-heart.png"
           alt="heart"
-          className="img-fluid position-absolute"
-          style={{ top: "1em", right: "1em", width: "15%", height: "auto" }}
+          className="img-fluid"
+          style={{ width: "15%", height: "auto" }}
         />
-      )}
-      {checkOnSaved(wine.id) && (
+        <FontAwesomeIcon
+          icon={faCheck}
+          className="checkmark-icon"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            fontSize: "1rem",
+            color: "green",
+          }}
+        />
+      </div>
+    ) : (
+      <button
+        onClick={() => {
+          addFavorite(user.id, wine.id);
+          navigate(`/favorites`);
+        }}
+        className="bg-transparent position-absolute"
+        style={{ border: "none", top: "1em", right: "1em" }}
+      >
+        <img
+          src="/images/5-heart.png"
+          alt="heart"
+          className="img-fluid"
+          style={{ width: "15%", height: "auto" }}
+        />
+      </button>
+    )}
+
+    {checkOnSaved(wine.id) ? (
+      <div
+        className="position-absolute"
+        style={{ top: "3em", right: "1em" }}
+      >
         <img
           src="/images/6-list.png"
           alt="savedPad"
-          className="img-fluid position-absolute"
-          style={{ top: "3em", right: "1em", width: "15%", height: "auto" }}
+          className="img-fluid"
+          style={{ width: "15%", height: "auto" }}
         />
-      )}
-    </div>
-    {checkOnFaves(wine.id) && (
-      <FontAwesomeIcon
-        icon={faCheck}
-        className="checkmark-icon position-absolute"
-        style={{
-          top: "1em",
-          left: "1em",
-          fontSize: "1rem",
-          color: "green",
+        <FontAwesomeIcon
+          icon={faCheck}
+          className="checkmark-icon"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            fontSize: "1rem",
+            color: "green",
+          }}
+        />
+      </div>
+    ) : (
+      <button
+        onClick={() => {
+          addSaved(user.id, wine.id);
         }}
-      />
-    )}
-    {checkOnSaved(wine.id) && (
-      <FontAwesomeIcon
-        icon={faCheck}
-        className="checkmark-icon position-absolute"
-        style={{
-          top: "3em",
-          left: "1em",
-          fontSize: "1rem",
-          color: "green",
-        }}
-      />
+        className="bg-transparent position-absolute"
+        style={{ border: "none", top: "3em", right: "1em" }}
+      >
+        <img
+          src="/images/6-list.png"
+          alt="savedPad"
+          className="img-fluid"
+          style={{ width: "15%", height: "auto" }}
+        />
+      </button>
     )}
   </div>
-
 
 
   <div className="card-body">
