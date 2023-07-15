@@ -135,8 +135,8 @@ const Profile = ({ user }) => {
                       }}
                     />
                   ))}
-
-                  <span className="mx-2"></span>
+                </div>
+                <div className="d-flex align-items-center">
                   <span className="me-1">
                     Following:
                     {/* {followingAvatars.length} */}
@@ -198,16 +198,12 @@ const Profile = ({ user }) => {
                     key={`userReview-${userReview.id}`}
                     className="col-md-6 mb-4"
                   >
-                    <div className="card">
-                      <div className="card-body">
-                        <UserReviewDetails
-                          user={user}
-                          userReviews={userReview}
-                          setUserReviews={setUserReviews}
-                          RatingComponent={Rating}
-                        />
-                      </div>
-                    </div>
+                    <UserReviewDetails
+                      user={user}
+                      userReviews={userReview}
+                      setUserReviews={setUserReviews}
+                      RatingComponent={Rating}
+                    />
                   </div>
                 );
               })

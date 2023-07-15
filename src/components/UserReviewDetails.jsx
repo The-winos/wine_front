@@ -44,11 +44,11 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
+    <div className="note">
+      <div>
         {userWineDetails && (
           <>
-            <h5 className="card-title">
+            <h5>
               {new Date(userReviews.review_date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -65,14 +65,14 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
                 objectPosition: "center center",
               }}
             />
-            <h6 className="card-subtitle mb-2">{userWineDetails.name}</h6>
+            <h6>{userWineDetails.name}</h6>
             <Rating
               value={userReviews.rating}
               edit={false}
               size={20}
               activeColor="#ffd700"
             />
-            <p className="card-text">{userReviews.review_comment}</p>
+            <p>{userReviews.review_comment}</p>
           </>
         )}
       </div>
