@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AccountSettings from "./AccountSettings";
-import {
-  getReviewByUser,
-  getAllUsers,
-  getFollowersById,
-  getFollowingById,
-} from "./API";
+import { getReviewByUser, getFollowersById, getFollowingById } from "./API";
 import OptionAvatars from "./OptionAvatars";
 import UserReviewDetails from "./UserReviewDetails";
 import Rating from "react-rating-stars-component";
