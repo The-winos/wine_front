@@ -53,9 +53,10 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
     removeSaved(savedId);
   }
 
+
   return (
     <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
-      <div className="card-header" style={{ position: "relative" }}>
+      <div className="card-header" style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         {console.log(wine, "wine obj")}
         <img
           src={`/images/${wine.image_url}`}
@@ -63,92 +64,83 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
           className="img-fluid"
           style={{ maxHeight: "30%", maxWidth: "30%" }}
         />
-        {checkOnFaves(wine.id) ? (
-          <button
-            onClick={() => {
-              handleRemoveFavorite(wine.id);
-            }}
-            className="bg-transparent"
-            style={{
-              position: "absolute",
-              border: "none",
-              top: "0.5rem",
-              right: "0.5rem",
-              zIndex: 0,
-            }}
-          >
-            <img
-              src="/images/7-heartcheck.png"
-              alt="heart"
-              className="img-fluid"
-              style={{ width: "20%", height: "auto" }}
-            />
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              addFavorite(user.id, wine.id);
-            }}
-            className="bg-transparent"
-            style={{
-              position: "absolute",
-              border: "none",
-              top: "0.5rem",
-              right: "0.5rem",
-              zIndex: 0,
-            }}
-          >
-            <img
-              src="/images/5-heart.png"
-              alt="heart"
-              className="img-fluid"
-              style={{ width: "15%", height: "auto" }}
-            />
-          </button>
-        )}
+        <div>
+          {checkOnFaves(wine.id) ? (
+            <button
+              onClick={() => {
+                handleRemoveFavorite(wine.id);
+              }}
+              className="bg-transparent"
+              style={{
+                border: "none",
+                marginBottom: "0.5rem",
+              }}
+            >
+              <img
+                src="/images/7-heartcheck.png"
+                alt="heart"
+                className="img-fluid"
+                style={{ width: "30%", height: "auto" }}
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                addFavorite(user.id, wine.id);
+              }}
+              className="bg-transparent"
+              style={{
+                border: "none",
+                marginBottom: "0.5rem",
+              }}
+            >
+              <img
+                src="/images/5-heart.png"
+                alt="heart"
+                className="img-fluid"
+                style={{ width: "25%", height: "auto" }}
+              />
+            </button>
+          )}
 
-
-    {checkOnSaved(wine.id) ? (
-      <div
-        className="position-absolute"
-        style={{ top: "3em", right: "1em" }}
-      >
-        <img
-          src="/images/6-list.png"
-          alt="savedPad"
-          className="img-fluid"
-          style={{ width: "15%", height: "auto" }}
-        />
-        <FontAwesomeIcon
-          icon={faCheck}
-          className="checkmark-icon"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "1rem",
-            color: "green",
-          }}
-        />
+          {checkOnSaved(wine.id) ? (
+            <button
+              onClick={() => {
+                handleRemoveSaved(wine.id);
+              }}
+              className="bg-transparent"
+              style={{
+                border: "none",
+              }}
+            >
+              <img
+                src="/images/notepad-check.png"
+                alt="notepad"
+                className="img-fluid"
+                style={{ width: "30%", height: "auto" }}
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                addSaved(user.id, wine.id);
+              }}
+              className="bg-transparent"
+              style={{
+                border: "none",
+              }}
+            >
+              <img
+                src="/images/6-list.png"
+                alt="savedPad"
+                className="img-fluid"
+                style={{ width: "30%", height: "auto" }}
+              />
+            </button>
+          )}
+        </div>
       </div>
-    ) : (
-      <button
-        onClick={() => {
-          addSaved(user.id, wine.id);
-        }}
-        className="bg-transparent position-absolute"
-        style={{ border: "none", top: "3em", right: "1em" }}
-      >
-        <img
-          src="/images/6-list.png"
-          alt="savedPad"
-          className="img-fluid"
-          style={{ width: "15%", height: "auto" }}
-        />
-      </button>
-    )}
-  </div>
+
 
 
   <div className="card-body">

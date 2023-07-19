@@ -51,7 +51,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  background-color: #f8f9fa;
+  background-color: rgb(249, 247, 232);;
 }
 
 .card-text {
@@ -259,13 +259,7 @@ button {
   background-color: blue;
 }
 
-.img-fluid {
-  display: flex;
-  justify-content: flex-end;
-  justify-items: flex-end;
-  border-radius: 100px;
-  margin: 20px;
-}
+
 
 .profile-username {
   display: flex;
