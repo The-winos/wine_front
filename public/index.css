@@ -210,6 +210,11 @@ button {
   font-size: inherit;
 }
 
+.heartButton{
+  margin-right: -80px !important;
+  padding: none !important;
+}
+
 .btn-follow:focus,
 .btn-follow:hover {
   background-color: transparent !important;
