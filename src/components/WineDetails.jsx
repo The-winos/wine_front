@@ -56,21 +56,22 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
 
   return (
     <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
-      <div className="card-header" style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+      <div  style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         {console.log(wine, "wine obj")}
         <img
           src={`/images/${wine.image_url}`}
           alt="wine image"
           className="img-fluid"
-          style={{ maxHeight: "30%", maxWidth: "30%" }}
+          style={{ maxHeight: "30%", maxWidth: "30%", margin:"none" }}
         />
-        <div>
+        <div className="d-flex justify-center flex-column align-items-end">
           {checkOnFaves(wine.id) ? (
+            <div className="heartButton">
             <button
               onClick={() => {
                 handleRemoveFavorite(wine.id);
               }}
-              className="bg-transparent"
+              className="bg-transparent p-0"
               style={{
                 border: "none",
                 marginBottom: "0.5rem",
@@ -83,12 +84,13 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 style={{ width: "30%", height: "auto" }}
               />
             </button>
+            </div>
           ) : (
             <button
               onClick={() => {
                 addFavorite(user.id, wine.id);
               }}
-              className="bg-transparent"
+              className="bg-transparent p-0"
               style={{
                 border: "none",
                 marginBottom: "0.5rem",
@@ -98,7 +100,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 src="/images/5-heart.png"
                 alt="heart"
                 className="img-fluid"
-                style={{ width: "25%", height: "auto" }}
+                style={{ width: "30%", height: "auto" }}
               />
             </button>
           )}
@@ -108,7 +110,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
               onClick={() => {
                 handleRemoveSaved(wine.id);
               }}
-              className="bg-transparent"
+              className="bg-transparent p-0"
               style={{
                 border: "none",
               }}
@@ -125,7 +127,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
               onClick={() => {
                 addSaved(user.id, wine.id);
               }}
-              className="bg-transparent"
+              className="bg-transparent p-0"
               style={{
                 border: "none",
               }}
