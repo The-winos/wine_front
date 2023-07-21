@@ -46,7 +46,6 @@ export async function registerUser(
   follower_count,
   following_count
 ) {
-  console.log("banana");
   const registerOptions = {
     method: "POST",
     headers: {
@@ -388,11 +387,71 @@ export async function updateUser(
 
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
-    console.log(result,  "result")
+    console.log(result, "result");
 
     return result;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function updatePasswordWithVerification(
+  userId,
+  oldPassword,
+  newPassword
+) {
+  try {
+    const verifyBody = {
+      password: oldPassword,
+    };
+
+    const verifyOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(verifyBody),
+    };
+
+    const verifyResponse = await fetch(
+      `${BASE_URL}/users/${userId}/password`,
+      verifyOptions
+    );
+
+    if (!verifyResponse.ok) {
+      const errorMessage = await verifyResponse.text();
+      throw new Error(errorMessage);
+    }
+
+    const updateBody = {
+      password: newPassword,
+    };
+
+    const updateOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(updateBody),
+    };
+
+    const updateResponse = await fetch(
+      `${BASE_URL}/users/${userId}/password`,
+      updateOptions
+    );
+
+    if (!updateResponse.ok) {
+      const errorMessage = await updateResponse.text();
+      throw new Error(errorMessage);
+    }
+
+    const result = await updateResponse.text();
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
@@ -506,7 +565,7 @@ export async function getFavorites(userId) {
 }
 
 export async function getSaved(userId) {
-  console.log(userId, "api userID")
+  console.log(userId, "api userID");
   try {
     const options = {
       headers: {
@@ -615,10 +674,7 @@ export async function removeSaved(savedId) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    const response = await fetch(
-      `${BASE_URL}/saved/${savedId}`,
-      options
-    );
+    const response = await fetch(`${BASE_URL}/saved/${savedId}`, options);
     const result = await response.json();
     return result;
   } catch (error) {

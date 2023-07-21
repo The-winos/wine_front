@@ -4,21 +4,26 @@ import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { updateUser, updateUserPassword, getUserById } from "./API";
+import {
+  updateUser,
+  getUserById,
+  updateUserPassword,
+  updatePasswordWithVerification,
+} from "./API";
 
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
-  const [username, setUsername] = useState(user.username);
-  const [name, setName] = useState(user.name);
+  const [username, setUsername] = useState(user.username || "");
+  const [name, setName] = useState(user.name || "");
   const [state, setState] = useState(user.state || "");
-  const [avatar, setAvatar] = useState(user.avatar);
-  const [email, setEmail] = useState(user.email);
+  const [avatar, setAvatar] = useState(user.avatar || "");
+  const [email, setEmail] = useState(user.email || "");
   const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
 
-  const [bio, setBio] = useState(user.bio);
+  const [bio, setBio] = useState(user.bio || "");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -57,13 +62,22 @@ const AccountSettings = ({ user }) => {
       return;
     }
 
-    if (oldPassword !== "" && oldPassword !== user.password) {
-      toast.error("Old password verification failed");
-      return;
-    }
-
     try {
-      const hashedOldPassword = await updateUserPassword(user.id, oldPassword);
+      if (newPassword !== "") {
+        const isOldPasswordValid = await updatePasswordWithVerification(
+          user.id,
+          oldPassword,
+          newPassword
+        );
+
+        // If the old password verification failed, show an error message
+        if (!isOldPasswordValid) {
+          toast.error("Old password verification failed");
+          return;
+        }
+      }
+
+      // If the old password verification passed or newPassword is empty, proceed with updating the user
       await updateUser(user.id, {
         username: username || user.username,
         name: name || user.name,
@@ -72,7 +86,6 @@ const AccountSettings = ({ user }) => {
         email: email || user.email,
         bio: bio || null,
         birthday: birthday || user.birthday,
-        oldPassword: hashedOldPassword,
         newPassword: newPassword || null,
       });
 
