@@ -654,6 +654,7 @@ export async function removeFavorite(favoriteId) {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+
     };
     const response = await fetch(
       `${BASE_URL}/favorites/${favoriteId}`,
@@ -667,6 +668,7 @@ export async function removeFavorite(favoriteId) {
 }
 
 export async function removeSaved(savedId) {
+  console.log(savedId, "saved ID in removedSaved")
   try {
     const options = {
       method: "DELETE",
@@ -674,6 +676,7 @@ export async function removeSaved(savedId) {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+
     };
     const response = await fetch(`${BASE_URL}/saved/${savedId}`, options);
     const result = await response.json();
