@@ -13,29 +13,27 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
   const [localSaved, setLocalSaved] = useState(saved || []);
 
   useEffect(() => {
-    console.log("useEffect triggered", saved, favorites);
     setLocalFavorites(favorites || []);
     setLocalSaved(saved || []);
   }, [favorites, saved]);
 
   function checkOnFaves(wineID) {
-    console.log("running checkOnFavs")
-    if (localFavorites.length > 0) {
-      const favorite = localFavorites.find((favorite) => favorite.wine_id === wineID);
-      return favorite ? favorite.id : null;
+    if(localFavorites.length>0){
+      for(const favoriteItem of localFavorites){
+        if(favoriteItem.wine_id===wineID){
+          return favoriteItem.id;
+        }
+      }
     }
     return null;
-  }
+    }
+
+
 
   function checkOnSaved(wineID) {
-    console.log("localSaved:", localSaved);
-    console.log("wineID:", wineID);
-
     if (localSaved.length > 0) {
       for (const savedItem of localSaved) {
         if (savedItem.wine_id === wineID) {
-          console.log("savedItem:", savedItem);
-          console.log(savedItem.id, "savedId")
           return savedItem.id;
         }
       }
@@ -43,15 +41,12 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
     return null;
   }
 
-  function handleRemoveFavorite(wineID) {
-    const updatedFavorites = localFavorites.filter(
-      (favorite) => favorite.wine_id !== wineID
-    );
-    setLocalFavorites(updatedFavorites);
-    const favoriteId = checkOnFaves(wineID);
-    if (favoriteId) {
-      removeFavorite(favoriteId);
-    }
+  function handleRemoveFavorite(favoriteID) {
+  const updateFavorite=localFavorites.filter(
+    (favoriteItem)=>favoriteItem.id !== favoriteID
+  );
+  setLocalFavorites(updateFavorite);
+  removeFavorite(favoriteID)
   }
 
   function handleRemoveSaved(savedId) {
@@ -70,6 +65,16 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
     };
     setLocalSaved([...localSaved, newSavedItem]);
     addSaved(userId, wineId);
+  }
+
+  function handleAddFavorite(userId, wineId) {
+    const newFavItem = {
+      id: Date.now(),
+      user_id: userId,
+      wine_id: wineId,
+    };
+    setLocalFavorites([...localFavorites, newFavItem]);
+    addFavorite(userId, wineId);
   }
 
   return (
@@ -92,7 +97,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
               if (favoriteId) {
                 handleRemoveFavorite(favoriteId);
               } else {
-                addFavorite(user.id, wine.id);
+                handleAddFavorite(user.id, wine.id);
               }
             }}
             className="custom-button"
@@ -123,7 +128,6 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
           <div
            onClick={() => {
             const savedId = checkOnSaved(wine.id);
-            console.log(savedId, "Is savedId here?")
             if (savedId) {
               handleRemoveSaved(savedId);
             } else {
