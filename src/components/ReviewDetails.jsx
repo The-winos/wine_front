@@ -6,7 +6,7 @@ import FollowButton from "./FollowButton";
 
 
 
-const ReviewDetails = ({review, user, favorites}) => {
+const ReviewDetails = ({review, user, favorites, saved}) => {
   const avatarUrl = `/images/${user.avatar}`;
   const navigate=useNavigate();
   const [reviewUser, setReviewUser]=useState({})
@@ -41,6 +41,27 @@ fetchGetUserById();
       }
     }
   }
+  function checkOnSaved(wineID) {
+    console.log(saved, "saved");
+    if (saved && saved.length) {
+      for (let i = 0; i < saved.length; i++) {
+        if (saved[i].wine_id === wineID) {
+          return true;
+        }
+      }
+    }
+  }
+  function handleRemoveSaved(wineID) {
+    let savedId;
+    for (let i = 0; i < saved.length; i++) {
+      if (saved[i].wine_id === wineID) {
+        savedId = saved[i].id;
+        break;
+      }
+    }
+    removeSaved(savedId);
+  }
+
 
   function handleRemoveFavorite(wineID) {
 
@@ -66,40 +87,73 @@ fetchGetUserById();
             className="img-fluid"
             style={{ maxHeight: "250px", maxWidth: "90%" }}
           />
-          {checkOnFaves(reviewWine.id) ? (
-            <button
-              onClick={() => {
-                handleRemoveFavorite(reviewWine.id);
-              }}
-              className="bg-transparent"
-              style={{
-                position: "absolute",
-                border: "none",
-                top: "1em",
-                right: "1em",
-                zIndex: "0",
-              }}
-            >
-              <span className="material-symbols-outlined">heart_check</span>
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                addFavorite(user.id, reviewWine.id);
-              }}
-              className="bg-transparent"
-              style={{
-                position: "absolute",
-                border: "none",
-                top: "1em",
-                right: "1em",
-                zIndex: "0",
-              }}
-            >
-              <span className="material-symbols-outlined">favorite</span>
-            </button>
-          )}
+                 <div className="d-flex justify-center flex-column align-items-end">
+  {checkOnFaves(reviewWine.id) ? (
+    <div
+      onClick={() => {
+        handleRemoveFavorite(reviewWine.id);
+      }}
+      className="custom-button"
+      style={{
+        marginBottom: "0.5rem",
+      }}
+    >
+      <img
+        src="/images/7-heartcheck.png"
+        alt="heart"
+        className="img-fluid"
+        style={{ width: "30%", height: "auto" }}
+      />
+    </div>
+  ) : (
+    <div
+      onClick={() => {
+        addFavorite(user.id, reviewWine.id);
+      }}
+      className="custom-button"
+      style={{
+        marginBottom: "0.5rem",
+      }}
+    >
+      <img
+        src="/images/5-heart.png"
+        alt="heart"
+        className="img-fluid"
+        style={{ width: "30%", height: "auto" }}
+      />
+    </div>
+  )}
 
+  {checkOnSaved(reviewWine.id) ? (
+    <div
+      onClick={() => {
+        handleRemoveSaved(reviewWine.id);
+      }}
+      className="custom-button"
+    >
+      <img
+        src="/images/8-notepad_check.png"
+        alt="notepad"
+        className="img-fluid"
+        style={{ width: "30%", height: "auto" }}
+      />
+    </div>
+  ) : (
+    <div
+      onClick={() => {
+        addSaved(user.id, reviewWine.id);
+      }}
+      className="custom-button"
+    >
+      <img
+        src="/images/6-list.png"
+        alt="savedPad"
+        className="img-fluid"
+        style={{ width: "30%", height: "auto" }}
+      />
+    </div>
+  )}
+</div>
         </div>
 
 

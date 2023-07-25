@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate, useHref } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 import { addFavorite, removeFavorite, removeSaved, addSaved } from "./API";
@@ -9,61 +9,77 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const WineDetails = ({ wine, favorites, user, saved }) => {
   const navigate = useNavigate();
   const ref = useHref();
+  const [localFavorites, setLocalFavorites] = useState(favorites || []);
+  const [localSaved, setLocalSaved] = useState(saved || []);
+
+  useEffect(() => {
+    setLocalFavorites(favorites || []);
+    setLocalSaved(saved || []);
+  }, [favorites, saved]);
 
   function checkOnFaves(wineID) {
-    if (favorites && favorites.length) {
-      for (let i = 0; i < favorites.length; i++) {
-        if (favorites[i].wine_id === wineID) {
-          return true;
+    if(localFavorites.length>0){
+      for(const favoriteItem of localFavorites){
+        if(favoriteItem.wine_id===wineID){
+          return favoriteItem.id;
         }
       }
     }
-  }
+    return null;
+    }
+
+
+
   function checkOnSaved(wineID) {
-    console.log(saved, "saved");
-    if (saved && saved.length) {
-      for (let i = 0; i < saved.length; i++) {
-        if (saved[i].wine_id === wineID) {
-          return true;
+    if (localSaved.length > 0) {
+      for (const savedItem of localSaved) {
+        if (savedItem.wine_id === wineID) {
+          return savedItem.id;
         }
       }
     }
+    return null;
   }
 
-  function handleRemoveFavorite(wineID) {
-    let favoriteId;
-    for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].wine_id === wineID) {
-        favoriteId = favorites[i].id;
-        break;
-      }
-    }
-    removeFavorite(favoriteId);
+  function handleRemoveFavorite(favoriteID) {
+  const updateFavorite=localFavorites.filter(
+    (favoriteItem)=>favoriteItem.id !== favoriteID
+  );
+  setLocalFavorites(updateFavorite);
+  removeFavorite(favoriteID)
   }
-  function handleRemoveSaved(wineID) {
-    let savedId;
-    for (let i = 0; i < saved.length; i++) {
-      if (saved[i].wine_id === wineID) {
-        savedId = saved[i].id;
-        break;
-      }
-    }
+
+  function handleRemoveSaved(savedId) {
+    const updatedSaved = localSaved.filter(
+      (savedItem) => savedItem.id !== savedId
+    );
+    setLocalSaved(updatedSaved);
     removeSaved(savedId);
+  }
+
+  function handleAddSaved(userId, wineId) {
+    const newSavedItem = {
+      id: Date.now(),
+      user_id: userId,
+      wine_id: wineId,
+    };
+    setLocalSaved([...localSaved, newSavedItem]);
+    addSaved(userId, wineId);
+  }
+
+  function handleAddFavorite(userId, wineId) {
+    const newFavItem = {
+      id: Date.now(),
+      user_id: userId,
+      wine_id: wineId,
+    };
+    setLocalFavorites([...localFavorites, newFavItem]);
+    addFavorite(userId, wineId);
   }
 
   return (
     <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          maxWidth: "55%",
-          margin: "0 auto",
-        }}
-      >
-        {console.log(wine, "wine obj")}
+      <div className="card-header d-flex justify-content-between align-items-start">
         <img
           src={`/images/${wine.image_url}`}
           alt="wine image"
@@ -74,83 +90,73 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
             padding: 5,
           }}
         />
-        <div className="d-flex justify-center flex-column align-items-end">
-          {checkOnFaves(wine.id) ? (
-            <div className="heartButton">
-              <button
-                onClick={() => {
-                  handleRemoveFavorite(wine.id);
-                }}
-                className="bg-transparent p-0"
-                style={{
-                  border: "none",
-                  marginBottom: "0.5rem",
-                  padding: 0,
-                }}
-              >
-                <img
-                  src="/images/7-heartcheck.png"
-                  alt="heart"
-                  className="img-fluid"
-                  style={{ width: "30%", height: "auto" }}
-                />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                addFavorite(user.id, wine.id);
-              }}
-              className="bg-transparent p-0"
-              style={{
-                border: "none",
-                marginBottom: "0.5rem",
-              }}
-            >
+        <div className="d-flex flex-column align-items-end">
+          <div
+            onClick={() => {
+              const favoriteId = checkOnFaves(wine.id);
+              if (favoriteId) {
+                handleRemoveFavorite(favoriteId);
+              } else {
+                handleAddFavorite(user.id, wine.id);
+              }
+            }}
+            className="custom-button"
+            style={{
+              marginBottom: "0.5rem",
+              cursor: "pointer",
+            }}
+          >
+            {checkOnFaves(wine.id) ? (
+              <img
+                src="/images/7-heartcheck.png"
+                alt="heart"
+                className="img-fluid"
+                style={{ width: "25%", height: "auto", marginBottom: "-5px", marginRight:"-2px"}}
+                title="Remove from Favorites"
+              />
+            ) : (
               <img
                 src="/images/5-heart.png"
                 alt="heart"
                 className="img-fluid"
-                style={{ width: "30%", height: "auto" }}
+                style={{ width: "23%", height: "auto" }}
+                title="Add To Favorites"
               />
-            </button>
-          )}
+            )}
+          </div>
 
-          {checkOnSaved(wine.id) ? (
-            <button
-              onClick={() => {
-                handleRemoveSaved(wine.id);
-              }}
-              className="bg-transparent p-0"
-              style={{
-                border: "none",
-              }}
-            >
+          <div
+           onClick={() => {
+            const savedId = checkOnSaved(wine.id);
+            if (savedId) {
+              handleRemoveSaved(savedId);
+            } else {
+              handleAddSaved(user.id, wine.id);
+            }
+            }}
+            className="custom-button"
+            style={{
+              cursor: "pointer",
+            }}
+          >
+            {checkOnSaved(wine.id) ? (
               <img
-                src="/images/notepad-check.png"
+                src="/images/8-notepad_check.png"
                 alt="notepad"
                 className="img-fluid"
-                style={{ width: "30%", height: "auto" }}
+                style={{ width: "25%", height: "auto", marginTop: "-6px", marginRight:"-2px" }}
+                title="Remove From My List"
               />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                addSaved(user.id, wine.id);
-              }}
-              className="bg-transparent p-0"
-              style={{
-                border: "none",
-              }}
-            >
+            ) : (
               <img
                 src="/images/6-list.png"
                 alt="savedPad"
                 className="img-fluid"
-                style={{ width: "30%", height: "auto" }}
+                style={{ width: "25%", height: "auto" }}
+                title="Add To My List"
               />
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
@@ -181,6 +187,6 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       </div>
     </div>
   );
-};
+        }
 
 export default WineDetails;
