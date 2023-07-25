@@ -15,7 +15,8 @@ const WineFeed = ({
   allReviews,
   setReviewInfo,
   reviewInfo,
-  favorites
+  favorites,
+  saved
 }) => {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -240,6 +241,7 @@ const WineFeed = ({
                       review={review}
                       setReviewInfo={setReviewInfo}
                       favorites={favorites}
+                      saved={saved}
                     />
                   </div>
                 );

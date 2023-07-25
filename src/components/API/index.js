@@ -637,6 +637,7 @@ export async function addSaved(user_id, wine_id) {
     };
     const response = await fetch(`${BASE_URL}/saved/`, options);
     const result = await response.json();
+    console.log(result, "result")
     return result;
   } catch (error) {
     console.error(error);

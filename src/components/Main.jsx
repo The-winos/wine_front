@@ -160,6 +160,7 @@ const Main = () => {
               setWineInfo={setWineInfo}
               user={user}
               favorites={favorites}
+              saved={saved}
             />
           }
         ></Route>
@@ -183,6 +184,7 @@ const Main = () => {
               reviewInfo={reviewInfo}
               setReviewInfo={setReviewInfo}
               favorites={favorites}
+              saved={saved}
             />
           }
         ></Route>
