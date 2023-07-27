@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserById, getWineById, addFavorite, removeFavorite } from "./API";
+import { getUserById, getWineById, addFavorite, removeFavorite, removeSaved, addSaved} from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
 
