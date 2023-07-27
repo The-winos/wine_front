@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserById, getWineById, addFavorite, removeFavorite } from "./API";
+import { getUserById, getWineById, addFavorite, removeFavorite, removeSaved, addSaved} from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
 
@@ -11,6 +11,13 @@ const ReviewDetails = ({review, user, favorites, saved}) => {
   const navigate=useNavigate();
   const [reviewUser, setReviewUser]=useState({})
   const [reviewWine, setReviewWine]=useState({})
+  const [localFavorites, setLocalFavorites] = useState(favorites || []);
+  const [localSaved, setLocalSaved] = useState(saved || []);
+
+  useEffect(() => {
+    setLocalFavorites(favorites || []);
+    setLocalSaved(saved || []);
+  }, [favorites, saved]);
 
   useEffect(()=>{
     async function fetchGetUserById(){
@@ -35,126 +42,146 @@ fetchGetUserById();
   });
 
   function checkOnFaves(wineID) {
-    for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].wine_id === wineID) {
-        return true;
-      }
-    }
-  }
-  function checkOnSaved(wineID) {
-    console.log(saved, "saved");
-    if (saved && saved.length) {
-      for (let i = 0; i < saved.length; i++) {
-        if (saved[i].wine_id === wineID) {
-          return true;
+    if(localFavorites.length>0){
+      for(const favoriteItem of localFavorites){
+        if(favoriteItem.wine_id===wineID){
+          return favoriteItem.id;
         }
       }
     }
-  }
-  function handleRemoveSaved(wineID) {
-    let savedId;
-    for (let i = 0; i < saved.length; i++) {
-      if (saved[i].wine_id === wineID) {
-        savedId = saved[i].id;
-        break;
-      }
+    return null;
     }
-    removeSaved(savedId);
-  }
 
-
-  function handleRemoveFavorite(wineID) {
-
-    let favoriteId;
-    for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].wine_id === wineID) {
-        favoriteId = favorites[i].id;
-        break;
+    function checkOnSaved(wineID) {
+      if (localSaved.length > 0) {
+        for (const savedItem of localSaved) {
+          if (savedItem.wine_id === wineID) {
+            return savedItem.id;
+          }
+        }
       }
+      return null;
     }
-    removeFavorite(favoriteId);
-  }
+
+    function handleRemoveFavorite(favoriteID) {
+      const updateFavorite=localFavorites.filter(
+        (favoriteItem)=>favoriteItem.id !== favoriteID
+      );
+      setLocalFavorites(updateFavorite);
+      removeFavorite(favoriteID)
+      }
+
+      function handleRemoveSaved(savedId) {
+        const updatedSaved = localSaved.filter(
+          (savedItem) => savedItem.id !== savedId
+        );
+        setLocalSaved(updatedSaved);
+        removeSaved(savedId);
+      }
+
+      function handleAddSaved(userId, wineId) {
+        const newSavedItem = {
+          id: Date.now(),
+          user_id: userId,
+          wine_id: wineId,
+        };
+        setLocalSaved([...localSaved, newSavedItem]);
+        addSaved(userId, wineId);
+      }
+
+      function handleAddFavorite(userId, wineId) {
+        const newFavItem = {
+          id: Date.now(),
+          user_id: userId,
+          wine_id: wineId,
+        };
+        setLocalFavorites([...localFavorites, newFavItem]);
+        addFavorite(userId, wineId);
+      }
 
 
 
-  return (
-    <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
-      <div className="row no-gutter">
-        <div className="col-md-3" style={{ border: "none", position: "relative" }}>
-          <img
-            src={`/images/${reviewWine.image_url}`}
-            alt="wine image"
-            className="img-fluid"
-            style={{ maxHeight: "250px", maxWidth: "90%" }}
-          />
-                 <div className="d-flex justify-center flex-column align-items-end">
-  {checkOnFaves(reviewWine.id) ? (
-    <div
-      onClick={() => {
-        handleRemoveFavorite(reviewWine.id);
-      }}
-      className="custom-button"
-      style={{
-        marginBottom: "0.5rem",
-      }}
-    >
-      <img
-        src="/images/7-heartcheck.png"
-        alt="heart"
-        className="img-fluid"
-        style={{ width: "30%", height: "auto" }}
-      />
-    </div>
-  ) : (
-    <div
-      onClick={() => {
-        addFavorite(user.id, reviewWine.id);
-      }}
-      className="custom-button"
-      style={{
-        marginBottom: "0.5rem",
-      }}
-    >
-      <img
-        src="/images/5-heart.png"
-        alt="heart"
-        className="img-fluid"
-        style={{ width: "30%", height: "auto" }}
-      />
-    </div>
-  )}
+      return (
+        <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
+          <div className="row no-gutter">
+            <div className="col-md-3" style={{ border: "none", position: "relative" }}>
+              <img
+                src={`/images/${reviewWine.image_url}`}
+                alt="wine image"
+                className="img-fluid"
+                style={{ maxHeight: "250px", maxWidth: "90%" }}
+              />
+              <div className="d-flex flex-column align-items-end" style={{ position: "absolute", top: 0, right: 0 }}>
+                <div
+                  onClick={() => {
+                    const favoriteId = checkOnFaves(reviewWine.id);
+                    if (favoriteId) {
+                      handleRemoveFavorite(favoriteId);
+                    } else {
+                      handleAddFavorite(user.id, reviewWine.id);
+                    }
+                  }}
+                  className="custom-button"
+                  style={{
+                    marginBottom: "0.5rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  {checkOnFaves(reviewWine.id) ? (
+                    <img
+                      src="/images/7-heartcheck.png"
+                      alt="heart"
+                      className="img-fluid"
+                      style={{ width: "25%", height: "auto", marginBottom: "-5px", marginRight: "-2px" }}
+                      title="Remove from Favorites"
+                    />
+                  ) : (
+                    <img
+                      src="/images/5-heart.png"
+                      alt="heart"
+                      className="img-fluid"
+                      style={{ width: "20%", height: "auto" }}
+                      title="Add To Favorites"
+                    />
+                  )}
+                </div>
 
-  {checkOnSaved(reviewWine.id) ? (
-    <div
-      onClick={() => {
-        handleRemoveSaved(reviewWine.id);
-      }}
-      className="custom-button"
-    >
-      <img
-        src="/images/8-notepad_check.png"
-        alt="notepad"
-        className="img-fluid"
-        style={{ width: "30%", height: "auto" }}
-      />
-    </div>
-  ) : (
-    <div
-      onClick={() => {
-        addSaved(user.id, reviewWine.id);
-      }}
-      className="custom-button"
-    >
-      <img
-        src="/images/6-list.png"
-        alt="savedPad"
-        className="img-fluid"
-        style={{ width: "30%", height: "auto" }}
-      />
-    </div>
-  )}
-</div>
-        </div>
+                <div
+                  onClick={() => {
+                    const savedId = checkOnSaved(reviewWine.id);
+                    if (savedId) {
+                      handleRemoveSaved(savedId);
+                    } else {
+                      handleAddSaved(user.id, reviewWine.id);
+                    }
+                  }}
+                  className="custom-button"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                >
+                  {checkOnSaved(reviewWine.id) ? (
+                    <img
+                      src="/images/8-notepad_check.png"
+                      alt="notepad"
+                      className="img-fluid"
+                      style={{ width: "15%", height: "auto", marginTop: "-6px", marginRight: "-2px" }}
+                      title="Remove From My List"
+                    />
+                  ) : (
+                    <img
+                      src="/images/6-list.png"
+                      alt="savedPad"
+                      className="img-fluid"
+                      style={{ width: "25%", height: "auto" }}
+                      title="Add To My List"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+
 
 
     <div className="col-md-9">
