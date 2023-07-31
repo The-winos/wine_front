@@ -144,8 +144,13 @@ button {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.review {
-  padding-bottom: 5rem;
+
+#wineFeed{
+  padding-bottom: 3rem;
+}
+.reviewPage {
+  margin-bottom: 5rem !important;
+
 }
 /* winefeed */
 

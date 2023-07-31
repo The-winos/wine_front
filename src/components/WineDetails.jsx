@@ -63,7 +63,8 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       user_id: userId,
       wine_id: wineId,
     };
-    setLocalSaved([...localSaved, newSavedItem]);
+    const updatedSaved = Array.isArray(localSaved) ? [...localSaved, newSavedItem] : [newSavedItem];
+    setLocalSaved(updatedSaved);
     addSaved(userId, wineId);
   }
 
@@ -73,8 +74,9 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       user_id: userId,
       wine_id: wineId,
     };
-    setLocalFavorites([...localFavorites, newFavItem]);
-    addFavorite(userId, wineId);
+    const updatedFavorites= Array.isArray(localFavorites) ? [...localFavorites, newFavItem] :[newFavItem]
+  setLocalFavorites(updatedFavorites);
+  addFavorite(userId, wineId)
   }
 
   return (
@@ -161,30 +163,28 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       </div>
 
       <div className="card-body">
-        <h5 className="card-title">{wine.name}</h5>
-        <p className="card-text">
-          <small className="text-muted">Type: {wine.flavor}</small>
-        </p>
-        <p className="card-text">
-          <small className="text-muted">Region: {wine.region}</small>
-        </p>
-        <div className="card-text">
-          <Rating
-            value={wine.rating}
-            edit={false}
-            size={20}
-            activeColor="#ffd700"
-          />
-        </div>
-        <button
-          onClick={() => {
-            navigate(`/singlewine/${wine.id}`);
-          }}
-          className="btn btn-primary"
-        >
-          View Details
-        </button>
-      </div>
+  <h5 className="card-title" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: "100%" }}>
+    {wine.name}
+  </h5>
+  <p className="card-text">
+    <small className="text-muted">Type: {wine.flavor}</small>
+  </p>
+  <p className="card-text">
+    <small className="text-muted">Region: {wine.region}</small>
+  </p>
+  <div className="card-text">
+    <Rating value={wine.rating} edit={false} size={20} activeColor="#ffd700" />
+  </div>
+  <button
+    onClick={() => {
+      navigate(`/singlewine/${wine.id}`);
+    }}
+    className="btn btn-primary"
+  >
+    View Details
+  </button>
+</div>
+
     </div>
   );
         }

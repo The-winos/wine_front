@@ -17,7 +17,7 @@ const Review = ({user, handleNewReview}) => {
   const[region, setRegion]=useState("");
   const[flavor, setFlavor]=useState("");
   const[reviewName, setReviewName]=useState("");
-  const[reviewPrice, setReviewPrice]=useState(0);
+  const[reviewPrice, setReviewPrice]=useState(null);
   const[reviewRating, setReviewRating]=useState(0);
   const[comment, setComment]=useState("");
   const[theLocation, setTheLocation]=useState("");
@@ -127,6 +127,7 @@ const handlePriceChange = (e) => {
             value={wineName}
             onChange={(e) => setWineName(e.target.value)}
             required
+            style={{ maxWidth: "350px" }}
           />
         </div>
         <button type="submit" className="btn btn-primary">
@@ -189,10 +190,10 @@ const handlePriceChange = (e) => {
 
 
 {isThereWine ?
-        <form onSubmit={handleReview}>
+        <form onSubmit={handleReview} className="border p-4 mt-4 border-light">
           <h2>Add Your Review</h2>
           <div className="mb-3">
-            <label htmlFor="reviewName" className="form-label">
+            <label htmlFor="reviewName" className="form-label mt-10px">
               Name of Review
             </label>
             <input
@@ -202,6 +203,7 @@ const handlePriceChange = (e) => {
               value={reviewName}
               onChange={(e) => setReviewName(e.target.value)}
               required
+              style={{ maxWidth: "350px" }}
             />
           </div>
           <div className="mb-3">
@@ -268,18 +270,22 @@ const handlePriceChange = (e) => {
           </div>
 
           <div className="mb-3">
-  <label htmlFor="reviewPrice" className="form-label">
-    Price
-  </label>
-  <input
-    type="number"
-    className="form-control"
-    id="reviewPrice"
-    value={reviewPrice}
-    onChange={(e) => setReviewPrice(e.target.value)}
-  />
-</div>
-
+        <label htmlFor="reviewPrice" className="form-label">
+          Price
+        </label>
+        <div className="input-group">
+          <span className="input-group-text">$</span>
+          <input
+            type="number"
+            className="form-control"
+            id="reviewPrice"
+            value={reviewPrice === null ? "" : reviewPrice}
+            onChange={(e) => setReviewPrice(e.target.value === "" ? null : Number(e.target.value))}
+            inputMode="decimal" // To remove up and down arrows
+            style={{ maxWidth: "150px" }} // To make the input field smaller
+          />
+        </div>
+      </div>
 
         <div className="mb-3">
           <label htmlFor="reviewComment" className="form-label">
@@ -292,6 +298,7 @@ const handlePriceChange = (e) => {
             rows="3"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            style={{ maxWidth: "650px" }}
           />
         </div>
         <div className="mb-3">
@@ -303,6 +310,7 @@ const handlePriceChange = (e) => {
             id="reviewLocation"
             value={theLocation}
             onChange={(e) => setTheLocation(e.target.value)}
+            style={{ maxWidth: "250px" }}
           >
             <option value="">Choose...</option>
             <option value="Grocery">Grocery</option>
@@ -313,7 +321,7 @@ const handlePriceChange = (e) => {
           </select>
 
 
-        <button type="submit" className="btn btn-primary" onClick={handleReview}>
+        <button type="submit" className="btn btn-primary mt-3 mb-1" onClick={handleReview}>
   Submit
 </button>
 
