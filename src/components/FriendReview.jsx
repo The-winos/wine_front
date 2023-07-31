@@ -83,7 +83,8 @@ function handleAddSaved(userId, wineId) {
     user_id: userId,
     wine_id: wineId,
   };
-  setLocalSaved([...localSaved, newSavedItem]);
+  const updatedSaved = Array.isArray(localSaved) ? [...localSaved, newSavedItem] : [newSavedItem];
+  setLocalSaved(updatedSaved);
   addSaved(userId, wineId);
 }
 
@@ -93,8 +94,9 @@ function handleAddFavorite(userId, wineId) {
     user_id: userId,
     wine_id: wineId,
   };
-  setLocalFavorites([...localFavorites, newFavItem]);
-  addFavorite(userId, wineId);
+  const updatedFavorites= Array.isArray(localFavorites) ? [...localFavorites, newFavItem] :[newFavItem]
+  setLocalFavorites(updatedFavorites);
+  addFavorite(userId, wineId)
 }
 
 return (
