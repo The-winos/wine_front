@@ -25,7 +25,7 @@ import {
   FooterAboutUs,
   FooterContact,
   FooterPrivacy,
-  FooterTerms
+  FooterTerms,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -40,13 +40,13 @@ const Main = () => {
   const [reviewInfo, setReviewInfo] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [saved, setSaved] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
 
   const getLoggedInUser = async (token) => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
-      console.log(loggedInUser, "user in main, mainfunction")
-
+      console.log(loggedInUser, "user in main, mainfunction");
     }
   };
   useEffect(() => {
@@ -90,7 +90,6 @@ const Main = () => {
     fetchUserSaved();
   }, [user]);
 
-
   return (
     <div id="main">
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
@@ -107,8 +106,11 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/admin" element={<Admin user={user}/>}></Route>
-        <Route path="/followers" element={<Followers user={user} favorites={favorites}/>}></Route>
+        <Route path="/admin" element={<Admin user={user} />}></Route>
+        <Route
+          path="/followers"
+          element={<Followers user={user} favorites={favorites} />}
+        ></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route
@@ -131,10 +133,10 @@ const Main = () => {
             />
           }
         />
-        <Route path="/favoritesuserid/:id"
-        element={
-          <FavoritesUserId user={user} setWineInfo={setWineInfo}/>
-        }/>
+        <Route
+          path="/favoritesuserid/:id"
+          element={<FavoritesUserId user={user} setWineInfo={setWineInfo} />}
+        />
 
         <Route
           path="/userreviewdetails"
@@ -168,12 +170,24 @@ const Main = () => {
           path="/singlewine/:wineId"
           element={<SingleWine user={user} loggedIn={loggedIn} />}
         ></Route>
-        <Route path="/winedetails" element={<WineDetails favorites={favorites} user={user}/>}></Route>
+        <Route
+          path="/winedetails"
+          element={<WineDetails favorites={favorites} user={user} />}
+        ></Route>
         <Route
           path="/accountsettings"
           element={<AccountSettings user={user} />}
         ></Route>
-        <Route path="/review" element={<Review user={user} />}></Route>
+        <Route
+          path="/review"
+          element={
+            <Review
+              user={user}
+              filteredReviews={filteredReviews}
+              setFilteredReviews={setFilteredReviews}
+            />
+          }
+        ></Route>
         <Route
           path="/winefeed"
           element={
@@ -185,16 +199,32 @@ const Main = () => {
               setReviewInfo={setReviewInfo}
               favorites={favorites}
               saved={saved}
+              filteredReviews={filteredReviews}
+              setFilteredReviews={setFilteredReviews}
             />
           }
         ></Route>
         <Route
           path="/favorites"
-          element={<Favorites user={user} setWineInfo={setWineInfo} favorites={favorites} setFavorites={setFavorites}/>}
+          element={
+            <Favorites
+              user={user}
+              setWineInfo={setWineInfo}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+          }
         ></Route>
         <Route
           path="/saved"
-          element={<Saved user={user} setWineInfo={setWineInfo} saved={saved} setSaved={setSaved}/>}
+          element={
+            <Saved
+              user={user}
+              setWineInfo={setWineInfo}
+              saved={saved}
+              setSaved={setSaved}
+            />
+          }
         ></Route>
         <Route
           path="/footeraboutus"
@@ -204,14 +234,8 @@ const Main = () => {
           path="/footercontact"
           element={<FooterContact user={user} />}
         ></Route>
-        <Route
-          path="/privacy"
-          element={<FooterPrivacy user={user} />}
-        ></Route>
-        <Route
-          path="/terms"
-          element={<FooterTerms user={user} />}
-        ></Route>
+        <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
+        <Route path="/terms" element={<FooterTerms user={user} />}></Route>
       </Routes>
       <Footer />
     </div>

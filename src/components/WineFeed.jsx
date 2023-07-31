@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllReviews, getAllWine, getUserById, getWineById } from "./API";
 import ReviewDetails from "./ReviewDetails";
+import Review from "./Review";
 import WineDetails from "./WineDetails";
 import {
   handlePriceFilter,
@@ -16,11 +17,12 @@ const WineFeed = ({
   setReviewInfo,
   reviewInfo,
   favorites,
-  saved
+  saved,
+  filteredReviews,
+  setFilteredReviews
 }) => {
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
-  const [filteredReviews, setFilteredReviews] = useState([]);
   const [selectedRating, setSelectedRating] = useState("all");
   const [searchName, setSearchName] = useState("");
   const [searchRegion, setSearchRegion] = useState("");
@@ -28,13 +30,19 @@ const WineFeed = ({
   const [searchUsername, setSearchUsername]= useState("");
 
   useEffect(() => {
-    async function fetchAllReview() {
-      const allTheReviews = await getAllReviews();
-      setAllReviews(allTheReviews);
-      setFilteredReviews(allTheReviews)
-    }
     fetchAllReview();
-  }, []);
+  }, [allReviews, filteredReviews]);
+
+  async function fetchAllReview() {
+    const allTheReviews = await getAllReviews();
+    setAllReviews(allTheReviews);
+    setFilteredReviews(allTheReviews);
+  }
+
+  function handleNewReview(newReview) {
+    setAllReviews((allReviews) => [newReview, ...allReviews]);
+    setFilteredReviews((filteredReviews) => [newReview, ...filteredReviews]);
+  }
 
   useEffect(() => {
     const filterReviews = async () => {
@@ -225,6 +233,7 @@ const WineFeed = ({
 
                 Add a review!
               </button>
+
             </div>
           </>
         )}
@@ -248,6 +257,7 @@ const WineFeed = ({
               })
           : null}
       </div>
+
     </div>
   );
 };

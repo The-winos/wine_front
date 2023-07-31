@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from "react";
 import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 
 import { checkExistingWine, createReview, createWine } from "./API";
 
-const Review = ({user}) => {
-  const navigate= useNavigate()
+const Review = ({user, filteredReviews, setFilteredReviews}) => {
+  const navigate= useNavigate();
   const[wineName, setWineName]=useState("");
   const[wineImg, setWineImg]=useState("")
   const[winePrice, setWinePrice]=useState("");
@@ -19,7 +23,8 @@ const Review = ({user}) => {
   const[theLocation, setTheLocation]=useState("");
   const[isThereWine, setIsThereWine]=useState(false)// for review
   const[noWine, setNoWine]=useState(false)
-  const[wineId, setWineId]=useState(0)
+  const[wineId, setWineId]=useState(0);
+
 
 async function handleWine(e)
 {
@@ -71,26 +76,34 @@ async function handleWine(e)
 
 }, [wineImg]);
 
-
-
-function handleReview(e) {
+async function handleReview(e) {
   e.preventDefault();
 
-  createReview({
-    wine_id: wineId,
-    user_id: user.id,
-    name: reviewName,
-    rating: reviewRating,
-    price: reviewPrice * 100,
-    review_comment: comment,
-    image_url: null,
-    review_date: new Date(),
-    location: theLocation
-  }).then(() => {
-    // Review created successfully, navigate to the desired route
-    navigate("/winefeed");
-  });
+  try {
+    const review = await createReview({
+      wine_id: wineId,
+      user_id: user.id,
+      name: reviewName,
+      rating: reviewRating,
+      price: reviewPrice * 100,
+      review_comment: comment,
+      image_url: null,
+      review_date: new Date(),
+      location: theLocation,
+    });
+
+    if (review) {
+      // Review created successfully, navigate to the desired route
+      setFilteredReviews([review, ...filteredReviews]);
+      toast.success("Review Added");
+      navigate("/winefeed");
+    }
+  } catch (error) {
+    //Review not created correctly
+    toast.error("Failed to submit the review. Please try again later.");
+  }
 }
+
 const handlePriceChange = (e) => {
   const userInput = e.target.value;
   const priceInDollars = parseFloat(userInput);
@@ -100,7 +113,7 @@ const handlePriceChange = (e) => {
 
 
   return (
-    <div className="container mt-5">
+    <div className="reviewPage container mt-5">
       <h1>Submit a Review</h1>
       <form onSubmit={handleWine}>
         <div className="mb-3">
@@ -299,12 +312,16 @@ const handlePriceChange = (e) => {
             <option value="Other">Other</option>
           </select>
 
-        <button type="submit" className="btn btn-primary" onSubmit={handleReview}>
-          Submit
-        </button>
+
+        <button type="submit" className="btn btn-primary" onClick={handleReview}>
+  Submit
+</button>
+
       </div></form>
 
+
         : null}
+        <ToastContainer />
       </div>
   );
 };
