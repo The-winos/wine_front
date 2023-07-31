@@ -90,6 +90,12 @@ const Main = () => {
     fetchUserSaved();
   }, [user]);
 
+  function handleNewReview(newReview) {
+    // Update the list of reviews to include the newly created review
+    setAllReviews((prevReviews) => [newReview, ...prevReviews]);
+    setFilteredReviews((prevReviews) => [newReview, ...prevReviews]);
+  }
+
   return (
     <div id="main">
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
@@ -185,6 +191,7 @@ const Main = () => {
               user={user}
               filteredReviews={filteredReviews}
               setFilteredReviews={setFilteredReviews}
+              handleNewReview={handleNewReview}
             />
           }
         ></Route>

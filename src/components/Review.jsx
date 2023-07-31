@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 import { checkExistingWine, createReview, createWine } from "./API";
 
-const Review = ({user, filteredReviews, setFilteredReviews}) => {
+const Review = ({user, handleNewReview}) => {
   const navigate= useNavigate();
   const[wineName, setWineName]=useState("");
   const[wineImg, setWineImg]=useState("")
@@ -94,7 +94,7 @@ async function handleReview(e) {
 
     if (review) {
       // Review created successfully, navigate to the desired route
-      setFilteredReviews([review, ...filteredReviews]);
+      handleNewReview(review);
       toast.success("Review Added");
       navigate("/winefeed");
     }
