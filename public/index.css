@@ -52,6 +52,17 @@ body {
   height: 100%;
   background-color: rgb(249, 247, 232);;
 }
+
+.custom-centered-card {
+  margin-top: 2rem !important;
+  padding-top: 10px;
+  margin: auto;
+  border: 3px solid #bae1ff !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+}
+
+
 .custom-button{
   display: flex;
   justify-content: end !important;
@@ -69,6 +80,13 @@ body {
 button {
   position: relative;
   margin-top: 10px;
+  background-color: #77DD77 !important;
+  border-color: #bae1ff !important;
+
+  &:hover {
+    background-color: #66BB66 !important;
+    border-color: #a0d1ff !important;
+  }
 }
 
 .card-text small {
@@ -167,6 +185,7 @@ button {
 /* singleWine */
 #single-wine {
   margin-top: 2rem;
+  padding-bottom: 6rem;
 }
 
 #single-wine img {

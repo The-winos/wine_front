@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getWineById, getAllWine } from "./API";
 import Rating from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
 
 const Home = ({ allWine, setAllWine }) => {
+  const navigate=useNavigate()
   const [filteredWines, setFilteredWines] = useState([]);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const Home = ({ allWine, setAllWine }) => {
 
   return (
     <div id="Home" className="text-center pt-5 pb-5">
-      {console.log(filteredWines, "filteredWines")}
+
       <div className="home-header">
         <img
           src="/images/4-wine_glass.png"
@@ -58,19 +60,22 @@ const Home = ({ allWine, setAllWine }) => {
       <h5>Community of Reviews & Knowledgeable Sippers</h5>
       {/* corks logo goes here */}
       {filteredWines.length > 0 ? <>
-      <h5>Featured Wine</h5>
-      <div className="col-md-9">
-      <div className="card-body">
+
+      <div>
+
+      <div className="card col-md-9 d-flex justify-content-center custom-centered-card">
+        <h5>Featured Wine</h5>
       <h4 className="wine-name">{filteredWines[0].name}
   <small className="wine-flavor muted">   {filteredWines[0].flavor}</small>
 </h4>
-
+<div className="d-flex justify-content-center">
         <Rating
                   value={filteredWines[0].rating}
                   edit={false}
                   size={20}
                   activeColor="#ffd700"
                 />
+                </div>
         <p className="card-text">
           <small className="text-muted">Average Price: <small className="text-muted"> {filteredWines[0].price !== 0 && filteredWines[0].price !== null ? formattedPrice : "N/A" }</small>
 </small> <br />
