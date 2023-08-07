@@ -46,7 +46,7 @@ const Main = () => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
-      console.log(loggedInUser, "user in main, mainfunction");
+
     }
   };
   useEffect(() => {
@@ -63,7 +63,6 @@ const Main = () => {
         try {
           const fetchedFavorites = await getFavorites(user.id);
           setFavorites(fetchedFavorites);
-          console.log(fetchedFavorites, "Main Fav");
         } catch (error) {
           console.error(error);
         }
@@ -76,11 +75,11 @@ const Main = () => {
   useEffect(() => {
     const fetchUserSaved = async () => {
       if (user) {
-        console.log(user, "userId in main");
+
         try {
           const fetchedSaved = await getSaved(user.id);
           setSaved(fetchedSaved);
-          console.log(fetchedSaved, "Main saved");
+
         } catch (error) {
           console.error(error);
         }
@@ -100,7 +99,7 @@ const Main = () => {
     <div id="main">
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Home allWine={allWine} setAllWine={setAllWine}/>}></Route>
         <Route
           path="/login"
           element={

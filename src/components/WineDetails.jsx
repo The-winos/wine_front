@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useHref } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 import { addFavorite, removeFavorite, removeSaved, addSaved } from "./API";
@@ -18,17 +18,15 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
   }, [favorites, saved]);
 
   function checkOnFaves(wineID) {
-    if(localFavorites.length>0){
-      for(const favoriteItem of localFavorites){
-        if(favoriteItem.wine_id===wineID){
+    if (localFavorites.length > 0) {
+      for (const favoriteItem of localFavorites) {
+        if (favoriteItem.wine_id === wineID) {
           return favoriteItem.id;
         }
       }
     }
     return null;
-    }
-
-
+  }
 
   function checkOnSaved(wineID) {
     if (localSaved.length > 0) {
@@ -42,11 +40,11 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
   }
 
   function handleRemoveFavorite(favoriteID) {
-  const updateFavorite=localFavorites.filter(
-    (favoriteItem)=>favoriteItem.id !== favoriteID
-  );
-  setLocalFavorites(updateFavorite);
-  removeFavorite(favoriteID)
+    const updateFavorite = localFavorites.filter(
+      (favoriteItem) => favoriteItem.id !== favoriteID
+    );
+    setLocalFavorites(updateFavorite);
+    removeFavorite(favoriteID);
   }
 
   function handleRemoveSaved(savedId) {
@@ -63,7 +61,9 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       user_id: userId,
       wine_id: wineId,
     };
-    const updatedSaved = Array.isArray(localSaved) ? [...localSaved, newSavedItem] : [newSavedItem];
+    const updatedSaved = Array.isArray(localSaved)
+      ? [...localSaved, newSavedItem]
+      : [newSavedItem];
     setLocalSaved(updatedSaved);
     addSaved(userId, wineId);
   }
@@ -74,9 +74,11 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       user_id: userId,
       wine_id: wineId,
     };
-    const updatedFavorites= Array.isArray(localFavorites) ? [...localFavorites, newFavItem] :[newFavItem]
-  setLocalFavorites(updatedFavorites);
-  addFavorite(userId, wineId)
+    const updatedFavorites = Array.isArray(localFavorites)
+      ? [...localFavorites, newFavItem]
+      : [newFavItem];
+    setLocalFavorites(updatedFavorites);
+    addFavorite(userId, wineId);
   }
 
   return (
@@ -113,7 +115,12 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 src="/images/7-heartcheck.png"
                 alt="heart"
                 className="img-fluid"
-                style={{ width: "25%", height: "auto", marginBottom: "-5px", marginRight:"-2px"}}
+                style={{
+                  width: "25%",
+                  height: "auto",
+                  marginBottom: "-5px",
+                  marginRight: "-2px",
+                }}
                 title="Remove from Favorites"
               />
             ) : (
@@ -128,13 +135,13 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
           </div>
 
           <div
-           onClick={() => {
-            const savedId = checkOnSaved(wine.id);
-            if (savedId) {
-              handleRemoveSaved(savedId);
-            } else {
-              handleAddSaved(user.id, wine.id);
-            }
+            onClick={() => {
+              const savedId = checkOnSaved(wine.id);
+              if (savedId) {
+                handleRemoveSaved(savedId);
+              } else {
+                handleAddSaved(user.id, wine.id);
+              }
             }}
             className="custom-button"
             style={{
@@ -146,7 +153,12 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 src="/images/8-notepad_check.png"
                 alt="notepad"
                 className="img-fluid"
-                style={{ width: "25%", height: "auto", marginTop: "-6px", marginRight:"-2px" }}
+                style={{
+                  width: "25%",
+                  height: "auto",
+                  marginTop: "-6px",
+                  marginRight: "-2px",
+                }}
                 title="Remove From My List"
               />
             ) : (
@@ -163,30 +175,42 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
       </div>
 
       <div className="card-body">
-  <h5 className="card-title" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", width: "100%" }}>
-    {wine.name}
-  </h5>
-  <p className="card-text">
-    <small className="text-muted">Type: {wine.flavor}</small>
-  </p>
-  <p className="card-text">
-    <small className="text-muted">Region: {wine.region}</small>
-  </p>
-  <div className="card-text">
-    <Rating value={wine.rating} edit={false} size={20} activeColor="#ffd700" />
-  </div>
-  <button
-    onClick={() => {
-      navigate(`/singlewine/${wine.id}`);
-    }}
-    className="btn btn-primary"
-  >
-    View Details
-  </button>
-</div>
-
+        <h5
+          className="card-title"
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            width: "100%",
+          }}
+        >
+          {wine.name}
+        </h5>
+        <p className="card-text">
+          <small className="text-muted">Type: {wine.flavor}</small>
+        </p>
+        <p className="card-text">
+          <small className="text-muted">Region: {wine.region}</small>
+        </p>
+        <div className="card-text">
+          <Rating
+            value={wine.rating}
+            edit={false}
+            size={20}
+            activeColor="#ffd700"
+          />
+        </div>
+        <button
+          onClick={() => {
+            navigate(`/singlewine/${wine.id}`);
+          }}
+          className="btn btn-primary"
+        >
+          View Details
+        </button>
+      </div>
     </div>
   );
-        }
+};
 
 export default WineDetails;

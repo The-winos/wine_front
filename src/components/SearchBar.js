@@ -23,6 +23,7 @@ export const handlePriceFilter = (event, option, filter) => {
   }
   filter(filtered);
 }
+
 export const handleRatingFilter = (event, option, filter, ratingFilter) => {
   const ratingRange = event.target.value;
   let filtered = [];
