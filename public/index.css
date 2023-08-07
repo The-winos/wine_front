@@ -100,6 +100,10 @@ button {
 
 /* profile */
 
+.profile-container {
+  padding-bottom: 3rem;
+}
+
 /* .card-body {
   display: flex;
   flex-direction: column;
@@ -126,9 +130,7 @@ button {
   padding: 0;
 }
 
-.profile-container {
-  padding: 20px;
-}
+
 
 .profile-username {
   text-align: center;
@@ -227,6 +229,10 @@ button {
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.4;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
 }
 /* singleWineReview */
 
