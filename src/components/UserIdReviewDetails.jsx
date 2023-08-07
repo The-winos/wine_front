@@ -78,7 +78,9 @@ const UserIdReviewDetails = ({ userReviews, userProfile, setUserReviews }) => {
  <br />
           <small className="text-muted">Bought at: {userReviews.location != null ? userReviews.location : "Unknown"}</small>
         </p>
-        <h5 className="review-comment">{userReviews.review_comment}</h5>
+        <h5 className="review-comment text-truncate">
+  {userReviews.review_comment}
+</h5>
 <button onClick={()=>{
         navigate(`/singlewine/${userWineDetails.id}`);
       }} className="btn btn-primary"> Check out this wine</button>

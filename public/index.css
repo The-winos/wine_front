@@ -52,6 +52,17 @@ body {
   height: 100%;
   background-color: rgb(249, 247, 232);;
 }
+
+.custom-centered-card {
+  margin-top: 2rem !important;
+  padding-top: 10px;
+  margin: auto;
+  border: 3px solid #bae1ff !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+}
+
+
 .custom-button{
   display: flex;
   justify-content: end !important;
@@ -69,6 +80,13 @@ body {
 button {
   position: relative;
   margin-top: 10px;
+  background-color: #77DD77 !important;
+  border-color: #bae1ff !important;
+
+  &:hover {
+    background-color: #66BB66 !important;
+    border-color: #a0d1ff !important;
+  }
 }
 
 .card-text small {
@@ -81,6 +99,10 @@ button {
 }
 
 /* profile */
+
+.profile-container {
+  padding-bottom: 3rem;
+}
 
 /* .card-body {
   display: flex;
@@ -108,9 +130,7 @@ button {
   padding: 0;
 }
 
-.profile-container {
-  padding: 20px;
-}
+
 
 .profile-username {
   text-align: center;
@@ -167,6 +187,7 @@ button {
 /* singleWine */
 #single-wine {
   margin-top: 2rem;
+  padding-bottom: 6rem;
 }
 
 #single-wine img {
@@ -208,6 +229,10 @@ button {
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.4;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
 }
 /* singleWineReview */
 
@@ -470,6 +495,9 @@ button {
   );
 
   border-image-slice: 1;
+}
+#admin{
+  padding-bottom: 2rem;
 }
 
 .misc {

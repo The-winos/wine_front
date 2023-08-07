@@ -222,13 +222,48 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
 
     {wineButton ? (
       <>
+      <div className="text-center py-2">
+        <h6>Average Rating</h6>
+      <span className="badge bg-danger mx-2 rounded-circle pr-3"> 1
+                  &nbsp;
+
+                </span>
+
+                <span className="badge bg-primary mx-2 rounded-circle">
+                  &nbsp;2
+                </span>
+
+                <span className="badge bg-secondary mx-2 rounded-circle">
+                  &nbsp;3
+                </span>
+
+                <span className="badge bg-info mx-2 rounded-circle pr-3">
+                  &nbsp;4
+                </span>
+
+                <span className="badge bg-success mx-2 rounded-circle">
+                  &nbsp;5
+                </span>
+
+
+      </div>
         {allWine
           .sort((a, b) => a.name.localeCompare(b.name))
           .map((wine) => {
             return (
               <div key={`winelist-${wine.id}`}>
                 <h5
-                  style={{ cursor: "pointer" }}
+                  style={{ color:
+                    wine.rating === 1
+                      ? "red"
+                      : wine.rating === 2
+                      ? "blue"
+                      : wine.rating === 3
+                      ? "black"
+                      : wine.rating === 4
+                      ? "#199EF3"
+                      : "green",
+                    cursor: "pointer" }}
                   onClick={() => handleWineClick(wine.id)}
                 >
                   {wine.name}

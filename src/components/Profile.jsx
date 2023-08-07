@@ -152,7 +152,8 @@ const Profile = ({ user }) => {
                 </div>
               </div>
             </div>
-            <div>
+            </div>
+            <div className="d-flex flex-wrap pt-3 pb-2">
               <Link to={"/accountsettings"}>
                 <button
                   type="accountsettings"
@@ -171,8 +172,9 @@ const Profile = ({ user }) => {
                   Saved
                 </button>
               </Link>
-            </div>
-          </div>
+              </div>
+
+
 
           <div>
             {user && user.admin ? (

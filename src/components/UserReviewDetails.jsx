@@ -72,7 +72,9 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
               size={20}
               activeColor="#ffd700"
             />
-            <p>{userReviews.review_comment}</p>
+            <h5 className="review-comment text-truncate">
+  {userReviews.review_comment}
+</h5>
           </>
         )}
       </div>
