@@ -14,7 +14,7 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
       try {
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
-        console.log(reviews, "user reviews");
+
       } catch (error) {
         console.error(error);
       }

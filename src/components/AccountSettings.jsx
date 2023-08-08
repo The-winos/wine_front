@@ -9,6 +9,7 @@ import {
   getUserById,
   updateUserPassword,
   updatePasswordWithVerification,
+  updateAdminUserPassword,
 } from "./API";
 
 import OptionsStates from "./OptionsStates";
@@ -22,25 +23,13 @@ const AccountSettings = ({ user }) => {
   const [birthday, setBirthday] = useState(
     user.birthday ? new Date(user.birthday) : null
   );
-
   const [bio, setBio] = useState(user.bio || "");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  useEffect(() => {
-    const parseDate = (dateString) => {
-      if (!dateString) {
-        return null;
-      }
-      const date = new Date(dateString);
-      date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-      return date;
-    };
-    const parsedBirthday = parseDate(user.birthday);
-    setBirthday(parsedBirthday);
-  }, [user.birthday, setBirthday]);
+
 
   const handleLocationChange = (selectedState) => {
     setState(selectedState);
@@ -64,7 +53,7 @@ const AccountSettings = ({ user }) => {
 
     try {
       if (newPassword !== "") {
-        const isOldPasswordValid = await updatePasswordWithVerification(
+        const isOldPasswordValid = await updateUserPassword(
           user.id,
           oldPassword,
           newPassword
@@ -74,20 +63,26 @@ const AccountSettings = ({ user }) => {
         if (!isOldPasswordValid) {
           toast.error("Old password verification failed");
           return;
+        } else {
+          setNewPassword(isOldPasswordValid);
         }
+      } else {
+        // If newPassword is empty, proceed with updating the user without changing the password
+        console.log(username, "username?")
+        await updateUser(
+          username,
+          undefined,
+          name,
+          state,
+          avatar,
+          user.role,
+          email,
+          bio,
+          birthday,
+          user.follower_count,
+          user.following_count
+        );
       }
-
-      // If the old password verification passed or newPassword is empty, proceed with updating the user
-      await updateUser(user.id, {
-        username: username || user.username,
-        name: name || user.name,
-        state: state || user.state,
-        avatar: avatar || user.avatar,
-        email: email || user.email,
-        bio: bio || null,
-        birthday: birthday || user.birthday,
-        newPassword: newPassword || null,
-      });
 
       setUsername("");
       setOldPassword("");
@@ -105,6 +100,7 @@ const AccountSettings = ({ user }) => {
       toast.error("Error updating user. Please try again.");
     }
   };
+
 
   return (
     <div id="accountSettings">
