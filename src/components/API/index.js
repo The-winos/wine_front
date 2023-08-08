@@ -492,10 +492,11 @@ export async function updateWine(
   }
 }
 
-export async function updateUserPassword(userId, password) {
+export async function updateUserPassword(userId, password, newPassword) {
   try {
     const body = {
       password,
+      newPassword
     };
 
     const options = {
@@ -512,6 +513,7 @@ export async function updateUserPassword(userId, password) {
       options
     );
     const result = await response.text();
+    console.log(result, "result in updatepass")
     return result;
   } catch (error) {
     console.error(error);

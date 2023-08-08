@@ -62,26 +62,6 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
     setUpdatingUser(userToUpdate);
   }
 
-  useEffect(() => {
-    const parseDate = (dateString) => {
-      if (!dateString) {
-        return null;
-      }
-      const date = new Date(dateString);
-      date.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-      return date;
-    };
-
-    const formattedDate = birthday
-      ? birthday.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        })
-      : "";
-    // setFormattedBirthday(formattedDate); // Remove this line
-  }, [birthday]);
-
   async function handleSubmit(event) {
     event.preventDefault();
 
