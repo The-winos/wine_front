@@ -483,7 +483,7 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
             {user.username}
           </td>
           <td>{user.name}</td>
-          <td>{new Date(user.date_joined).toLocaleDateString("en-US")}</td>
+          <td>{new Date(user.join_date).toLocaleDateString("en-US")}</td>
           {/* <td>{user.reviews.length}</td>
           <td>{user.wines_entered}</td> */}
         </tr>

@@ -28,12 +28,16 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
       username,
       password,
       state,
+      "character_1.png",
       "user",
       email,
+      null,
       birthday,
       0,
-      0
+      0,
+      new Date(),
     );
+
 
     if (response.error) {
       setError(response.message);
