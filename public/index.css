@@ -19,6 +19,20 @@ body {
   padding-left: 20px !important;
 }
 
+/* AccountSettings.css */
+
+/* Adjust the position of the close icon in the DatePicker */
+.custom-datepicker .react-datepicker__close-icon {
+  top: 5px; /* Adjust this value as needed */
+  right: 10px; /* Adjust this value as needed */
+}
+
+/* Style the close icon */
+.custom-datepicker .react-datepicker__close-icon:before {
+  font-size: 20px; /* Adjust this value as needed */
+  line-height: 1;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -50,7 +64,7 @@ body {
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  background-color: rgb(249, 247, 232);;
+  background-color: rgb(249, 247, 232);
 }
 
 .custom-centered-card {
@@ -62,12 +76,10 @@ body {
   padding: 10px !important;
 }
 
-
-.custom-button{
+.custom-button {
   display: flex;
   justify-content: end !important;
 }
-
 
 .card-text {
   margin-bottom: 0.5rem;
@@ -80,11 +92,11 @@ body {
 button {
   position: relative;
   margin-top: 10px;
-  background-color: #77DD77 !important;
+  background-color: #77dd77 !important;
   border-color: #bae1ff !important;
 
   &:hover {
-    background-color: #66BB66 !important;
+    background-color: #66bb66 !important;
     border-color: #a0d1ff !important;
   }
 }
@@ -165,12 +177,11 @@ button {
   padding-bottom: 20px;
 }
 
-#wineFeed{
+#wineFeed {
   padding-bottom: 3rem;
 }
 .reviewPage {
   margin-bottom: 5rem !important;
-
 }
 /* winefeed */
 
@@ -179,7 +190,7 @@ button {
   padding-bottom: 4rem;
 }
 
-.reviewPage{
+.reviewPage {
   padding-bottom: 4rem;
 }
 /* following feed */
@@ -248,7 +259,7 @@ button {
   font-size: inherit;
 }
 
-.heartButton{
+.heartButton {
   margin-right: -80px !important;
   padding: none !important;
 }
@@ -301,8 +312,6 @@ button {
   text-decoration: none;
   background-color: blue;
 }
-
-
 
 .profile-username {
   display: flex;
@@ -496,7 +505,7 @@ button {
 
   border-image-slice: 1;
 }
-#admin{
+#admin {
   padding-bottom: 2rem;
 }
 

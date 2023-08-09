@@ -29,8 +29,6 @@ const AccountSettings = ({ user }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-
-
   const handleLocationChange = (selectedState) => {
     setState(selectedState);
   };
@@ -68,7 +66,7 @@ const AccountSettings = ({ user }) => {
         }
       } else {
         // If newPassword is empty, proceed with updating the user without changing the password
-        console.log(username, "username?")
+        console.log(username, "username?");
         await updateUser(
           username,
           undefined,
@@ -100,7 +98,6 @@ const AccountSettings = ({ user }) => {
       toast.error("Error updating user. Please try again.");
     }
   };
-
 
   return (
     <div id="accountSettings">
@@ -138,7 +135,7 @@ const AccountSettings = ({ user }) => {
             onChange={(date) => setBirthday(date)}
             placeholderText="Select a date"
             dateFormat="MM/dd/yyyy"
-            isClearable
+            isClearable="custom-datepicker"
           />
 
           <h6>Update Password:</h6>
