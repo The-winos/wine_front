@@ -74,6 +74,7 @@ const AccountSettings = ({ user }) => {
           birthday,
           user.follower_count,
           user.following_count
+          // user.join_date
         );
       }
 
