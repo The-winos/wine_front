@@ -19,20 +19,6 @@ body {
   padding-left: 20px !important;
 }
 
-/* AccountSettings.css */
-
-/* Adjust the position of the close icon in the DatePicker */
-.custom-datepicker .react-datepicker__close-icon {
-  top: 5px; /* Adjust this value as needed */
-  right: 10px; /* Adjust this value as needed */
-}
-
-/* Style the close icon */
-.custom-datepicker .react-datepicker__close-icon:before {
-  font-size: 20px; /* Adjust this value as needed */
-  line-height: 1;
-}
-
 .footer {
   position: fixed;
   bottom: 0;
@@ -431,6 +417,21 @@ button {
   justify-content: center;
 
 } */
+
+.centered-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
 
 #accountSettings {
   padding-bottom: 6rem !important;
