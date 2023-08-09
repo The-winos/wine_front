@@ -108,7 +108,8 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
             bio,
             birthday,
             updatingUser.follower_count,
-            updatingUser.following_count
+            updatingUser.following_count,
+            updatingUser.join_date
           );
         } catch (error) {
           console.error(error);
@@ -125,7 +126,8 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
           bio,
           birthday,
           updatingUser.follower_count,
-          updatingUser.following_count
+          updatingUser.following_count,
+          updatingUser.join_date
         );
         setUsername("");
         setPassword("");
@@ -436,7 +438,7 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
           </form>
         </>
       ) : null}
-      {userButton ? (
+{userButton ? (
         <>
           {allUsers && allUsers.length ? (
             <>
@@ -454,34 +456,48 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
                 </span>
                 User
               </div>
+     <table className="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Date Joined</th>
+      <th>Reviews</th>
+      <th>Wines Entered</th>
+    </tr>
+  </thead>
+  <tbody>
+    {allUsers
+      .filter((user) => user.username !== "Deleted User")
+      .sort((a, b) => a.username.localeCompare(b.username))
+      .map((user) => (
+        <tr key={`userlist-${user.id}`}>
+          <td
+            style={{
+              color:
+                user.role === "admin" ? "red" : user.role === "merchant" ? "blue" : "black",
+              cursor: "pointer",
+            }}
+            onClick={() => handleUserClick(user.id)}
+          >
+            {user.username}
+          </td>
+          <td>{user.name}</td>
+          <td>{new Date(user.date_joined).toLocaleDateString("en-US")}</td>
+          {/* <td>{user.reviews.length}</td>
+          <td>{user.wines_entered}</td> */}
+        </tr>
+      ))}
+  </tbody>
+</table>
 
-              {allUsers
-                .filter((user) => user.username !== "Deleted User") // Exclude "Deleted User"
-                .sort((a, b) => a.username.localeCompare(b.username))
-                .map((user) => {
-                  return (
-                    <div key={`userlist-${user.id}`}>
-                      <h5
-                        style={{
-                          color:
-                            user.role === "admin"
-                              ? "red"
-                              : user.role === "merchant"
-                              ? "blue"
-                              : "black",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleUserClick(user.id)}
-                      >
-                        {user.username}
-                      </h5>
-                    </div>
-                  );
-                })}
-            </>
-          ) : (
-            <h2>No users found</h2>
-          )}
+
+
+
+
+
+</>
+      ) : null}
         </>
       ) : null}
       <ToastContainer />
