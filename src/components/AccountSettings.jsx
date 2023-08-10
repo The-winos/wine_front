@@ -28,6 +28,7 @@ const AccountSettings = ({ user }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleLocationChange = (selectedState) => {
     setState(selectedState);
@@ -73,21 +74,24 @@ const AccountSettings = ({ user }) => {
           bio,
           birthday,
           user.follower_count,
-          user.following_count
-          // user.join_date
+          user.following_count,
+          user.join_date
         );
+
+        // Update the local state with the new name
+        setName(name);
       }
 
       setUsername("");
       setOldPassword("");
       setNewPassword("");
-      setName("");
       setState("");
       setAvatar("");
       setEmail("");
       setBio("");
       setBirthday("");
       setConfirmPassword("");
+      setFormSubmitted(true); // Set the formSubmitted to true after successful submission
       toast.success("User updated");
     } catch (error) {
       console.error(error);
@@ -114,7 +118,7 @@ const AccountSettings = ({ user }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="accountSettings-form">
-            <h3>{user.name}</h3>
+            <h3>{formSubmitted ? name : user.name}</h3>
             <h6>Update Name</h6>
             <input
               placeholder="Enter name"
