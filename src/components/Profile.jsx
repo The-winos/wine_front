@@ -112,43 +112,16 @@ const Profile = ({ user }) => {
                   </span>
                   {user.state}
                 </h6>
+
                 <div className="d-flex align-items-center">
-                  <span className="me-1">
-                    Followers:
-                    {/* {followerAvatars.length} */}
-                  </span>
-                  {followerAvatars.map((followerAvatar, index) => (
-                    <img
-                      key={`followerAvatar-${index}`}
-                      src={`/images/${followerAvatar}`}
-                      alt="follower avatar"
-                      className="img-thumbnail me-2"
-                      style={{
-                        height: "30px",
-                        width: "30px",
-                        objectFit: "contain",
-                      }}
-                    />
-                  ))}
+                  <h5 className="profile-username">
+                    I follow {user.following_count} people
+                  </h5>
                 </div>
                 <div className="d-flex align-items-center">
-                  <span className="me-1">
-                    Following:
-                    {/* {followingAvatars.length} */}
-                  </span>
-                  {followingAvatars.map((followingAvatar, index) => (
-                    <img
-                      key={`followingAvatar-${index}`}
-                      src={`/images/${followingAvatar}`}
-                      alt="following avatar"
-                      className="img-thumbnail me-2"
-                      style={{
-                        height: "30px",
-                        width: "30px",
-                        objectFit: "contain",
-                      }}
-                    />
-                  ))}
+                  <h5 className="profile-username">
+                    {user.follower_count} people follow me!
+                  </h5>
                 </div>
               </div>
             </div>

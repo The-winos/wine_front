@@ -501,7 +501,7 @@ button {
     rgba(255, 255, 255, 0.15) 90%,
     rgba(255, 255, 255, 0.15) 100%
   );
-  background-color: #ffffa5;
+  background-color: #a5c9e6;
 
   border-top: 1px solid transparent;
   border-left: 1px solid transparent;
@@ -529,4 +529,22 @@ button {
   position: relative;
   left: 50%;
   margin-left: -200px;
+}
+
+.review-date {
+  position: absolute;
+  top: 0;
+  left: -10;
+  padding: 0.5rem;
+  background-color: #a5c9e6; /* Or any other background color you want */
+  border-top-left-radius: 10px; /* Match the radius of the note */
+  border-bottom-right-radius: 10px; /* Match the radius of the note */
+}
+
+.date {
+  font-size: 0.8rem; /* Adjust the font size as needed */
+  margin-left: -10;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
 }
