@@ -14,7 +14,6 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
       try {
         const reviews = await getReviewByUser(user.id);
         setUserReviews(reviews);
-
       } catch (error) {
         console.error(error);
       }
@@ -48,7 +47,8 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
       <div>
         {userWineDetails && (
           <>
-            <h5>
+            <div className="review-date"></div>
+            <h5 className="date">
               {new Date(userReviews.review_date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -73,8 +73,8 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
               activeColor="#ffd700"
             />
             <h5 className="review-comment text-truncate">
-  {userReviews.review_comment}
-</h5>
+              {userReviews.review_comment}
+            </h5>
           </>
         )}
       </div>
