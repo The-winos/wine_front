@@ -44,7 +44,8 @@ export async function registerUser(
   email,
   birthday,
   follower_count,
-  following_count
+  following_count,
+  join_date
 ) {
   const registerOptions = {
     method: "POST",
@@ -61,6 +62,7 @@ export async function registerUser(
       birthday,
       follower_count,
       following_count,
+      join_date,
     }),
   };
   try {
@@ -353,7 +355,8 @@ export async function updateUser(
   bio,
   birthday,
   follower_count,
-  following_count
+  following_count,
+  join_date
 ) {
   try {
     const body = {
@@ -368,6 +371,7 @@ export async function updateUser(
       birthday,
       follower_count,
       following_count,
+      join_date,
     };
 
     if (birthday !== "" && birthday !== null) {
@@ -496,7 +500,7 @@ export async function updateUserPassword(userId, password, newPassword) {
   try {
     const body = {
       password,
-      newPassword
+      newPassword,
     };
 
     const options = {
@@ -513,7 +517,7 @@ export async function updateUserPassword(userId, password, newPassword) {
       options
     );
     const result = await response.text();
-    console.log(result, "result in updatepass")
+    console.log(result, "result in updatepass");
     return result;
   } catch (error) {
     console.error(error);
@@ -567,7 +571,6 @@ export async function getFavorites(userId) {
 }
 
 export async function getSaved(userId) {
-
   try {
     const options = {
       headers: {
@@ -639,7 +642,7 @@ export async function addSaved(user_id, wine_id) {
     };
     const response = await fetch(`${BASE_URL}/saved/`, options);
     const result = await response.json();
-    console.log(result, "result")
+    console.log(result, "result");
     return result;
   } catch (error) {
     console.error(error);
@@ -656,7 +659,6 @@ export async function removeFavorite(favoriteId) {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-
     };
     const response = await fetch(
       `${BASE_URL}/favorites/${favoriteId}`,
@@ -670,7 +672,7 @@ export async function removeFavorite(favoriteId) {
 }
 
 export async function removeSaved(savedId) {
-  console.log(savedId, "saved ID in removedSaved")
+  console.log(savedId, "saved ID in removedSaved");
   try {
     const options = {
       method: "DELETE",
@@ -678,7 +680,6 @@ export async function removeSaved(savedId) {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-
     };
     const response = await fetch(`${BASE_URL}/saved/${savedId}`, options);
     const result = await response.json();
