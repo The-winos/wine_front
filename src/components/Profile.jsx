@@ -152,31 +152,38 @@ const Profile = ({ user }) => {
                 </div>
               </div>
             </div>
-            </div>
-            <div className="d-flex flex-wrap pt-3 pb-2">
-              <Link to={"/accountsettings"}>
-                <button
-                  type="accountsettings"
-                  className="btn btn-primary pb-2 mx-2"
-                >
-                  Account Settings
-                </button>
-              </Link>
-              <Link to={"/favorites"}>
-                <button type="favorite" className="btn btn-primary pb-2 mx-2">
-                  Favorites
-                </button>
-              </Link>
-              <Link to={"/saved"}>
-                <button type="saved" className="btn btn-primary pb-2 mx-2">
-                  Saved
-                </button>
-              </Link>
-              </div>
-
-
+          </div>
+          <p
+            className="profile-bio"
+            style={{ width: "50%", paddingTop: "20px", paddingLeft: "20px" }}
+          >
+            {user.bio}
+          </p>
+          <div className="d-flex flex-wrap pt-3 pb-2">
+            <Link to={"/accountsettings"}>
+              <button
+                type="accountsettings"
+                className="btn btn-primary pb-2 mx-2"
+              >
+                Account Settings
+              </button>
+            </Link>
+            <Link to={"/favorites"}>
+              <button type="favorite" className="btn btn-primary pb-2 mx-2">
+                Favorites
+              </button>
+            </Link>
+            <Link to={"/saved"}>
+              <button type="saved" className="btn btn-primary pb-2 mx-2">
+                Saved
+              </button>
+            </Link>
+          </div>
 
           <div>
+            <div className="header-container text-center mb-3">
+              <h2 className="profile-username">{user.username}'s Reviews</h2>
+            </div>
             {user && user.admin ? (
               <>
                 <Link to={"/users"}>

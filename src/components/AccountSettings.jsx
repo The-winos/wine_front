@@ -15,6 +15,10 @@ import {
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
+  const initialUserData = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : user;
+
   const [username, setUsername] = useState(user.username || "");
   const [name, setName] = useState(user.name || "");
   const [state, setState] = useState(user.state || "");
@@ -98,6 +102,23 @@ const AccountSettings = ({ user }) => {
       toast.error("Error updating user. Please try again.");
     }
   };
+
+  useEffect(() => {
+    console.log("Updating bio in local storage:", bio);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({
+        username,
+        name,
+        state,
+        avatar,
+        email,
+        birthday,
+        bio,
+        newPassword,
+      })
+    );
+  }, [username, name, state, avatar, email, birthday, bio, newPassword]);
 
   return (
     <div id="accountSettings">
