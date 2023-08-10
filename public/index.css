@@ -418,6 +418,17 @@ button {
 
 } */
 
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.profile-bio {
+  margin-right: 1rem; /* Adjust the margin as needed */
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
 .centered-section {
   display: flex;
   flex-direction: column;
