@@ -8,6 +8,7 @@ import {
   deleteItem,
   getSaved,
   getFollowingById,
+  getAllReviews,
 } from "./API";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,8 +20,15 @@ import { getFavorites } from "./API";
 import { getFollowersById } from "./API";
 import "react-toastify/dist/ReactToastify.css";
 import { UNSAFE_DataRouterContext } from "react-router-dom";
+import { handleSearch } from "./SearchBar";
 
-const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
+const AdminUser = ({
+  user,
+  userButton,
+  updateTheUser,
+  setUpdateTheUser,
+  allWine,
+}) => {
   const [allUsers, setAllUser] = useState([]);
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -34,15 +42,54 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
   const [bio, setBio] = useState("");
   const [role, setRole] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [allReviews, setAllReviews] = useState([]);
+  const [searchUsername, setSearchUsername]= useState("");
+  const [filteredUsers, setFilteredUsers]=useState([])
+
+  useEffect(() => {
+    async function fetchAllReview() {
+      const allTheRev = await getAllReviews();
+
+      setAllReviews(allTheRev);
+    }
+    fetchAllReview();
+  }, []);
 
   useEffect(() => {
     async function fetchAllUsers() {
       const allTheUsers = await getAllUsers();
       setAllUser(allTheUsers);
-      console.log(allTheUsers, "all the users");
+      setFilteredUsers(allTheUsers)
     }
     fetchAllUsers();
   }, []);
+
+  useEffect(() => {
+    const filterUsers = async () => {
+      const filteredResults = await Promise.all(
+        allUsers.map(async (use) => {
+          if (use.username.toLowerCase().includes(searchUsername.toLowerCase())) {
+            return use;
+          }
+        })
+      );
+      setFilteredUsers(filteredResults.filter((use) => use !== undefined));
+    };
+    filterUsers();
+  }, [searchUsername]);
+
+
+  function calculateReviews(userId) {
+    const userReviews = allReviews.filter(
+      (review) => review.user_id === userId
+    );
+    return userReviews.length;
+  }
+
+  function calculateWinesEntered(userId) {
+    const userWines = allWine.filter((wine) => wine.author_id === userId);
+    return userWines.length;
+  }
 
   async function handleUserClick(userId) {
     setUpdateTheUser(true);
@@ -379,36 +426,37 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
             </div>
             <></>
             <div className="container-fluid">
-  <h6 id="text-fields">New Password:</h6>
-  <div className="row mb-3">
-    <div className="col-sm-1">
-      <span className="input-group-text">
-        <i className="fa fa-lock"></i>
-      </span>
-    </div>
-    <div className="col-md-4">
-      <input
-        type="password"
-        className="password form-control"
-        placeholder="Enter New Password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      />
-    </div>
-    <div className="col-sm-1">
-      <button
-        type="button"
-        className="btn btn-outline-secondary col-md-12"
-        onClick={() => setPasswordVisible(!passwordVisible)}
-      >
-        <i
-          className={`fa ${passwordVisible ? "fa-eye-slash" : "fa-eye"}`}
-        ></i>
-      </button>
-    </div>
-  </div>
-</div>
-
+              <h6 id="text-fields">New Password:</h6>
+              <div className="row mb-3">
+                <div className="col-sm-1">
+                  <span className="input-group-text">
+                    <i className="fa fa-lock"></i>
+                  </span>
+                </div>
+                <div className="col-md-4">
+                  <input
+                    type="password"
+                    className="password form-control"
+                    placeholder="Enter New Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                </div>
+                <div className="col-sm-1">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary col-md-12"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    <i
+                      className={`fa ${
+                        passwordVisible ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
 
             <div className="col-md-6 p-3">
               <h6>User's Bio:</h6>
@@ -438,11 +486,12 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
           </form>
         </>
       ) : null}
-{userButton ? (
+      {userButton ? (
         <>
-          {allUsers && allUsers.length ? (
+          {filteredUsers && filteredUsers.length ? (
             <>
-              <div className="text-center py-2">
+              <div className="text-center py-2 pt-4">
+                <div>
                 <span className="badge bg-danger mx-2 rounded-circle pr-3">
                   &nbsp;
                 </span>
@@ -455,49 +504,64 @@ const AdminUser = ({ user, userButton, updateTheUser, setUpdateTheUser }) => {
                   &nbsp;
                 </span>
                 User
+
+                </div>
+                <div className="pt-2">
+                  <label htmlFor="type-filter">   Username: </label>
+            <input
+              type="text"
+              id="type-filter"
+              name="search-user"
+              value={searchUsername}
+              onChange={(event) => {
+                handleSearch(event, setSearchUsername);
+              }}
+            />
+            </div>
               </div>
-     <table className="table">
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Name</th>
-      <th>Date Joined</th>
-      <th>Reviews</th>
-      <th>Wines Entered</th>
-    </tr>
-  </thead>
-  <tbody>
-    {allUsers
-      .filter((user) => user.username !== "Deleted User")
-      .sort((a, b) => a.username.localeCompare(b.username))
-      .map((user) => (
-        <tr key={`userlist-${user.id}`}>
-          <td
-            style={{
-              color:
-                user.role === "admin" ? "red" : user.role === "merchant" ? "blue" : "black",
-              cursor: "pointer",
-            }}
-            onClick={() => handleUserClick(user.id)}
-          >
-            {user.username}
-          </td>
-          <td>{user.name}</td>
-          <td>{new Date(user.join_date).toLocaleDateString("en-US")}</td>
-          {/* <td>{user.reviews.length}</td>
-          <td>{user.wines_entered}</td> */}
-        </tr>
-      ))}
-  </tbody>
-</table>
-
-
-
-
-
-
-</>
-      ) : null}
+              <table className="table m-4">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Name</th>
+                    <th>Date Joined</th>
+                    <th>Reviews</th>
+                    <th>Wines Entered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredUsers
+                    .filter((user) => user.username !== "Deleted User")
+                    .sort((a, b) => a.username.localeCompare(b.username))
+                    .map((user) => (
+                      <tr key={`userlist-${user.id}`}>
+                        <td
+                          style={{
+                            color:
+                              user.role === "admin"
+                                ? "red"
+                                : user.role === "merchant"
+                                ? "blue"
+                                : "black",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleUserClick(user.id)}
+                          title="Click to edit"
+                        >
+                          {user.username}
+                        </td>
+                        <td>{user.name}</td>
+                        <td>
+                          {new Date(user.join_date).toLocaleDateString("en-US")}
+                        </td>
+                        <td>{calculateReviews(user.id)}</td>
+                        <td>{calculateWinesEntered(user.id)}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </>
+          ) : null}
         </>
       ) : null}
       <ToastContainer />
