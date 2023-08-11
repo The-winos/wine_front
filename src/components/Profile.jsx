@@ -162,6 +162,14 @@ const Profile = ({ user }) => {
             </div>
           </div>
           <h6> From: {user.state}</h6>
+          <Link to={"/accountsettings"}>
+            <button
+              type="accountsettings"
+              className="btn btn-primary pb-2 mx-2"
+            >
+              Account Settings
+            </button>
+          </Link>
           <p
             className="profile-bio"
             style={{ width: "50%", paddingTop: "20px", paddingLeft: "20px" }}
@@ -169,14 +177,6 @@ const Profile = ({ user }) => {
             {user.bio}
           </p>
           <div className="d-flex flex-wrap pt-3 pb-2">
-            <Link to={"/accountsettings"}>
-              <button
-                type="accountsettings"
-                className="btn btn-primary pb-2 mx-2"
-              >
-                Account Settings
-              </button>
-            </Link>
             <Link to={"/favorites"}>
               <button type="favorite" className="btn btn-primary pb-2 mx-2">
                 Favorites

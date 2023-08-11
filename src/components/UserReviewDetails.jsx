@@ -8,6 +8,7 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
   const { wineId } = useParams();
   const [userWineDetails, setUserWineDetails] = useState([]);
   const [reviewWine, setReviewWine] = useState({});
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -43,7 +44,11 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
   };
 
   return (
-    <div className="note">
+    <div
+      className={`note ${isHovered ? "hovered" : ""}`} // Apply hover style
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div>
         {userWineDetails && (
           <>
