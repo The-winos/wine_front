@@ -565,3 +565,62 @@ button {
   justify-content: flex-start;
   color: maroon;
 }
+.profile-username {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #f091ad; /* Fun color */
+  margin: 0;
+}
+
+/* fun-text-styles.css */
+
+.fun-text {
+  position: relative;
+  font-family: "Infamy Fill", sans-serif;
+  font-size: 1.5rem;
+  color: #f091ad;
+  margin: 1rem 0;
+}
+
+.count-text {
+  position: relative;
+  font-family: "Infamy Fill", sans-serif;
+  font-size: 2.5rem;
+  color: #f7cad8;
+  text-transform: uppercase;
+  font-variant-ligatures: none;
+  line-height: 0.97;
+  font-weight: normal;
+  z-index: 5;
+}
+
+.count-text::after {
+  content: attr(data-heading);
+  position: absolute;
+  font-family: "Infamy Shadow", sans-serif;
+  line-height: 1.1;
+  color: rgba(191, 73, 112, 0.3);
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.count-text::before {
+  content: attr(data-heading);
+  position: absolute;
+  font-family: "Infamy Outline", sans-serif;
+  line-height: 0.97;
+  color: #f7cad8;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.count-link {
+  margin-right: 10px; /* Adjust the value as needed */
+}
+
+.count-container {
+  display: block;
+  margin-top: 10px; /* Add margin for spacing between the counts */
+}
