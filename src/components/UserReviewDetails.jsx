@@ -53,16 +53,21 @@ const UserReviewDetails = ({ userReviews, setUserReviews }) => {
             onMouseEnter={() => setIsWineImageHovered(true)}
             onMouseLeave={() => setIsWineImageHovered(false)}
           >
-            <img
-              src={`/images/${userWineDetails.image_url}`}
-              alt="wine image"
-              className="card-img-top"
-              style={{
-                height: "200px",
-                objectFit: "contain",
-                objectPosition: "center center",
-              }}
-            />
+            <div className="wine-image-container">
+              <img
+                src={`/images/${userWineDetails.image_url}`}
+                alt="wine image"
+                className="card-img-top"
+                style={{
+                  height: "200px",
+                  objectFit: "contain",
+                  objectPosition: "center center",
+                }}
+              />
+              {isWineImageHovered && (
+                <div className="edit-text">Edit Review</div>
+              )}
+            </div>
           </button>
           <h4 className="wine-name-profile">{userWineDetails.name}</h4>
           <h6 className="wine-region-profile">{userWineDetails.region}</h6>
