@@ -548,3 +548,20 @@ button {
   justify-content: flex-start;
   padding: 10px;
 }
+
+.wine-name-profile {
+  display: flex;
+  color: purple;
+}
+
+.wine-region-profile {
+  display: flex;
+  justify-content: flex-start;
+  color: green;
+}
+
+.wine-flavor-profile {
+  display: flex;
+  justify-content: flex-start;
+  color: maroon;
+}
