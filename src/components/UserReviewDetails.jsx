@@ -65,7 +65,9 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
                 objectPosition: "center center",
               }}
             />
-            <h6>{userWineDetails.name}</h6>
+            <h4 className="wine-name-profile">{userWineDetails.name}</h4>
+            <h6 className="wine-region-profile">{userWineDetails.region}</h6>
+            <h6 className="wine-flavor-profile">{userWineDetails.flavor}</h6>
             <Rating
               value={userReviews.rating}
               edit={false}
