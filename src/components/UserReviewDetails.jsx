@@ -1,27 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getReviewByUser, getWineById } from "./API";
-import { useParams, useNavigate } from "react-router-dom";
+import { getWineById } from "./API";
+import { useNavigate } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 
-const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
+const UserReviewDetails = ({ userReviews, setUserReviews }) => {
   const navigate = useNavigate();
-  const { wineId } = useParams();
-  const [userWineDetails, setUserWineDetails] = useState([]);
-  const [reviewWine, setReviewWine] = useState({});
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    const fetchUserReviews = async () => {
-      try {
-        const reviews = await getReviewByUser(user.id);
-        setUserReviews(reviews);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUserReviews();
-  }, [user]);
+  const [userWineDetails, setUserWineDetails] = useState({});
+  const [isNoteHovered, setIsNoteHovered] = useState(false);
+  const [isWineImageHovered, setIsWineImageHovered] = useState(false);
 
   useEffect(() => {
     const fetchUserWineDetails = async () => {
@@ -36,23 +22,21 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
     fetchUserWineDetails();
   }, [userReviews]);
 
-  // Function to convert rating to star icons
-  const renderRatingStars = (rating) => {
-    const filledStars = "★".repeat(rating);
-    const emptyStars = "☆".repeat(5 - rating);
-    return filledStars + emptyStars;
+  const handleReviewClick = () => {
+    // Navigate to the review details component
+    // Replace with the appropriate route and component
+    navigate(`/review-details/${userReviews.id}`);
   };
 
   return (
     <div
-      className={`note ${isHovered ? "hovered" : ""}`} // Apply hover style
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`note ${isNoteHovered ? "hovered" : ""}`}
+      onMouseEnter={() => setIsNoteHovered(true)}
+      onMouseLeave={() => setIsNoteHovered(false)}
     >
-      <div>
-        {userWineDetails && (
-          <>
-            <div className="review-date"></div>
+      {userWineDetails && (
+        <div>
+          <div className="review-date">
             <h5 className="date">
               {new Date(userReviews.review_date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -60,6 +44,15 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
                 day: "numeric",
               })}
             </h5>
+          </div>
+          <button
+            className={`wine-image-button ${
+              isWineImageHovered ? "hovered" : ""
+            }`}
+            onClick={handleReviewClick}
+            onMouseEnter={() => setIsWineImageHovered(true)}
+            onMouseLeave={() => setIsWineImageHovered(false)}
+          >
             <img
               src={`/images/${userWineDetails.image_url}`}
               alt="wine image"
@@ -70,29 +63,21 @@ const UserReviewDetails = ({ userReviews, user, setUserReviews }) => {
                 objectPosition: "center center",
               }}
             />
-            <h4 className="wine-name-profile">{userWineDetails.name}</h4>
-            <h6 className="wine-region-profile">{userWineDetails.region}</h6>
-            <h6 className="wine-flavor-profile">{userWineDetails.flavor}</h6>
-            <Rating
-              value={userReviews.rating}
-              edit={false}
-              size={20}
-              activeColor="#ffd700"
-            />
-            <h5 className="review-comment text-truncate">
-              {userReviews.review_comment}
-            </h5>
-          </>
-        )}
-      </div>
-      <button
-        onClick={() => {
-          navigate(`/singlewine/${reviewWine.id}`);
-        }}
-        className="btn btn-primary"
-      >
-        Edit Review
-      </button>
+          </button>
+          <h4 className="wine-name-profile">{userWineDetails.name}</h4>
+          <h6 className="wine-region-profile">{userWineDetails.region}</h6>
+          <h6 className="wine-flavor-profile">{userWineDetails.flavor}</h6>
+          <Rating
+            value={userReviews.rating}
+            edit={false}
+            size={20}
+            activeColor="#ffd700"
+          />
+          <h5 className="review-comment text-truncate">
+            {userReviews.review_comment}
+          </h5>
+        </div>
+      )}
     </div>
   );
 };
