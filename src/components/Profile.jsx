@@ -11,6 +11,22 @@ const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
   const [followerAvatars, setFollowerAvatars] = useState([]);
   const [followingAvatars, setFollowingAvatars] = useState([]);
+  const [userLocation, setUserLocation] = useState("");
+
+  const getUserLocation = async () => {
+    try {
+      const response = await fetch("https://ipapi.co/json/");
+      const data = await response.json();
+      const location = `${data.city}, ${data.region}`;
+      setUserLocation(location);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -110,22 +126,42 @@ const Profile = ({ user }) => {
                       />
                     </svg>
                   </span>
-                  {user.state}
+
+                  {userLocation}
                 </h6>
 
-                <div className="d-flex align-items-center">
+                <div className="count-container">
                   <h5 className="profile-username">
-                    I follow {user.following_count} people
+                    I follow{"  "}
+                    <Link to="/following" className="count-link">
+                      <div
+                        className="count-text"
+                        data-heading={user.following_count}
+                      >
+                        {user.following_count}
+                      </div>
+                      <div></div>
+                    </Link>{" "}
+                    people
                   </h5>
                 </div>
-                <div className="d-flex align-items-center">
+                <div className="count-container">
                   <h5 className="profile-username">
-                    {user.follower_count} people follow me!
+                    <Link to="/followers" className="count-link">
+                      <span
+                        className="count-text"
+                        data-heading={user.follower_count}
+                      >
+                        {user.follower_count}
+                      </span>
+                    </Link>{" "}
+                    people follow me!
                   </h5>
                 </div>
               </div>
             </div>
           </div>
+          <h6> From: {user.state}</h6>
           <p
             className="profile-bio"
             style={{ width: "50%", paddingTop: "20px", paddingLeft: "20px" }}
