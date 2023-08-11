@@ -522,6 +522,26 @@ button {
   transform: scale(1.05);
 }
 
+.wine-image-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Animation transition */
+  border-radius: 10px; /* Add beveled edges */
+  overflow: hidden; /* Prevent image overflow */
+}
+
+.wine-image-button.hovered {
+  transform: scale(1.05); /* Apply a slight scale increase on hover */
+}
+
+.wine-image-container {
+  position: relative;
+  border-radius: 10px; /* Add beveled edges */
+  overflow: hidden; /* Prevent image overflow */
+}
+
 #admin {
   padding-bottom: 2rem;
 }
