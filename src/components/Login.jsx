@@ -86,11 +86,11 @@ const Login = ({ setUser, setLoggedIn }) => {
                 </div>
 
                 <div className="text-center">
-                  Don't have an account? <Link to="/register">Sign up</Link>
+                  Don't have an account? <Link to="/register">Sign up</Link> 🥂
                 </div>
                 <div className="text-center">
-                  Forgot your password? Don't worry... It happens to the best of
-                  us. <Link to="/forgotPassword">Reset Password</Link> 😉👌
+                  Forgot your password?{" "}
+                  <Link to="/forgotPassword">Reset Password</Link> 👌
                 </div>
               </form>
             </div>
