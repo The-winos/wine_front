@@ -13,6 +13,7 @@ import AdminWine from "./AdminWine";
 const Admin = ({ user }) => {
 
   const [allWine, setAllWine]= useState([]);
+  const [filteredWines, setFilteredWines]=useState([])
   const [userButton, setUserButton]=useState(false);
   const [updateTheUser, setUpdateTheUser] = useState(false);
   const [wineButton, setWineButton]=useState(false);
@@ -26,6 +27,7 @@ const Admin = ({ user }) => {
       const allTheWine = await getAllWine();
       console.log(allTheWine)
       setAllWine(allTheWine);
+      setFilteredWines(allTheWine)
     }
     fetchAllWine();
   },[])
@@ -99,7 +101,7 @@ const Admin = ({ user }) => {
 
 
 
-            <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton}/>
+            <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton} filteredWines={filteredWines} setFilteredWines={setFilteredWines}/>
 
 
 

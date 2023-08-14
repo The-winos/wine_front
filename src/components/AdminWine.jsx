@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { deleteItem, getFavorites, getSaved, getWineById, updateWine, getReviewsByWineId, getFavoritesByWine } from "./API";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { handleSearch } from "./SearchBar";
 
-const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton}) => {
+const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton, filteredWines, setFilteredWines}) => {
   const [author, setAuthor] = useState("");
   const [flavor, setFlavor] = useState("");
   const [image, setImage] = useState("");
@@ -12,6 +13,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
   const [region, setRegion] = useState("");
   const [updatingWine, setUpdatingWine] = useState({});
   const [changeImage, setChangeImage] = useState(false);
+  const [searchWineName, setSearchWineName]=useState([])
 
   async function handleWineClick(wineId) {
     setUpdatingTheWine(true);
@@ -109,6 +111,20 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
       console.error(error);
     }
   }
+  //Searches
+  useEffect(() => {
+    const filterUsers = async () => {
+      const filteredResults = await Promise.all(
+        allWine.map(async (use) => {
+          if (use.name.toLowerCase().includes(searchWineName.toLowerCase())) {
+            return use;
+          }
+        })
+      );
+      setFilteredWines(filteredResults.filter((use) => use !== undefined));
+    };
+    filterUsers();
+  }, [searchWineName]);
 
   return (
     <>
@@ -217,7 +233,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
         </>
       ) : null}
 
-{allWine && allWine.length ? (
+{filteredWines && filteredWines.length ? (
   <div className="wine-list-container">
 
     {wineButton ? (
@@ -245,14 +261,34 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                   &nbsp;5
                 </span>
 
-
+<input
+              type="text"
+              id="type-filter"
+              name="search-wine"
+              value={searchWineName}
+              onChange={(event) => {
+                handleSearch(event, setSearchWineName);
+              }}
+            />
       </div>
-        {allWine
+
+      <table className="table m-4">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Region</th>
+            <th>Average Price</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+        {filteredWines
           .sort((a, b) => a.name.localeCompare(b.name))
           .map((wine) => {
             return (
-              <div key={`winelist-${wine.id}`}>
-                <h5
+              <tr key={`winelist-${wine.id}`}>
+                <td
                   style={{ color:
                     wine.rating === 1
                       ? "red"
@@ -265,12 +301,20 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                       : "green",
                     cursor: "pointer" }}
                   onClick={() => handleWineClick(wine.id)}
+                  title="Click to edit"
                 >
-                  {wine.name}
-                </h5>
-              </div>
+                  {wine.name}</td>
+                  <td>{wine.flavor}</td>
+                  <td>{wine.region}</td>
+                  <td>{wine.price==null ? "N/A" :
+                  wine.price/100}</td>
+                  <td>{wine.rating}</td>
+
+              </tr>
             );
           })}
+          </tbody>
+          </table>
       </>
     ) : null}
   </div>
