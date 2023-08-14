@@ -57,7 +57,7 @@ const Home = ({ allWine, setAllWine }) => {
           className="home-image"
         />
       </div>
-      <h5>Community of Reviews & Knowledgeable Sippers</h5>
+      <h5>Community Of Reviews & Knowledgeable Sippers</h5>
       {/* corks logo goes here */}
       {filteredWines.length > 0 ? <>
 

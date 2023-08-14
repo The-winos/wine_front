@@ -12,7 +12,7 @@ const FooterAboutUs = () => {
         <h2>C.O.R.K.S</h2>
         <img src="/images/4-wine_glass.png" alt="Wine Glass" className="home-image" />
       </div>
-      <h5>Community of Reviews & Knowledgeable Sippers</h5>
+      <h5>Community Of Reviews & Knowledgeable Sippers</h5>
     </div>
      <h4 className="site-description py-4">
   Welcome to our wine community! We built this platform to address the common struggle of never knowing which wine to buy and enduring the disappointment of trying too many underwhelming options. Our site empowers you to make confident choices by providing access to genuine reviews from fellow wine enthusiasts, including your trusted friends and family. Explore a wide range of wines, save your favorites, and contribute your own reviews to create a vibrant community-driven resource. Discover the perfect bottle for every occasion and elevate your wine-drinking experience with us.
