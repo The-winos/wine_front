@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 import OptionsStates from "./OptionsStates";
+import PasswordChecklist from "./PasswordChecklist";
 
 const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const navigate = useNavigate();
@@ -16,11 +17,28 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
+  const [hasUpperCase, setHasUpperCase] = useState(false);
+  const [hasLowerCase, setHasLowerCase] = useState(false);
+  const [hasDigit, setHasDigit] = useState(false);
+  const [isLengthValid, setIsLengthValid] = useState(false);
+
+  const checkPasswordRequirements = (password) => {
+    setHasUpperCase(/[A-Z]/.test(password));
+    setHasLowerCase(/[a-z]/.test(password));
+    setHasDigit(/\d/.test(password));
+    setIsLengthValid(password.length >= 8);
+  };
+
   async function handleRegister(event) {
     event.preventDefault();
 
     if (password !== confirmPasswordValue) {
       setError("Passwords do not match");
+      return;
+    }
+
+    if (!isLengthValid || !hasUpperCase || !hasLowerCase || !hasDigit) {
+      setError("Password does not meet requirements.");
       return;
     }
 
@@ -35,9 +53,8 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
       birthday,
       0,
       0,
-      new Date(),
+      new Date()
     );
-
 
     if (response.error) {
       setError(response.message);
@@ -103,7 +120,10 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                     placeholder="Password"
                     required
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                      checkPasswordRequirements(event.target.value);
+                    }}
                   />
                   <button
                     className="btn btn-outline-secondary"
@@ -117,6 +137,12 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                     ></i>
                   </button>
                 </div>
+                <PasswordChecklist
+                  hasUpperCase={hasUpperCase}
+                  hasLowerCase={hasLowerCase}
+                  hasDigit={hasDigit}
+                  isLengthValid={isLengthValid}
+                />
                 <div className="input-group mb-3">
                   <span className="input-group-text">
                     <i className="fa fa-lock"></i>
@@ -167,7 +193,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                     <i className="fa fa-map-marker"></i>
                   </span>
                   <select className="form-select" id="state-select">
-                   <OptionsStates/>
+                    <OptionsStates />
                   </select>
                 </div>
 
