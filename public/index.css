@@ -632,20 +632,19 @@ button {
   position: relative;
   font-family: "Infamy Fill", sans-serif;
   font-size: 1.5rem;
-  color: #f091ad;
+  color: #da1f57;
   margin: 1rem 0;
 }
 
 .count-text {
-  position: relative;
   font-family: "Infamy Fill", sans-serif;
-  font-size: 2.5rem;
-  color: #f7cad8;
+  font-size: 1.8rem;
+  color: #f7cad8; /* Adjust the color as needed */
   text-transform: uppercase;
   font-variant-ligatures: none;
-  line-height: 0.97;
+  line-height: 1;
   font-weight: normal;
-  z-index: 5;
+  margin-right: 10px;
 }
 
 .count-text::after {
@@ -663,7 +662,7 @@ button {
   content: attr(data-heading);
   position: absolute;
   font-family: "Infamy Outline", sans-serif;
-  line-height: 0.97;
+  line-height: 1;
   color: #f7cad8;
   width: 100%;
   top: 0;
@@ -671,30 +670,28 @@ button {
 }
 
 .count-link {
-  margin-right: 10px; /* Adjust the value as needed */
+  text-decoration: none;
+  margin-right: 10px;
+  color: darkorchid;
+}
+
+.count-link .count-text {
+  color: #a0d1ff;
 }
 
 .count-container {
   display: block;
-  margin-top: 10px; /* Add margin for spacing between the counts */
+  margin-top: 10px;
 }
 
-.password-checklist {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.follow-count {
+  margin-left: 10px;
 }
 
-.check-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.check-item .fa-check {
-  color: green;
-}
-
-.check-item .fa-times {
-  color: red;
+.smaller-text {
+  font-size: 18px;
+  padding: 2px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
