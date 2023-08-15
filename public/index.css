@@ -695,3 +695,60 @@ button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.thought-bubble {
+  position: relative;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px solid #cccccc;
+  margin-top: 20px;
+  max-width: 60%; /* Adjust the width as needed */
+  overflow: hidden;
+}
+
+.thought-bubble::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  left: -15px;
+  top: 10px;
+  border: 2px solid #cccccc;
+}
+
+.thought-bubble::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  left: -10px;
+  top: 25px;
+  border: 2px solid #cccccc;
+}
+
+.thought-bubble::before,
+.thought-bubble::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 2px solid #cccccc;
+}
+
+.thought-bubble::before {
+  left: -6px;
+  top: -6px;
+}
+
+.thought-bubble::after {
+  left: -6px;
+  bottom: -6px;
+}

@@ -159,12 +159,7 @@ const Profile = ({ user }) => {
           Account Settings
         </button>
       </Link>
-      <p
-        className="profile-bio"
-        style={{ width: "50%", paddingTop: "20px", paddingLeft: "20px" }}
-      >
-        {user.bio}
-      </p>
+      <p className="thought-bubble">{user.bio}</p>
       <div className="d-flex flex-wrap pt-3 pb-2">
         <Link to={"/favorites"}>
           <button type="favorite" className="btn btn-primary pb-2 mx-2">
