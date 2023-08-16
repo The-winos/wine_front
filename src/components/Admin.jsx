@@ -10,7 +10,7 @@ import AdminUser from "./AdminUser";
 import AdminWine from "./AdminWine";
 
 
-const Admin = ({ user }) => {
+const Admin = ({ user, allReviews }) => {
 
   const [allWine, setAllWine]= useState([]);
   const [filteredWines, setFilteredWines]=useState([])
@@ -101,7 +101,7 @@ const Admin = ({ user }) => {
 
 
 
-            <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton} filteredWines={filteredWines} setFilteredWines={setFilteredWines}/>
+            <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton} filteredWines={filteredWines} setFilteredWines={setFilteredWines} allReviews={allReviews}/>
 
 
 

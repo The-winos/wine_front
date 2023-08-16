@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { handleSearch } from "./SearchBar";
 
-const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton, filteredWines, setFilteredWines}) => {
+const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton, filteredWines, setFilteredWines, allReviews}) => {
   const [author, setAuthor] = useState("");
   const [flavor, setFlavor] = useState("");
   const [image, setImage] = useState("");
@@ -13,8 +13,12 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
   const [region, setRegion] = useState("");
   const [updatingWine, setUpdatingWine] = useState({});
   const [changeImage, setChangeImage] = useState(false);
-  const [searchWineName, setSearchWineName]=useState([])
+  const [searchWineName, setSearchWineName]=useState("")
 
+  function calculateReviewNumber(wineId){
+    const reviewNumber=allReviews.filter((review)=>review.wine_id===wineId);
+    return reviewNumber.length
+  }
   async function handleWineClick(wineId) {
     setUpdatingTheWine(true);
     const wineToUpdate = await getWineById(wineId);
@@ -261,16 +265,21 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                   &nbsp;5
                 </span>
 
-<input
-              type="text"
-              id="type-filter"
-              name="search-wine"
-              value={searchWineName}
-              onChange={(event) => {
-                handleSearch(event, setSearchWineName);
-              }}
-            />
-      </div>
+   </div>
+
+<div className="text-center py-2">
+  <input
+    type="text"
+    id="type-filter"
+    name="search-wine"
+    value={searchWineName}
+    onChange={(event) => {
+      handleSearch(event, setSearchWineName);
+    }}
+    placeholder="Search wines..."
+  />
+</div>
+
 
       <table className="table m-4">
         <thead>
@@ -280,6 +289,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
             <th>Region</th>
             <th>Average Price</th>
             <th>Average Rating</th>
+            <th>Number of Reviews</th>
           </tr>
         </thead>
         <tbody>
@@ -309,6 +319,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                   <td>{wine.price==null ? "N/A" :
                   wine.price/100}</td>
                   <td>{wine.rating}</td>
+                  <td>{calculateReviewNumber(wine.id)}</td>
 
               </tr>
             );

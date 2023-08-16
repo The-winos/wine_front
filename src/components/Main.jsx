@@ -111,7 +111,7 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/admin" element={<Admin user={user} />}></Route>
+        <Route path="/admin" element={<Admin user={user} allReviews={allReviews} />}></Route>
         <Route
           path="/followers"
           element={<Followers user={user} favorites={favorites} />}

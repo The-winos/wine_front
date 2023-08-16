@@ -78,6 +78,17 @@ async function handleWine(e)
 
 async function handleReview(e) {
   e.preventDefault();
+  const profaneWords = ["fuck", "shit", "cunt", "nigga", "nigger", "whore", "slut", "faggot", "rape", "5hit", "ejaculation", "fagot", "gangbang", "masterbate" ];
+
+  const containsProfaneWords = profaneWords.some(word => {
+    return reviewName.toLowerCase().includes(word) || comment.toLowerCase().includes(word);
+  });
+
+  if (containsProfaneWords) {
+
+    toast.error("Your review contains inappropriate language. Please edit your review.");
+    return;
+  }
 
   try {
     const review = await createReview({
