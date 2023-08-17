@@ -29,25 +29,7 @@ const WineFeed = ({
   const [searchType, setSearchType] = useState("");
   const [searchUsername, setSearchUsername]= useState("");
 
-  useEffect(() => {
-    // Fetch all reviews on initial load
-    fetchAllReview();
-  }, []);
 
-  useEffect(() => {
-    // Update the filtered reviews whenever all reviews change
-    setFilteredReviews(allReviews);
-  }, [allReviews]);
-
-  function fetchAllReview() {
-    getAllReviews()
-      .then((allTheReviews) => {
-        setAllReviews(allTheReviews);
-      })
-      .catch((error) => {
-        // Handle error if needed
-      });
-  }
 
 
 

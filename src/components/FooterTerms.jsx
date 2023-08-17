@@ -60,6 +60,9 @@ const FooterTerms = () => {
         the rights of any third party.
         <br />
         <br />
+        3.3. You agree to use respectful and appropriate language when submitting content to our website. Content containing inappropriate or offensive language will be denied.
+        <br />
+        <br />
         4. Disclaimer of Warranty
         <br />
         <br />
@@ -112,7 +115,7 @@ const FooterTerms = () => {
         questions or concerns, please contact us.
         <br />
         <br />
-        Last updated: 7/12/2023
+        Last updated: 08/16/2023
       </p>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { authUser, getSaved } from "./API";
+import { authUser, getSaved, getAllReviews, getAllWine } from "./API";
 import {
   Navbar,
   Home,
@@ -49,6 +49,26 @@ const Main = () => {
 
     }
   };
+  useEffect(() => {
+    // Fetch all reviews on initial load
+    fetchAllReview();
+  }, []);
+
+  useEffect(() => {
+    // Update the filtered reviews whenever all reviews change
+    setFilteredReviews(allReviews);
+  }, [allReviews]);
+
+  function fetchAllReview() {
+    getAllReviews()
+      .then((allTheReviews) => {
+        setAllReviews(allTheReviews);
+      })
+      .catch((error) => {
+        // Handle error if needed
+      });
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -111,7 +131,7 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/admin" element={<Admin user={user} />}></Route>
+        <Route path="/admin" element={<Admin user={user} allReviews={allReviews} />}></Route>
         <Route
           path="/followers"
           element={<Followers user={user} favorites={favorites} />}

@@ -53,22 +53,5 @@ export const handleRatingFilter = (event, option, filter, ratingFilter) => {
 
 export const handleSearch = (event, searchItem) => {
   const value = event.target.value;
-  console.log(value, "this is value")
-  switch (event.target.name) {
-    case "search-name":
-      searchItem(value);
-
-      break;
-    case "search-region":
-      searchItem(value);
-      break;
-    case "search-type":
-      searchItem(value);
-      break;
-      case "search-user":
-      searchItem(value);
-      break;
-    default:
-      break;
-  }
+  searchItem(value);
 };

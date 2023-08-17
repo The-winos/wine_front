@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { handleSearch } from "./SearchBar";
 
-const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton, filteredWines, setFilteredWines}) => {
+const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, setWineButton, filteredWines, setFilteredWines, allReviews}) => {
   const [author, setAuthor] = useState("");
   const [flavor, setFlavor] = useState("");
   const [image, setImage] = useState("");
@@ -13,8 +13,25 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
   const [region, setRegion] = useState("");
   const [updatingWine, setUpdatingWine] = useState({});
   const [changeImage, setChangeImage] = useState(false);
-  const [searchWineName, setSearchWineName]=useState([])
+  const [searchWineName, setSearchWineName]=useState("")
+  const [sortColumn, setSortColumn] = useState("name");
+const [sortDirection, setSortDirection] = useState("asc");
 
+const handleSort = (column) => {
+  if (sortColumn === column) {
+    // If the same column is clicked, toggle the sort direction
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  } else {
+    // If a different column is clicked, set it as the new sorting column and default to ascending
+    setSortColumn(column);
+    setSortDirection("asc");
+  }
+};
+
+  function calculateReviewNumber(wineId){
+    const reviewNumber=allReviews.filter((review)=>review.wine_id===wineId);
+    return reviewNumber.length
+  }
   async function handleWineClick(wineId) {
     setUpdatingTheWine(true);
     const wineToUpdate = await getWineById(wineId);
@@ -25,6 +42,30 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
     setRegion(wineToUpdate.region);
     setUpdatingWine(wineToUpdate);
   }
+
+  const sortedWines = [...filteredWines].sort((a, b) => {
+    // Compare based on the selected column
+    switch (sortColumn) {
+      case "flavor":
+      case "region":
+        return a[sortColumn].localeCompare(b[sortColumn]);
+      case "price":
+        return sortDirection === "asc"
+          ? (a[sortColumn] || 0) - (b[sortColumn] || 0)
+          : (b[sortColumn] || 0) - (a[sortColumn] || 0);
+      case "rating":
+        return sortDirection === "asc"
+          ? a[sortColumn] - b[sortColumn]
+          : b[sortColumn] - a[sortColumn];
+      case "reviews":
+        return sortDirection === "asc"
+          ? calculateReviewNumber(a.id) - calculateReviewNumber(b.id)
+          : calculateReviewNumber(b.id) - calculateReviewNumber(a.id);
+      default:
+        return a.name.localeCompare(b.name); // Default to sorting by name
+    }
+  });
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -261,31 +302,35 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                   &nbsp;5
                 </span>
 
-<input
-              type="text"
-              id="type-filter"
-              name="search-wine"
-              value={searchWineName}
-              onChange={(event) => {
-                handleSearch(event, setSearchWineName);
-              }}
-            />
-      </div>
+   </div>
+
+<div className="text-center py-2">
+  <input
+    type="text"
+    id="type-filter"
+    name="search-wine"
+    value={searchWineName}
+    onChange={(event) => {
+      handleSearch(event, setSearchWineName);
+    }}
+    placeholder="Search wines..."
+  />
+</div>
+
 
       <table className="table m-4">
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Region</th>
-            <th>Average Price</th>
-            <th>Average Rating</th>
-          </tr>
+        <tr>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("name")}>Name</th>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("flavor")}>Type</th>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("region")}>Region</th>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("price")}>Average Price</th>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("rating")}>Average Rating</th>
+    <th style={{cursor: "pointer"}} onClick={() => handleSort("reviews")}>Number of Reviews</th>
+  </tr>
         </thead>
         <tbody>
-        {filteredWines
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map((wine) => {
+        {sortedWines.map((wine) =>{
             return (
               <tr key={`winelist-${wine.id}`}>
                 <td
@@ -309,6 +354,7 @@ const AdminWine = ({ allWine, updatingTheWine, setUpdatingTheWine, wineButton, s
                   <td>{wine.price==null ? "N/A" :
                   wine.price/100}</td>
                   <td>{wine.rating}</td>
+                  <td>{calculateReviewNumber(wine.id)}</td>
 
               </tr>
             );

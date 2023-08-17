@@ -10,12 +10,13 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
 
   return (
     <Navbar className="custom-navbar" expand="lg" sticky="top">
-      <Container fluid>
-        <Navbar.Brand>
-          <NavLink className="navbar-brand" to="/">
-            C.O.R.K.S.
-          </NavLink>
-        </Navbar.Brand>
+
+
+      <NavLink className="navbar-brand m-0 p-0" to="/">
+    <img src="/images/C.O.R.K.S.png" alt="C.O.R.K.S. Logo" className="navbar-logo" />
+  </NavLink>
+  <Container fluid>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
