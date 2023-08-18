@@ -6,67 +6,63 @@ import Container from "react-bootstrap/Container";
 
 const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState(false);
 
   return (
     <Navbar className="custom-navbar" expand="lg" sticky="top">
-
-
-      <NavLink className="navbar-brand m-0 p-0" to="/">
-    <img src="/images/C.O.R.K.S.png" alt="C.O.R.K.S. Logo" className="navbar-logo" />
-  </NavLink>
-  <Container fluid>
-
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link as={NavLink} to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/profile">
-              My Account
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/winefeed">
-              The Tasting Room
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/followers">
-              Happy Hour
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/winelist">
-              Wine List
-            </Nav.Link>
-
-            {loggedIn &&
-              (user.role === "merchant" || user.role === "admin") && (
+      <Container fluid className="p-0">
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <NavLink to="/">
+              <img src="/images/C.O.R.K.S.png" alt="C.O.R.K.S. Logo" className="navbar-logo" />
+            </NavLink>
+          </div>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ml-auto">
+              <Nav.Link as={NavLink} to="/">
+                Home
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/profile">
+                My Account
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/winefeed">
+                The Tasting Room
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/followers">
+                Happy Hour
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/winelist">
+                Wine List
+              </Nav.Link>
+              {loggedIn && (user.role === "merchant" || user.role === "admin") && (
                 <Nav.Link as={NavLink} to="/admin">
                   Admin
                 </Nav.Link>
               )}
-          </Nav>
-        </Navbar.Collapse>
-        <Nav className="ml-auto">
-          {loggedIn ? (
-            <div className="d-flex align-items-center">
-              <span className="nav-link">Welcome, {user.username}</span>
-              <Nav.Link
-                as={NavLink}
-                to="/login"
-                onClick={() => {
-                  navigate("/login");
-                  localStorage.removeItem("token");
-                  setLoggedIn(false);
-                  setUser(null);
-                }}
-              >
-                Log Out
-              </Nav.Link>
-            </div>
-          ) : (
-            <Nav.Link as={NavLink} to="/login">
-              Login
-            </Nav.Link>
-          )}
-        </Nav>
+              {loggedIn ? (
+                <div className="d-lg-flex align-items-center">
+                  <span className="nav-link d-none d-lg-block">Welcome, {user.username}</span>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/login"
+                    onClick={() => {
+                      navigate("/login");
+                      localStorage.removeItem("token");
+                      setLoggedIn(false);
+                      setUser(null);
+                    }}
+                  >
+                    Log Out
+                  </Nav.Link>
+                </div>
+              ) : (
+                <Nav.Link as={NavLink} to="/login">
+                  Login
+                </Nav.Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   );

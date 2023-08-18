@@ -51,6 +51,18 @@ async function handleWine(e)
   }
   function handleCreateWine(e){
     e.preventDefault();
+
+    const profaneWords = ["fuck", "shit", "cunt", "nigga", "nigger", "whore", "slut", "faggot", "rape", "5hit", "ejaculation", "fagot", "gangbang", "masterbate" ];
+
+    const containsProfaneWords = profaneWords.some(word => {
+      return wineName.toLowerCase().includes(word);
+    });
+
+    if (containsProfaneWords) {
+
+      toast.error("Your wine name contains inappropriate language.");
+      return;
+    }
     if (flavor== "Cabernet" || flavor== "Syrah"|| flavor=="Zinfandel" || flavor=="Pinot Noir"||flavor=="Merlot"||flavor=="Malbec"||flavor=="Tempranillo"|| flavor=="Red Blend"||flavor=="TreTerzi"||flavor=="Petite Sirah"){
       setWineImg("3-reddish-purple_wine.png")
     }
