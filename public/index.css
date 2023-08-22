@@ -752,3 +752,93 @@ button {
   left: -6px;
   bottom: -6px;
 }
+
+.container-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#profile-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.container-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.container-right {
+  flex: 1;
+}
+
+.img-fluid {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.profile-username {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.count-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.count-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.count-text {
+  font-weight: bold;
+}
+
+.follower-count-text {
+  font-weight: bold;
+  color: green;
+}
+
+.user-location {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.thought-bubble {
+  font-style: italic;
+  color: #333;
+}
+
+.buttons {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.buttons:hover {
+  background-color: #0056b3;
+}
+
+.col-md-6 {
+  flex: 0 0 calc(50% - 10px);
+  margin-bottom: 20px;
+}
