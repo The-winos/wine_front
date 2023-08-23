@@ -119,7 +119,7 @@ const Profile = ({ user }) => {
                   />
                 </svg>
               </span>
-              {/* <span className="from-text smaller-text"></span>{" "} */}
+
               <span className="user-location smaller-text">{userLocation}</span>
             </h6>
             <div className="d-flex align-items-center">
@@ -169,7 +169,7 @@ const Profile = ({ user }) => {
                 Saved
               </button>
             </Link>
-            <p className="user-location">Location: {userLocation}</p>
+            {/* <p className="user-location">Location: {userLocation}</p> */}
           </div>
         </div>
         <div className="container-right">
