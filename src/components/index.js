@@ -34,3 +34,4 @@ export { default as FooterAboutUs } from "./FooterAboutUs";
 export { default as FooterPrivacy } from "./FooterPrivacy";
 export { default as FooterTerms } from "./FooterTerms";
 export { default as PasswordChecklist } from "./PasswordChecklist";
+export { default as UserData } from "./UserData";
