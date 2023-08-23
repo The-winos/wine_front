@@ -50,7 +50,7 @@ const FooterAboutUs = () => {
           <div className="developer">
             <a href={jen_url}>
               <img
-                src="/images/jen.jpeg"
+                src="/images/jenn.png"
                 alt="Jen Picture"
                 className="img-fluid rounded-circle"
                 style={{ width: "150px", height: "150px" }}
