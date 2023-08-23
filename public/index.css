@@ -15,12 +15,10 @@ body {
   padding: 0 15px;
   width: 100% !important;
 }
-.navLinks{
-  width:100% !important;
+.navLinks {
+  width: 100% !important;
   padding-right: 20px;
-
 }
-
 
 .navbar-logo {
   width: auto;
@@ -33,7 +31,7 @@ body {
   display: flex;
   align-items: center;
 }
-.navWelcome{
+.navWelcome {
   display: flex;
   justify-content: end !important;
 }
@@ -59,7 +57,6 @@ body {
   .navbar-content {
     flex-direction: column;
     align-items: flex-start;
-
   }
 
   .welcome-logout-container {
@@ -67,8 +64,6 @@ body {
     padding-top: 0;
   }
 }
-
-
 
 .footer {
   position: fixed;
@@ -150,7 +145,8 @@ button {
 /* profile */
 
 .profile-container {
-  padding-bottom: 3rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* .card-body {
@@ -892,4 +888,20 @@ button {
 .col-md-6 {
   flex: 0 0 calc(50% - 10px);
   margin-bottom: 20px;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.arc path {
+  transition: fill 0.3s;
+}
+
+.arc text {
+  font-size: 12px;
+  text-anchor: middle;
 }

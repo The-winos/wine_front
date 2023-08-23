@@ -26,6 +26,7 @@ import {
   FooterContact,
   FooterPrivacy,
   FooterTerms,
+  UserData,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -46,7 +47,6 @@ const Main = () => {
     if (token) {
       const loggedInUser = await authUser(token);
       setUser(loggedInUser);
-
     }
   };
   useEffect(() => {
@@ -95,11 +95,9 @@ const Main = () => {
   useEffect(() => {
     const fetchUserSaved = async () => {
       if (user) {
-
         try {
           const fetchedSaved = await getSaved(user.id);
           setSaved(fetchedSaved);
-
         } catch (error) {
           console.error(error);
         }
@@ -119,7 +117,10 @@ const Main = () => {
     <div id="main">
       <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} user={user} />
       <Routes>
-        <Route path="/" element={<Home allWine={allWine} setAllWine={setAllWine}/>}></Route>
+        <Route
+          path="/"
+          element={<Home allWine={allWine} setAllWine={setAllWine} />}
+        ></Route>
         <Route
           path="/login"
           element={
@@ -131,7 +132,10 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/admin" element={<Admin user={user} allReviews={allReviews} />}></Route>
+        <Route
+          path="/admin"
+          element={<Admin user={user} allReviews={allReviews} />}
+        ></Route>
         <Route
           path="/followers"
           element={<Followers user={user} favorites={favorites} />}
@@ -262,6 +266,7 @@ const Main = () => {
         ></Route>
         <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
         <Route path="/terms" element={<FooterTerms user={user} />}></Route>
+        <Route path="/userdata" element={<UserData user={user} />} />
       </Routes>
       <Footer />
     </div>
