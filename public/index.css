@@ -811,24 +811,10 @@ button {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
 #profile-main {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-.container-left {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
 }
 
 .container-right {
@@ -908,4 +894,32 @@ button {
 .arc text {
   font-size: 12px;
   text-anchor: middle;
+}
+.user-info-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: max-content;
+}
+
+.user-details {
+  margin-left: 20px;
+}
+
+.user-location {
+  margin-top: 5px; /* Add some space between the location and followers/following count */
+}
+
+.user-bio-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  max-width: 200px;
+  max-height: 1000px;
 }
