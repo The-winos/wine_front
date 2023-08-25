@@ -266,7 +266,7 @@ const Main = () => {
         ></Route>
         <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
         <Route path="/terms" element={<FooterTerms user={user} />}></Route>
-        <Route path="/userdata" element={<UserData user={user} />} />
+        <Route path="/userdata" element={<UserData user={user} />}></Route>
       </Routes>
       <Footer />
     </div>
