@@ -3,6 +3,8 @@ import React from "react";
 const FooterAboutUs = () => {
   const jess_url = "https://www.linkedin.com/in/jessica-piesco-60622513a/";
   const jen_url = "https://www.linkedin.com/in/jenniffermelchiade/";
+  const kyla_url ="https://www.linkedin.com/in/kyla-frisinger-9830b4197/";
+  const justin_url= "https://www.linkedin.com/in/justin-piesco-39503525/"
 
   return (
     <div className="aboutfooter container">
@@ -29,7 +31,7 @@ const FooterAboutUs = () => {
           <div className="developer">
             <a href={jess_url}>
               <img
-                src="/images/jessica.jpeg"
+                src="/images/jessy.png"
                 alt="Jessica Picture"
                 className="img-fluid rounded-circle"
                 style={{ width: "150px", height: "150px" }}
@@ -68,6 +70,48 @@ const FooterAboutUs = () => {
           </div>
         </div>
       </div>
+      <h3 className="text-center pt-5 pb-5 text-decoration-underline" id="header">
+        Meet the Artists
+      </h3>
+
+      <div className="row mt-4">
+        <div className="col-md-6">
+          <div className="developer">
+            <a href={kyla_url}>
+              <img
+                src="/images/kyla.png"
+                alt="Kyla Picture"
+                className="img-fluid rounded-circle"
+                style={{ width: "150px", height: "150px" }}
+                title="Kyla's LinkedIn"
+              />
+            </a>
+
+            <h5 className="bio">
+            Kyla is an artsy and stylish individual whose vibrant energy is contagious. With a deep appreciation for anime, she brings her creativity to life through her unique sense of fashion and enthusiasm for all things imaginative.
+            </h5>
+            <h6>Favorite Wine: Sangria</h6>
+          </div>
+    </div>
+    <div className="col-md-6">
+          <div className="developer">
+            <a href={justin_url}>
+              <img
+                src="/images/justin.png"
+                alt="Justin Picture"
+                className="img-fluid rounded-circle"
+                style={{ width: "150px", height: "150px" }}
+                title="Justin's LinkedIn"
+              />
+            </a>
+
+            <h5 className="bio">
+            Justin is a one-of-a-kind artist who effortlessly blends his distinctive style with his passion for creativity. Alongside his love for his 4-year-old daughter, he finds solace in listening to Wu-Tang Clan's beats or hitting the basketball court for a game of hoops.
+            </h5>
+            <h6>Favorite Wine: Apothic Dark</h6>
+          </div>
+    </div>
+    </div>
     </div>
   );
 };
