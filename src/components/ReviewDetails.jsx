@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getUserById, getWineById, addFavorite, removeFavorite, removeSaved, addSaved} from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
+import ReviewUpdate from "./ReviewUpdate";
 
 
 
@@ -13,6 +14,7 @@ const ReviewDetails = ({review, user, favorites, saved}) => {
   const [reviewWine, setReviewWine]=useState({})
   const [localFavorites, setLocalFavorites] = useState(favorites || []);
   const [localSaved, setLocalSaved] = useState(saved || []);
+  const [updateReview, setUpdateReview]= useState(false)
 
   useEffect(() => {
     setLocalFavorites(favorites || []);
@@ -222,6 +224,10 @@ fetchGetUserById();
           <small className="text-muted">Bought at: {review.location != null ? review.location : "Unknown"}</small>
         </p>
         <h5 className="review-comment">{review.review_comment}</h5>
+        {user.id==reviewUser.id ? (
+          <button onClick={()=>{setUpdateReview(true)}}>Update Review</button>
+        ): null}
+        {updateReview ? <ReviewUpdate review={review} setUpdateReview={setUpdateReview}/> : null}
         <button
           onClick={() => {
             navigate(`/singlewine/${reviewWine.id}`);
