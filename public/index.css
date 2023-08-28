@@ -63,6 +63,15 @@ body {
     margin-left: 0;
     padding-top: 0;
   }
+
+  .review-comment-container {
+    flex-direction: column;
+  }
+
+  .read-more {
+    margin-left: 0;
+    margin-top: 5px;
+  }
 }
 
 .footer {
@@ -269,15 +278,32 @@ button {
   margin-bottom: 15px;
 }
 
+.review-comment-container {
+  display: flex;
+  align-items: baseline;
+}
+
 .review-comment {
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.4;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-  text-overflow: ellipsis !important;
-  max-width: 100% !important;
+
+  max-width: 100%;
 }
+
+.review-comment.expanded {
+  white-space: normal;
+}
+
+.read-more {
+  cursor: pointer;
+
+}
+.read-less {
+  cursor: pointer;
+
+}
+
 /* singleWineReview */
 
 /* follow button */

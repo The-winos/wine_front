@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getUserById, getWineById, addFavorite, removeFavorite, removeSaved, addSaved} from "./API";
 import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
+import ReviewUpdate from "./ReviewUpdate";
 
 
 
@@ -13,6 +14,8 @@ const ReviewDetails = ({review, user, favorites, saved}) => {
   const [reviewWine, setReviewWine]=useState({})
   const [localFavorites, setLocalFavorites] = useState(favorites || []);
   const [localSaved, setLocalSaved] = useState(saved || []);
+  const [updateReview, setUpdateReview]= useState(false);
+  const [expandedComment, setExpandedComment]= useState(false)
 
   useEffect(() => {
     setLocalFavorites(favorites || []);
@@ -104,6 +107,9 @@ fetchGetUserById();
 
 
       return (
+
+      <>
+      {!updateReview ? (<>
         <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
           <div className="row no-gutter">
             <div className="col-md-3" style={{ border: "none", position: "relative" }}>
@@ -196,7 +202,7 @@ fetchGetUserById();
             src={`/images/${reviewUser.avatar}`}
             alt="user picture"
             className="img-fluid"
-            style={{ maxHeight: "50px", maxWidth: "50px", position: "absolute", top: 0, right: 0 }}
+            style={{ maxHeight: "50px", maxWidth: "50px", padding:"3px", position: "absolute", top: 0, right: 0 }}
           />
         <h4 className="review-title">{review.name}</h4>
         <div className="d-flex align-items-center">
@@ -212,16 +218,58 @@ fetchGetUserById();
          ( <div className="ml-3">
             <FollowButton review={review} reviewUser={reviewUser} reviewWine={reviewWine} user={user} />
           </div>): null}
+          {user.id==reviewUser.id ? (
+          <div style={{ marginLeft: "10px",
+          padding:"1px",
+          fontSize: "12px",
+          background: "#f6dec5",
+          border: "1px solid gray",
+          color: "gray",
+          cursor: "pointer"
+          }}  onClick={()=>{setUpdateReview(true)}}><small>Update Review</small>
+          </div>
+        ): null}
         </div>
         <Rating value={review.rating} edit={false} size={20} activeColor="#ffd700" />
         <p className="card-text">
           <small className="text-muted">
             Price: {review.price !== 0 && review.price !== null ? formattedPrice : "N/A"}
           </small>
-          <br />
-          <small className="text-muted">Bought at: {review.location != null ? review.location : "Unknown"}</small>
+
+          <small className="text-muted" style={{ marginLeft: "20px"}}>Bought at: {review.location != null ? review.location : "Unknown"}</small>
         </p>
-        <h5 className="review-comment">{review.review_comment}</h5>
+        {review.review_comment.length > 75 ? (
+  <div className="review-comment-container">
+    <h6 className={`review-comment ${expandedComment ? "expanded" : ""}`}>
+      {expandedComment
+        ? review.review_comment
+        : review.review_comment.substring(0, 75)}
+    </h6>
+    {!expandedComment && (
+      <span
+        onClick={() => setExpandedComment(true)}
+        className="read-more"
+      >
+        <small>... (read more)</small>
+      </span>
+    )}
+    {expandedComment && (
+      <span
+        onClick={() => setExpandedComment(false)}
+        className="read-less"
+      >
+
+         <small>(read less)</small>
+      </span>
+    )}
+  </div>
+) : (
+  <h5 className="review-comment">{review.review_comment}</h5>
+)}
+
+
+
+
         <button
           onClick={() => {
             navigate(`/singlewine/${reviewWine.id}`);
@@ -233,7 +281,10 @@ fetchGetUserById();
       </div>
     </div>
   </div>
-</div>
+  </div>
+  </>): <ReviewUpdate review={review} setUpdateReview={setUpdateReview} reviewWine={reviewWine} reviewUser={reviewUser}/> }
+
+</>
 
 
   );
