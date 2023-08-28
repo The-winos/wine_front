@@ -217,19 +217,28 @@ fetchGetUserById();
          ( <div className="ml-3">
             <FollowButton review={review} reviewUser={reviewUser} reviewWine={reviewWine} user={user} />
           </div>): null}
+          {user.id==reviewUser.id ? (
+          <div style={{ marginLeft: "10px",
+          padding:"1px",
+          fontSize: "12px",
+          background: "#f6dec5",
+          border: "1px solid gray",
+          color: "gray",
+          cursor: "pointer"
+          }}  onClick={()=>{setUpdateReview(true)}}><small>Update Review</small>
+          </div>
+        ): null}
         </div>
         <Rating value={review.rating} edit={false} size={20} activeColor="#ffd700" />
         <p className="card-text">
           <small className="text-muted">
             Price: {review.price !== 0 && review.price !== null ? formattedPrice : "N/A"}
           </small>
-          <br />
-          <small className="text-muted">Bought at: {review.location != null ? review.location : "Unknown"}</small>
+
+          <small className="text-muted" style={{ marginLeft: "20px"}}>Bought at: {review.location != null ? review.location : "Unknown"}</small>
         </p>
         <h5 className="review-comment">{review.review_comment}</h5>
-        {user.id==reviewUser.id ? (
-          <button onClick={()=>{setUpdateReview(true)}}>Update Review</button>
-        ): null}
+
 
         <button
           onClick={() => {

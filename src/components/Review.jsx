@@ -336,7 +336,7 @@ const handlePriceChange = (e) => {
             style={{ maxWidth: "250px" }}
           >
             <option value="">Choose...</option>
-            <option value="Grocery">Grocery</option>
+            <option value="Grocery">Grocery Store</option>
             <option value="Costco">Costco</option>
             <option value="Liquor Store">Liquor Store</option>
             <option value="Sams">Sams</option>

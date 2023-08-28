@@ -90,7 +90,7 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
                 onChange={(event) => {
                   setReviewName(event.target.value);
                 }}
-                style={{ maxWidth: "650px" }}
+                style={{ maxWidth: "300px" }}
               />
               <div className="mb-3">
                 <label htmlFor="reviewRating" className="form-label">
@@ -155,6 +155,7 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
                 </div>
               </div>
               <div className="card-text">
+                <div className="d-flex align-items-center">
                 <h6>Update Price: $
                 <input
                   placeholder="Enter updated price"
@@ -164,19 +165,29 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
                   onChange={(event) => {
                     setReviewPrice((event.target.value)* 100);
                   }}
-                  style={{maxWidth: "75px"}}
+                  style={{maxWidth: "75px", marginLeft: "5px"}}
                 /></h6>
 
-                <h6>Bought at:
-                <input
-                  placeholder="Enter updated bought at"
-                  className="review-location"
-                  type="text"
-                  value={reviewLocation}
-                  onChange={(event) => {
-                    setReviewLocation(event.target.value);
-                  }}
-                /></h6>
+
+  <h6 style={{ margin: 0, marginLeft: "10px" }}>Bought at:</h6>
+  <select
+    className="form-select"
+    id="reviewLocation"
+    value={reviewLocation}
+    onChange={(e) => setReviewLocation(e.target.value)}
+    style={{ maxWidth: "150px", marginLeft: "5px", padding:0 }}
+  >
+    <option value="">Choose...</option>
+    <option value="Grocery">Grocery Store</option>
+    <option value="Costco">Costco</option>
+    <option value="Liquor Store">Liquor Store</option>
+    <option value="Sams">Sams</option>
+    <option value="Trader Joes">Trader Joes</option>
+    <option value="Other">Other</option>
+  </select>
+</div>
+
+
               </div>
               <div>
                 <h6>Edit Comment:</h6>
