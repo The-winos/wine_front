@@ -106,6 +106,9 @@ fetchGetUserById();
 
 
       return (
+
+      <>
+      {!updateReview ? (<>
         <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
           <div className="row no-gutter">
             <div className="col-md-3" style={{ border: "none", position: "relative" }}>
@@ -227,7 +230,7 @@ fetchGetUserById();
         {user.id==reviewUser.id ? (
           <button onClick={()=>{setUpdateReview(true)}}>Update Review</button>
         ): null}
-        {updateReview ? <ReviewUpdate review={review} setUpdateReview={setUpdateReview}/> : null}
+
         <button
           onClick={() => {
             navigate(`/singlewine/${reviewWine.id}`);
@@ -239,7 +242,10 @@ fetchGetUserById();
       </div>
     </div>
   </div>
-</div>
+  </div>
+  </>): <ReviewUpdate review={review} setUpdateReview={setUpdateReview} reviewWine={reviewWine} reviewUser={reviewUser}/> }
+
+</>
 
 
   );

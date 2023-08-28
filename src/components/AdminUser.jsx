@@ -310,7 +310,6 @@ const AdminUser = ({
     <>
       {updateTheUser ? (
         <>
-          {console.log(updatingUser, "updatingUser")}
           <form
             onSubmit={handleSubmit}
             className="admin-form border p-2 m-3 mb-4"
