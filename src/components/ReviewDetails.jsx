@@ -14,7 +14,8 @@ const ReviewDetails = ({review, user, favorites, saved}) => {
   const [reviewWine, setReviewWine]=useState({})
   const [localFavorites, setLocalFavorites] = useState(favorites || []);
   const [localSaved, setLocalSaved] = useState(saved || []);
-  const [updateReview, setUpdateReview]= useState(false)
+  const [updateReview, setUpdateReview]= useState(false);
+  const [expandedComment, setExpandedComment]= useState(false)
 
   useEffect(() => {
     setLocalFavorites(favorites || []);
@@ -201,7 +202,7 @@ fetchGetUserById();
             src={`/images/${reviewUser.avatar}`}
             alt="user picture"
             className="img-fluid"
-            style={{ maxHeight: "50px", maxWidth: "50px", position: "absolute", top: 0, right: 0 }}
+            style={{ maxHeight: "50px", maxWidth: "50px", padding:"3px", position: "absolute", top: 0, right: 0 }}
           />
         <h4 className="review-title">{review.name}</h4>
         <div className="d-flex align-items-center">
@@ -237,7 +238,36 @@ fetchGetUserById();
 
           <small className="text-muted" style={{ marginLeft: "20px"}}>Bought at: {review.location != null ? review.location : "Unknown"}</small>
         </p>
-        <h5 className="review-comment">{review.review_comment}</h5>
+        {review.review_comment.length > 75 ? (
+  <div className="review-comment-container">
+    <h6 className={`review-comment ${expandedComment ? "expanded" : ""}`}>
+      {expandedComment
+        ? review.review_comment
+        : review.review_comment.substring(0, 75)}
+    </h6>
+    {!expandedComment && (
+      <span
+        onClick={() => setExpandedComment(true)}
+        className="read-more"
+      >
+        <small>... (read more)</small>
+      </span>
+    )}
+    {expandedComment && (
+      <span
+        onClick={() => setExpandedComment(false)}
+        className="read-less"
+      >
+
+         <small>(read less)</small>
+      </span>
+    )}
+  </div>
+) : (
+  <h5 className="review-comment">{review.review_comment}</h5>
+)}
+
+
 
 
         <button
