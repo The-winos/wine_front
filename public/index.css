@@ -43,6 +43,7 @@ body {
   padding-top: 1rem; /* Adjust as needed */
 }
 
+
 @media (max-width: 768px) {
   .custom-navbar {
     max-height: 120px;
@@ -139,8 +140,17 @@ button {
   &:hover {
     background-color: #66bb66 !important;
     border-color: #a0d1ff !important;
+    text-decoration: underline;
   }
 }
+
+.btn-danger{
+  background-color: rgb(161, 37, 37) !important;
+
+  &:hover {
+    background-color: rgb(126, 25, 25) !important;
+  }
+  }
 
 .card-text small {
   margin: 0;

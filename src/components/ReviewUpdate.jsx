@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { updateReview } from "./API";
+import { deleteItem, updateReview } from "./API";
 import { ToastContainer, toast } from "react-toastify";
 
-const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
+const ReviewUpdate = ({ review, setUpdateReview, updateReviews, reviewWine, reviewUser }) => {
   const [reviewName, setReviewName] = useState(review.name);
   const [reviewRating, setReviewRating] = useState(review.rating);
   const [reviewPrice, setReviewPrice] = useState(review.price);
   const [reviewComment, setReviewComment] = useState(review.review_comment);
-  const [reviewLocation, setReviewLocation] = useState(review.location);
+  const [reviewLocation, setReviewLocation] = useState(review.location !== null ? review.location : "");
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -18,6 +18,7 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
       reviewComment === review.review_comment &&
       reviewLocation === review.location
     ) {
+      toast.warning("Nothing to update")
       return;
     }
     try {
@@ -40,8 +41,36 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
     }
   }
 
+  function showConfirmation(message) {
+    return new Promise((resolve, reject) => {
+      const confirmed = window.confirm(message);
+      if (confirmed) {
+        resolve(true);
+      } else {
+        return;
+      }
+    });
+  }
+
+  async function handleDelete(type, reviewId){
+    try {
+      const confirmDeletion = await showConfirmation(`Are you sure you want to delete review? This action cannot be undone.`);
+      if (!confirmDeletion){
+        return;
+      }
+
+      const result = await deleteItem(type, reviewId);
+      console.log(result);
+      setUpdateReview(false)
+      toast.success(`Review deleted`)
+    } catch (error) {
+
+    }
+  }
+
   return (
     <>
+    {updateReviews &&  (<>
       <form
         onSubmit={handleSubmit}
         className="card mb-3"
@@ -202,7 +231,7 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
                   }}
                   style={{ maxWidth: "650px" }}
                 />
-                 <button type="submit" className="btn btn-primary">
+                 <button type="submit" className="btn btn-primary" style={{ marginLeft: "5px", marginTop: "5px" }}>
               Save Changes
             </button>
                 <button
@@ -210,14 +239,24 @@ const ReviewUpdate = ({ review, setUpdateReview, reviewWine, reviewUser }) => {
                     setUpdateReview(false);
                   }}
                   className="btn btn-primary"
+                  style={{ marginLeft: "5px", marginTop: "5px" }}
                 >
                   Cancel edit
                 </button>
+                <button
+        type="button"
+        className="btn btn-danger ml-2"
+        onClick={() => handleDelete('reviews', review.id)}
+        style={{ marginLeft: "5px", marginTop: "5px"}}
+      >
+        Delete
+      </button>
               </div>
             </div>
           </div>
         </div>
       </form>
+      </>)}
       <ToastContainer />
     </>
   );
