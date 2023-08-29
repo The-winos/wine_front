@@ -297,11 +297,9 @@ button {
 
 .read-more {
   cursor: pointer;
-
 }
 .read-less {
   cursor: pointer;
-
 }
 
 /* singleWineReview */
@@ -937,15 +935,17 @@ button {
 }
 
 .user-location {
-  margin-top: 5px; /* Add some space between the location and followers/following count */
+  margin-top: 5px;
 }
 
 .user-bio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  max-width: 200px;
-  max-height: 1000px;
+  max-width: 600px;
 }
