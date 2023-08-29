@@ -11,8 +11,6 @@ When first opening the project make sure to install the necessesary dependencies
 Team Members:
 •Jessica Piesco
 •Jennifer Melchiade
-•Alexa Mullin
 
 Tech Stack:
 For our front-end we used Javascript, React.js, Bootstap and CSS.
-# Portfolio
