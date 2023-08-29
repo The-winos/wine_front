@@ -14,7 +14,7 @@ const ReviewDetails = ({review, user, favorites, saved}) => {
   const [reviewWine, setReviewWine]=useState({})
   const [localFavorites, setLocalFavorites] = useState(favorites || []);
   const [localSaved, setLocalSaved] = useState(saved || []);
-  const [updateReview, setUpdateReview]= useState(false);
+  const [updateReviews, setUpdateReview]= useState(false);
   const [expandedComment, setExpandedComment]= useState(false)
 
   useEffect(() => {
@@ -109,7 +109,7 @@ fetchGetUserById();
       return (
 
       <>
-      {!updateReview ? (<>
+      {!updateReviews ? (<>
         <div className="card mb-3" style={{ maxWidth: "60%", margin: "0 auto" }}>
           <div className="row no-gutter">
             <div className="col-md-3" style={{ border: "none", position: "relative" }}>
@@ -282,7 +282,7 @@ fetchGetUserById();
     </div>
   </div>
   </div>
-  </>): <ReviewUpdate review={review} setUpdateReview={setUpdateReview} reviewWine={reviewWine} reviewUser={reviewUser}/> }
+  </>): <ReviewUpdate review={review} setUpdateReview={setUpdateReview} reviewWine={reviewWine} reviewUser={reviewUser} updateReviews={updateReviews}/> }
 
 </>
 
