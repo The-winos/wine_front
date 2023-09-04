@@ -8,6 +8,7 @@ const ReviewUpdate = ({
   updateReviews,
   reviewWine,
   reviewUser,
+
 }) => {
   const [reviewName, setReviewName] = useState(review.name);
   const [reviewRating, setReviewRating] = useState(review.rating);
@@ -74,6 +75,7 @@ const ReviewUpdate = ({
       );
       setUpdateReview(false);
       toast.success("Review Updated");
+
     } catch (error) {
       console.error(error);
     }
@@ -297,7 +299,7 @@ const ReviewUpdate = ({
                       onClick={() => handleDelete("reviews", review.id)}
                       style={{ marginLeft: "5px", marginTop: "5px" }}
                     >
-                      Delete
+                      Delete Review
                     </button>
                   </div>
                 </div>
