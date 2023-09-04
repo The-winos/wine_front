@@ -73,6 +73,15 @@ body {
     margin-left: 0;
     margin-top: 5px;
   }
+  .avatar-container {
+    top: 0;
+    right: 9px !important;
+  }
+
+  .savedFavs{
+    top:60px !important;
+    right: 30px !important;
+  }
 }
 
 .footer {
@@ -221,6 +230,12 @@ button {
 }
 
 /* wine list */
+.avatar-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px;
+}
 
 /* winefeed */
 .tastingRoom {
