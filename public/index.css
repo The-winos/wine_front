@@ -36,13 +36,17 @@ body {
   justify-content: end !important;
 }
 
-.welcome-logout-container {
+/* .welcome-logout-container {
   display: flex;
   align-items: center;
   margin-left: auto;
-  padding-top: 1rem; /* Adjust as needed */
+  padding-top: 1rem;
+} */
+.welcomeName{
+  right: 0;
+  position: absolute;
+  padding-right: 1rem;
 }
-
 
 @media (max-width: 768px) {
   .custom-navbar {
@@ -60,9 +64,8 @@ body {
     align-items: flex-start;
   }
 
-  .welcome-logout-container {
-    margin-left: 0;
-    padding-top: 0;
+  .welcomeName{
+    position: relative;
   }
 
   .review-comment-container {
@@ -81,6 +84,18 @@ body {
   .savedFavs{
     top:60px !important;
     right: 30px !important;
+  }
+  .bg-custom {
+    background-color: rgb(244, 233, 218);
+    margin-top: 50px !important;
+
+  }
+  .hamburger{
+    max-height: 4rem;
+    top:2rem;
+    right:0;
+    margin-right: 20px !important;
+    position: absolute;
   }
 }
 

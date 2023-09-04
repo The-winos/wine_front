@@ -10,14 +10,16 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
   return (
     <Navbar className="custom-navbar" expand="lg" sticky="top">
       <Container fluid className="p-0">
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
+        <div className="d-flex justify-content-between">
+        <div className="d-flex mr-auto">
+          <div className="mr-4">
             <NavLink to="/">
               <img src="/images/C.O.R.K.S.png" alt="C.O.R.K.S. Logo" className="navbar-logo" />
             </NavLink>
           </div>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" className="hamburger"/>
+          </div>
+          <Navbar.Collapse id="responsive-navbar-nav" className="p-3 bg-custom">
             <Nav className="ml-auto">
               <Nav.Link as={NavLink} to="/">
                 Home
@@ -40,7 +42,7 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
                 </Nav.Link>
               )}
               {loggedIn ? (
-                <div className="d-lg-flex align-items-center">
+                <div className="welcomeName d-lg-flex">
                   <span className="nav-link d-none d-lg-block">Welcome, {user.username}</span>
                   <Nav.Link
                     as={NavLink}
