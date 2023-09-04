@@ -58,9 +58,11 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
                   </Nav.Link>
                 </div>
               ) : (
+                <div className="welcomeName">
                 <Nav.Link as={NavLink} to="/login">
                   Login
                 </Nav.Link>
+                </div>
               )}
             </Nav>
           </Navbar.Collapse>
