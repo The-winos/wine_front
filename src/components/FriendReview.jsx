@@ -109,7 +109,7 @@ return (
           className="img-fluid"
           style={{ maxHeight: "250px", maxWidth: "90%" }}
         />
-      <div className="d-flex flex-column align-items-end" style={{ position: "absolute", top: 0, right: 0 }}>
+      <div className="savedFavs d-flex flex-column align-items-end" style={{ position: "absolute", top: 0, right: 0 }}>
         <div
           onClick={() => {
             const favoriteId = checkOnFaves(wineFriend.id);
@@ -190,12 +190,13 @@ return (
         <h4 className="review-title">{reviews.name}</h4>
         <small className="text-muted">By: {user.id!=reviewFriend.id ?
            <a href={`/profileuserid/${reviewFriend.id}`}>{reviewFriend.username}</a>  :  <a href={`/profile`}>{reviewFriend.username}</a> }</small>
+           <div className="avatar-container">
            <img
           src={`/images/${reviewFriend.avatar}`}
           alt="user picture"
           className="img-fluid"
-          style={{ maxHeight: "50px", maxWidth: "50px", position: "absolute", top: 0, right: 0 }}
-        />
+          style={{ maxHeight: "50px", maxWidth: "50px"}}
+        /></div>
 
         <Rating
                   value={reviews.rating}
