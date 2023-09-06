@@ -188,9 +188,14 @@ button {
 /* profile */
 
 .profile-container {
-  max-width: 100%;
-  overflow-x: hidden;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: white;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
 }
+
 
 /* .card-body {
   display: flex;
@@ -732,7 +737,7 @@ button {
 }
 .profile-username {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 20px !important;
   color: #f091ad; /* Fun color */
   margin: 0;
 }
@@ -749,13 +754,12 @@ button {
 
 .count-text {
   font-family: "Infamy Fill", sans-serif;
-  font-size: 1.8rem;
-  color: #f7cad8; /* Adjust the color as needed */
-  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: #f7cad8;
   font-variant-ligatures: none;
   line-height: 1;
   font-weight: normal;
-  margin-right: 10px;
+
 }
 
 .count-text::after {
@@ -799,70 +803,16 @@ button {
   margin-left: 10px;
 }
 
-.smaller-text {
-  font-size: 18px;
-  padding: 2px;
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.thought-bubble {
-  position: relative;
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 15px;
-  border: 2px solid #cccccc;
-  margin-top: 20px;
-  max-width: 60%; /* Adjust the width as needed */
-  overflow: hidden;
+.thought-bubble{
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: max-content;
+  font-size: small;
+  margin-top: -25px !important;
 }
 
-.thought-bubble::before {
-  content: "";
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  transform: rotate(45deg);
-  left: -15px;
-  top: 10px;
-  border: 2px solid #cccccc;
-}
-
-.thought-bubble::after {
-  content: "";
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  transform: rotate(45deg);
-  left: -10px;
-  top: 25px;
-  border: 2px solid #cccccc;
-}
-
-.thought-bubble::before,
-.thought-bubble::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  border: 2px solid #cccccc;
-}
-
-.thought-bubble::before {
-  left: -6px;
-  top: -6px;
-}
-
-.thought-bubble::after {
-  left: -6px;
-  bottom: -6px;
-}
 
 .container-left {
   display: flex;
@@ -908,14 +858,7 @@ button {
   text-decoration: none;
 }
 
-.count-text {
-  font-weight: bold;
-}
 
-.follower-count-text {
-  font-weight: bold;
-  color: green;
-}
 
 .user-location {
   font-size: 0.9rem;
@@ -960,11 +903,10 @@ button {
   text-anchor: middle;
 }
 .user-info-container {
-  display: flex;
   align-items: center;
   margin-bottom: 20px;
-  background-color: white;
   padding: 20px;
+  margin-left: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: max-content;
@@ -978,7 +920,7 @@ button {
   margin-top: 5px;
 }
 
-.user-bio-container {
+user-bio-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -987,5 +929,4 @@ button {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  max-width: 600px;
 }

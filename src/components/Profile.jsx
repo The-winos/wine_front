@@ -82,21 +82,22 @@ const Profile = ({ user }) => {
     <div className="profile-container">
       {/* User Information Container */}
       <div className="user-info-container">
+        <div className="profileAvatar">
         <img
           src={`/images/${user.avatar}`}
           alt="avatar image"
           className="img-fluid"
           style={{
-            height: "200px",
-            width: "200px",
+            height: "125px",
+            width: "125px",
           }}
-        />
-        <div>
+        /></div>
+        <div className="d-flex flex-column">
           <h2 className="profile-username">{user.name}</h2>
-          <div className="user-details">
+          {/* <div className="user-details"> */}
             {/* Other user information */}
-            <h6 className="profile-username me-3 smaller-text">
-              <span className="me-1">
+            <h6 className="profile-username smaller-text">
+              <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -122,29 +123,29 @@ const Profile = ({ user }) => {
                 I follow{" "}
                 <div className="follow-count">
                   <Link to="/following" className="count-link">
-                    <div
+                    <span
                       className="count-text"
                       data-heading={user.following_count}
                     >
                       {user.following_count}
-                    </div>
+                    </span>
                   </Link>
-                </div>{" "}
+                </div>
                 people
               </h5>
               <h5 className="profile-username">
                 <Link to="/followers" className="count-link">
                   <span
-                    className="follower-count-text"
+                    className="count-text"
                     data-heading={user.follower_count}
                   >
                     {user.follower_count}
                   </span>
-                </Link>{" "}
+                </Link>
                 people follow me!
               </h5>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
 
