@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import UserData from "./UserData";
-import UserReviewDetails from "./UserReviewDetails";
 import { getReviewByUser, getFollowersById, getFollowingById } from "./API";
+import ProfileReviews from "./ProfileReviews";
+import ProfileOverview from "./ProfileOverview";
 
 const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
   const [followerAvatars, setFollowerAvatars] = useState([]);
   const [followingAvatars, setFollowingAvatars] = useState([]);
   const [userLocation, setUserLocation] = useState("");
+  const [expandedBio, setExpandedBio] = useState(false);
+  const [profileReview, setProfileReview]=useState(false)
+  const [profileOverview, setProfileOverview]=useState(true)
 
   const getUserLocation = async () => {
     try {
@@ -79,6 +82,8 @@ const Profile = ({ user }) => {
   }, [user]);
 
   return (
+    <>
+    <div className="d-flex flex-wrap">
     <div className="profile-container">
       {/* User Information Container */}
       <div className="user-info-container">
@@ -119,9 +124,9 @@ const Profile = ({ user }) => {
               <span className="user-location smaller-text">{userLocation}</span>
             </h6>
             <div className="count-container">
-              <h5 className="profile-username">
-                I follow{" "}
-                <div className="follow-count">
+              <h6>
+              I follow{" "}
+
                   <Link to="/following" className="count-link">
                     <span
                       className="count-text"
@@ -130,10 +135,10 @@ const Profile = ({ user }) => {
                       {user.following_count}
                     </span>
                   </Link>
-                </div>
+
                 people
-              </h5>
-              <h5 className="profile-username">
+              </h6>
+              <h6>
                 <Link to="/followers" className="count-link">
                   <span
                     className="count-text"
@@ -142,43 +147,63 @@ const Profile = ({ user }) => {
                     {user.follower_count}
                   </span>
                 </Link>
-                people follow me!
-              </h5>
+                {user.follower_count<=1 ? ("person follows me") : ("people follow me!")}
+
+              </h6>
             </div>
           {/* </div> */}
         </div>
       </div>
+      {user.bio ? (
+  <div className="user-bio-container">
+    <h6
+      className={`thought-bubble ${
+        expandedBio ? "expanded" : ""
+      }`}
+    >
+      {expandedBio
+        ? user.bio
+        : user.bio.substring(0, 150)}
+        {!expandedBio && (
+      <span
+        onClick={() => setExpandedBio(true)}
+        className="read-more"
+      >
+        <small>... (read more)</small>
+      </span>
+    )}
+    {expandedBio && (
+      <span
+        onClick={() => setExpandedBio(false)}
+        className="read-less"
+      >
+        <small>(read less)</small>
+      </span>
+    )}
+    </h6>
 
-      {/* User Bio Container */}
-      <div className="user-bio-container">
-        <p className="thought-bubble">{user.bio}</p>
-      </div>
 
-      {/* User Reviews Container */}
-      <div className="container-right">
-        <div className="header-container text-center mb-3">
-          <h2 className="profile-username">{user.username}'s Reviews</h2>
-        </div>
-        {userReviews && userReviews.length ? (
-          <div className="row justify-content-center">
-            {userReviews.map((userReview) => (
-              <div
-                key={`userReview-${userReview.id}`}
-                className="col-md-6 mb-4"
-              >
-                <UserReviewDetails
-                  userReviews={userReview}
-                  setUserReviews={setUserReviews}
-                />
-                <UserData user={user} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+  </div>
+) : (
+  <h5 className="thought-bubble">No bio available.</h5>
+)}
+<div className="profileLinks">
+<div>Overview</div>
+<div>Reviews</div>
+</div>
+
+
+
+
     </div>
+<div className="profileElements">
+{profileOverview ?
+(<ProfileOverview user={user}/>): null}
+{profileReview ?
+(<ProfileReviews user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>): null}
+    </div>
+    </div>
+    </>
   );
 };
 

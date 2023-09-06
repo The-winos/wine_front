@@ -97,6 +97,9 @@ body {
     margin-right: 20px !important;
     position: absolute;
   }
+  .profile-container {
+    max-width: 150px;
+  }
 }
 
 .footer {
@@ -192,42 +195,11 @@ button {
   left: 0;
   bottom: 0;
   width: 250px;
+  min-height: 100vh;
   background-color: white;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-
-/* .card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  background-color: #f8f9fa;
-}
-
-.card-text {
-  margin-bottom: 0.5rem;
-}
-
-.card {
-  border: none;
-}
-
-.buttons {
-  position: relative;
-  margin-top: 10px;
-}
-
-.card-text small {
-  margin: 0;
-  padding: 0;
-}
-
-
-
-.profile-username {
-  text-align: center;
-} */
 
 /* wine details */
 
@@ -795,9 +767,11 @@ button {
 }
 
 .count-container {
-  display: block;
   margin-top: 10px;
+  font-size: 5px !important;
+  margin-bottom: 5px;
 }
+
 
 .follow-count {
   margin-left: 10px;
@@ -805,12 +779,12 @@ button {
 
 .thought-bubble{
   align-items: center;
-  margin-bottom: 20px;
-  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 10px;
   max-width: max-content;
   font-size: small;
-  margin-top: -25px !important;
+  margin-top: -10px !important;
 }
 
 
@@ -847,16 +821,6 @@ button {
   margin-bottom: 5px;
 }
 
-.count-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.count-link {
-  color: #333;
-  text-decoration: none;
-}
 
 
 
