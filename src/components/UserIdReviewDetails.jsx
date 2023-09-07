@@ -39,7 +39,7 @@ const UserIdReviewDetails = ({ userReviews, userProfile, setUserReviews }) => {
 
   return (<>
 
-      <div className="card mb-3 mx-auto mr-0 text-left" style={{ maxWidth: "60%" }}>
+      <div className="review-card mb-3 mx-auto mr-0 text-left" style={{ maxWidth: "60%" }}>
       <h3 className="user-review-date">
         {new Date(userReviews.review_date).toLocaleDateString("en-US", {
           year: "numeric",

@@ -36,3 +36,5 @@ export { default as FooterTerms } from "./FooterTerms";
 export { default as PasswordChecklist } from "./PasswordChecklist";
 export { default as UserData } from "./UserData";
 export { default as ReviewUpdate } from "./ReviewUpdate";
+export { default as ProfileReviews } from "./ProfileReviews";
+export { default as ProfileOverview } from "./ProfileOverview";
