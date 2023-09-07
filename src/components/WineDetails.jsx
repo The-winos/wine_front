@@ -83,18 +83,22 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
 
   return (
     <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
-      <div className="card-header d-flex justify-content-between align-items-start">
-        <img
-          src={`/images/${wine.image_url}`}
-          alt="wine image"
-          className="img-fluid"
-          style={{
-            maxHeight: "30%",
-            maxWidth: "30%",
-            padding: 5,
-          }}
-        />
-        <div className="d-flex flex-column align-items-end">
+    <div className="card-header">
+      <div className="d-flex justify-content-between align-items-start">
+        <div className="d-flex flex-column align-items-start"style={{ maxWidth: "55%", minWidth: "55%", margin: "0 auto" }}>
+          <img
+            src={`/images/${wine.image_url}`}
+            alt="wine image"
+            className="img-fluid"
+            style={{
+              maxHeight: "40%",
+              maxWidth: "40%",
+              padding: 4,
+            }}
+          />
+
+        </div>
+        <div className="d-flex flex-column align-items-end h-100" style={{height:"100%"}}>
           <div
             onClick={() => {
               const favoriteId = checkOnFaves(wine.id);
@@ -158,6 +162,8 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                   height: "auto",
                   marginTop: "-6px",
                   marginRight: "-2px",
+                  maxWidth:"25%"
+
                 }}
                 title="Remove From My List"
               />
@@ -166,21 +172,25 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 src="/images/6-list.png"
                 alt="savedPad"
                 className="img-fluid"
-                style={{ width: "25%", height: "auto" }}
+                style={{ width: "25%", maxWidth:"25%", height: "auto", }}
                 title="Add To My List"
+
               />
             )}
           </div>
-        </div>
-        <div className="card-text">
-          <Rating
-            value={wine.rating}
-            edit={false}
-            size={20}
-            activeColor="#ffd700"
-          />
+          <div className="card-text text-left align-self-end pt-5">
+            <Rating
+              value={wine.rating}
+              edit={false}
+              size={15}
+              activeColor="#ffd700"
+            />
+          </div>
         </div>
       </div>
+    </div>
+
+
 
 
       <div className="card-body">

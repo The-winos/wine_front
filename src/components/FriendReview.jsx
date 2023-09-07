@@ -107,7 +107,7 @@ return (
           src={`/images/${wineFriend.image_url}`}
           alt="wine image"
           className="img-fluid"
-          style={{ maxHeight: "250px", maxWidth: "90%" }}
+          style={{ maxHeight: "250px", maxWidth: "90%", padding:"1rem" }}
         />
       <div className="savedFavs d-flex flex-column align-items-end" style={{ position: "absolute", top: 0, right: 0 }}>
         <div
