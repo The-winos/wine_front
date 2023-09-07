@@ -148,6 +148,7 @@ body {
 .custom-button {
   display: flex;
   justify-content: end !important;
+
 }
 
 .card-text {

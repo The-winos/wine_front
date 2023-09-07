@@ -130,7 +130,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                   src={`/images/${reviewWine.image_url}`}
                   alt="wine image"
                   className="img-fluid"
-                  style={{ maxHeight: "250px", maxWidth: "90%" }}
+                  style={{ maxHeight: "250px", maxWidth: "90%", padding: "1rem" }}
                 />
                 <div
                   className="savedFavs d-flex flex-column align-items-end"
@@ -149,6 +149,8 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     style={{
                       marginBottom: "0.5rem",
                       cursor: "pointer",
+
+
                     }}
                   >
                     {checkOnFaves(reviewWine.id) ? (
