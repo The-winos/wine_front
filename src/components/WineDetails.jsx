@@ -172,7 +172,16 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
             )}
           </div>
         </div>
+        <div className="card-text">
+          <Rating
+            value={wine.rating}
+            edit={false}
+            size={20}
+            activeColor="#ffd700"
+          />
+        </div>
       </div>
+
 
       <div className="card-body">
         <h5
@@ -192,14 +201,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
         <p className="card-text">
           <small className="text-muted">Region: {wine.region}</small>
         </p>
-        <div className="card-text">
-          <Rating
-            value={wine.rating}
-            edit={false}
-            size={20}
-            activeColor="#ffd700"
-          />
-        </div>
+
         <button
           onClick={() => {
             navigate(`/singlewine/${wine.id}`);
