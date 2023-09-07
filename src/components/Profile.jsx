@@ -135,8 +135,8 @@ const Profile = ({ user }) => {
                       {user.following_count}
                     </span>
                   </Link>
+                  {user.following_count<=1 ? ("person"): ("people")}
 
-                people
               </h6>
               <h6>
                 <Link to="/followers" className="count-link">
@@ -188,8 +188,8 @@ const Profile = ({ user }) => {
   <h5 className="thought-bubble">No bio available.</h5>
 )}
 <div className="profileLinks">
-<div>Overview</div>
-<div>Reviews</div>
+<div onClick={() => {setProfileOverview(true) & setProfileReview(false)}}>Overview</div>
+<div className="review-card" onClick={() => {setProfileReview(true) & setProfileOverview(false)}}>Reviews</div>
 </div>
 
 
@@ -197,10 +197,14 @@ const Profile = ({ user }) => {
 
     </div>
 <div className="profileElements">
+
 {profileOverview ?
 (<ProfileOverview user={user}/>): null}
+
 {profileReview ?
 (<ProfileReviews user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>): null}
+
+
     </div>
     </div>
     </>
