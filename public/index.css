@@ -42,7 +42,7 @@ body {
   margin-left: auto;
   padding-top: 1rem;
 } */
-.welcomeName{
+.welcomeName {
   right: 0;
   position: absolute;
   padding-right: 1rem;
@@ -64,7 +64,7 @@ body {
     align-items: flex-start;
   }
 
-  .welcomeName{
+  .welcomeName {
     position: relative;
   }
 
@@ -81,19 +81,18 @@ body {
     right: 9px !important;
   }
 
-  .savedFavs{
-    top:60px !important;
+  .savedFavs {
+    top: 60px !important;
     right: 30px !important;
   }
   .bg-custom {
     background-color: rgb(244, 233, 218);
     margin-top: 50px !important;
-
   }
-  .hamburger{
+  .hamburger {
     max-height: 4rem;
-    top:2rem;
-    right:0;
+    top: 2rem;
+    right: 0;
     margin-right: 20px !important;
     position: absolute;
   }
@@ -148,7 +147,6 @@ body {
 .custom-button {
   display: flex;
   justify-content: end !important;
-
 }
 
 .card-text {
@@ -172,13 +170,13 @@ button {
   }
 }
 
-.btn-danger{
+.btn-danger {
   background-color: rgb(161, 37, 37) !important;
 
   &:hover {
     background-color: rgb(126, 25, 25) !important;
   }
-  }
+}
 
 .card-text small {
   margin: 0;
@@ -200,11 +198,17 @@ button {
   background-color: white;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
 }
-.profileElements{
+
+/*_________________________________*/
+/* This is the sidebar on Profile */
+
+.profileElements {
   padding-left: 2rem !important;
   width: calc(100vw - 255px);
+  /* background-color: white; */
 }
 
+/*_________________________________*/
 
 /* wine details */
 
@@ -568,11 +572,10 @@ button {
 }
 
 @import url("https://fonts.googleapis.com/css?family=Reenie+Beanie");
-.review-card{
-padding: none;
-width: 15rem;
+.review-card {
+  padding: none;
+  width: 15rem;
   max-width: calc(100% - 250px);
-
 }
 .note {
   color: #333;
@@ -739,7 +742,6 @@ width: 15rem;
   font-variant-ligatures: none;
   line-height: 1;
   font-weight: normal;
-
 }
 
 .count-text::after {
@@ -780,12 +782,11 @@ width: 15rem;
   margin-bottom: 5px;
 }
 
-
 .follow-count {
   margin-left: 10px;
 }
 
-.thought-bubble{
+.thought-bubble {
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
@@ -794,7 +795,6 @@ width: 15rem;
   font-size: small;
   margin-top: -10px !important;
 }
-
 
 .container-left {
   display: flex;
@@ -828,9 +828,6 @@ width: 15rem;
   font-size: 1.5rem;
   margin-bottom: 5px;
 }
-
-
-
 
 .user-location {
   font-size: 0.9rem;
@@ -901,4 +898,29 @@ user-bio-container {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+}
+
+.profileOverview {
+  background-color: white;
+}
+
+.profileLinks {
+  text-decoration: none;
+}
+
+.profile-review-sidebar {
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.profile-review-sidebar a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.profile-review-sidebar a:active {
+  color: #721c24;
+  text-decoration: underline;
 }
