@@ -900,8 +900,32 @@ user-bio-container {
   margin-bottom: 20px;
 }
 
-.profileOverview {
+/* .profileOverview {
   background-color: white;
+} */
+
+.profile-overview-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.profile-overview-left-container,
+.profile-overview-right-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.container-box {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 20px;
+  width: auto;
+  height: 200px;
 }
 
 .profileLinks {
