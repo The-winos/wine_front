@@ -398,6 +398,8 @@ button {
 
 .profile-username {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
@@ -689,13 +691,13 @@ button {
   top: 0;
   left: -10;
   padding: 0.5rem;
-  background-color: #a5c9e6; /* Or any other background color you want */
-  border-top-left-radius: 10px; /* Match the radius of the note */
-  border-bottom-right-radius: 10px; /* Match the radius of the note */
+  background-color: #a5c9e6;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .date {
-  font-size: 0.8rem; /* Adjust the font size as needed */
+  font-size: 0.8rem;
   margin-left: -10;
   display: flex;
   justify-content: flex-start;
@@ -924,7 +926,13 @@ button {
   padding: 20px;
   margin: 20px;
   width: auto;
-  height: 200px;
+  height: fit-content;
+}
+
+.bottom-left .container-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileLinks {
@@ -992,4 +1000,10 @@ button {
 .note.selected:hover {
   transform: translateY(0);
   z-index: 2;
+}
+
+.profile-overview-reviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ProfileReviews from "./ProfileReviews";
 
 const ProfileOverview = ({ user }) => {
   const [expandedBio, setExpandedBio] = useState(false);
@@ -38,6 +39,9 @@ const ProfileOverview = ({ user }) => {
           </div>
           <div className="bottom-left container-box">
             This is the Bottom-Left Container-Box
+            <div className="profile-overview-reviews">
+              <ProfileReviews user={user} />
+            </div>
           </div>
         </div>
         <div className="profile-overview-right-container">
