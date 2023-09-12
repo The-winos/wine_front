@@ -10,7 +10,6 @@ const Profile = ({ user }) => {
   const [followerAvatars, setFollowerAvatars] = useState([]);
   const [followingAvatars, setFollowingAvatars] = useState([]);
   const [userLocation, setUserLocation] = useState("");
-  const [expandedBio, setExpandedBio] = useState(false);
   const [profileReview, setProfileReview] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
   const [profileOverview, setProfileOverview] = useState(true);
@@ -159,31 +158,7 @@ const Profile = ({ user }) => {
               {/* </div> */}
             </div>
           </div>
-          {user.bio ? (
-            <div className="user-bio-container">
-              <h6 className={`thought-bubble ${expandedBio ? "expanded" : ""}`}>
-                {expandedBio ? user.bio : user.bio.substring(0, 150)}
-                {!expandedBio && (
-                  <span
-                    onClick={() => setExpandedBio(true)}
-                    className="read-more"
-                  >
-                    <small>... (read more)</small>
-                  </span>
-                )}
-                {expandedBio && (
-                  <span
-                    onClick={() => setExpandedBio(false)}
-                    className="read-less"
-                  >
-                    <small>(read less)</small>
-                  </span>
-                )}
-              </h6>
-            </div>
-          ) : (
-            <h5 className="thought-bubble">No bio available.</h5>
-          )}
+
           <div className="profileLinks">
             <div
               onClick={() => {
