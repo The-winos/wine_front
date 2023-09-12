@@ -924,3 +924,49 @@ user-bio-container {
   color: #721c24;
   text-decoration: underline;
 }
+
+.profile-favorites-sidebar {
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.profile-favorites-sidebar a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.profile-favorites-sidebar a:active {
+  color: #721c24;
+  text-decoration: underline;
+}
+
+.profile-favorites-sidebar {
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.profile-favorites-sidebar a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.profile-favorites-sidebar a:active {
+  color: #721c24;
+  text-decoration: underline;
+}
+
+.note.selected {
+  position: relative;
+  transform: translateY(-50px);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.note.selected:hover {
+  transform: translateY(0);
+  z-index: 2;
+}

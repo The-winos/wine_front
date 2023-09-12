@@ -209,7 +209,13 @@ const Profile = ({ user }) => {
             <div
               className="profile-favorites-sidebar"
               onClick={() => {
-                setProfileFavorites(true) & setProfileOverview(false);
+                setProfileFavorites(true) &
+                  setProfileOverview(false) &
+                  setLinkClicked(true);
+              }}
+              style={{
+                textDecoration: linkClicked ? "underline" : "none",
+                color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
               Favorites
