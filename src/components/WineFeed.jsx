@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllReviews, getAllWine, getUserById, getWineById } from "./API";
-import ReviewDetails from "./ReviewDetails";
-import Review from "./Review";
-import WineDetails from "./WineDetails";
+
+
 import {
   handlePriceFilter,
   handleRatingFilter,
   handleSearch,
 } from "./SearchBar";
+
+const LazyReviewDetails = lazy(() => import("./ReviewDetails"));
 
 const WineFeed = ({
   user,
@@ -235,14 +236,15 @@ const WineFeed = ({
               .map((review) => {
                 return (
                   <div key={`allreviews-${review.id}`}>
-                    <ReviewDetails
+                    <Suspense fallback={<div>Loading...</div>}>
+                    <LazyReviewDetails
                       user={user}
                       review={review}
                       setReviewInfo={setReviewInfo}
                       favorites={favorites}
                       saved={saved}
-
                     />
+                  </Suspense>
                   </div>
                 );
               })
