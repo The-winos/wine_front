@@ -55,14 +55,14 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
   return (
     <div id="wineFeed">
       <div id="all-wine-title">
-      <h2 >Wines</h2>
+      <h1 >Wines</h1>
       <h5>All the wines reviewed by our amazing wine sippers!</h5>
       </div>
       {searchOpen ? (
         <div className="search-bars-container">
           <div className="search-box p-3">
-            <h3>You can search wines by their name, their type or where they're made</h3>
-            <label htmlFor="name-filter">Find a wine by name: </label>
+            <h4>You can search wines by their name, their type or where they're made</h4>
+            <label htmlFor="name-filter">Name: </label>
             <input
               type="text"
               id="name-filter"
@@ -71,18 +71,21 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
               onChange={(event) => {
                 handleSearch(event, setSearchName);
               }}
+              style={{marginRight:"10px", marginTop:"10px"}}
             />
-            <label htmlFor="region-filter">Find a wine by region: </label>
+            <label htmlFor="region-filter">Region: </label>
             <input
               type="text"
               id="region-filter"
               name="search-region"
               value={searchRegion}
+              style={{marginRight:"10px"}}
               onChange={(event) => {
                 handleSearch(event, setSearchRegion);
               }}
+
             />
-            <label htmlFor="type-filter">Wine by type: </label>
+            <label htmlFor="type-filter">Flavor type: </label>
             <input
               type="text"
               id="type-filter"
@@ -91,14 +94,16 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
               onChange={(event) => {
                 handleSearch(event, setSearchType);
               }}
+
             />
           </div>
           <div className="sort-filter-box p-3">
-            <h3>Or you can search by price or rating</h3>
-            <label htmlFor="price-filter">Sort by price: </label>
+            <h4>Or you can search by average price or rating</h4>
+            <label htmlFor="price-filter">Price: </label>
             <select
               id="price-filter"
               name="price-filter"
+              style={{marginRight:"10px"}}
               onChange={(event) =>
                 handlePriceFilter(event, allWine, setFilteredWines)
               }
@@ -110,7 +115,7 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
               <option value="30+">$30+</option>
             </select>
 
-            <label htmlFor="rating-filter">Filter by rating:</label>
+            <label htmlFor="rating-filter">Rating:</label>
             <select
               id="rating-filter"
               name="rating-filter"
@@ -156,10 +161,10 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
 
       <div id="wines" className="wine">
       <div className="container">
-  <div className="row ">
+  <div className="row">
     {filteredWines && filteredWines.length ? (
       filteredWines.map((wine) => (
-        <div className="col-md-4" key={`allWines-${wine.id}`}>
+        <div className="col-md-3 col-sm-6 pt-5 p-1 pb-3" key={`allWines-${wine.id}`}>
           <WineDetails
             wine={wine}
             setWineInfo={setWineInfo}
