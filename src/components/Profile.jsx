@@ -34,6 +34,17 @@ const Profile = ({ user }) => {
     const fetchUserReviews = async () => {
       try {
         const reviews = await getReviewByUser(user.id);
+
+        // Sort the reviews by review_date in descending order
+        reviews.sort((a, b) => {
+          // Convert the review_date strings to Date objects for comparison
+          const dateA = new Date(a.review_date);
+          const dateB = new Date(b.review_date);
+
+          // Compare the dates in descending order
+          return dateB - dateA;
+        });
+
         setUserReviews(reviews);
       } catch (error) {
         console.error(error);
@@ -42,6 +53,7 @@ const Profile = ({ user }) => {
 
     fetchUserReviews();
   }, [user]);
+
 
   useEffect(() => {
     const fetchFollowers = async () => {
