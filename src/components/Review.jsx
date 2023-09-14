@@ -66,7 +66,7 @@ async function handleWine(e)
     if (flavor== "Cabernet" || flavor== "Syrah"|| flavor=="Zinfandel" || flavor=="Pinot Noir"||flavor=="Merlot"||flavor=="Malbec"||flavor=="Tempranillo"|| flavor=="Red Blend"||flavor=="TreTerzi"||flavor=="Petite Sirah"){
       setWineImg("3-reddish-purple_wine.png")
     }
-  if(flavor=="White Zinfandel" || flavor=="Rose"){
+  if(flavor=="White Zinfandel" || flavor=="Rose" || flavor=="Champagne" || flavor=="Sparkling" || flavor=="Other"){
     setWineImg("2-purple_wine.png")
   }
     else {
@@ -200,6 +200,8 @@ const handlePriceChange = (e) => {
             <option value="White Blend">White Blend</option>
             <option value="Rose">Rosé</option>
             <option value="White Zinfandel">White Zinfandel</option>
+            <option value="Sparkling">Sparkling</option>
+            <option value="Champagne">Champagne</option>
             <option value="Other">Other</option>
 
           </select>
@@ -217,7 +219,7 @@ const handlePriceChange = (e) => {
           <h2>Add Your Review</h2>
           <div className="mb-3">
             <label htmlFor="reviewName" className="form-label mt-10px">
-              Name of Review
+              Title of Review
             </label>
             <input
               type="text"
@@ -340,6 +342,7 @@ const handlePriceChange = (e) => {
             <option value="Costco">Costco</option>
             <option value="Liquor Store">Liquor Store</option>
             <option value="Sams">Sams</option>
+            <option value="Trader Joes">Trader Joes</option>
             <option value="Other">Other</option>
           </select>
 
