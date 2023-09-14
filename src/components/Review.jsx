@@ -24,7 +24,7 @@ const Review = ({ user, handleNewReview }) => {
   const [noWine, setNoWine] = useState(false);
   const [wineId, setWineId] = useState(0);
   const [suggestions, setSuggestions] = useState([]);
-  const [allWineNames, setAllWineNames]= useState([]);
+  const [allWineNames, setAllWineNames] = useState([]);
 
   useEffect(() => {
     const fetchAllWineData = async () => {
@@ -37,12 +37,11 @@ const Review = ({ user, handleNewReview }) => {
       }
     };
 
-
     fetchAllWineData();
   }, []);
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    console.log(value, "suggestionfetchValue")
+    console.log(value, "suggestionfetchValue");
     if (value.trim() === "") {
       // Clear the suggestions when the input is empty
       setSuggestions([]);
@@ -57,10 +56,8 @@ const Review = ({ user, handleNewReview }) => {
   };
 
   const onSuggestionsClearRequested = () => {
-
     setSuggestions([]);
   };
-
 
   async function handleWine(e) {
     e.preventDefault();
@@ -202,14 +199,16 @@ const Review = ({ user, handleNewReview }) => {
         location: theLocation,
       });
 
-      if (review) {
-        // Review created successfully, navigate to the desired route
+      if (review && !review.error) {
         handleNewReview(review);
         toast.success("Review Added");
         navigate("/winefeed");
+      } else if (review && review.error) {
+        toast.error(review.message);
+      } else {
+        toast.error("Failed to submit the review. Please try again later.");
       }
     } catch (error) {
-
       toast.error("Failed to submit the review. Please try again later.");
     }
   }
