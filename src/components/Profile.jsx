@@ -34,6 +34,13 @@ const Profile = ({ user }) => {
     const fetchUserReviews = async () => {
       try {
         const reviews = await getReviewByUser(user.id);
+        reviews.sort((a, b) => {
+          const dateA = new Date(a.review_date);
+          const dateB = new Date(b.review_date);
+
+          return dateB - dateA;
+        });
+
         setUserReviews(reviews);
       } catch (error) {
         console.error(error);
