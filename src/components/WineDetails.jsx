@@ -82,7 +82,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
   }
 
   return (
-    <div className="card mb-3" style={{ maxWidth: "55%", margin: "0 auto" }}>
+    <div className="card mb-3" style={{ maxWidth: "75%", margin: "0 auto", padding: "0", boxShadow: "10px 10px 10px rgba(0, 0, 0, .6)"}}>
     <div className="card-header">
       <div className="d-flex justify-content-between align-items-start">
         <div className="d-flex flex-column align-items-start"style={{ maxWidth: "55%", minWidth: "55%", margin: "0 auto" }}>
@@ -182,7 +182,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
             <Rating
               value={wine.rating}
               edit={false}
-              size={15}
+              size={13}
               activeColor="#ffd700"
             />
           </div>

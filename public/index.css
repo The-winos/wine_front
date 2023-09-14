@@ -230,6 +230,17 @@ button {
   padding-bottom: 3rem;
 }
 
+.wine-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Customize shadow here */
+  border-radius: 5px; /* Add rounded corners for a card-like look */
+  padding: 10px; /* Add some padding for spacing */
+  margin: 10px; /* Add margin to separate cards */
+
+}
+
 /* wine list */
 .avatar-container {
   position: absolute;
