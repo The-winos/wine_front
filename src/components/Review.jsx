@@ -192,7 +192,7 @@ const Review = ({ user, handleNewReview }) => {
         user_id: user.id,
         name: reviewName,
         rating: reviewRating,
-        price: reviewPrice * 100,
+        price: Math.round(reviewPrice),
         review_comment: comment,
         image_url: null,
         review_date: new Date(),
@@ -216,9 +216,9 @@ const Review = ({ user, handleNewReview }) => {
   const handlePriceChange = (e) => {
     const userInput = e.target.value;
     const priceInDollars = parseFloat(userInput);
-    const priceInPennies = priceInDollars * 100;
-    setReviewPrice(priceInPennies);
+    setReviewPrice(priceInDollars);
   };
+
 
   return (
     <div className="reviewPage container mt-5">
@@ -388,18 +388,19 @@ const Review = ({ user, handleNewReview }) => {
             <div className="input-group">
               <span className="input-group-text">$</span>
               <input
-                type="number"
-                className="form-control"
-                id="reviewPrice"
-                value={reviewPrice === null ? "" : reviewPrice}
-                onChange={(e) =>
-                  setReviewPrice(
-                    e.target.value === "" ? null : Number(e.target.value)
-                  )
-                }
-                inputMode="decimal" // To remove up and down arrows
-                style={{ maxWidth: "150px" }} // To make the input field smaller
-              />
+  type="number"
+  className="form-control"
+  id="reviewPrice"
+  value={reviewPrice === null ? "" : reviewPrice / 100} // Divide by 100 to show the correct value
+  onChange={(e) =>
+    setReviewPrice(
+      e.target.value === "" ? null : parseFloat(e.target.value) * 100
+    )
+  }
+  inputMode="decimal"
+  style={{ maxWidth: "150px" }}
+/>
+
             </div>
           </div>
 
