@@ -149,6 +149,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     style={{
                       marginBottom: "0.5rem",
                       cursor: "pointer",
+                      padding: "1rem"
 
 
                     }}
@@ -163,6 +164,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                           height: "auto",
                           marginBottom: "-5px",
                           marginRight: "-2px",
+                          padding: "2px"
                         }}
                         title="Remove from Favorites"
                       />
@@ -171,7 +173,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         src="/images/5-heart.png"
                         alt="heart"
                         className="img-fluid"
-                        style={{ width: "20%", height: "auto" }}
+                        style={{ width: "18%", height: "auto", paddingTop: "2px"  }}
                         title="Add To Favorites"
                       />
                     )}
@@ -189,6 +191,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     className="custom-button"
                     style={{
                       cursor: "pointer",
+                      paddingTop: "2px"
                     }}
                   >
                     {checkOnSaved(reviewWine.id) ? (
@@ -200,7 +203,8 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                           width: "15%",
                           height: "auto",
                           marginTop: "-6px",
-                          marginRight: "-2px",
+
+                          padding: "2px"
                         }}
                         title="Remove From My List"
                       />
@@ -209,7 +213,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         src="/images/6-list.png"
                         alt="savedPad"
                         className="img-fluid"
-                        style={{ width: "25%", height: "auto" }}
+                        style={{ width: "25%", height: "auto", padding: "2px"  }}
                         title="Add To My List"
                       />
                     )}
@@ -233,8 +237,9 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     alt="user picture"
                     className="img-fluid"
                     style={{
-                      maxHeight: "50px",
-                      maxWidth: "50px",
+                      maxHeight: "60px",
+                      maxWidth: "60px",
+                      padding: "5px"
 
                     }}
                   />
@@ -345,6 +350,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     onClick={() => {
                       navigate(`/singlewine/${reviewWine.id}`);
                     }}
+                    style={{width: "25%", height: "50%"}}
                     className="btn btn-primary"
                   >
                     Check out this wine

@@ -229,7 +229,7 @@ const WineFeed = ({
           </>
         )}
       </div>
-      <div id="reviews" className="review">
+      <div id="reviews" className="review pb-5 mt-5">
         {filteredReviews && filteredReviews.length
           ? filteredReviews
               .sort((a, b) => new Date(b.review_date) - new Date(a.review_date))
