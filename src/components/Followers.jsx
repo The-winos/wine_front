@@ -240,7 +240,7 @@ const Followers = ({ user, favorites }) => {
           </>
         )}
       </div>
-      <div id="freview" className="frev">
+      <div id="freview" className="frev pb-5 mt-5">
         {user && filteredReviews.length ? (
           filteredReviews
             .sort((a, b) => new Date(b.review_date) - new Date(a.review_date))
