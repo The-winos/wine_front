@@ -110,6 +110,7 @@ body {
   color: white;
   color: #2a0e01;
 }
+
 #footerTerms {
   background-color: rgb(249, 247, 232);
   overflow: auto;
@@ -238,7 +239,6 @@ button {
   border-radius: 5px; /* Add rounded corners for a card-like look */
   padding: 10px; /* Add some padding for spacing */
   margin: 10px; /* Add margin to separate cards */
-
 }
 
 /* wine list */

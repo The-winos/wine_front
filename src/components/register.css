@@ -3,12 +3,13 @@
   flex-direction: column;
   align-content: center;
   border: solid salmon 3px;
-  height: max-content;
   width: max-content;
   border-radius: 1rem;
-  padding: 1rem;
-  margin: auto;
+  padding: 2rem;
+  /* padding-bottom: 2rem;
+  margin-bottom: auto; */
 }
+
 .register-line {
   display: flex;
   padding: 0.5rem;
@@ -17,4 +18,34 @@
   display: flex;
   padding: 0.5rem;
   font-size: large;
+}
+
+.custom-margin {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Add a custom style to the alert */
+.custom-alert {
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da; /* Background color of the alert */
+  color: #721c24; /* Text color of the alert */
+  padding: 10px; /* Add padding to the alert */
+  width: 80%; /* Adjust the width of the alert */
+  text-align: center; /* Center-align the text */
+  z-index: 1000; /* Ensure it's on top of other content */
+}
+
+/* Style the link inside the alert */
+.custom-alert a {
+  color: #721c24; /* Link color in the alert */
+  text-decoration: underline; /* Add an underline to links */
+}
+
+/* Add some margin to the top of the alert */
+.custom-alert + * {
+  margin-top: 20px;
 }
