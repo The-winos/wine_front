@@ -66,7 +66,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
   }
 
   return (
-    <div className="register-container">
+    <div className="register-container mt-1 pb-5">
       <div className="bg-light">
         <div className="container">
           <div className="row mt-5">
@@ -228,7 +228,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
               </span>
             </div>
             {error && (
-              <div className="alert alert-danger" role="alert">
+              <div className="alert alert-danger custom-alert" role="alert">
                 {error}
               </div>
             )}
