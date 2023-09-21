@@ -202,9 +202,8 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         style={{
                           width: "15%",
                           height: "auto",
-                          marginTop: "-6px",
-
-                          padding: "2px"
+                          padding: "2px",
+                          marginRight: "10px"
                         }}
                         title="Remove From My List"
                       />
@@ -213,7 +212,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         src="/images/6-list.png"
                         alt="savedPad"
                         className="img-fluid"
-                        style={{ width: "25%", height: "auto", padding: "2px"  }}
+                        style={{ width: "35%", height: "auto", padding: "2px", marginRight: "10px"  }}
                         title="Add To My List"
                       />
                     )}
@@ -265,6 +264,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     </small>
                     {reviewUser.username != "Deleted User" ? (
                       <div className="ml-3">
+
                         <FollowButton
                           review={review}
                           reviewUser={reviewUser}
@@ -314,7 +314,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                       {review.location != null ? review.location : "Unknown"}
                     </small>
                   </p>
-                  {review.review_comment.length > 75 ? (
+                  {review.review_comment.length > 89 ? (
                     <div className="review-comment-container">
                       <h6
                         className={`review-comment ${
@@ -323,7 +323,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                       >
                         {expandedComment
                           ? review.review_comment
-                          : review.review_comment.substring(0, 75)}
+                          : review.review_comment.substring(0, 89)}
                       </h6>
                       {!expandedComment && (
                         <span
@@ -332,6 +332,8 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         >
                           <small>... (read more)</small>
                         </span>
+
+
                       )}
                       {expandedComment && (
                         <span
@@ -346,15 +348,17 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                     <h5 className="review-comment">{review.review_comment}</h5>
                   )}
 
-                  <button
-                    onClick={() => {
-                      navigate(`/singlewine/${reviewWine.id}`);
-                    }}
-                    style={{width: "25%", height: "50%"}}
-                    className="btn btn-primary"
-                  >
-                    Check out this wine
-                  </button>
+<button
+  onClick={() => {
+    navigate(`/singlewine/${reviewWine.id}`);
+  }}
+  style={{ whiteSpace: "nowrap", maxWidth: "fit-content" }}
+  className="btn btn-primary"
+>
+  View Wine
+</button>
+
+
                 </div>
               </div>
             </div>
