@@ -17,6 +17,7 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
   const [wineFriend, setWineFriend] = useState({});
   const [localFavorites, setLocalFavorites] = useState(favorites || []);
   const [localSaved, setLocalSaved] = useState(saved || []);
+  const [expandedComment, setExpandedComment] = useState(false);
 
   useEffect(() => {
     setLocalFavorites(favorites || []);
@@ -139,7 +140,7 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
               style={{
                 marginBottom: "0.5rem",
                 cursor: "pointer",
-                padding: "1rem"
+                padding: "1rem",
               }}
             >
               {checkOnFaves(wineFriend.id) ? (
@@ -148,12 +149,12 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                   alt="heart"
                   className="img-fluid"
                   style={{
-                          width: "25%",
-                          height: "auto",
-                          marginBottom: "-5px",
-                          marginRight: "-2px",
-                          padding: "2px"
-                        }}
+                    width: "25%",
+                    height: "auto",
+                    marginBottom: "-5px",
+                    marginRight: "-2px",
+                    padding: "2px",
+                  }}
                   title="Remove from Favorites"
                 />
               ) : (
@@ -161,7 +162,7 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                   src="/images/5-heart.png"
                   alt="heart"
                   className="img-fluid"
-                  style={{ width: "18%", height: "auto", paddingTop: "2px"  }}
+                  style={{ width: "18%", height: "auto", paddingTop: "2px" }}
                   title="Add To Favorites"
                 />
               )}
@@ -187,11 +188,11 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                   alt="notepad"
                   className="img-fluid"
                   style={{
-                          width: "15%",
-                          height: "auto",
-                          padding: "2px",
-                          marginRight: "10px"
-                        }}
+                    width: "15%",
+                    height: "auto",
+                    padding: "2px",
+                    marginRight: "10px",
+                  }}
                   title="Remove From My List"
                 />
               ) : (
@@ -199,7 +200,13 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                   src="/images/6-list.png"
                   alt="savedPad"
                   className="img-fluid"
-                  s style={{ width: "35%", height: "auto", padding: "2px", marginRight: "10px"  }}
+                  s
+                  style={{
+                    width: "35%",
+                    height: "auto",
+                    padding: "2px",
+                    marginRight: "10px",
+                  }}
                   title="Add To My List"
                 />
               )}
@@ -250,13 +257,44 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                     : "N/A"}
                 </small>
               </small>{" "}
-
               <small className="text-muted" style={{ marginLeft: "20px" }}>
                 Bought at:{" "}
                 {reviews.location != null ? reviews.location : "Unknown"}
               </small>
             </p>
-            <h5 className="review-comment">{reviews.review_comment}</h5>
+
+            {reviews.review_comment.length > 89 ? (
+              <div className="review-comment-container">
+                <h6
+                  className={`review-comment ${
+                    expandedComment ? "expanded" : ""
+                  }`}
+                >
+                  {expandedComment
+                    ? reviews.review_comment
+                    : reviews.review_comment.substring(0, 89)}
+                </h6>
+                {!expandedComment && (
+                  <span
+                    onClick={() => setExpandedComment(true)}
+                    className="read-more"
+                  >
+                    <small>... (read more)</small>
+                  </span>
+                )}
+                {expandedComment && (
+                  <span
+                    onClick={() => setExpandedComment(false)}
+                    className="read-less"
+                  >
+                    <small>(read less)</small>
+                  </span>
+                )}
+              </div>
+            ) : (
+              <h5 className="review-comment">{reviews.review_comment}</h5>
+            )}
+
             <button
               onClick={() => {
                 navigate(`/singlewine/${wineFriend.id}`);

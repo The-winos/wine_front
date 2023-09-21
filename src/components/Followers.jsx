@@ -1,5 +1,5 @@
 //list of users following you - w/links to their profiles
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import { getReviewsByFollowers, getWineById, getUserById } from "./API";
 import FriendReview from "./FriendReview";
@@ -9,6 +9,7 @@ import {
   handleRatingFilter,
   handleSearch,
 } from "./SearchBar";
+const LazyFriendReview = lazy(() => import("./FriendReview"));
 
 const Followers = ({ user, favorites }) => {
   const [reviewFollowers, setReviewFollowers] = useState([]);
@@ -247,7 +248,9 @@ const Followers = ({ user, favorites }) => {
             .map((reviews) => {
               return (
                 <div key={`followerReview-${reviews.id}`}>
-                  <FriendReview reviews={reviews} user={user} favorites={favorites} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                  <LazyFriendReview reviews={reviews} user={user} favorites={favorites} />
+                  </Suspense>
                 </div>
               );
             })
