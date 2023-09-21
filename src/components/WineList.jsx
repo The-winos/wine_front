@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { getAllWine } from "./API";
 import {
   handlePriceFilter,
   handleRatingFilter,
   handleSearch,
 } from "./SearchBar";
-import WineDetails from "./WineDetails";
+const LazyWineDetails = lazy(() => import("./WineDetails"));
 
 const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites, saved }) => {
   const [filteredWines, setFilteredWines] = useState([]);
@@ -165,13 +165,15 @@ const WineList = ({ allWine, setAllWine, setWineInfo, wineInfo, user, favorites,
     {filteredWines && filteredWines.length ? (
       filteredWines.map((wine) => (
         <div className="col-md-3 col-sm-6 pt-5 p-1 pb-3" key={`allWines-${wine.id}`}>
-          <WineDetails
+          <Suspense fallback={<div>Loading...</div>}>
+          <LazyWineDetails
             wine={wine}
             setWineInfo={setWineInfo}
             user={user}
             favorites={favorites}
             saved={saved}
           />
+          </Suspense>
         </div>
       ))
     ) : (

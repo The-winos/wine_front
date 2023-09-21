@@ -174,6 +174,7 @@ export async function updateFollower(user_id, follower_id) {
     };
     const response = await fetch(`${BASE_URL}/followers/${user_id}`, options);
     const result = await response.json();
+
     return result;
   } catch (error) {
     console.error(error);
@@ -509,15 +510,15 @@ export async function updateReview(
 ) {
   try {
     const body = {
-  wine_id,
-  user_id,
-  name,
-  rating,
-  price,
-  review_comment,
-  image_url,
-  review_date,
-  location
+      wine_id,
+      user_id,
+      name,
+      rating,
+      price,
+      review_comment,
+      image_url,
+      review_date,
+      location,
     };
 
     const options = {

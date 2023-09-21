@@ -20,6 +20,7 @@ const FollowButton = ({ review, reviewUser, user }) => {
 
   async function handleFollow() {
     try {
+
       const updatedFollow = await updateFollower(user.id, review.user_id);
       const followingIds = following && following.map(follower => follower.follower_id);
       setFollowing(followingIds);
