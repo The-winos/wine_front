@@ -2,7 +2,6 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import { getReviewsByFollowers, getWineById, getUserById } from "./API";
-import FriendReview from "./FriendReview";
 import { useNavigate } from "react-router-dom";
 import {
   handlePriceFilter,
