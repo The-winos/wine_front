@@ -40,25 +40,32 @@ export async function registerUser(
   password,
   name,
   state,
+  avatar,
   role,
   email,
+  bio,
   birthday,
   follower_count,
   following_count,
   join_date
 ) {
+  console.log("This is the API bDAY", birthday);
+
   const registerOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify({
       username,
       password,
       name,
       state,
+      avatar,
       role,
       email,
+      bio,
       birthday,
       follower_count,
       following_count,
