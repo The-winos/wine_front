@@ -40,25 +40,32 @@ export async function registerUser(
   password,
   name,
   state,
+  avatar,
   role,
   email,
+  bio,
   birthday,
   follower_count,
   following_count,
   join_date
 ) {
+  console.log("This is the API bDAY", birthday);
+
   const registerOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify({
       username,
       password,
       name,
       state,
+      avatar,
       role,
       email,
+      bio,
       birthday,
       follower_count,
       following_count,
@@ -509,15 +516,15 @@ export async function updateReview(
 ) {
   try {
     const body = {
-  wine_id,
-  user_id,
-  name,
-  rating,
-  price,
-  review_comment,
-  image_url,
-  review_date,
-  location
+      wine_id,
+      user_id,
+      name,
+      rating,
+      price,
+      review_comment,
+      image_url,
+      review_date,
+      location,
     };
 
     const options = {
