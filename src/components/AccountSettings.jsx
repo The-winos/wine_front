@@ -4,13 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import {
-  updateUser,
-  getUserById,
-  updateUserPassword,
-  updatePasswordWithVerification,
-  updateAdminUserPassword,
-} from "./API";
+import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
 
@@ -38,7 +32,7 @@ const AccountSettings = ({ user }) => {
     setState(selectedState);
   };
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (
@@ -67,7 +61,7 @@ const AccountSettings = ({ user }) => {
           return;
         }
       } else {
-        const updateUserFormSubmit = await updateUser(
+        const updateUserInfo = await updateUser(
           username,
           undefined,
           name,
@@ -82,26 +76,17 @@ const AccountSettings = ({ user }) => {
           user.join_date
         );
 
-        // Update the local state with the new name
         setName(name);
       }
 
-      // setUsername("");
-      // setOldPassword("");
-      // setNewPassword("");
-      // setState("");
-      // setAvatar("");
-      // setEmail("");
-      // setBio("");
-      // setBirthday("");
       setConfirmPassword("");
-      setFormSubmitted(true); // Set the formSubmitted to true after successful submission
+      setFormSubmitted(true);
       toast.success("User updated");
     } catch (error) {
       console.error(error);
       toast.error("Error updating user. Please try again.");
     }
-  };
+  }
 
   useEffect(() => {
     console.log("Updating bio in local storage:", bio);
@@ -123,7 +108,6 @@ const AccountSettings = ({ user }) => {
   return (
     <div id="accountSettings">
       <div className="container">
-        {/* <div className="centered-section"> */}
         <div>
           <img
             src={`/images/${user.avatar}`}
@@ -141,8 +125,7 @@ const AccountSettings = ({ user }) => {
         <form onSubmit={handleSubmit} className="accountSettings-form">
           <h3>{formSubmitted ? name : user.name}</h3>
           <h6>Update Name</h6>
-          {console.log("This is name", name)}
-          {console.log("This is user", user)}
+
           <input
             placeholder="Enter name"
             className="first-name"
@@ -161,7 +144,6 @@ const AccountSettings = ({ user }) => {
             dateFormat="MM/dd/yyyy"
             isClearable="custom-datepicker"
           />
-
           <h6>Update Password:</h6>
           <div className="row">
             <div className="col-md-6">

@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import ProfileReviews from "./ProfileReviews";
+import { useNavigate } from "react-router-dom";
 
 const ProfileOverview = ({ user }) => {
   const [expandedBio, setExpandedBio] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCreateBio = () => {
+    navigate("/accountsettings");
+  };
+
   return (
     <div className="profileOverview">
       <div className="profile-overview-container">
         <div className="profile-overview-left-container">
           <div className="top-left container-box">
-            <div>This is the Top-Left Container-Box</div>
+            <div></div>
             {user.bio ? (
               <div className="user-bio-container">
                 <h6
@@ -34,9 +41,14 @@ const ProfileOverview = ({ user }) => {
                 </h6>
               </div>
             ) : (
-              <h5 className="thought-bubble">No bio available.</h5>
+              <div className="user-bio-container">
+                <h5 className="thought-bubble">No bio available.</h5>
+
+                <button onClick={handleCreateBio}>Create Bio</button>
+              </div>
             )}
           </div>
+
           <div className="bottom-left container-box">
             This is the Bottom-Left Container-Box
             <div className="profile-overview-reviews">
