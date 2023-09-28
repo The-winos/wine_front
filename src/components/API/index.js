@@ -49,8 +49,6 @@ export async function registerUser(
   following_count,
   join_date
 ) {
-  console.log("This is the API bDAY", birthday);
-
   const registerOptions = {
     method: "POST",
     headers: {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 import OptionsStates from "./OptionsStates";
-// import PasswordChecklist from "./PasswordChecklist";
+import PasswordChecklist from "./PasswordChecklist";
 
 const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const navigate = useNavigate();
@@ -213,12 +213,12 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                     ></i>
                   </button>
                 </div>
-                {/* <PasswordChecklist
+                <PasswordChecklist
                   hasUpperCase={hasUpperCase}
                   hasLowerCase={hasLowerCase}
                   hasDigit={hasDigit}
                   isLengthValid={isLengthValid}
-                /> */}
+                />
                 <div className="input-group mb-3">
                   <span className="input-group-text">
                     <i className="fa fa-lock"></i>
