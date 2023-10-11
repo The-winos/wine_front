@@ -9,9 +9,9 @@ import { updateUser, updateUserPassword } from "./API";
 import OptionsStates from "./OptionsStates";
 
 const AccountSettings = ({ user }) => {
-  const initialUserData = localStorage.getItem("userData")
-    ? JSON.parse(localStorage.getItem("userData"))
-    : user;
+  // const initialUserData = localStorage.getItem("userData")
+  //   ? JSON.parse(localStorage.getItem("userData"))
+  //   : user;
 
   const [username, setUsername] = useState(user.username || "");
   const [name, setName] = useState(user.name || "");
