@@ -575,6 +575,11 @@ button {
 .avatar {
   border: none;
 }
+.avatar-grid{
+  display: grid;
+  grid-template-columns: repeat(14, 1fr); /* 14 avatars per row */
+  grid-gap: 10px; /* Adjust the gap between avatars */
+}
 
 .selected {
   border: 2px solid blue;
