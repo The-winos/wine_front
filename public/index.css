@@ -275,9 +275,11 @@ button {
 /* following feed */
 
 /* singleWine */
-#single-wine {
-  margin-top: 2rem;
-  padding-bottom: 6rem;
+.singleWine {
+  margin-top: 5rem;
+  padding-top: 4rem;
+  padding-bottom: 12rem;
+
 }
 
 #single-wine img {
@@ -340,6 +342,7 @@ button {
 }
 
 /* singleWineReview */
+/* footer */
 
 /* follow button */
 
@@ -574,6 +577,11 @@ button {
 /* admin */
 .avatar {
   border: none;
+}
+.avatar-grid{
+  display: grid;
+  grid-template-columns: repeat(14, 1fr); /* 14 avatars per row */
+  grid-gap: 10px; /* Adjust the gap between avatars */
 }
 
 .selected {

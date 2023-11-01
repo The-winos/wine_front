@@ -322,7 +322,7 @@ const AdminUser = ({
               <div className="col">
                 <h6>Update Avatar</h6>
                 <img
-                  src={`/images/${updatingUser.avatar}`}
+                  src={`/images/${avatar}`}
                   alt="avatar image"
                   className="img-fluid"
                   style={{
@@ -368,7 +368,7 @@ const AdminUser = ({
                 </select>
               </div>
               {changeAvatar && (
-                <div className="d-flex justify-content-around">
+                <div className="avatar-grid">
                   <h6>Choose Avatar</h6>
                   <br />
                   <OptionAvatars avatar={avatar} setAvatar={setAvatar} />
