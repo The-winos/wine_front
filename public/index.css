@@ -582,6 +582,18 @@ button {
   display: grid;
   grid-template-columns: repeat(14, 1fr); /* 14 avatars per row */
   grid-gap: 10px; /* Adjust the gap between avatars */
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    margin-bottom: 2rem;
+  margin-top: 1rem;
+
+  }
 }
 
 .selected {
