@@ -35,7 +35,7 @@ const SingleWine = ({ user, loggedIn }) => {
     : "";
 
   return (
-    <div className="row" id="single-wine">
+    <div className="singleWine row" id="single-wine">
   {singleWine ? (
     <>
       <div className="col-md-3 ml-4">
@@ -47,6 +47,8 @@ const SingleWine = ({ user, loggedIn }) => {
             height: "auto",
             width: "25%",
             margin: "0 auto",
+            marginLeft: "18rem",
+            marginBottom: "2rem"
           }}
         />
       </div>
