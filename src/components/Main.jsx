@@ -16,7 +16,7 @@ import {
   SingleWine,
   WineList,
   ReviewDetails,
-  AccountSettings,
+  ProfileAccountSettings,
   Review,
   ProfileUserId,
   Favorites,
@@ -205,7 +205,7 @@ const Main = () => {
         ></Route>
         <Route
           path="/accountsettings"
-          element={<AccountSettings user={user} />}
+          element={<ProfileAccountSettings user={user} />}
         ></Route>
         <Route
           path="/review"
@@ -231,7 +231,6 @@ const Main = () => {
               saved={saved}
               filteredReviews={filteredReviews}
               setFilteredReviews={setFilteredReviews}
-
             />
           }
         ></Route>

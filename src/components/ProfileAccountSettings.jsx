@@ -8,7 +8,12 @@ import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
 
-const AccountSettings = ({ user }) => {
+const ProfileAccountSettings = ({
+  user,
+  setProfileOverview,
+  setProfileReview,
+  setProfileAccountSettings,
+}) => {
   // const initialUserData = localStorage.getItem("userData")
   //   ? JSON.parse(localStorage.getItem("userData"))
   //   : user;
@@ -245,7 +250,16 @@ const AccountSettings = ({ user }) => {
         {/* </div> */}
         <div className="navigation-buttons">
           <Link to={"/profile"}>
-            <button className="btn btn-secondary">Back to Profile</button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                setProfileAccountSettings(false);
+                setProfileReview(false);
+                setProfileOverview(true);
+              }}
+            >
+              Close
+            </button>
           </Link>
         </div>
       </div>
@@ -253,4 +267,4 @@ const AccountSettings = ({ user }) => {
   );
 };
 
-export default AccountSettings;
+export default ProfileAccountSettings;
