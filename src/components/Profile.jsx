@@ -4,6 +4,7 @@ import { getReviewByUser, getFollowersById, getFollowingById } from "./API";
 import ProfileReviews from "./ProfileReviews";
 import ProfileOverview from "./ProfileOverview";
 import Favorites from "./Favorites";
+import ProfileAccountSettings from "./ProfileAccountSettings";
 
 const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
@@ -11,7 +12,7 @@ const Profile = ({ user }) => {
   const [followingAvatars, setFollowingAvatars] = useState([]);
   const [userLocation, setUserLocation] = useState("");
   const [profileReview, setProfileReview] = useState(false);
-  const [ProfileAccountSettings, setProfileAccountSettings] = useState(false);
+  const [profileAccountSettings, setProfileAccountSettings] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
   const [profileOverview, setProfileOverview] = useState(true);
   const [linkClicked, setLinkClicked] = useState(false);
@@ -110,22 +111,19 @@ const Profile = ({ user }) => {
             </div>
 
             <div className="gear-icon">
-              <Link to="/accountsettings">
-                <img
-                  src="/images/gear1.png"
-                  alt="Gear-1"
-                  className="gear-image"
-                  style={{
-                    height: "85px",
-                    width: "85px",
-                  }}
-                  onClick={() => {
-                    setProfileAccountSettings(true) &
-                      setProfileOverview(false) &
-                      setLinkClicked(true);
-                  }}
-                />
-              </Link>
+              <img
+                src="/images/gear1.png"
+                alt="Gear-1"
+                className="gear-image"
+                style={{
+                  height: "85px",
+                  width: "85px",
+                }}
+                onClick={() => {
+                  setProfileAccountSettings(true) & setProfileOverview(false);
+                  setProfileReview(false);
+                }}
+              />
             </div>
             <div className="d-flex flex-column">
               <h2 className="profile-username">{user.name}</h2>
@@ -199,6 +197,7 @@ const Profile = ({ user }) => {
               onClick={() => {
                 setProfileReview(true) &
                   setProfileOverview(false) &
+                  setProfileAccountSettings(false) &
                   setLinkClicked(true);
               }}
               style={{
@@ -213,6 +212,7 @@ const Profile = ({ user }) => {
               onClick={() => {
                 setProfileFavorites(true) &
                   setProfileOverview(false) &
+                  setProfileAccountSettings(false) &
                   setLinkClicked(true);
               }}
               style={{
@@ -233,6 +233,14 @@ const Profile = ({ user }) => {
                 user={user}
                 userReviews={userReviews}
                 setUserReviews={setUserReviews}
+              />
+            ) : null}
+            {profileAccountSettings ? (
+              <ProfileAccountSettings
+                user={user}
+                setProfileReview={setProfileReview}
+                setProfileOverview={setProfileOverview}
+                setProfileAccountSettings={setProfileAccountSettings}
               />
             ) : null}
           </div>
