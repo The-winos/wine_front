@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
+import OptionAvatars from "./OptionAvatars";
 
 const ProfileAccountSettings = ({
   user,
@@ -25,6 +26,7 @@ const ProfileAccountSettings = ({
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [changeAvatar, setChangeAvatar] = useState(false);
 
   const handleLocationChange = (selectedState) => {
     setState(selectedState);
@@ -44,12 +46,6 @@ const ProfileAccountSettings = ({
     ) {
       return;
     }
-    // console.log("this is user", user);
-    // name !== "" ? name : user.name,
-    //   state !== "" ? state : user.state,
-    //   email !== "" ? email : user.email,
-    //   birthday !== "" ? birthday : user.birthday,
-    //   bio !== "" ? bio : user.bio;
 
     try {
       if (newPassword !== "") {
@@ -106,28 +102,12 @@ const ProfileAccountSettings = ({
     }
   }
 
-  useEffect(() => {
-    console.log("Updating bio in local storage:", bio);
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({
-        name,
-        state,
-        avatar,
-        email,
-        birthday,
-        bio,
-        newPassword,
-      })
-    );
-  }, [name, state, avatar, email, birthday, bio, newPassword]);
-
   return (
     <div id="accountSettings">
       <div className="container">
         <div>
           <img
-            src={`/images/${user.avatar}`}
+            src={`/images/${avatar}`}
             alt="avatar image"
             className="img-fluid"
             style={{
@@ -135,9 +115,28 @@ const ProfileAccountSettings = ({
               width: "300px",
               objectFit: "contain",
               objectPosition: "center center",
+              cursor: "pointer",
             }}
+            onClick={() => setChangeAvatar(true)}
           />
+          Change my Avatar!
         </div>
+        {changeAvatar && (
+          <div className="avatar-grid">
+            <h6>Choose Avatar</h6>
+            <br />
+            <OptionAvatars avatar={avatar} setAvatar={setAvatar} />
+            <button
+              onClick={() => {
+                setChangeAvatar(false);
+              }}
+              variant="outline-secondary"
+              size="sm"
+            >
+              Close
+            </button>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="accountSettings-form">
           <h3>{formSubmitted ? name : user.name}</h3>
