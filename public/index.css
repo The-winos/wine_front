@@ -279,7 +279,6 @@ button {
   margin-top: 5rem;
   padding-top: 4rem;
   padding-bottom: 12rem;
-
 }
 
 #single-wine img {
@@ -578,7 +577,7 @@ button {
 .avatar {
   border: none;
 }
-.avatar-grid{
+.avatar-grid {
   display: grid;
   grid-template-columns: repeat(14, 1fr); /* 14 avatars per row */
   grid-gap: 10px; /* Adjust the gap between avatars */
@@ -591,8 +590,7 @@ button {
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
     margin-bottom: 2rem;
-  margin-top: 1rem;
-
+    margin-top: 1rem;
   }
 }
 
@@ -1037,4 +1035,16 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.gear-image {
+  margin-top: -50px;
+  margin-bottom: -10px;
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.gear-image:hover {
+  transform: scale(1.2) rotate(45deg);
 }

@@ -4,7 +4,7 @@ import Rating from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
 const Home = ({ allWine, setAllWine }) => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [filteredWines, setFilteredWines] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Home = ({ allWine, setAllWine }) => {
     if (filtered.length > 0) {
       const randomIndex = Math.floor(Math.random() * filtered.length);
       const randomWine = filtered[randomIndex];
-      console.log(randomWine, "randomw wine in function")
+      console.log(randomWine, "random wine in function");
       setFilteredWines([randomWine]);
     } else {
       setFilteredWines([]);
@@ -29,21 +29,19 @@ const Home = ({ allWine, setAllWine }) => {
   };
 
   const formattedPrice = filteredWines[0]
-  ? (filteredWines[0].price / 100).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    })
-  : null;
+    ? (filteredWines[0].price / 100).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+      })
+    : null;
 
   useEffect(() => {
     findRandomFiveStarWine(allWine);
   }, [allWine]);
 
-
   return (
     <div id="Home" className="text-center pt-5 pb-5">
-
       <div className="home-header">
         <img
           src="/images/4-wine_glass.png"
@@ -59,37 +57,53 @@ const Home = ({ allWine, setAllWine }) => {
       </div>
       <h5>Community Of Reviews & Knowledgeable Sippers</h5>
       {/* corks logo goes here */}
-      {filteredWines.length > 0 ? <>
-
-      <div>
-
-      <div className="card col-md-9 d-flex justify-content-center custom-centered-card">
-        <h5>Featured Wine</h5>
-      <h4 className="wine-name">{filteredWines[0].name}
-  <small className="wine-flavor muted">   {filteredWines[0].flavor}</small>
-</h4>
-<div className="d-flex justify-content-center">
-        <Rating
+      {filteredWines.length > 0 ? (
+        <>
+          <div>
+            <div className="card col-md-9 d-flex justify-content-center custom-centered-card">
+              <h5>Featured Wine</h5>
+              <h4 className="wine-name">
+                {filteredWines[0].name}
+                <small className="wine-flavor muted">
+                  {" "}
+                  {filteredWines[0].flavor}
+                </small>
+              </h4>
+              <div className="d-flex justify-content-center">
+                <Rating
                   value={filteredWines[0].rating}
                   edit={false}
                   size={20}
                   activeColor="#ffd700"
                 />
-                </div>
-        <p className="card-text">
-          <small className="text-muted">Average Price: <small className="text-muted"> {filteredWines[0].price !== 0 && filteredWines[0].price !== null ? formattedPrice : "N/A" }</small>
-</small> <br />
+              </div>
+              <p className="card-text">
+                <small className="text-muted">
+                  Average Price:{" "}
+                  <small className="text-muted">
+                    {" "}
+                    {filteredWines[0].price !== 0 &&
+                    filteredWines[0].price !== null
+                      ? formattedPrice
+                      : "N/A"}
+                  </small>
+                </small>{" "}
+                <br />
+              </p>
 
-        </p>
-
-<button onClick={()=>{
-        navigate(`/singlewine/${filteredWines[0].id}`);
-      }} className="btn btn-primary"> Check out this wine</button>
-      </div>
-
-
-     </div>
-     </>:null}
+              <button
+                onClick={() => {
+                  navigate(`/singlewine/${filteredWines[0].id}`);
+                }}
+                className="btn btn-primary"
+              >
+                {" "}
+                Check out this wine
+              </button>
+            </div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };
