@@ -11,6 +11,7 @@ const Profile = ({ user }) => {
   const [followingAvatars, setFollowingAvatars] = useState([]);
   const [userLocation, setUserLocation] = useState("");
   const [profileReview, setProfileReview] = useState(false);
+  const [ProfileAccountSettings, setProfileAccountSettings] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
   const [profileOverview, setProfileOverview] = useState(true);
   const [linkClicked, setLinkClicked] = useState(false);
@@ -107,16 +108,24 @@ const Profile = ({ user }) => {
                 }}
               />
             </div>
+
             <div className="gear-icon">
-              <img
-                src="/images/gear1.png"
-                alt="Gear-1"
-                className="gear-image"
-                style={{
-                  height: "85px",
-                  width: "85px",
-                }}
-              />
+              <Link to="/accountsettings">
+                <img
+                  src="/images/gear1.png"
+                  alt="Gear-1"
+                  className="gear-image"
+                  style={{
+                    height: "85px",
+                    width: "85px",
+                  }}
+                  onClick={() => {
+                    setProfileAccountSettings(true) &
+                      setProfileOverview(false) &
+                      setLinkClicked(true);
+                  }}
+                />
+              </Link>
             </div>
             <div className="d-flex flex-column">
               <h2 className="profile-username">{user.name}</h2>
