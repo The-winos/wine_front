@@ -107,6 +107,17 @@ const Profile = ({ user }) => {
                 }}
               />
             </div>
+            <div className="gear-icon">
+              <img
+                src="/images/gear1.png"
+                alt="Gear-1"
+                className="gear-image"
+                style={{
+                  height: "85px",
+                  width: "85px",
+                }}
+              />
+            </div>
             <div className="d-flex flex-column">
               <h2 className="profile-username">{user.name}</h2>
               {/* <div className="user-details"> */}
