@@ -27,6 +27,7 @@ import {
   FooterPrivacy,
   FooterTerms,
   UserData,
+  LoginForgotPass,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -267,6 +268,8 @@ const Main = () => {
         <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
         <Route path="/terms" element={<FooterTerms user={user} />}></Route>
         <Route path="/userdata" element={<UserData user={user} />}></Route>
+        <Route path="/reset-password/:resetToken" element= {<LoginForgotPass/>}
+        ></Route>
       </Routes>
       <Footer />
     </div>
