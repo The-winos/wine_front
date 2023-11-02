@@ -14,19 +14,12 @@ const ProfileAccountSettings = ({
   setProfileReview,
   setProfileAccountSettings,
 }) => {
-  // const initialUserData = localStorage.getItem("userData")
-  //   ? JSON.parse(localStorage.getItem("userData"))
-  //   : user;
-
-  const [username, setUsername] = useState(user.username || "");
-  const [name, setName] = useState(user.name || "");
-  const [state, setState] = useState(user.state || "");
-  const [avatar, setAvatar] = useState(user.avatar || "");
-  const [email, setEmail] = useState(user.email || "");
-  const [birthday, setBirthday] = useState(
-    user.birthday ? new Date(user.birthday) : null
-  );
-  const [bio, setBio] = useState(user.bio || "");
+  const [name, setName] = useState(user.name);
+  const [state, setState] = useState(user.state);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [email, setEmail] = useState(user.email);
+  const [birthday, setBirthday] = useState(new Date(user.birthday));
+  const [bio, setBio] = useState(user.bio);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,7 +34,6 @@ const ProfileAccountSettings = ({
     event.preventDefault();
 
     if (
-      username === user.username &&
       name === user.name &&
       state === user.state &&
       avatar === user.avatar &&
@@ -52,6 +44,12 @@ const ProfileAccountSettings = ({
     ) {
       return;
     }
+    // console.log("this is user", user);
+    // name !== "" ? name : user.name,
+    //   state !== "" ? state : user.state,
+    //   email !== "" ? email : user.email,
+    //   birthday !== "" ? birthday : user.birthday,
+    //   bio !== "" ? bio : user.bio;
 
     try {
       if (newPassword !== "") {
@@ -65,9 +63,24 @@ const ProfileAccountSettings = ({
           toast.error("Old password verification failed");
           return;
         }
-      } else {
         const updateUserInfo = await updateUser(
-          username,
+          user.username,
+          undefined,
+          name,
+          state,
+          avatar,
+          user.role,
+          email,
+          bio,
+          birthday,
+          user.follower_count,
+          user.following_count,
+          user.join_date
+        );
+      } else {
+        console.log("This is name", name);
+        const updateUserInfo = await updateUser(
+          user.username,
           undefined,
           name,
           state,
@@ -98,7 +111,6 @@ const ProfileAccountSettings = ({
     localStorage.setItem(
       "userData",
       JSON.stringify({
-        username,
         name,
         state,
         avatar,
@@ -108,7 +120,7 @@ const ProfileAccountSettings = ({
         newPassword,
       })
     );
-  }, [username, name, state, avatar, email, birthday, bio, newPassword]);
+  }, [name, state, avatar, email, birthday, bio, newPassword]);
 
   return (
     <div id="accountSettings">
@@ -130,22 +142,36 @@ const ProfileAccountSettings = ({
         <form onSubmit={handleSubmit} className="accountSettings-form">
           <h3>{formSubmitted ? name : user.name}</h3>
           <h6>Update Name</h6>
-
-          <input
-            placeholder="Enter name"
-            className="first-name"
-            type="text"
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-          <div></div>
+          <div>
+            <input
+              placeholder="Enter name"
+              className="first-name"
+              type="text"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
+            />
+          </div>
+          <h6>Update Email</h6>
+          <div>
+            {" "}
+            <input
+              placeholder="Enter Email"
+              className="update-email"
+              type="text"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
           <h6>Update Birthday</h6>
           <DatePicker
             selected={birthday}
             onChange={(date) => setBirthday(date)}
             placeholderText="Select a date"
+            value={birthday}
             dateFormat="MM/dd/yyyy"
             isClearable="custom-datepicker"
           />
