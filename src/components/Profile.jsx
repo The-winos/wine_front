@@ -92,6 +92,20 @@ const Profile = ({ user }) => {
     fetchFollowing();
   }, [user]);
 
+  // Function to handle the gear icon click
+  const handleGearIconClick = () => {
+    // Add your desired action here, e.g., open account settings
+    setProfileAccountSettings(true);
+
+    const gearImage = document.querySelector(".gear-image");
+    if (gearImage) {
+      gearImage.classList.add("spin-once");
+      setTimeout(() => {
+        gearImage.classList.remove("spin-once");
+      }, 500); // Adjust the time for the desired animation speed
+    }
+  };
+
   return (
     <>
       <div className="d-flex flex-wrap">
@@ -121,6 +135,9 @@ const Profile = ({ user }) => {
                 onClick={() => {
                   setProfileAccountSettings(true) & setProfileOverview(false);
                   setProfileReview(false);
+                  {
+                    handleGearIconClick();
+                  }
                 }}
               />
               <div className="gear-text">Account Settings</div>
