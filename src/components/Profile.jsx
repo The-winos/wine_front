@@ -109,8 +109,7 @@ const Profile = ({ user }) => {
                 }}
               />
             </div>
-
-            <div className="gear-icon">
+            <div className="gear-container">
               <img
                 src="/images/gear1.png"
                 alt="Gear-1"
@@ -124,7 +123,9 @@ const Profile = ({ user }) => {
                   setProfileReview(false);
                 }}
               />
+              <div className="gear-text">Account Settings</div>
             </div>
+
             <div className="d-flex flex-column">
               <h2 className="profile-username">{user.name}</h2>
               {/* <div className="user-details"> */}

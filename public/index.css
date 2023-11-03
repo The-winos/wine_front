@@ -1037,14 +1037,36 @@ button {
   align-items: center;
 }
 
-.gear-image {
-  margin-top: -50px;
-  margin-bottom: -10px;
+.gear-container {
   position: relative;
   display: inline-block;
   transition: transform 0.3s ease;
 }
 
-.gear-image:hover {
+.gear-image {
+  margin-top: -50px;
+  margin-bottom: -10px;
+}
+
+.gear-text {
+  position: absolute;
+  top: 21px; /* Adjust this value to position the text properly */
+  left: 80%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.7); /* Background mask with 70% opacity */
+  color: white; /* Text color */
+  padding: 5px 10px; /* Padding for text (5px top and bottom, 10px left and right) */
+  border-radius: 5px; /* Rounded corners for the mask */
+  white-space: nowrap; /* Prevents text from wrapping */
+  display: inline; /* Display text inline */
+}
+
+.gear-container:hover .gear-image {
   transform: scale(1.2) rotate(45deg);
+}
+
+.gear-container:hover .gear-text {
+  opacity: 1;
 }
