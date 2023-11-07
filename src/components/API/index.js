@@ -756,3 +756,25 @@ export async function deleteItem(routeType, itemId) {
     console.error(error);
   }
 }
+
+export async function sendResetEmail(email) {
+  console.log("entered SendResetEmail")
+  try {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        email, // Use the email property
+      }),
+    };
+    const response = await fetch(`${BASE_URL}/users/password-reset`, options);
+    const result = await response.json();
+    console.log(result, "result from APi call")
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
