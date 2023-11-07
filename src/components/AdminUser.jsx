@@ -371,7 +371,7 @@ const AdminUser = ({
                 <div className="avatar-grid">
                   <h6>Choose Avatar</h6>
                   <br />
-                  <OptionAvatars avatar={avatar} setAvatar={setAvatar} />
+                  <OptionAvatars avatar={avatar} setAvatar={setAvatar} user={user} />
                   <button
                     onClick={() => {
                       setChangeAvatar(false);

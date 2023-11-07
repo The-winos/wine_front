@@ -3,11 +3,54 @@ import React from "react";
 const OptionAvatars = ({
   avatar,
   setAvatar,
+  user,
   followingAvatars,
   followerAvatars,
 }) => {
   return (
     <>
+    {user.username==="cutegeek" ?
+    <img
+    src="/images/avatarJessy.png"
+    alt="avatar"
+    className={`avatar ${avatar === "avatarJessy.png" ? "selected" : ""}`}
+    onClick={() => setAvatar("avatarJessy.png")}
+    style={{
+      height: "50px",
+      width: "50px",
+      objectFit: "contain",
+      objectPosition: "center center",
+      cursor: "pointer",
+    }}
+  /> : null }
+  {user.username==="amazinghuman" ?
+    <img
+    src="/images/avatarJen.png"
+    alt="avatar"
+    className={`avatar ${avatar === "avatarJen.png" ? "selected" : ""}`}
+    onClick={() => setAvatar("avatarJen.png")}
+    style={{
+      height: "50px",
+      width: "50px",
+      objectFit: "contain",
+      objectPosition: "center center",
+      cursor: "pointer",
+    }}
+  /> : null }
+   {user.username==="iceman" ?
+    <img
+    src="/images/avatarJustin.png"
+    alt="avatar"
+    className={`avatar ${avatar === "avatarJustin.png" ? "selected" : ""}`}
+    onClick={() => setAvatar("avatarJustin.png")}
+    style={{
+      height: "50px",
+      width: "50px",
+      objectFit: "contain",
+      objectPosition: "center center",
+      cursor: "pointer",
+    }}
+  /> : null }
       <img
         src="/images/character_1.png"
         alt="avatar"
