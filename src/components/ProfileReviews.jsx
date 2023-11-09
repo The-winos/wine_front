@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import UserReviewDetails from "./UserReviewDetails";
 import UserData from "./UserData";
+import { Link } from "react-router-dom";
 
 const ProfileReviews = ({ user, userReviews, setUserReviews }) => {
   const [selectedNote, setSelectedNote] = useState(null);
+  const [seeAllReviewsLink, setSeeAllReviewsLink] = useState(false);
 
   // Function to handle selecting a note
   const handleNoteClick = (userReview) => {
@@ -18,7 +20,16 @@ const ProfileReviews = ({ user, userReviews, setUserReviews }) => {
   return (
     <>
       <div className="review-card">
-        <div className="header-container text-center mb-3 p-1">
+        <div
+          className="header-container text-center mb-3 p-1"
+          onClick={() => {
+            seeAllReviewsLink(true);
+          }}
+        >
+          <Link to="/reviewdetails" className="link-to-reviews">
+            <h3 className="see-reviews-header">See all reviews</h3>
+          </Link>
+
           <h2 className="profile-username">{user.username}'s Reviews</h2>
         </div>
         {userReviews && userReviews.length ? (
