@@ -50,7 +50,11 @@ const ProfileOverview = ({ user }) => {
           </div>
 
           <div className="bottom-left container-box">
-            This is the Bottom-Left Container-Box
+            <p>
+              Separate user.reviews to render top (stylized) add link to see all
+              (listed)
+            </p>
+            <p className="reviews-header">My Reviews</p>
             <div className="profile-overview-reviews">
               <ProfileReviews user={user} />
             </div>
@@ -58,10 +62,10 @@ const ProfileOverview = ({ user }) => {
         </div>
         <div className="profile-overview-right-container">
           <div className="top-right container-box">
-            This is the Top-Right Container-Box
+            Insert User Graph/Basic Statistics
           </div>
           <div className="bottom-right container-box">
-            This is the Bottom-Right Container-Box
+            Place two most popularly rated favorites among users
           </div>
         </div>
       </div>
