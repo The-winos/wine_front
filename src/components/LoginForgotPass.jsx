@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import LoginResetPasswordForm from "./LoginResetPasswordForm";
 
 const LoginForgotPass = () => {
   const { resetToken } = useParams();
@@ -30,7 +31,7 @@ const LoginForgotPass = () => {
     <div id="loginForgotPass">
       {tokenValid === true && (
         // Render your reset password form when the token is valid
-        <ResetPasswordForm resetToken={resetToken} />
+        <LoginResetPasswordForm resetToken={resetToken} />
       )}
       {tokenValid === false && (
         <p>Invalid or expired reset token. Please request a new one.</p>
@@ -38,6 +39,7 @@ const LoginForgotPass = () => {
       {tokenValid === null && (
         <p>Verifying token...</p>
       )}
+
     </div>
   );
 };
