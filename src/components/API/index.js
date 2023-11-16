@@ -601,6 +601,39 @@ export async function updateAdminUserPassword(userId, password) {
     console.error(error);
   }
 }
+
+export async function updateForgottenPassword(token, password) {
+  try {
+    const body = {
+      token,
+      password
+    };
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(
+      `${BASE_URL}/users/forgot/${token}/password`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to update password");
+    }
+
+    const result = await response.text();
+    return result.password;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 //fetches all favorites
 export async function getFavorites(userId) {
   try {
@@ -644,7 +677,6 @@ export async function getFavoritesByWine(wineId) {
       options
     );
     const result = await response.json();
-    console.log(result, "favorite result");
     return result;
   } catch (error) {
     console.error(error);
@@ -763,8 +795,7 @@ export async function sendResetEmail(email) {
     const options = {
       method: "POST",
       headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json"
       },
       body: JSON.stringify({
         email, // Use the email property
