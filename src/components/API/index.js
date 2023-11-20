@@ -627,7 +627,7 @@ export async function updateForgottenPassword(token, password) {
     }
 
     const result = await response.text();
-    return result.password;
+    return result;
   } catch (error) {
     console.error(error);
   }
