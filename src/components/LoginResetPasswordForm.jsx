@@ -7,7 +7,7 @@ const LoginResetPasswordForm = ({ resetToken }) => {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
   const [passwordBlock, setPasswordBlock]= useState(true)
 
   const handlePasswordChange = (e) => {
@@ -29,14 +29,14 @@ const LoginResetPasswordForm = ({ resetToken }) => {
 
     try {
       const updatePass= await updateForgottenPassword(resetToken, password)
-      console.log(updatePass)
-      if(updatePass){
-        console.log("hello")
 
-        setMessage("Password has been updated");
+
+      if(updatePass.error){
+        setMessage("Password does not meet above requirements.")
+      }
+      else{
+        setMessage("Success! Your password has been updated.");
         setPasswordBlock(false)
-
-
       }
     } catch (error) {
       console.error("Error updating password:", error);
@@ -48,6 +48,13 @@ const LoginResetPasswordForm = ({ resetToken }) => {
       {passwordBlock ? (
         <>
           <h2>Reset Your Password</h2>
+          <h6>Password must be:<br></br>
+             • 8 characters long<br></br>
+             • Contain at least one uppercase letter <br></br>
+             • One lowercase letter<br></br>
+             • One number<br></br>
+            You can also include optional special characters</h6>
+            <h4>{message}</h4>
           <div style={{ border: "1px solid #ccc", padding: "20px", borderRadius: "8px", maxWidth: "300px", margin: "auto", backgroundColor: "#F4E7D3" }}>
             <form onSubmit={handleSubmit}>
               <label htmlFor="password" style={{ marginTop: "10px" }}>New Password:</label>
@@ -70,8 +77,9 @@ const LoginResetPasswordForm = ({ resetToken }) => {
 
               <button type="submit" style={{ marginTop: "10px" }}>Reset Password</button>
             </form>
-            <p>{message}</p>
+
           </div>
+          {console.log(message, "message")}
         </>
       ) : (<>
         <h3>{message}</h3>
