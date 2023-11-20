@@ -626,8 +626,8 @@ export async function updateForgottenPassword(token, password) {
       throw new Error("Failed to update password");
     }
 
-    const result = await response.text();
-    return result.password;
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.error(error);
   }
