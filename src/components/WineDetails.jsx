@@ -93,6 +93,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
     >
       <div className="card-header">
         <div className="d-flex justify-content-between align-items-start">
+          {user ? (<>
           <div
             className="d-flex flex-column align-items-start"
             style={{ maxWidth: "55%", minWidth: "55%", margin: "0 auto" }}
@@ -111,7 +112,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
           <div
             className="d-flex flex-column align-items-end h-100"
             style={{ height: "100%" }}
-          >
+          > {user ?(<>
             <div
               onClick={() => {
                 const favoriteId = checkOnFaves(wine.id);
@@ -196,7 +197,9 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
                 activeColor="#ffd700"
               />
             </div>
+            </>) : null}
           </div>
+          </>) : null}
         </div>
       </div>
 

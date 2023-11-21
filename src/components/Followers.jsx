@@ -217,6 +217,7 @@ const Followers = ({ user, favorites }) => {
           </>
         ) : (
           <>
+            {user ? (<>
             <div className="mx-2">
               <button
                 onClick={() => {
@@ -237,6 +238,7 @@ const Followers = ({ user, favorites }) => {
                 Add a review!
               </button>
             </div>
+            </>) : null}
           </>
         )}
       </div>
@@ -255,15 +257,27 @@ const Followers = ({ user, favorites }) => {
             })
         ) : (
           <>
-            (
-            <h2>
+
+              {user ? (<div className="d-flex justify-content-center p-2">
+            <h2 >
               You aren't following anyone yet. Find some friends to follow!
             </h2>
             <NavLink className="btn btn-primary" to="/winefeed">
               The Tasting Room
             </NavLink>
-            )
+            </div>):(<div className="d-flex flex-column align-items-center p-2">
+  <h2>
+    Please Login to see the people you follow.
+  </h2>
+  <NavLink className="btn btn-primary mt-2" to="/login">
+    Login
+  </NavLink>
+</div>
+            )}
+
+
           </>
+
         )}
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoginResetPasswordForm from "./LoginResetPasswordForm";
+import { checkToken } from "./API";
 
 const LoginForgotPass = () => {
   const { resetToken } = useParams();
@@ -9,7 +10,8 @@ const LoginForgotPass = () => {
   const verifyResetToken = async () => {
     try {
       // Make an API request to your backend to validate the token
-      const response = await fetch(`/api/verify-reset-token?token=${resetToken}`);
+      const response = await checkToken(resetToken)
+      console.log(response, "response")
       if (response.ok) {
         // Token is valid, update state accordingly
         setTokenValid(true);

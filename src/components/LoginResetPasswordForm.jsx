@@ -79,7 +79,7 @@ const LoginResetPasswordForm = ({ resetToken }) => {
             </form>
 
           </div>
-          {console.log(message, "message")}
+
         </>
       ) : (<>
         <h3>{message}</h3>
@@ -88,7 +88,7 @@ const LoginResetPasswordForm = ({ resetToken }) => {
 </h4>
 
       </>)}
-      {console.log(message)}
+
     </div>
   );
 

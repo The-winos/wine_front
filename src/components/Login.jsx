@@ -14,7 +14,7 @@ const Login = ({ setUser, setLoggedIn }) => {
     const { token, user, message } = await loginUser(username, password);
     console.log(token, "this is token");
     const login = await authUser(token);
-    console.log(user, token, "this is user and token");
+
 
     localStorage.removeItem("token");
     localStorage.setItem("token", token);
@@ -38,7 +38,7 @@ const Login = ({ setUser, setLoggedIn }) => {
         <div className="register-container">
           <div className="row mt-15">
             <div className="col-lg-4 bg-white m-auto">
-              <h3 className="text-center pt-3">Log in</h3>
+              <h3 className="text-center pt-3">Login</h3>
 
               <form action="#" onSubmit={handleLogin}>
                 <div className="input-group mb-3">
