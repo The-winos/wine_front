@@ -346,9 +346,9 @@ export async function checkExistingWine(wineName) {
   return null;
 }
 
-export async function checkResetToken(token) {
+export async function checkToken(token) {
   try {
-    const response = await fetch(`${BASE_URL}/users/check-reset-token?token=${token}`);
+    const response = await fetch(`${BASE_URL}/users/check-reset-token/${token}`);
     console.log(response, "response in api");
     return response;
   } catch (error) {
