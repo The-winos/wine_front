@@ -38,6 +38,7 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
               <Nav.Link as={NavLink} to="/winelist">
                 Wine List
               </Nav.Link>
+              {user ? (<>
               {loggedIn && (user.role === "merchant" || user.role === "admin") && (
                 <Nav.Link as={NavLink} to="/admin">
                   Admin
@@ -65,7 +66,7 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
                   Login
                 </Nav.Link>
                 </div>
-              )}
+              )}</>): null}
             </Nav>
           </Navbar.Collapse>
         </div>

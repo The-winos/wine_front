@@ -4,11 +4,21 @@ import { Link, useParams } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
 import UserIdReviewDetails from "./UserIdReviewDetails";
 import FollowButton from "./FollowButton";
+import ProfileOverview from "./ProfileOverview";
+import ProfileAccountSettings from "./ProfileAccountSettings";
+import Favorites from "./Favorites";
+import ProfileReviews from "./ProfileReviews";
 
-const ProfileUserId = ({ user }) => {
+const ProfileUserId = () => {
   const { id } = useParams();
   const [userReviews, setUserReviews] = useState([]);
   const [userProfile, setUserProfile] = useState({});
+  const [linkClicked, setLinkClicked] = useState(false);
+  const [profileReview, setProfileReview] = useState(false);
+  const [profileAccountSettings, setProfileAccountSettings] = useState(false);
+  const [profileFavorites, setProfileFavorites] = useState(false);
+  const [profileOverview, setProfileOverview] = useState(true);
+
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -32,64 +42,140 @@ const ProfileUserId = ({ user }) => {
     fetchGetUserById();
   }, []);
 
-  return (
-    <div className="profile-container">
-      <div id="profile-main" className="d-flex align-items-center">
-        <img
-          src={`/images/${userProfile.avatar}`}
-          alt="avatar image"
-          className="img-fluid"
-          style={{
-            height: "200px",
-            width: "200px",
-            objectFit: "contain",
-            objectPosition: "center center",
-          }}
-        />
-        <div className="ml-4">
-          <div className="d-flex align-items-center">
-            <h2 className="profile-username">{userProfile.name}</h2>
-            <div className="ml-3"></div>
+  return (<>
+    <div className="d-flex flex-wrap">
+      <div className="profile-container">
+        {/* User Information Container */}
+        <div className="user-info-container">
+          <div className="profileAvatar">
+            <img
+              src={`/images/${userProfile.avatar}`}
+              alt="avatar image"
+              className="img-fluid"
+              style={{
+                height: "125px",
+                width: "125px",
+              }}
+            />
           </div>
 
-          <h5 className="profile-username">
-            I follow {userProfile.following_count} people
-          </h5>
-          <h5 className="profile-username">
-            {userProfile.follower_count} people follow me!
-          </h5>
+
+          <div className="d-flex flex-column">
+            <h2 className="profile-username">{userProfile.name}</h2>
+
+            <h6 className="profile-username smaller-text">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  className="bi bi-geo-alt"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6 1a4 4 0 0 1 4 4c0 2.77-2.7 5.935-4 7.745C4.7 11.935 2 8.77 2 5a4 4 0 0 1 4-4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M8 9a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H7a.5.5 0 0 1 0-1H8v-2.5A.5.5 0 0 1 8 9z"
+                  />
+                </svg>
+              </span>
+              <span className="user-location smaller-text">
+                {userProfile.state}
+              </span>
+            </h6>
+            <div className="count-container">
+              <h6>
+                I follow{" "}
+                <Link to="/following" className="count-link">
+                  <span
+                    className="count-text"
+                    data-heading={userProfile.following_count}
+                  >
+                    {userProfile.following_count}
+                  </span>
+                </Link>
+                {userProfile.following_count <= 1 ? "person" : "people"}
+              </h6>
+              <h6>
+                <Link to="/followers" className="count-link">
+                  <span
+                    className="count-text"
+                    data-heading={userProfile.follower_count}
+                  >
+                    {userProfile.follower_count}
+                  </span>
+                </Link>
+                {userProfile.follower_count <= 1
+                  ? "person follows me"
+                  : "people follow me!"}
+              </h6>
+            </div>
+            {/* </div> */}
+          </div>
+        </div>
+
+        <div className="profileLinks">
+          <div
+            onClick={() => {
+              setProfileOverview(true) & setProfileReview(false);
+            }}
+          >
+            Overview
+          </div>
+          <div
+            className="profile-review-sidebar"
+            onClick={() => {
+              setProfileReview(true) &
+                setProfileOverview(false) &
+                setProfileAccountSettings(false) &
+                setLinkClicked(true);
+            }}
+            style={{
+              textDecoration: linkClicked ? "underline" : "none",
+              color: linkClicked ? "#721c24" : "#007bff",
+            }}
+          >
+            Reviews
+          </div>
+          <div
+            className="profile-favorites-sidebar"
+            onClick={() => {
+              setProfileFavorites(true) &
+                setProfileOverview(false) &
+                setProfileAccountSettings(false) &
+                setLinkClicked(true);
+            }}
+            style={{
+              textDecoration: linkClicked ? "underline" : "none",
+              color: linkClicked ? "#721c24" : "#007bff",
+            }}
+          >
+            Favorites
+          </div>
         </div>
       </div>
-      <div className="col-md-4 mx-3">
-        {userProfile.bio ? userProfile.bio : null}
-      </div>
-      <Link to={`/favoritesuserid/${id}`}>
-        <button type="favorite" className="buttons">
-          Favorites
-        </button>
-      </Link>
+      <div className="profileElements">
+        <div>
+          {" "}
+          {profileOverview ? <ProfileOverview user={userProfile} /> : null}
+          {profileReview ? (
+            <ProfileReviews
+            user={userProfile}
+              userReviews={userReviews}
+              setUserReviews={setUserReviews}
+            />
+          ) : null}
 
-      <div className="text-center">
-        <h3 className="profile-review-list mx-auto">
-          {userProfile.username}'s Reviews
-        </h3>
-
-        {userReviews && userReviews.length
-          ? userReviews.map((userReviews) => {
-              return (
-                <div key={`useridReview-${userReviews.id}`}>
-                  <UserIdReviewDetails
-                    userReviews={userReviews}
-                    setUserReviews={setUserReviews}
-                    userProfile={userProfile}
-                  />
-                </div>
-              );
-            })
-          : null}
+        </div>
+        <div> {profileReview ? <Favorites user={userProfile} /> : null}</div>
       </div>
     </div>
-  );
+  </>
+);
 };
 
 export default ProfileUserId;
