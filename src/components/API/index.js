@@ -334,20 +334,27 @@ export async function checkExistingWine(wineName) {
     `${BASE_URL}/wines?name=${encodeURIComponent(wineName)}`
   );
   const wines = await response.json();
-  console.log(wines, "what is wines?");
 
   for (const wine of wines) {
-    console.log(wine, "what is wine?");
-    console.log(wine.name, "wine.name");
-    console.log(wineName, "wineName");
+
     if (wine.name.toLowerCase() === wineName.toLowerCase()) {
-      console.log("Wine found");
       return wine;
     }
   }
 
   console.log("No matching wine found");
   return null;
+}
+
+export async function checkToken(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/users/check-reset-token/${token}`);
+    console.log(response, "response in api");
+    return response;
+  } catch (error) {
+    console.error("Error in API call:", error);
+    throw error;
+  }
 }
 
 export async function updateUser(
@@ -790,7 +797,7 @@ export async function deleteItem(routeType, itemId) {
 }
 
 export async function sendResetEmail(email) {
-  console.log("entered SendResetEmail")
+
   try {
     const options = {
       method: "POST",
@@ -798,12 +805,12 @@ export async function sendResetEmail(email) {
         "Content-type": "application/json"
       },
       body: JSON.stringify({
-        email, // Use the email property
+        email,
       }),
     };
     const response = await fetch(`${BASE_URL}/users/password-reset`, options);
     const result = await response.json();
-    console.log(result, "result from APi call")
+
     return result;
   } catch (error) {
     console.error(error);

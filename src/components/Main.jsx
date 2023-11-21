@@ -37,7 +37,7 @@ import { getFavorites } from "./API";
 
 const Main = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({}); //in griffinBack it has it as useState({ admin: false });
+  const [user, setUser] = useState(null);
   const [wineInfo, setWineInfo] = useState({});
   const [allWine, setAllWine] = useState([]);
   const [allReviews, setAllReviews] = useState([]);
@@ -96,6 +96,8 @@ const Main = () => {
   }, [user]);
 
   useEffect(() => {
+    console.log("are you entering here??")
+    console.log(user, "whate is this then?")
     const fetchUserSaved = async () => {
       if (user) {
         try {

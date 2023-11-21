@@ -24,9 +24,11 @@ const CustomNavbar = ({ setLoggedIn, loggedIn, user, setUser }) => {
               <Nav.Link as={NavLink} to="/">
                 Home
               </Nav.Link>
+              {user ? (<>
               <Nav.Link as={NavLink} to="/profile">
                 My Account
               </Nav.Link>
+              </>): null}
               <Nav.Link as={NavLink} to="/winefeed">
                 The Tasting Room
               </Nav.Link>

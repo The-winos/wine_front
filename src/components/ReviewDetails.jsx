@@ -13,7 +13,7 @@ import FollowButton from "./FollowButton";
 import ReviewUpdate from "./ReviewUpdate";
 
 const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
-  const avatarUrl = `/images/${user.avatar}`;
+
   const navigate = useNavigate();
   const [reviewUser, setReviewUser] = useState({});
   const [reviewWine, setReviewWine] = useState({});
@@ -136,6 +136,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                   className="savedFavs d-flex flex-column align-items-end"
                   style={{ position: "absolute", top: 0, right: 0 }}
                 >
+                  {user ? (<>
                   <div
                     onClick={() => {
                       const favoriteId = checkOnFaves(reviewWine.id);
@@ -217,6 +218,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                       />
                     )}
                   </div>
+                  </>) : null}
                 </div>
               </div>
 
@@ -247,6 +249,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                   <div className="d-flex align-items-center">
                     <small className="text-muted">
                       By:
+                      {user ? (<>
                       {user.id !== reviewUser.id &&
                       reviewUser.username != "Deleted User" ? (
                         <a href={`/profileuserid/${reviewUser.id}`}>
@@ -260,8 +263,9 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                             <small>{reviewUser.username}</small>
                           )}
                         </>
-                      )}
+                      )}</>) : reviewUser.username}
                     </small>
+                    {user ? (<>
                     {reviewUser.username != "Deleted User" ? (
                       <div className="ml-3">
 
@@ -291,6 +295,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         <small>Update Review</small>
                       </div>
                     ) : null}
+                    </>) : null}
                   </div>
                   <Rating
                     value={review.rating}

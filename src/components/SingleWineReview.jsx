@@ -49,29 +49,34 @@ const SingleWineReview = ({ review, user }) => {
             />
           </div>
           <div className="col-8 avatar-username">
-            {user.id !== reviewUser.id &&
-            reviewUser.username !== "Deleted User" ? (
-              <span>
-                {" "}
-                <a href={`/profileuserid/${reviewUser.id}`}>
-                  {reviewUser.username}
-                </a>{" "}
-              </span>
-            ) : (
+            {user ? (
               <>
-                {reviewUser.username !== "Deleted User" ? (
+                {user.id !== reviewUser.id &&
+                reviewUser.username !== "Deleted User" ? (
                   <span>
                     {" "}
-                    <a href={`/profile`}>{reviewUser.username}</a>{" "}
+                    <a href={`/profileuserid/${reviewUser.id}`}>
+                      {reviewUser.username}
+                    </a>{" "}
                   </span>
                 ) : (
-                  <span>{reviewUser.username}</span>
+                  <>
+                    {reviewUser.username !== "Deleted User" ? (
+                      <span>
+                        {" "}
+                        <a href={`/profile`}>{reviewUser.username}</a>{" "}
+                      </span>
+                    ) : (
+                      <span>{reviewUser.username}</span>
+                    )}
+                  </>
                 )}
               </>
+            ) : (
+              reviewUser.username
             )}
           </div>{" "}
-          {console.log("user", user)}
-          {console.log("reviewWine", reviewWine)}
+
           <div className="col-2 text-right">
             <span>
               {new Date(review.review_date).toLocaleDateString("en-US", {
@@ -98,23 +103,24 @@ const SingleWineReview = ({ review, user }) => {
           />
         </div>
         <p className="card-text mb-1">
-          <small className="text-muted">
+          <small className="text-muted" style={{marginRight:"10px"}}>
             Price:{" "}
             {review.price !== 0 && review.price !== null
               ? formattedPrice
               : "N/A"}
           </small>{" "}
-          <br />
+
           <small className="text-muted">
             Bought at: {review.location != null ? review.location : "Unknown"}
           </small>
         </p>
         <h5 className="review-comment">{review.review_comment}</h5>
+        {user ? (<>
         {user.id === reviewWine.author_id && (
           <button className="btn btn-primary" onClick={handleEditReview}>
             Edit Review
           </button>
-        )}
+        )}</>): null}
       </div>
     </div>
   );
