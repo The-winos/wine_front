@@ -39,4 +39,5 @@ export { default as ReviewUpdate } from "./ReviewUpdate";
 export { default as ProfileReviews } from "./ProfileReviews";
 export { default as ProfileOverview } from "./ProfileOverview";
 export { default as LoginForgotPass } from "./LoginForgotPass";
-export { default as LoginEnterEmail} from "./LoginEnterEmail";
+export { default as LoginEnterEmail } from "./LoginEnterEmail";
+export { default as ProfileStats } from "./ProfileStats.jsx";

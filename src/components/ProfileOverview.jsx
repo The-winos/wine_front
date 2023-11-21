@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getReviewByUser, getUserById } from "./API";
 import ProfileReviews from "./ProfileReviews";
-import { useNavigate } from "react-router-dom";
+import UserData from "./UserData";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ProfileOverview = ({ user }) => {
+const ProfileOverview = ({ user, userReviews, setUserReviews }) => {
   const [expandedBio, setExpandedBio] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [userProfile, setUserProfile] = useState({});
+
+  useEffect(() => {
+    const fetchUserReviews = async () => {
+      try {
+        const reviews = await getReviewByUser(id);
+        setUserReviews(reviews);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserReviews();
+  }, []);
+
+  useEffect(() => {
+    async function fetchGetUserById() {
+      const theUser = await getUserById(id);
+      console.log(theUser);
+      setUserProfile(theUser);
+    }
+    fetchGetUserById();
+  }, []);
 
   const handleCreateBio = () => {
     navigate("/accountsettings");
@@ -54,18 +81,38 @@ const ProfileOverview = ({ user }) => {
               Separate user.reviews to render top (stylized) add link to see all
               (listed)
             </p>
-            <p className="reviews-header">My Reviews</p>
+            <p className="reviews-header"></p>
             <div className="profile-overview-reviews">
-              <ProfileReviews user={user} />
+              <div className="text-center">
+                <h3 className="profile-review-list mx-auto">
+                  {user.username}'s Reviews
+                </h3>
+
+                {userReviews && userReviews.length
+                  ? userReviews.map((userReviews) => {
+                      return (
+                        <div key={`useridReview-${userReviews[0].id}`}>
+                          <UserReviewDetails
+                            userReviews={userReviews[0]}
+                            setUserReviews={() => {}}
+                          />
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+              {/* <ProfileReviews user={user} userReviews={{ userReviews }} /> */}
             </div>
           </div>
         </div>
         <div className="profile-overview-right-container">
           <div className="top-right container-box">
             Insert User Graph/Basic Statistics
+            <UserData userReviews={userReviews} />
           </div>
           <div className="bottom-right container-box">
-            Place two most popularly rated favorites among users
+            Place most popularly rated favorites and saved wine
+            {/* <FavoritesUSerId /> */}
           </div>
         </div>
       </div>
