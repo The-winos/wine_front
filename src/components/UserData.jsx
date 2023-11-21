@@ -1,50 +1,54 @@
-import React, { useEffect } from "react";
-// import * as d3 from "d3"; // Import D3.js library
+import React, { useEffect, useRef } from "react";
 
-const UserData = ({ user }) => {
-  //   useEffect(() => {
-  //     if (user && user.userReviews) {
-  //       renderGraphs(user.userReviews);
-  //     }
-  //   }, [user]);
+import * as d3 from "d3";
 
-  //   const renderGraphs = (userReviews) => {
-  //     const svg = d3
-  //       .select("#pieChart")
-  //       .append("svg")
-  //       .attr("width", 300)
-  //       .attr("height", 300);
-  //     const data = user.userReviews.map((review) => ({
-  //       label: review.wineType,
-  //       value: review.rating,
-  //     }));
+const UserData = ({ user, userReviews }) => {
+  const chartRef = useRef(null);
 
-  //     const pie = d3.pie().value((d) => d.value);
-  //     const arc = d3.arc().innerRadius(0).outerRadius(100);
+  useEffect(() => {
+    if (userReviews) {
+      renderGraphs(userReviews);
+    }
+  }, [userReviews]);
 
-  //     const arcs = svg
-  //       .selectAll("arc")
-  //       .data(pie(data))
-  //       .enter()
-  //       .append("g")
-  //       .attr("class", "arc");
+  const renderGraphs = (userReviews) => {
+    console.log(userReviews);
+    const svg = d3
+      .select(chartRef.current)
+      .append("svg")
+      .attr("width", 300)
+      .attr("height", 300);
 
-  //     arcs
-  //       .append("path")
-  //       .attr("d", arc)
-  //       .attr("fill", (d, i) => d3.schemeCategory10[i]);
+    const data = userReviews.map((review) => ({
+      label: review.wineType,
+      value: review.rating,
+    }));
 
-  //     arcs
-  //       .append("text")
-  //       .attr("transform", (d) => `translate(${arc.centroid(d)})`)
-  //       .attr("text-anchor", "middle")
-  //       .text((d) => d.data.label);
-  //   };
+    const pie = d3.pie().value((d) => d.value);
+    const arc = d3.arc().innerRadius(0).outerRadius(100);
+
+    const arcs = svg
+      .selectAll("arc")
+      .data(pie(data))
+      .enter()
+      .append("g")
+      .attr("class", "arc");
+
+    arcs
+      .append("path")
+      .attr("d", arc)
+      .attr("fill", (d, i) => d3.schemeCategory10[i]);
+
+    arcs
+      .append("text")
+      .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+      .attr("text-anchor", "middle")
+      .text((d) => d.data.label);
+  };
 
   return (
     <div className="user-data-container">
-      {/* {renderGraphs()} */}
-      <div id="pieChart" className="chart"></div>
+      <div ref={chartRef} className="chart"></div>
     </div>
   );
 };

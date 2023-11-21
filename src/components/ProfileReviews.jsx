@@ -17,6 +17,9 @@ const ProfileReviews = ({ user, userReviews, setUserReviews }) => {
     setSelectedNote(null);
   };
 
+  // const firstUserReview =
+  //   userReviews && userReviews.length ? userReviews[0] : null;
+
   return (
     <>
       <div className="review-card">
