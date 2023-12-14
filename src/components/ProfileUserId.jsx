@@ -44,6 +44,7 @@ const ProfileUserId = ({user}) => {
 
   return (<>
     <div className="d-flex flex-wrap">
+      {console.log(user, "user")}
       <div className="profile-container">
         {/* User Information Container */}
         <div className="user-info-container">

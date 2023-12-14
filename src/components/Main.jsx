@@ -96,8 +96,7 @@ const Main = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log("are you entering here??")
-    console.log(user, "whate is this then?")
+
     const fetchUserSaved = async () => {
       if (user) {
         try {

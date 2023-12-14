@@ -14,7 +14,7 @@ const ProfileOverview = ({
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [userProfile, setUserProfile] = useState({});
+
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -29,14 +29,7 @@ const ProfileOverview = ({
     fetchUserReviews();
   }, []);
 
-  useEffect(() => {
-    async function fetchGetUserById() {
-      const theUser = await getUserById(id);
-      console.log(theUser);
-      setUserProfile(theUser);
-    }
-    fetchGetUserById();
-  }, []);
+
 
   const handleCreateBio = () => {
     navigate("/accountsettings");
@@ -45,9 +38,9 @@ const ProfileOverview = ({
   return (
     <div className="profileOverview">
       <div className="profile-overview-container">
-        <div className="profile-overview-left-container">
+        <div className="profile-overview-left-container">{user ? (<>
           <div className="top-left container-box">
-            <div></div>
+
             {user.bio ? (
               user.bio.length > 400 ? (
                 <div className="user-bio-container">
@@ -84,15 +77,19 @@ const ProfileOverview = ({
               )
             ) : (
               <div className="user-bio-container">
-                <h5 className="thought-bubble">No bio available.</h5>
-
-                {user.id === currentUser.id ? (
+                <h5 className="thought-bubble">No bio has been created yet</h5>
+              {user && currentUser ? (
+                  <>
+                  {user.id=== currentUser.id ? (
                   <button onClick={handleCreateBio}>Create Bio</button>
-                ) : null}
+                  ): null}
+</>
+                ): null}
               </div>
             )}
+
           </div>
-          {console.log(currentUser, "here")}
+
           <div className="bottom-left container-box">
             <p>
               Separate user.reviews to render top (stylized) add link to see all
@@ -106,21 +103,13 @@ const ProfileOverview = ({
                 </h3>
 
                 {userReviews && userReviews.length
-                  ? userReviews.map((userReviews) => {
-                      return (
-                        <div key={`useridReview-${userReviews[0].id}`}>
-                          <UserReviewDetails
-                            userReviews={userReviews[0]}
-                            setUserReviews={() => {}}
-                          />
-                        </div>
-                      );
-                    })
+                  ? (console.log(userReviews, "review"))
                   : null}
               </div>
               {/* <ProfileReviews user={user} userReviews={{ userReviews }} /> */}
             </div>
           </div>
+          </>) : <h5>Loading profile</h5>} this one
         </div>
         <div className="profile-overview-right-container">
           <div className="top-right container-box">

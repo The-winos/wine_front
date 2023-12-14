@@ -110,9 +110,11 @@ const Profile = ({ user }) => {
     <>
       <div className="d-flex flex-wrap">
         <div className="profile-container">
+          {user ? (<>
           {/* User Information Container */}
           <div className="user-info-container">
             <div className="profileAvatar">
+
               <img
                 src={`/images/${user.avatar}`}
                 alt="avatar image"
@@ -241,11 +243,12 @@ const Profile = ({ user }) => {
               Favorites
             </div>
           </div>
+          </>) : (<h5>Loading profile</h5>)}
         </div>
         <div className="profileElements">
           <div>
             {" "}
-            {profileOverview ? <ProfileOverview user={user} /> : null}
+            {profileOverview ? <ProfileOverview user={user} currentUser={user}/> : null}
             {profileReview ? (
               <ProfileReviews
                 user={user}
@@ -257,14 +260,13 @@ const Profile = ({ user }) => {
             {profileAccountSettings ? (
               <ProfileAccountSettings
                 user={user}
-                currentUser={user}
                 setProfileReview={setProfileReview}
                 setProfileOverview={setProfileOverview}
                 setProfileAccountSettings={setProfileAccountSettings}
               />
             ) : null}
           </div>
-          <div> {profileReview ? <Favorites user={user} currentUser={user} /> : null}</div>
+          <div> {profileFavorites ? <Favorites user={user} currentUser={user} /> : null}</div>
         </div>
       </div>
     </>
