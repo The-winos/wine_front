@@ -4,7 +4,12 @@ import ProfileReviews from "./ProfileReviews";
 import UserData from "./UserData";
 import { useNavigate, useParams } from "react-router-dom";
 
-const ProfileOverview = ({ user, userReviews, setUserReviews }) => {
+const ProfileOverview = ({
+  user,
+  userReviews,
+  setUserReviews,
+  currentUser,
+}) => {
   const [expandedBio, setExpandedBio] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -44,38 +49,50 @@ const ProfileOverview = ({ user, userReviews, setUserReviews }) => {
           <div className="top-left container-box">
             <div></div>
             {user.bio ? (
-              <div className="user-bio-container">
-                <h6
-                  className={`thought-bubble ${expandedBio ? "expanded" : ""}`}
-                >
-                  {expandedBio ? user.bio : user.bio.substring(0, 150)}
-                  {!expandedBio && (
-                    <span
-                      onClick={() => setExpandedBio(true)}
-                      className="read-more"
-                    >
-                      <small>... (read more)</small>
-                    </span>
-                  )}
-                  {expandedBio && (
-                    <span
-                      onClick={() => setExpandedBio(false)}
-                      className="read-less"
-                    >
-                      <small>(read less)</small>
-                    </span>
-                  )}
-                </h6>
-              </div>
+              user.bio.length > 400 ? (
+                <div className="user-bio-container">
+                  <h6
+                    className={`thought-bubble ${
+                      expandedBio ? "expanded" : ""
+                    }`}
+                  >
+                    {expandedBio ? (
+                      <h6>{user.bio}</h6>
+                    ) : (
+                      user.bio.substring(0, 400)
+                    )}
+                    {!expandedBio && (
+                      <span
+                        onClick={() => setExpandedBio(true)}
+                        className="read-more"
+                      >
+                        <small>... (read more)</small>
+                      </span>
+                    )}
+                    {expandedBio && (
+                      <span
+                        onClick={() => setExpandedBio(false)}
+                        className="read-less"
+                      >
+                        <small>(read less)</small>
+                      </span>
+                    )}
+                  </h6>
+                </div>
+              ) : (
+                <h6>{user.bio}</h6>
+              )
             ) : (
               <div className="user-bio-container">
                 <h5 className="thought-bubble">No bio available.</h5>
 
-                <button onClick={handleCreateBio}>Create Bio</button>
+                {user.id === currentUser.id ? (
+                  <button onClick={handleCreateBio}>Create Bio</button>
+                ) : null}
               </div>
             )}
           </div>
-
+          {console.log(currentUser, "here")}
           <div className="bottom-left container-box">
             <p>
               Separate user.reviews to render top (stylized) add link to see all

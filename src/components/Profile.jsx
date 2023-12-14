@@ -249,6 +249,7 @@ const Profile = ({ user }) => {
             {profileReview ? (
               <ProfileReviews
                 user={user}
+                currentUser={user}
                 userReviews={userReviews}
                 setUserReviews={setUserReviews}
               />
@@ -256,13 +257,14 @@ const Profile = ({ user }) => {
             {profileAccountSettings ? (
               <ProfileAccountSettings
                 user={user}
+                currentUser={user}
                 setProfileReview={setProfileReview}
                 setProfileOverview={setProfileOverview}
                 setProfileAccountSettings={setProfileAccountSettings}
               />
             ) : null}
           </div>
-          <div> {profileReview ? <Favorites user={user} /> : null}</div>
+          <div> {profileReview ? <Favorites user={user} currentUser={user} /> : null}</div>
         </div>
       </div>
     </>

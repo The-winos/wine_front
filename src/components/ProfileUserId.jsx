@@ -9,7 +9,7 @@ import ProfileAccountSettings from "./ProfileAccountSettings";
 import Favorites from "./Favorites";
 import ProfileReviews from "./ProfileReviews";
 
-const ProfileUserId = () => {
+const ProfileUserId = ({user}) => {
   const { id } = useParams();
   const [userReviews, setUserReviews] = useState([]);
   const [userProfile, setUserProfile] = useState({});
@@ -157,21 +157,23 @@ const ProfileUserId = () => {
             Favorites
           </div>
         </div>
-      </div>
+      </div>{console.log(user, "in wine feed")}
       <div className="profileElements">
         <div>
           {" "}
-          {profileOverview ? <ProfileOverview user={userProfile} /> : null}
+          {profileOverview ? <ProfileOverview user={userProfile} currentUser={user}/> : null}
           {profileReview ? (
             <ProfileReviews
             user={userProfile}
+            currentUser={user}
               userReviews={userReviews}
               setUserReviews={setUserReviews}
             />
           ) : null}
 
         </div>
-        <div> {profileReview ? <Favorites user={userProfile} /> : null}</div>
+        <div> {profileReview ? <Favorites user={userProfile} currentUser={user}/> : null}</div>
+
       </div>
     </div>
   </>
