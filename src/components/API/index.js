@@ -237,7 +237,7 @@ export async function getAllUsers() {
   }
 }
 
-export async function getReviewByUser(userId) {
+export async function getReviewByUser(userId, orderBy = 'review_date DESC') {
   try {
     const options = {
       headers: {
@@ -245,7 +245,7 @@ export async function getReviewByUser(userId) {
       },
     };
     const response = await fetch(
-      `${BASE_URL}/users/${userId}/reviews`,
+      `${BASE_URL}/users/${userId}/reviews?orderBy=${orderBy}`,
       options
     );
     const result = await response.json();

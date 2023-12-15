@@ -3,7 +3,7 @@ import { getWineById } from "./API";
 import { useNavigate } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 
-const UserReviewDetails = ({ userReviews, setUserReviews }) => {
+const UserReviewDetails = ({ userReviews, setUserReviews, user, currentUser }) => {
   const navigate = useNavigate();
   const [userWineDetails, setUserWineDetails] = useState({});
   const [isNoteHovered, setIsNoteHovered] = useState(false);

@@ -9,7 +9,7 @@ import ProfileAccountSettings from "./ProfileAccountSettings";
 import Favorites from "./Favorites";
 import ProfileReviews from "./ProfileReviews";
 
-const ProfileUserId = () => {
+const ProfileUserId = ({user}) => {
   const { id } = useParams();
   const [userReviews, setUserReviews] = useState([]);
   const [userProfile, setUserProfile] = useState({});
@@ -44,6 +44,7 @@ const ProfileUserId = () => {
 
   return (<>
     <div className="d-flex flex-wrap">
+      {console.log(user, "user")}
       <div className="profile-container">
         {/* User Information Container */}
         <div className="user-info-container">
@@ -121,7 +122,12 @@ const ProfileUserId = () => {
         <div className="profileLinks">
           <div
             onClick={() => {
-              setProfileOverview(true) & setProfileReview(false);
+              setProfileOverview(true) &
+              setProfileReview(false) &
+              setProfileAccountSettings(false) &
+              setProfileFavorites(false) &
+              setLinkClicked(true)
+              ;
             }}
           >
             Overview
@@ -132,6 +138,7 @@ const ProfileUserId = () => {
               setProfileReview(true) &
                 setProfileOverview(false) &
                 setProfileAccountSettings(false) &
+                setProfileReview(false) &
                 setLinkClicked(true);
             }}
             style={{
@@ -147,6 +154,7 @@ const ProfileUserId = () => {
               setProfileFavorites(true) &
                 setProfileOverview(false) &
                 setProfileAccountSettings(false) &
+                setProfileReview(false) &
                 setLinkClicked(true);
             }}
             style={{
@@ -157,21 +165,23 @@ const ProfileUserId = () => {
             Favorites
           </div>
         </div>
-      </div>
+      </div>{console.log(user, "in wine feed")}
       <div className="profileElements">
         <div>
           {" "}
-          {profileOverview ? <ProfileOverview user={userProfile} /> : null}
+          {profileOverview ? <ProfileOverview user={userProfile} currentUser={user}/> : null}
           {profileReview ? (
             <ProfileReviews
             user={userProfile}
+            currentUser={user}
               userReviews={userReviews}
               setUserReviews={setUserReviews}
             />
           ) : null}
 
         </div>
-        <div> {profileReview ? <Favorites user={userProfile} /> : null}</div>
+        <div> {profileReview ? <Favorites user={userProfile} currentUser={user}/> : null}</div>
+
       </div>
     </div>
   </>
