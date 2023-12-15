@@ -207,7 +207,11 @@ const Profile = ({ user }) => {
           <div className="profileLinks">
             <div
               onClick={() => {
-                setProfileOverview(true) & setProfileReview(false);
+                setProfileOverview(true) &
+                setProfileReview(false) &
+                setProfileFavorites(false) &
+                setProfileAccountSettings(false) &
+                setLinkClicked(true);
               }}
             >
               Overview
@@ -218,6 +222,7 @@ const Profile = ({ user }) => {
                 setProfileReview(true) &
                   setProfileOverview(false) &
                   setProfileAccountSettings(false) &
+                  setProfileFavorites(false) &
                   setLinkClicked(true);
               }}
               style={{
@@ -233,6 +238,7 @@ const Profile = ({ user }) => {
                 setProfileFavorites(true) &
                   setProfileOverview(false) &
                   setProfileAccountSettings(false) &
+                  setProfileReview(false) &
                   setLinkClicked(true);
               }}
               style={{

@@ -109,7 +109,7 @@ const ProfileOverview = ({
               {/* <ProfileReviews user={user} userReviews={{ userReviews }} /> */}
             </div>
           </div>
-          </>) : <h5>Loading profile</h5>} this one
+          </>) : <h5>Loading profile</h5>}
         </div>
         <div className="profile-overview-right-container">
           <div className="top-right container-box">
