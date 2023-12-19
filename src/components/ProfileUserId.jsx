@@ -145,7 +145,7 @@ const ProfileUserId = ({ user }) => {
                 setProfileReview(true) &
                   setProfileOverview(false) &
                   setProfileAccountSettings(false) &
-                  setProfileReview(false) &
+                  setProfileFavorites(false) &
                   setProfileSaved(false) &
                   setLinkClicked(true);
               }}

@@ -15,9 +15,9 @@ const ProfileSaved = ({user, currentUser}) => {
       if (user) {
         try {
           const fetchedSaved = await getSaved(user.id);
-          console.log(fetchedSaved, "fetch");
+
           setSaved(fetchedSaved);
-          // Retrieve additional information for each favorite
+          if(fetchedSaved>=1){
           const wines = await Promise.all(
             fetchedSaved.map(async (save) => {
               const wineInfo = await getWineById(save.wine_id);
@@ -26,7 +26,7 @@ const ProfileSaved = ({user, currentUser}) => {
           );
 
           // Update the wines state
-          setWines(wines);
+          setWines(wines);}
 
 
         } catch (error) {
@@ -56,7 +56,7 @@ const ProfileSaved = ({user, currentUser}) => {
 
   return (
     <div id="favorites">
-     { console.log(wines, "checker here")}
+
       <h1 className="mb-4">{user.username}'s saved for later wines</h1>
       <Row>
         {wines && wines.length ? (

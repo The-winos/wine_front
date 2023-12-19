@@ -24,9 +24,6 @@ const ProfileOverview = ({
         if (user && user.id) {
           const reviews = await getReviewByUser(user.id);
 
-          console.log(user, 'should be person I clicked');
-          console.log(reviews, 'should be their reviews');
-
           if (reviews && reviews.length > 0) {
             // Sort reviews by date
             const sortedReviews = [...reviews].sort(

@@ -45,7 +45,7 @@ const UserReviewDetails = ({ userReviews, setUserReviews, user, currentUser }) =
               })}
             </h5>
           </div>
-          <button
+          <div
             className={`wine-image-button ${
               isWineImageHovered ? "hovered" : ""
             }`}
@@ -68,7 +68,7 @@ const UserReviewDetails = ({ userReviews, setUserReviews, user, currentUser }) =
                 <div className="edit-text">Edit Review</div>
               )}
             </div>
-          </button>
+          </div>
           <h4 className="wine-name-profile">{userWineDetails.name}</h4>
           <h6 className="wine-region-profile">{userWineDetails.region}</h6>
           <h6 className="wine-flavor-profile">{userWineDetails.flavor}</h6>
