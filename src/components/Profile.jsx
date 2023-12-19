@@ -5,6 +5,7 @@ import ProfileReviews from "./ProfileReviews";
 import ProfileOverview from "./ProfileOverview";
 import ProfileFavorites from "./ProfileFavorites";
 import ProfileAccountSettings from "./ProfileAccountSettings";
+import ProfileSaved from "./ProfileSaved";
 
 const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
@@ -191,7 +192,7 @@ const Profile = ({ user }) => {
                           {user.following_count}
                         </span>
                       </Link>
-                      {user.following_count <= 1 ? "person" : "people"}
+                      {user.following_count == 1 ? "person" : "people"}
                     </h6>
                     <h6>
                       <Link to="/followers" className="count-link">
@@ -202,7 +203,7 @@ const Profile = ({ user }) => {
                           {user.follower_count}
                         </span>
                       </Link>
-                      {user.follower_count <= 1
+                      {user.follower_count == 1
                         ? "person follows me"
                         : "people follow me!"}
                     </h6>
@@ -212,7 +213,7 @@ const Profile = ({ user }) => {
               </div>
 
               <div className="profileLinks">
-                <div
+                <div className="profile-review-sidebar"
                   onClick={() => {
                     setProfileOverview(true) &
                       setProfileReview(false) &
@@ -220,6 +221,10 @@ const Profile = ({ user }) => {
                       setProfileAccountSettings(false) &
                       setProfileSaved(false) &
                       setLinkClicked(true);
+                  }}
+                  style={{
+                    textDecoration: linkClicked ? "underline" : "none",
+                    color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
                   Overview
@@ -312,7 +317,7 @@ const Profile = ({ user }) => {
               <ProfileFavorites user={user} currentUser={user} />
             ) : null}
             {profileSaved ? (
-              <Favorites user={user} currentUser={user} />
+              <ProfileSaved user={user} currentUser={user} />
             ) : null}
           </div>
         </div>

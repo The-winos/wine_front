@@ -42,3 +42,4 @@ export { default as LoginForgotPass } from "./LoginForgotPass";
 export { default as LoginEnterEmail } from "./LoginEnterEmail";
 export { default as ProfileStats } from "./ProfileStats.jsx";
 export { default as LoginResetPasswordForm} from "./LoginResetPasswordForm";
+export { default as ProfileSaved} from "./ProfileSaved.jsx";

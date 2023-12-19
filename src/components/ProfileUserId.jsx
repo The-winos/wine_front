@@ -8,6 +8,8 @@ import ProfileOverview from "./ProfileOverview";
 import ProfileAccountSettings from "./ProfileAccountSettings";
 import Favorites from "./ProfileFavorites";
 import ProfileReviews from "./ProfileReviews";
+import ProfileFavorites from "./ProfileFavorites";
+import ProfileSaved from "./ProfileSaved";
 
 const ProfileUserId = ({ user }) => {
   const { id } = useParams();
@@ -18,6 +20,7 @@ const ProfileUserId = ({ user }) => {
   const [profileReview, setProfileReview] = useState(false);
   const [profileAccountSettings, setProfileAccountSettings] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
+  const [profileSaved, setProfileSaved]=useState(false)
   const [profileOverview, setProfileOverview] = useState(true);
 
   useEffect(() => {
@@ -98,7 +101,7 @@ const ProfileUserId = ({ user }) => {
                       {userProfile.following_count}
                     </span>
                   </Link>
-                  {userProfile.following_count <= 1 ? "person" : "people"}
+                  {userProfile.following_count == 1 ? "person" : "people"}
                 </h6>
                 <h6>
                   <Link to="/followers" className="count-link">
@@ -109,7 +112,7 @@ const ProfileUserId = ({ user }) => {
                       {userProfile.follower_count}
                     </span>
                   </Link>
-                  {userProfile.follower_count <= 1
+                  {userProfile.follower_count == 1
                     ? "person follows me"
                     : "people follow me!"}
                 </h6>
@@ -120,12 +123,18 @@ const ProfileUserId = ({ user }) => {
 
           <div className="profileLinks">
             <div
+            className="profile-review-sidebar"
               onClick={() => {
                 setProfileOverview(true) &
                   setProfileReview(false) &
                   setProfileAccountSettings(false) &
                   setProfileFavorites(false) &
+                  setProfileSaved(false) &
                   setLinkClicked(true);
+              }}
+              style={{
+                textDecoration: linkClicked ? "underline" : "none",
+                color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
               Overview
@@ -137,6 +146,7 @@ const ProfileUserId = ({ user }) => {
                   setProfileOverview(false) &
                   setProfileAccountSettings(false) &
                   setProfileReview(false) &
+                  setProfileSaved(false) &
                   setLinkClicked(true);
               }}
               style={{
@@ -144,12 +154,30 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              Reviews
+              My reviews
             </div>
             <div
               className="profile-favorites-sidebar"
               onClick={() => {
                 setProfileFavorites(true) &
+                  setProfileOverview(false) &
+                  setProfileAccountSettings(false) &
+                  setProfileReview(false) &
+                  setProfileSaved(false) &
+                  setLinkClicked(true);
+              }}
+              style={{
+                textDecoration: linkClicked ? "underline" : "none",
+                color: linkClicked ? "#721c24" : "#007bff",
+              }}
+            >
+              My favorites
+            </div>
+            <div
+              className="profile-favorites-sidebar"
+              onClick={() => {
+                setProfileSaved(true) &
+                setProfileFavorites(false) &
                   setProfileOverview(false) &
                   setProfileAccountSettings(false) &
                   setProfileReview(false) &
@@ -160,7 +188,7 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              Favorites
+              I want to try these
             </div>
           </div>
         </div>
@@ -182,11 +210,12 @@ const ProfileUserId = ({ user }) => {
                 setUserReviews={setUserReviews}
               />
             ) : null}
-          </div>
-          <div>
-            {" "}
-            {profileReview ? (
-              <Favorites user={userProfile} currentUser={user} />
+
+            {profileFavorites ? (
+              <ProfileFavorites user={userProfile} currentUser={user} />
+            ) : null}
+            {profileSaved ? (
+              <ProfileSaved user={userProfile} currentUser={user} />
             ) : null}
           </div>
         </div>
