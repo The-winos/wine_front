@@ -35,6 +35,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
+        if(user){
         const reviews = await getReviewByUser(user.id);
         reviews.sort((a, b) => {
           const dateA = new Date(a.review_date);
@@ -44,6 +45,7 @@ const Profile = ({ user }) => {
         });
 
         setUserReviews(reviews);
+      }
       } catch (error) {
         console.error(error);
       }
@@ -55,8 +57,9 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchFollowers = async () => {
       try {
+        if(user){
         const followersData = await getFollowersById(user.id);
-        console.log("Followers Data:", followersData);
+
         if (Array.isArray(followersData)) {
           const followerAvatars = followersData.map(
             (follower) => follower.avatar
@@ -64,9 +67,9 @@ const Profile = ({ user }) => {
           setFollowerAvatars(followerAvatars);
         } else {
           console.error("Followers data is not an array:", followersData);
-        }
+        }}
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     };
 
@@ -76,14 +79,15 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchFollowing = async () => {
       try {
+        if(user){
         const followingData = await getFollowingById(user.id);
-        console.log("Following Data:", followingData);
+
         if (Array.isArray(followingData)) {
           const followingAvatars = followingData.map((follow) => follow.avatar);
           setFollowingAvatars(followingAvatars);
         } else {
           console.error("Following data is not an array:", followingData);
-        }
+        }}
       } catch (error) {
         console.error(error);
       }
