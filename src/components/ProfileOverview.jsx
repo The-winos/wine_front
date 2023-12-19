@@ -129,27 +129,28 @@ const ProfileOverview = ({
       {latestReview && latestWine ? (
         <>
           <div className="underline"></div>
-          <div className="d-flex align-items-center justify-content-between">
           <div
-                className="btn btn-link"
-                onClick={() => navigate(`/singlewine/${latestWine.id}`)}
-              >
-            <div>
-              <p className="wine-name">{latestWine.name}</p>
-              <Rating
-                value={latestReview.rating}
-                edit={false}
-                size={20}
-                activeColor="#ffd700"
-              />
-            </div>
+  className="d-flex align-items-center justify-content-between clickable-content"
+  onClick={() => navigate(`/singlewine/${latestWine.id}`)}
+  style={{ cursor: 'pointer' }}
+>
+  <div>
+    <div className="d-flex align-items-center">
+      <p className="wine-name">{latestWine.name}</p>
+      {latestReview.rating != null ? (
+      <Rating
+        value={latestReview.rating}
+        edit={false}
+        size={20}
+        activeColor="#ffd700"
+      />
+      ):null}
+    </div>
+    <p className="review-comment">{latestReview.review_comment}</p>
+  </div>
+</div>
 
 
-
-              </div>
-
-          </div>
-          <p className="review-comment">{latestReview.review_comment}</p>
         </>
       ) : null}
     </div>

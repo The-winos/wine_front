@@ -430,6 +430,7 @@ button {
   margin: 10px;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+    margin-top: -1rem;
 }
 
 .alert {
@@ -1111,4 +1112,20 @@ button {
   display: flex;
   justify-content: center;
   font-size: 21px;
+}
+
+.underline {
+  border-bottom: 2px solid #000; /* Adjust the color as needed */
+  width: 100%;
+  margin-bottom: 10px; /* Adjust the spacing as needed */
+}
+
+.wine-name {
+  font-weight: bold;
+  padding-right: 1rem;
+
+}
+
+.review-comment {
+  margin-top: 10px; /* Adjust the spacing as needed */
 }
