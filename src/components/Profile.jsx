@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { getReviewByUser, getFollowersById, getFollowingById } from "./API";
 import ProfileReviews from "./ProfileReviews";
 import ProfileOverview from "./ProfileOverview";
-import Favorites from "./Favorites";
+import ProfileFavorites from "./ProfileFavorites";
 import ProfileAccountSettings from "./ProfileAccountSettings";
+import ProfileSaved from "./ProfileSaved";
 
 const Profile = ({ user }) => {
   const [userReviews, setUserReviews] = useState([]);
@@ -14,7 +15,9 @@ const Profile = ({ user }) => {
   const [profileReview, setProfileReview] = useState(false);
   const [profileAccountSettings, setProfileAccountSettings] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
+  const [profileSaved, setProfileSaved] = useState(false);
   const [profileOverview, setProfileOverview] = useState(true);
+
   const [linkClicked, setLinkClicked] = useState(false);
 
   const getUserLocation = async () => {
@@ -35,6 +38,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
+        if(user){
         const reviews = await getReviewByUser(user.id);
         reviews.sort((a, b) => {
           const dateA = new Date(a.review_date);
@@ -44,6 +48,7 @@ const Profile = ({ user }) => {
         });
 
         setUserReviews(reviews);
+      }
       } catch (error) {
         console.error(error);
       }
@@ -55,8 +60,9 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchFollowers = async () => {
       try {
+        if(user){
         const followersData = await getFollowersById(user.id);
-        console.log("Followers Data:", followersData);
+
         if (Array.isArray(followersData)) {
           const followerAvatars = followersData.map(
             (follower) => follower.avatar
@@ -64,9 +70,9 @@ const Profile = ({ user }) => {
           setFollowerAvatars(followerAvatars);
         } else {
           console.error("Followers data is not an array:", followersData);
-        }
+        }}
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     };
 
@@ -76,14 +82,15 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchFollowing = async () => {
       try {
+        if(user){
         const followingData = await getFollowingById(user.id);
-        console.log("Following Data:", followingData);
+
         if (Array.isArray(followingData)) {
           const followingAvatars = followingData.map((follow) => follow.avatar);
           setFollowingAvatars(followingAvatars);
         } else {
           console.error("Following data is not an array:", followingData);
-        }
+        }}
       } catch (error) {
         console.error(error);
       }
@@ -185,7 +192,7 @@ const Profile = ({ user }) => {
                           {user.following_count}
                         </span>
                       </Link>
-                      {user.following_count <= 1 ? "person" : "people"}
+                      {user.following_count == 1 ? "person" : "people"}
                     </h6>
                     <h6>
                       <Link to="/followers" className="count-link">
@@ -196,7 +203,7 @@ const Profile = ({ user }) => {
                           {user.follower_count}
                         </span>
                       </Link>
-                      {user.follower_count <= 1
+                      {user.follower_count == 1
                         ? "person follows me"
                         : "people follow me!"}
                     </h6>
@@ -206,13 +213,18 @@ const Profile = ({ user }) => {
               </div>
 
               <div className="profileLinks">
-                <div
+                <div className="profile-review-sidebar"
                   onClick={() => {
                     setProfileOverview(true) &
                       setProfileReview(false) &
                       setProfileFavorites(false) &
                       setProfileAccountSettings(false) &
+                      setProfileSaved(false) &
                       setLinkClicked(true);
+                  }}
+                  style={{
+                    textDecoration: linkClicked ? "underline" : "none",
+                    color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
                   Overview
@@ -224,6 +236,7 @@ const Profile = ({ user }) => {
                       setProfileOverview(false) &
                       setProfileAccountSettings(false) &
                       setProfileFavorites(false) &
+                      setProfileSaved(false) &
                       setLinkClicked(true);
                   }}
                   style={{
@@ -231,12 +244,30 @@ const Profile = ({ user }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Reviews
+                  My reviews
                 </div>
                 <div
                   className="profile-favorites-sidebar"
                   onClick={() => {
                     setProfileFavorites(true) &
+                      setProfileOverview(false) &
+                      setProfileAccountSettings(false) &
+                      setProfileReview(false) &
+                      setProfileSaved(false) &
+                      setLinkClicked(true);
+                  }}
+                  style={{
+                    textDecoration: linkClicked ? "underline" : "none",
+                    color: linkClicked ? "#721c24" : "#007bff",
+                  }}
+                >
+                 My favorites
+                </div>
+                <div
+                  className="profile-saved-sidebar"
+                  onClick={() => {
+                    setProfileSaved(true) &
+                    setProfileFavorites(false) &
                       setProfileOverview(false) &
                       setProfileAccountSettings(false) &
                       setProfileReview(false) &
@@ -247,7 +278,7 @@ const Profile = ({ user }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Favorites
+                  Wines I want to try
                 </div>
               </div>
             </>
@@ -282,11 +313,11 @@ const Profile = ({ user }) => {
                 setProfileAccountSettings={setProfileAccountSettings}
               />
             ) : null}
-          </div>
-          <div>
-            {" "}
             {profileFavorites ? (
-              <Favorites user={user} currentUser={user} />
+              <ProfileFavorites user={user} currentUser={user} />
+            ) : null}
+            {profileSaved ? (
+              <ProfileSaved user={user} currentUser={user} />
             ) : null}
           </div>
         </div>

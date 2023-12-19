@@ -19,7 +19,7 @@ import {
   ProfileAccountSettings,
   Review,
   ProfileUserId,
-  Favorites,
+  ProfileFavorites,
   Saved,
   FavoritesUserId,
   FooterAboutUs,
@@ -241,7 +241,7 @@ const Main = () => {
         <Route
           path="/favorites"
           element={
-            <Favorites
+            <ProfileFavorites
               user={user}
               setWineInfo={setWineInfo}
               favorites={favorites}
