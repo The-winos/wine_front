@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getReviewByUser, getFollowersById, getFollowingById } from "./API";
 import ProfileReviews from "./ProfileReviews";
 import ProfileOverview from "./ProfileOverview";
-import Favorites from "./Favorites";
+import ProfileFavorites from "./ProfileFavorites";
 import ProfileAccountSettings from "./ProfileAccountSettings";
 
 const Profile = ({ user }) => {
@@ -14,7 +14,9 @@ const Profile = ({ user }) => {
   const [profileReview, setProfileReview] = useState(false);
   const [profileAccountSettings, setProfileAccountSettings] = useState(false);
   const [profileFavorites, setProfileFavorites] = useState(false);
+  const [profileSaved, setProfileSaved] = useState(false);
   const [profileOverview, setProfileOverview] = useState(true);
+
   const [linkClicked, setLinkClicked] = useState(false);
 
   const getUserLocation = async () => {
@@ -216,6 +218,7 @@ const Profile = ({ user }) => {
                       setProfileReview(false) &
                       setProfileFavorites(false) &
                       setProfileAccountSettings(false) &
+                      setProfileSaved(false) &
                       setLinkClicked(true);
                   }}
                 >
@@ -228,6 +231,7 @@ const Profile = ({ user }) => {
                       setProfileOverview(false) &
                       setProfileAccountSettings(false) &
                       setProfileFavorites(false) &
+                      setProfileSaved(false) &
                       setLinkClicked(true);
                   }}
                   style={{
@@ -235,12 +239,30 @@ const Profile = ({ user }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Reviews
+                  My reviews
                 </div>
                 <div
                   className="profile-favorites-sidebar"
                   onClick={() => {
                     setProfileFavorites(true) &
+                      setProfileOverview(false) &
+                      setProfileAccountSettings(false) &
+                      setProfileReview(false) &
+                      setProfileSaved(false) &
+                      setLinkClicked(true);
+                  }}
+                  style={{
+                    textDecoration: linkClicked ? "underline" : "none",
+                    color: linkClicked ? "#721c24" : "#007bff",
+                  }}
+                >
+                 My favorites
+                </div>
+                <div
+                  className="profile-saved-sidebar"
+                  onClick={() => {
+                    setProfileSaved(true) &
+                    setProfileFavorites(false) &
                       setProfileOverview(false) &
                       setProfileAccountSettings(false) &
                       setProfileReview(false) &
@@ -251,7 +273,7 @@ const Profile = ({ user }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Favorites
+                  Wines I want to try
                 </div>
               </div>
             </>
@@ -286,10 +308,10 @@ const Profile = ({ user }) => {
                 setProfileAccountSettings={setProfileAccountSettings}
               />
             ) : null}
-          </div>
-          <div>
-            {" "}
             {profileFavorites ? (
+              <ProfileFavorites user={user} currentUser={user} />
+            ) : null}
+            {profileSaved ? (
               <Favorites user={user} currentUser={user} />
             ) : null}
           </div>

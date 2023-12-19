@@ -91,6 +91,7 @@ const WineDetails = ({ wine, favorites, user, saved }) => {
         boxShadow: "10px 10px 10px rgba(0, 0, 0, .6)",
       }}
     >
+
       <div className="card-header">
         <div className="d-flex justify-content-between align-items-start">
           {user ? (<>

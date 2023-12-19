@@ -6,7 +6,7 @@ import UserIdReviewDetails from "./UserIdReviewDetails";
 import FollowButton from "./FollowButton";
 import ProfileOverview from "./ProfileOverview";
 import ProfileAccountSettings from "./ProfileAccountSettings";
-import Favorites from "./Favorites";
+import Favorites from "./ProfileFavorites";
 import ProfileReviews from "./ProfileReviews";
 
 const ProfileUserId = ({ user }) => {
