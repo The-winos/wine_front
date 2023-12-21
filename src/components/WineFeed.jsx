@@ -243,6 +243,7 @@ const WineFeed = ({
                       setReviewInfo={setReviewInfo}
                       favorites={favorites}
                       saved={saved}
+                      currentUser={user}
                     />
                   </Suspense>
                   </div>

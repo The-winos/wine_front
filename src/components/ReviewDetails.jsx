@@ -12,7 +12,7 @@ import Rating from "react-rating-stars-component";
 import FollowButton from "./FollowButton";
 import ReviewUpdate from "./ReviewUpdate";
 
-const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
+const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, currentUser }) => {
 
   const navigate = useNavigate();
   const [reviewUser, setReviewUser] = useState({});
@@ -119,7 +119,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
         <>
           <div
             className="card mb-3"
-            style={{ maxWidth: "60%", margin: "0 auto" }}
+            style={{ maxWidth: "60%", margin: "0 auto",  }}
           >
             <div className="row no-gutter">
               <div
@@ -130,21 +130,23 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                   src={`/images/${reviewWine.image_url}`}
                   alt="wine image"
                   className="img-fluid"
-                  style={{ maxHeight: "250px", maxWidth: "90%", padding: "1rem" }}
+                  style={{ maxHeight: "250px", maxWidth: "100%", padding: "1rem" }}
                 />
                 <div
                   className="savedFavs d-flex flex-column align-items-end"
                   style={{ position: "absolute", top: 0, right: 0 }}
                 >
-                  {user ? (<>
+                  {user && currentUser ? (<>
+                    {console.log(user, currentUser, "lets look")}
                   <div
                     onClick={() => {
+                      if(user.id==currentUser.id){
                       const favoriteId = checkOnFaves(reviewWine.id);
                       if (favoriteId) {
                         handleRemoveFavorite(favoriteId);
                       } else {
                         handleAddFavorite(user.id, reviewWine.id);
-                      }
+                      }}
                     }}
                     className="custom-button"
                     style={{
@@ -182,12 +184,13 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
 
                   <div
                     onClick={() => {
+                      if(user.id==currentUser.id){
                       const savedId = checkOnSaved(reviewWine.id);
                       if (savedId) {
                         handleRemoveSaved(savedId);
                       } else {
                         handleAddSaved(user.id, reviewWine.id);
-                      }
+                      }}
                     }}
                     className="custom-button"
                     style={{
@@ -277,7 +280,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
                         />
                       </div>
                     ) : null}
-                    {user.id == reviewUser.id ? (
+                    {currentUser.id == reviewUser.id ? (
                       <div
                         style={{
                           marginLeft: "10px",
@@ -370,6 +373,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview }) => {
           </div>
         </>
       ) : (
+
         <ReviewUpdate
           review={review}
           setUpdateReview={setUpdateReview}
