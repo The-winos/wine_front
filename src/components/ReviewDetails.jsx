@@ -119,7 +119,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
         <>
           <div
             className="card mb-3"
-            style={{ maxWidth: "60%", margin: "0 auto" }}
+            style={{ maxWidth: "60%", margin: "0 auto",  }}
           >
             <div className="row no-gutter">
               <div
@@ -130,7 +130,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
                   src={`/images/${reviewWine.image_url}`}
                   alt="wine image"
                   className="img-fluid"
-                  style={{ maxHeight: "250px", maxWidth: "90%", padding: "1rem" }}
+                  style={{ maxHeight: "250px", maxWidth: "100%", padding: "1rem" }}
                 />
                 <div
                   className="savedFavs d-flex flex-column align-items-end"
@@ -184,7 +184,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
 
                   <div
                     onClick={() => {
-                      if(user.id==currentUser.ic){
+                      if(user.id==currentUser.id){
                       const savedId = checkOnSaved(reviewWine.id);
                       if (savedId) {
                         handleRemoveSaved(savedId);
