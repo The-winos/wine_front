@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ReviewDetails from "./ReviewDetails";
 import { getFavorites, getSaved } from "./API";
 
-const ProfileReviews = ({ user, userReviews, setUserReviews }) => {
+const ProfileReviews = ({ user, userReviews, setUserReviews, currentUser }) => {
   const [selectedNote, setSelectedNote] = useState(null);
   const [seeAllReviewsLink, setSeeAllReviewsLink] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -70,6 +70,7 @@ const ProfileReviews = ({ user, userReviews, setUserReviews }) => {
                     setReviewInfo={setUserReviews}
                     favorites={favorites}
                     saved={saved}
+                    currentUser={currentUser}
                   />
                   <UserData user={user} />
                 </>
