@@ -3,7 +3,7 @@ import { getWineById, getAllWine } from "./API";
 import Rating from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ allWine, setAllWine }) => {
+const Home = ({ allWine, setAllWine, user }) => {
   const navigate = useNavigate();
   const [filteredWines, setFilteredWines] = useState([]);
 
@@ -21,7 +21,7 @@ const Home = ({ allWine, setAllWine }) => {
     if (filtered.length > 0) {
       const randomIndex = Math.floor(Math.random() * filtered.length);
       const randomWine = filtered[randomIndex];
-      console.log(randomWine, "random wine in function");
+
       setFilteredWines([randomWine]);
     } else {
       setFilteredWines([]);
@@ -104,6 +104,32 @@ const Home = ({ allWine, setAllWine }) => {
           </div>
         </>
       ) : null}
+      {user ? null : (<div style={{ textAlign: 'center', marginTop: '10px' }}>
+  <button
+    onClick={() => {
+      navigate(`/login`);
+    }}
+    className="btn btn-primary"
+  >
+    Login
+  </button>
+
+  <button
+    onClick={() => {
+      navigate(`/register`);
+    }}
+    className="btn btn-primary"
+    style={{ marginLeft: '10px' }}
+  >
+    Sign Up
+  </button>
+
+
+</div>
+
+
+
+)}
     </div>
   );
 };

@@ -123,7 +123,7 @@ const Main = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home allWine={allWine} setAllWine={setAllWine} />}
+          element={<Home allWine={allWine} setAllWine={setAllWine} user={user}/>}
         ></Route>
         <Route
           path="/login"
@@ -142,7 +142,7 @@ const Main = () => {
         ></Route>
         <Route
           path="/followers"
-          element={<Followers user={user} favorites={favorites} />}
+          element={<Followers user={user} favorites={favorites} saved={saved} />}
         ></Route>
         <Route path="/following" element={<Following />}></Route>
         <Route path="/merchant" element={<Merchant />}></Route>
@@ -171,7 +171,7 @@ const Main = () => {
           element={<FavoritesUserId user={user} setWineInfo={setWineInfo} />}
         />
 
-        <Route
+        {/* <Route
           path="/userreviewdetails"
           element={
             <UserReviewDetails
@@ -180,7 +180,7 @@ const Main = () => {
               setAllReviews={setAllReviews}
             />
           }
-        ></Route>
+        ></Route> */}
         <Route
           path="/register"
           element={<Register user={user} setLoggedIn={setLoggedIn} />}

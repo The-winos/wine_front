@@ -200,7 +200,6 @@ const FriendReview = ({ reviews, user, favorites, saved }) => {
                   src="/images/6-list.png"
                   alt="savedPad"
                   className="img-fluid"
-                  s
                   style={{
                     width: "35%",
                     height: "auto",

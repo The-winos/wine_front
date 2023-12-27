@@ -1,4 +1,4 @@
-//list of users following you - w/links to their profiles
+
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import { getReviewsByFollowers, getWineById, getUserById } from "./API";
@@ -10,7 +10,7 @@ import {
 } from "./SearchBar";
 const LazyFriendReview = lazy(() => import("./FriendReview"));
 
-const Followers = ({ user, favorites }) => {
+const Followers = ({ user, favorites, saved }) => {
   const [reviewFollowers, setReviewFollowers] = useState([]);
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -250,7 +250,7 @@ const Followers = ({ user, favorites }) => {
               return (
                 <div key={`followerReview-${reviews.id}`}>
                   <Suspense fallback={<div>Loading...</div>}>
-                  <LazyFriendReview reviews={reviews} user={user} favorites={favorites} />
+                  <LazyFriendReview reviews={reviews} user={user} favorites={favorites} saved={saved} />
                   </Suspense>
                 </div>
               );
