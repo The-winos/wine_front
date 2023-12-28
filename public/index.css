@@ -97,8 +97,9 @@ body {
     position: absolute;
   }
   .profile-container {
-    max-width: 150px;
+    max-width: 100px;
   }
+
 }
 
 .footer {
@@ -781,7 +782,9 @@ button {
   border-radius: 10px;
   max-width: max-content;
   font-size: small;
-  margin-top: -10px !important;
+  margin-top: -10px;
+  font-style: italic;
+  color: #333;
 }
 
 .container-left {
@@ -822,10 +825,6 @@ button {
   color: #777;
 }
 
-.thought-bubble {
-  font-style: italic;
-  color: #333;
-}
 
 .buttons {
   background-color: #007bff;
@@ -884,18 +883,10 @@ button {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-/* .profileOverview {
-  background-color: white;
-} */
 
-.profile-overview-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
 
 .profile-overview-left-container,
 .profile-overview-right-container {
@@ -920,6 +911,23 @@ button {
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 768px) {
+  .user-bio-container{
+    padding: 5px !important;
+
+  }
+  .thought-bubble{
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 0;
+  }
+  .container-box{
+    padding: 5px;
+  }
+  .profile-overview-left-container,
+.profile-overview-right-container {
+  padding:5px;
+  }}
 
 .profileLinks {
   text-decoration: none;
