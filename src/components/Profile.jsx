@@ -182,32 +182,35 @@ const Profile = ({ user }) => {
                     </span>
                   </h6>
                   <div className="count-container">
-                    <h6>
-                      I follow{" "}
-                      <Link to="/following" className="count-link">
-                        <span
-                          className="count-text"
-                          data-heading={user.following_count}
-                        >
-                          {user.following_count}
-                        </span>
-                      </Link>
-                      {user.following_count == 1 ? "person" : "people"}
-                    </h6>
-                    <h6>
-                      <Link to="/followers" className="count-link">
-                        <span
-                          className="count-text"
-                          data-heading={user.follower_count}
-                        >
-                          {user.follower_count}
-                        </span>
-                      </Link>
-                      {user.follower_count == 1
-                        ? "person follows me"
-                        : "people follow me!"}
-                    </h6>
-                  </div>
+      {/* Large screens */}
+      <div className="d-none d-md-block">
+        <h6>
+          I follow{' '}
+          <Link to="/following" className="count-link">
+            <span className="count-text" data-heading={user.following_count}>
+              {user.following_count}
+            </span>
+          </Link>
+          {user.following_count === 1 ? ' person' : ' people'}
+        </h6>
+        <h6>
+          <Link to="/followers" className="count-link">
+            <span className="count-text" data-heading={user.follower_count}>
+              {user.follower_count}
+            </span>
+          </Link>
+          {user.follower_count === 1
+            ? ' person follows me'
+            : ' people follow me!'}
+        </h6>
+      </div>
+
+      {/* Small screens */}
+      <div className="d-md-none">
+        <h6>Followers: {user.follower_count}</h6>
+        <h6>Following: {user.following_count}</h6>
+      </div>
+    </div>
                   {/* </div> */}
                 </div>
               </div>

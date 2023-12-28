@@ -25,7 +25,7 @@ const Admin = ({ user, allReviews }) => {
   useEffect(()=>{
     async function fetchAllWine(){
       const allTheWine = await getAllWine();
-      console.log(allTheWine)
+
       setAllWine(allTheWine);
       setFilteredWines(allTheWine)
     }

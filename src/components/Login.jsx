@@ -12,7 +12,7 @@ const Login = ({ setUser, setLoggedIn }) => {
   async function handleLogin(event) {
     event.preventDefault();
     const { token, user, message } = await loginUser(username, password);
-    console.log(token, "this is token");
+
     const login = await authUser(token);
 
 
@@ -81,7 +81,7 @@ const Login = ({ setUser, setLoggedIn }) => {
                 </div>
                 <div className="text-center mb-3">
                   <button type="submit" className="btn btn-primary w-100">
-                    Log in
+                    Login
                   </button>
                 </div>
 

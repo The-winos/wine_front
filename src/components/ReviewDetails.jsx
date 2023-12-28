@@ -137,7 +137,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
                   style={{ position: "absolute", top: 0, right: 0 }}
                 >
                   {user && currentUser ? (<>
-                    {console.log(user, currentUser, "lets look")}
+
                   <div
                     onClick={() => {
                       if(user.id==currentUser.id){
