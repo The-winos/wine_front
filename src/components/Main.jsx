@@ -271,7 +271,7 @@ const Main = () => {
         ></Route>
         <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
         <Route path="/terms" element={<FooterTerms user={user} />}></Route>
-        <Route path="/userdata" element={<UserData user={user} />}></Route>
+        {/* <Route path="/userdata" element={<UserData user={user} />}></Route> */}
         <Route
           path="/profilestats"
           element={<ProfileStats user={user} />}

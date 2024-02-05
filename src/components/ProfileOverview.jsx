@@ -48,7 +48,12 @@ const ProfileOverview = ({
             } catch (error) {
               console.error(error);
             }
+          } else {
+            setUserReviews([]); // Set an empty array if there are no reviews
+            setLatestReview(null);
+            setLatestWine(null);
           }
+
           if (fav && fav.length > 0) {
             // Sort reviews by date
             const sortedFavs = [...fav].sort(
@@ -66,6 +71,10 @@ const ProfileOverview = ({
             } catch (error) {
               console.error(error);
             }
+          } else {
+            setFav([]); // Set an empty array if there are no favorites
+            setLatestFav(null);
+            setFavWine(null);
           }
         }
       } catch (error) {
@@ -75,6 +84,7 @@ const ProfileOverview = ({
 
     fetchUserReviews();
   }, [user]);
+
 
 
 
@@ -194,8 +204,13 @@ const ProfileOverview = ({
         <div className="col-md-6">
         <div className="profile-overview-right-container">
           <div className="top-right container-box">
-            Insert User Graph/Basic Statistics
-            {/* <UserData userReviews={userReviews} /> */}
+          <div className="text-center">
+      <h6 className="profile-review-list mx-auto">
+        What Types of Wine I Review
+      </h6>
+      </div>
+
+            <UserData userReviews={userReviews} />
           </div>
           <div className="bottom-right container-box">
             {user ? (<div className="text-center">
@@ -203,7 +218,7 @@ const ProfileOverview = ({
       </h6>
       {latestFav && favWine ? (
         <>
-        {console.log(latestFav, "Fav wine")}
+
         <div className="underline"></div>
         <div
   className="d-flex align-items-center justify-content-between clickable-content"
@@ -227,9 +242,9 @@ const ProfileOverview = ({
 </div>
 
         </>
-      ) : loading}
+      ) : null}
       </div>
-      ) : Loading}
+      ) : <p>Loading...</p>}
           </div>
         </div>
         </div>
