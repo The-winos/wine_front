@@ -72,7 +72,7 @@ const ProfileReviews = ({ user, userReviews, setUserReviews, currentUser }) => {
                     saved={saved}
                     currentUser={currentUser}
                   />
-                  <UserData user={user} />
+                  {/* <UserData user={user} /> */}
                 </>
               ))}
             </div>

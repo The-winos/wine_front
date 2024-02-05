@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getReviewByUser, getUserById } from "./API";
+import { getFavorites, getReviewByUser, getUserById } from "./API";
 import { Link, useParams } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
 import UserIdReviewDetails from "./UserIdReviewDetails";
@@ -22,6 +22,7 @@ const ProfileUserId = ({ user }) => {
   const [profileFavorites, setProfileFavorites] = useState(false);
   const [profileSaved, setProfileSaved]=useState(false)
   const [profileOverview, setProfileOverview] = useState(true);
+  const [favorites, setFavorites]=useState([])
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -34,6 +35,21 @@ const ProfileUserId = ({ user }) => {
     };
 
     fetchUserReviews();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserFavorites = async () => {
+      if (id) {
+        try {
+          const fetchedFavorites = await getFavorites(id);
+          setFavorites(fetchedFavorites);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    fetchUserFavorites();
   }, []);
 
   useEffect(() => {
@@ -200,6 +216,7 @@ const ProfileUserId = ({ user }) => {
                 user={userProfile}
                 currentUser={user}
                 setUserReviews={setUserReviews}
+                favorites={favorites}
               />
             ) : null}
             {profileReview ? (

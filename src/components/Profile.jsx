@@ -7,7 +7,7 @@ import ProfileFavorites from "./ProfileFavorites";
 import ProfileAccountSettings from "./ProfileAccountSettings";
 import ProfileSaved from "./ProfileSaved";
 
-const Profile = ({ user }) => {
+const Profile = ({ user, favorites }) => {
   const [userReviews, setUserReviews] = useState([]);
   const [followerAvatars, setFollowerAvatars] = useState([]);
   const [followingAvatars, setFollowingAvatars] = useState([]);
@@ -298,6 +298,8 @@ const Profile = ({ user }) => {
                 currentUser={user}
                 userReviews={userReviews}
                 setUserReviews={setUserReviews}
+                favorites={favorites}
+
               />
             ) : null}
             {profileReview ? (

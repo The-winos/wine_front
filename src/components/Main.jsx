@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { authUser, getSaved, getAllReviews, getAllWine } from "./API";
 import {
-  Navbar,
-  Home,
-  Login,
   Admin,
-  Followers,
-  Following,
-  Merchant,
-  Profile,
-  Register,
-  WineDetails,
-  WineFeed,
-  Footer,
-  SingleWine,
-  WineList,
-  ReviewDetails,
-  ProfileAccountSettings,
-  Review,
-  ProfileUserId,
-  ProfileFavorites,
-  Saved,
-  FavoritesUserId,
-  FooterAboutUs,
-  FooterContact,
-  FooterPrivacy,
-  FooterTerms,
-  UserData,
-  LoginForgotPass,
-  LoginEnterEmail,
-  ProfileStats,
+FavoritesUserId,
+Followers,
+Following,
+Footer,
+FooterAboutUs,
+FooterContact,
+FooterPrivacy,
+FooterTerms,
+Home,
+Login,
+LoginEnterEmail,
+LoginForgotPass,
+Merchant,
+Navbar,
+Profile,
+ProfileAccountSettings,
+ProfileFavorites,
+ProfileStats,
+ProfileUserId,
+Register,
+Review,
+ReviewDetails,
+Saved,
+SingleWine,
+UserData,
+WineDetails,
+WineFeed,
+WineList,
 } from "./";
 import { Route, Routes } from "react-router-dom";
 import UserReviewDetails from "./UserReviewDetails";
@@ -153,6 +153,7 @@ const Main = () => {
               user={user}
               allReviews={allReviews}
               setAllReviews={setAllReviews}
+              favorites={favorites}
             />
           }
         ></Route>
@@ -270,7 +271,7 @@ const Main = () => {
         ></Route>
         <Route path="/privacy" element={<FooterPrivacy user={user} />}></Route>
         <Route path="/terms" element={<FooterTerms user={user} />}></Route>
-        <Route path="/userdata" element={<UserData user={user} />}></Route>
+        {/* <Route path="/userdata" element={<UserData user={user} />}></Route> */}
         <Route
           path="/profilestats"
           element={<ProfileStats user={user} />}
