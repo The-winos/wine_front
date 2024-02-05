@@ -10,6 +10,7 @@ const ProfileOverview = ({
   userReviews,
   setUserReviews,
   currentUser,
+  favorites
 }) => {
   const [expandedBio, setExpandedBio] = useState(false);
   const navigate = useNavigate();
@@ -183,119 +184,7 @@ const ProfileOverview = ({
       </div>
       </div>
 
-      <div className="profile-overview-container d-md-none">
 
-      <div className="profile-overview-left-container">
-          {user ? (
-            <>
-              <div className="top-left container-box">
-                {user.bio ? (
-                  user.bio.length > 175 ? (
-                    <div className="user-bio-container">
-                      <h6
-                        className={`thought-bubble ${
-                          expandedBio ? "expanded" : ""
-                        }`}
-                      >
-                        {expandedBio ? (
-                          <h6>{user.bio}</h6>
-                        ) : (
-                          user.bio.substring(0, 175)
-                        )}
-                        {!expandedBio && (
-                          <span
-                            onClick={() => setExpandedBio(true)}
-                            className="read-more"
-                          >
-                            <small>... (read more)</small>
-                          </span>
-                        )}
-                        {expandedBio && (
-                          <span
-                            onClick={() => setExpandedBio(false)}
-                            className="read-less"
-                          >
-                            <small>(read less)</small>
-                          </span>
-                        )}
-                      </h6>
-                    </div>
-                  ) : (
-                    <h6>{user.bio}</h6>
-                  )
-                ) : (
-                  <div className="user-bio-container">
-                    <h5 className="thought-bubble">
-                      No bio has been created yet
-                    </h5>
-                    {user && currentUser ? (
-                      <>
-                        {user.id === currentUser.id ? (
-                          <button onClick={handleCreateBio}>Create Bio</button>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </div>
-                )}
-              </div>
-
-              <div className="bottom-left container-box">
-  <p className="reviews-header"></p>
-  <div className="profile-overview-reviews">
-    <div className="text-center">
-      <h6 className="profile-review-list mx-auto">
-        {user.username}'s most current review
-      </h6>
-      {latestReview && latestWine ? (
-        <>
-          <div className="underline"></div>
-          <div
-  className="d-flex align-items-center justify-content-between clickable-content"
-  onClick={() => navigate(`/singlewine/${latestWine.id}`)}
-  style={{ cursor: 'pointer' }}
->
-  <div>
-    <div className="d-flex align-items-center">
-      <p className="wine-name">{latestWine.name}</p>
-      {latestReview.rating != null ? (
-      <Rating
-        value={latestReview.rating}
-        edit={false}
-        size={20}
-        activeColor="#ffd700"
-      />
-      ):null}
-    </div>
-    <p className="review-comment">{latestReview.review_comment}</p>
-  </div>
-</div>
-
-
-        </>
-      ) : null}
-    </div>
-    {/* <ProfileReviews user={user} userReviews={{ userReviews }} /> */}
-  </div>
-</div>
-
-            </>
-          ) : (
-            <h5>Loading profile</h5>
-          )}
-        </div>
-
-
-      <div className="profile-overview-right-container">
-      <div className="top-right container-box">
-            Insert User Graph/Basic Statistics
-            {/* <UserData userReviews={userReviews} /> */}
-          </div>
-          <div className="bottom-right container-box">
-            Place most popularly rated favorites and saved wine
-            {/* <FavoritesUSerId /> */}
-          </div>
-      </div>
-    </div>
     </div>
   );
 };
