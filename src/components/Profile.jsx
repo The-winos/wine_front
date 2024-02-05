@@ -299,6 +299,7 @@ const Profile = ({ user, favorites }) => {
                 userReviews={userReviews}
                 setUserReviews={setUserReviews}
                 favorites={favorites}
+
               />
             ) : null}
             {profileReview ? (

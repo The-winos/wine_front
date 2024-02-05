@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { getReviewByUser, getUserById, getWineById } from "./API";
+import { getFavorites, getReviewByUser, getUserById, getWineById } from "./API";
 import ProfileReviews from "./ProfileReviews";
 import UserData from "./UserData";
 import { useNavigate, useParams } from "react-router-dom";
 import Rating from "react-rating-stars-component";
+import { faV } from "@fortawesome/free-solid-svg-icons";
 
 const ProfileOverview = ({
   user,
   userReviews,
   setUserReviews,
   currentUser,
-  favorites
+  favorites,
+
 }) => {
   const [expandedBio, setExpandedBio] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const [latestReview, setLatestReview] = useState({});
   const [latestWine, setLatestWine] = useState({});
+  const [fav, setFav]=useState({})
+  const [latestFav, setLatestFav]=useState({})
+  const [favWine, setFavWine]= useState({})
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -24,6 +29,7 @@ const ProfileOverview = ({
         // Check if user is available
         if (user && user.id) {
           const reviews = await getReviewByUser(user.id);
+          const fav = await getFavorites(user.id);
 
           if (reviews && reviews.length > 0) {
             // Sort reviews by date
@@ -39,6 +45,24 @@ const ProfileOverview = ({
             try {
               const newWine = await getWineById(sortedReviews[0].wine_id);
               setLatestWine(newWine);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          if (fav && fav.length > 0) {
+            // Sort reviews by date
+            const sortedFavs = [...fav].sort(
+              (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+
+            setFav(sortedFavs);
+
+            // Set latest review and wine if reviews are available
+            setLatestFav(sortedFavs[0]);
+
+            try {
+              const newFav = await getWineById(sortedFavs[0].wine_id);
+              setFavWine(newFav);
             } catch (error) {
               console.error(error);
             }
@@ -174,8 +198,38 @@ const ProfileOverview = ({
             {/* <UserData userReviews={userReviews} /> */}
           </div>
           <div className="bottom-right container-box">
-            Place most popularly rated favorites and saved wine
-            {/* <FavoritesUSerId /> */}
+            {user ? (<div className="text-center">
+            <h6 className="profile-review-list mx-auto">{user.username}'s latest favorite
+      </h6>
+      {latestFav && favWine ? (
+        <>
+        {console.log(latestFav, "Fav wine")}
+        <div className="underline"></div>
+        <div
+  className="d-flex align-items-center justify-content-between clickable-content"
+  onClick={() => navigate(`/singlewine/${favWine.id}`)}
+  style={{ cursor: 'pointer' }}
+>
+  <div>
+    <div className="d-flex align-items-center">
+      <p className="wine-name">{favWine.name}</p>
+      {favWine.rating != null ? (
+      <Rating
+        value={favWine.rating}
+        edit={false}
+        size={20}
+        activeColor="#ffd700"
+      />
+      ):null}
+    </div>
+
+  </div>
+</div>
+
+        </>
+      ) : loading}
+      </div>
+      ) : Loading}
           </div>
         </div>
         </div>
