@@ -215,6 +215,7 @@ const ProfileUserId = ({ user }) => {
               <ProfileOverview
                 user={userProfile}
                 currentUser={user}
+                userReviews={userReviews}
                 setUserReviews={setUserReviews}
                 favorites={favorites}
               />

@@ -26,6 +26,7 @@ const ProfileOverview = ({
   useEffect(() => {
     const fetchUserReviews = async () => {
       try {
+        console.log(user, "user in function")
         // Check if user is available
         if (user && user.id) {
           const reviews = await getReviewByUser(user.id);
@@ -36,6 +37,7 @@ const ProfileOverview = ({
             const sortedReviews = [...reviews].sort(
               (a, b) => new Date(b.review_date) - new Date(a.review_date)
             );
+            console.log(sortedReviews, "reviews in function")
 
             setUserReviews(sortedReviews);
 
@@ -45,11 +47,13 @@ const ProfileOverview = ({
             try {
               const newWine = await getWineById(sortedReviews[0].wine_id);
               setLatestWine(newWine);
+
             } catch (error) {
               console.error(error);
             }
           } else {
-            setUserReviews([]); // Set an empty array if there are no reviews
+            if(userReviews.length<1){
+            setUserReviews([]);} // Set an empty array if there are no reviews
             setLatestReview(null);
             setLatestWine(null);
           }
@@ -102,7 +106,7 @@ const ProfileOverview = ({
         <div className="row">
       <div className="col-md-6">
         <div className="profile-overview-left-container">
-
+{console.log(userReviews, "userReviews in return")}
           {user ? (
             <>
               <div className="top-left container-box">
@@ -209,7 +213,7 @@ const ProfileOverview = ({
         What Types of Wine I Review
       </h6>
       </div>
-
+{console.log(userReviews, "in parent")}
             <UserData userReviews={userReviews} />
           </div>
           <div className="bottom-right container-box">

@@ -7,6 +7,7 @@ const UserData = ({ userReviews }) => {
 
   useEffect(() => {
     console.log("UserData component rendered");
+    console.log(userReviews, "in function")
     clearGraph(); // Clear any existing graph before rendering
     if (userReviews) {
       renderGraphs(userReviews);
