@@ -267,7 +267,7 @@ const Profile = ({ user, favorites }) => {
                  My favorites
                 </div>
                 <div
-                  className="profile-saved-sidebar"
+                  className="profile-review-sidebar"
                   onClick={() => {
                     setProfileSaved(true) &
                     setProfileFavorites(false) &
