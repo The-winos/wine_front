@@ -11,16 +11,18 @@ const ProfileSaved = ({user, currentUser}) => {
 
 
   useEffect(() => {
-    const fetchUserFavorites = async () => {
+    const fetchUserSaved = async () => {
       if (user) {
         try {
           const fetchedSaved = await getSaved(user.id);
 
+
           setSaved(fetchedSaved);
-          if(fetchedSaved>=1){
+          if(fetchedSaved.length>=1){
           const wines = await Promise.all(
             fetchedSaved.map(async (save) => {
               const wineInfo = await getWineById(save.wine_id);
+
               return wineInfo;
             })
           );
@@ -35,7 +37,7 @@ const ProfileSaved = ({user, currentUser}) => {
       }
     };
 
-    fetchUserFavorites();
+    fetchUserSaved();
   }, [user]);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ const ProfileSaved = ({user, currentUser}) => {
 
 
   return (
-    <div id="favorites">
+    <div id="Saved">
 
       <h1 className="mb-4">{user.username}'s saved for later wines</h1>
       <Row>

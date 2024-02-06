@@ -80,7 +80,7 @@ const ProfileUserId = ({ user }) => {
             </div>
 
             <div className="d-flex flex-column">
-              <h2 className="profile-username">{userProfile.name}</h2>
+              <h2 className="profile-username fs-5 fs-md-4">{userProfile.name}</h2>
 
               <h6 className="profile-username smaller-text">
                 <span>
@@ -106,8 +106,8 @@ const ProfileUserId = ({ user }) => {
                   {userProfile.state}
                 </span>
               </h6>
-              <div className="count-container">
-                <h6>
+              <div className="count-container ">
+                <h6 className="fs-6 fs-md-4">
                   I follow{" "}
                   <Link to="/following" className="count-link">
                     <span
@@ -119,7 +119,7 @@ const ProfileUserId = ({ user }) => {
                   </Link>
                   {userProfile.following_count == 1 ? "person" : "people"}
                 </h6>
-                <h6>
+                <h6 className="fs-6 fs-md-4">
                   <Link to="/followers" className="count-link">
                     <span
                       className="count-text"
@@ -137,7 +137,7 @@ const ProfileUserId = ({ user }) => {
             </div>
           </div>
 
-          <div className="profileLinks">
+          <div className="profileLinks fs-6 fs-md-4">
             <div
             className="profile-review-sidebar"
               onClick={() => {
@@ -215,6 +215,7 @@ const ProfileUserId = ({ user }) => {
               <ProfileOverview
                 user={userProfile}
                 currentUser={user}
+                userReviews={userReviews}
                 setUserReviews={setUserReviews}
                 favorites={favorites}
               />
