@@ -128,7 +128,8 @@ const Profile = ({ user, favorites }) => {
                     className="img-fluid"
                     style={{
                       height: "125px",
-                      width: "125px",
+                      minHeight:"120px",
+                      width: "auto",
                     }}
                   />
                 </div>
@@ -136,11 +137,13 @@ const Profile = ({ user, favorites }) => {
                   <img
                     src="/images/gear1.png"
                     alt="Gear-1"
-                    className="gear-image"
+                    className="gear-image img-fluid"
                     style={{
                       height: "85px",
-                      width: "85px",
+                      width: "auto",
                     }}
+
+
                     onClick={() => {
                       setProfileAccountSettings(true) &
                         setProfileOverview(false);
@@ -154,7 +157,7 @@ const Profile = ({ user, favorites }) => {
                 </div>
 
                 <div className="d-flex flex-column">
-                  <h2 className="profile-username">{user.name}</h2>
+                  <h2 className="profile-username fs-5 fs-md-4">{user.name}</h2>
                   {/* <div className="user-details"> */}
                   {/* Other user information */}
                   <h6 className="profile-username smaller-text">
@@ -206,7 +209,7 @@ const Profile = ({ user, favorites }) => {
       </div>
 
       {/* Small screens */}
-      <div className="d-md-none">
+      <div className="d-md-none fs-6 fs-md-4">
         <h6>Followers: {user.follower_count}</h6>
         <h6>Following: {user.following_count}</h6>
       </div>
@@ -215,7 +218,7 @@ const Profile = ({ user, favorites }) => {
                 </div>
               </div>
 
-              <div className="profileLinks">
+              <div className="profileLinks fs-6 fs-md-4">
                 <div className="profile-review-sidebar"
                   onClick={() => {
                     setProfileOverview(true) &
@@ -250,7 +253,7 @@ const Profile = ({ user, favorites }) => {
                   My reviews
                 </div>
                 <div
-                  className="profile-favorites-sidebar"
+                  className="profile-review-sidebar"
                   onClick={() => {
                     setProfileFavorites(true) &
                       setProfileOverview(false) &

@@ -594,6 +594,12 @@ button {
     margin-bottom: 2rem;
     margin-top: 1rem;
   }
+  .profileElements {
+    padding-left: 1rem !important;
+    width: calc(100vw - 115px);
+    margin-bottom: 7rem;
+    /* background-color: white; */
+  }
 }
 
 .selected {
@@ -896,6 +902,7 @@ button {
   padding: 20px;
 }
 
+
 .container-box {
   background-color: white;
   border-radius: 10px;
@@ -927,10 +934,18 @@ button {
   .profile-overview-left-container,
 .profile-overview-right-container {
   padding:5px;
-  }}
+  }
+  .user-info-container {
+
+    padding: 5px;
+
+  }
+}
 
 .profileLinks {
   text-decoration: none;
+  padding-left: 1rem !important;
+
 }
 
 .profile-review-sidebar {
