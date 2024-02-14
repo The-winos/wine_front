@@ -233,7 +233,7 @@ const Profile = ({ user, favorites }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Overview
+                 •Overview
                 </div>
                 <div
                   className="profile-review-sidebar"
@@ -250,7 +250,7 @@ const Profile = ({ user, favorites }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  My reviews
+                  •Reviews
                 </div>
                 <div
                   className="profile-review-sidebar"
@@ -267,7 +267,7 @@ const Profile = ({ user, favorites }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                 My favorites
+                 •Favorites
                 </div>
                 <div
                   className="profile-review-sidebar"
@@ -284,7 +284,7 @@ const Profile = ({ user, favorites }) => {
                     color: linkClicked ? "#721c24" : "#007bff",
                   }}
                 >
-                  Wines I want to try
+                  •Saved for later
                 </div>
               </div>
             </>

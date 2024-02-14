@@ -153,7 +153,7 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              Overview
+              •Overview
             </div>
             <div
               className="profile-review-sidebar"
@@ -170,7 +170,7 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              My reviews
+              •Reviews
             </div>
             <div
               className="profile-favorites-sidebar"
@@ -187,7 +187,7 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              My favorites
+              •Favorites
             </div>
             <div
               className="profile-favorites-sidebar"
@@ -204,7 +204,7 @@ const ProfileUserId = ({ user }) => {
                 color: linkClicked ? "#721c24" : "#007bff",
               }}
             >
-              I want to try these
+              •Saved for Later
             </div>
           </div>
         </div>
