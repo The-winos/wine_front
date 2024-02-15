@@ -8,6 +8,7 @@ import { updateUser, updateUserPassword } from "./API";
 
 import OptionsStates from "./OptionsStates";
 import OptionAvatars from "./OptionAvatars";
+import ProfaneWords from "./ProfaneWords"
 
 const ProfileAccountSettings = ({
   user,
@@ -19,7 +20,7 @@ const ProfileAccountSettings = ({
   const [state, setState] = useState(user.state);
   const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState(user.email);
-  const [birthday, setBirthday] = useState(new Date(user.birthday));
+
   const [bio, setBio] = useState(user.bio);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -34,13 +35,14 @@ const ProfileAccountSettings = ({
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const profaneWords = ProfaneWords;
 
     if (
       name === user.name &&
       state === user.state &&
       avatar === user.avatar &&
       email === user.email &&
-      birthday === user.birthday &&
+
       bio === user.bio &&
       newPassword === ""
     ) {
@@ -48,6 +50,20 @@ const ProfileAccountSettings = ({
     }
 
     try {
+      const containsProfaneWords = profaneWords.some((word) => {
+        return (
+          name.toLowerCase().includes(word) ||
+          email.toLowerCase().includes(word) ||
+          bio.toLowerCase().includes(word)
+        );
+      });
+
+      if (containsProfaneWords) {
+        toast.error(
+          "Your information contains inappropriate language. Please edit your information."
+        );
+        return;
+      }
       if (newPassword !== "") {
         const isOldPasswordValid = await updateUserPassword(
           user.id,
@@ -68,7 +84,7 @@ const ProfileAccountSettings = ({
           user.role,
           email,
           bio,
-          birthday,
+          user.birthday,
           user.follower_count,
           user.following_count,
           user.join_date
@@ -84,7 +100,7 @@ const ProfileAccountSettings = ({
           user.role,
           email,
           bio,
-          birthday,
+          user.birthday,
           user.follower_count,
           user.following_count,
           user.join_date
@@ -105,81 +121,102 @@ const ProfileAccountSettings = ({
   return (
     <div id="accountSettings">
       <div className="container">
-        <div>
-          <img
-            src={`/images/${avatar}`}
-            alt="avatar image"
-            className="img-fluid"
-            style={{
-              height: "300px",
-              width: "300px",
-              objectFit: "contain",
-              objectPosition: "center center",
-              cursor: "pointer",
-            }}
-            onClick={() => setChangeAvatar(true)}
-          />
-          Change my Avatar!
-        </div>
-        {changeAvatar && (
-          <div className="avatar-grid">
-            <h6>Choose Avatar</h6>
-            <br />
-            <OptionAvatars avatar={avatar} setAvatar={setAvatar} user={user} />
-            <button
-              onClick={() => {
-                setChangeAvatar(false);
-              }}
-              variant="outline-secondary"
-              size="sm"
-            >
-              Close
-            </button>
-          </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="accountSettings-form">
-          <h3>{formSubmitted ? name : user.name}</h3>
-          <h6>Update Name</h6>
-          <div>
-            <input
-              placeholder="Enter name"
-              className="first-name"
-              type="text"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-            />
+          <div className="col-lg-12">
+            <div className="ProfileAvatar">
+              <img
+                src={`/images/${avatar}`}
+                alt="avatar image"
+                className="img-fluid"
+                style={{
+                  height: "200px",
+                  width: "200px",
+                  paddingTop:"10px",
+                  objectFit: "contain",
+                  objectPosition: "center center",
+                  cursor: "pointer",
+                }}
+                onClick={() => setChangeAvatar(true)}
+              />
+              <div className="change-avatar-text">
+                Change My Avatar
+              </div>
+            </div>
+            {changeAvatar && (
+              <div className="avatar-grid">
+                <h6>Choose Avatar</h6>
+                <OptionAvatars avatar={avatar} setAvatar={setAvatar} user={user} />
+                <button
+                  onClick={() => {
+                    setChangeAvatar(false);
+                  }}
+                  variant="outline-secondary"
+                  size="sm"
+                >
+                  Close
+                </button>
+              </div>
+            )}
           </div>
-          <h6>Update Email</h6>
-          <div>
-            {" "}
-            <input
-              placeholder="Enter Email"
-              className="update-email"
-              type="text"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-            />
-          </div>
-          <h6>Update Birthday</h6>
-          <DatePicker
-            selected={birthday}
-            onChange={(date) => setBirthday(date)}
-            placeholderText="Select a date"
-            value={birthday}
-            dateFormat="MM/dd/yyyy"
-            isClearable="custom-datepicker"
-          />
-          <h6>Update Password:</h6>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="oldPassword">Old Password</label>
-                <div className="input-group">
+          <div className="col-lg-12" style={{paddingLeft:"50px"}}>
+            <form onSubmit={handleSubmit} className="accountSettings-form">
+              <h3>{formSubmitted ? name : user.name}</h3>
+              <div className="row mb-3">
+                <div className="col-md-4" >
+                <div className="change-profile-text">
+                Name
+              </div>
+                  <input
+                    placeholder="Enter name"
+                    className="first-name form-control"
+                    type="text"
+                    value={name}
+                    onChange={(event) => {
+                      setName(event.target.value);
+                    }}
+                    style={{maxWidth:"300px"}}
+                  />
+                </div>
+                <div className="col-md-4">
+                <div className="change-profile-text">
+                Email
+              </div>
+                  <input
+                    placeholder="Enter Email"
+                    className="update-email form-control"
+                    type="text"
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                    }}
+                    style={{maxWidth:"300px"}}
+                  />
+                </div> <div className="col-md-4">
+              <div className="change-profile-text">
+                Update State
+              </div>
+                <select
+                  placeholder="location"
+                  className="location form-select"
+                  type="text"
+                  value={state}
+                  onChange={(event) => {
+                    setState(event.target.value);
+                  }}
+                  style={{maxWidth:"200px"}}
+                >
+                  <OptionsStates onChange={handleLocationChange} />
+                </select>
+              </div>
+              </div>
+
+<div className="col-md-12">
+              <div className="row mb-3">
+                <div className="change-profile-text">
+                Change Password:
+              </div>
+                <div className="col-md-4">
+
                   <input
                     type={passwordVisible ? "text" : "password"}
                     className="form-control"
@@ -187,29 +224,11 @@ const ProfileAccountSettings = ({
                     placeholder="Old Password"
                     value={oldPassword}
                     onChange={(event) => setOldPassword(event.target.value)}
+                    style={{maxWidth:"300px"}}
                   />
-                  <div className="input-group-append">
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary"
-                      onClick={() => setPasswordVisible(!passwordVisible)}
-                    >
-                      {passwordVisible ? (
-                        <i className="fa fa-eye-slash"></i>
-                      ) : (
-                        <i className="fa fa-eye"></i>
-                      )}
-                    </button>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="newPassword">New Password</label>
-                <div className="input-group">
+
+                <div className="col-md-4">
                   <input
                     type={passwordVisible ? "text" : "password"}
                     className="form-control"
@@ -217,61 +236,43 @@ const ProfileAccountSettings = ({
                     placeholder="New Password"
                     value={newPassword}
                     onChange={(event) => setNewPassword(event.target.value)}
+                    style={{maxWidth:"300px"}}
                   />
                 </div>
+                <div className="col-md-4">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm New Password"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                  style={{maxWidth:"300px"}}
+                />
               </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <div className="input-group">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(event) => setConfirmPassword(event.target.value)}
-                  />
-                </div>
               </div>
-            </div>
+              </div>
+
+              <div className="mb-3">
+  <div className="change-profile-text">
+    Update Bio
+  </div>
+  <textarea
+    placeholder="bio"
+    className="form-control textarea-bio"
+    style={{ width: "80%", height: "150px", padding: "8px" }}
+    onChange={(event) => {
+      setBio(event.target.value);
+    }}
+    value={bio}
+  />
+</div>
+
+              <button type="submit" className="btn btn-primary mb-3">
+                Save Changes
+              </button>
+            </form>
           </div>
-          <h6>Location: {user.state}</h6>
-          <h6>Update location:</h6>
-          <select
-            placeholder="location"
-            className="location"
-            type="text"
-            value={state}
-            onChange={(event) => {
-              setState(event.target.value);
-            }}
-          >
-            <OptionsStates onChange={handleLocationChange} />
-          </select>
-          <div className="row justify-content-center">
-            <div className="col-lg-6">
-              <div className="mt-3"></div>
-              <h6 className="row justify-content-center">My Bio:</h6>
-              <textarea
-                placeholder="bio"
-                className="form-control border-0 p-0 form-control-lg textarea-bio"
-                style={{ width: "100%" }}
-                onChange={(event) => {
-                  setBio(event.target.value);
-                }}
-                value={bio}
-              />
-            </div>
-          </div>
-          <div className="mt-3"></div>
-          <button type="submit" className="btn btn-primary">
-            Save Changes
-          </button>
-        </form>
         {/* </div> */}
         <div className="navigation-buttons">
           <Link to={"/profile"}>
@@ -288,6 +289,7 @@ const ProfileAccountSettings = ({
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

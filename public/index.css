@@ -47,6 +47,24 @@ body {
   position: absolute;
   padding-right: 1rem;
 }
+.ProfileAvatar {
+  top: 50%;
+  left: 50%;
+
+  text-align: center;
+}
+
+.change-avatar-text {
+  position: relative;
+  bottom: 50px;
+  left: 50%;
+  max-width: fit-content;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.5); /* Foggy background color */
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
 
 @media (max-width: 768px) {
   .custom-navbar {
@@ -121,7 +139,7 @@ body {
 }
 
 .aboutfooter {
-  padding-bottom: 5rem;
+  padding-bottom: 6rem;
 }
 
 .content {
@@ -368,6 +386,7 @@ button {
 }
 
 /* follow button */
+
 /* HOME START*/
 .home-header {
   display: flex;
@@ -380,6 +399,9 @@ button {
   width: 15px;
   height: auto;
   margin: 0 10px;
+}
+#Home{
+  padding-bottom: 8rem !important;
 }
 /* HOME END*/
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deleteItem, updateReview } from "./API";
 import { ToastContainer, toast } from "react-toastify";
+import ProfaneWords from "./ProfaneWords"
 
 const ReviewUpdate = ({
   review,
@@ -20,22 +21,7 @@ const ReviewUpdate = ({
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const profaneWords = [
-      "fuck",
-      "shit",
-      "cunt",
-      "nigga",
-      "nigger",
-      "whore",
-      "slut",
-      "faggot",
-      "rape",
-      "5hit",
-      "ejaculation",
-      "fagot",
-      "gangbang",
-      "masterbate",
-    ];
+    const profaneWords = ProfaneWords;
     if (
       reviewName === review.name &&
       reviewRating === review.rating &&

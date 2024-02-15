@@ -45,7 +45,7 @@ const SingleWine = ({ user, loggedIn }) => {
           alt="wine image"
           style={{
             height: "auto",
-            width: "25%",
+            width: "15%",
             margin: "0 auto",
             marginLeft: "18rem",
             marginBottom: "2rem"

@@ -102,6 +102,14 @@ const Home = ({ allWine, setAllWine, user }) => {
               </button>
             </div>
           </div>
+          <div className="pt-4">
+          <h6>
+
+Please note that this website is currently in beta testing. While we've worked hard to ensure a smooth experience, you may encounter occasional glitches or issues as we continue to improve and refine our platform. Your feedback is invaluable to us, so if you encounter any problems or have suggestions for improvement, please don't hesitate to reach out to us. Thank you for your understanding and support!
+
+</h6>
+<h6>
+-The Corks Team</h6></div>
         </>
       ) : null}
       {user ? null : (<div style={{ textAlign: 'center', marginTop: '10px' }}>
@@ -123,6 +131,7 @@ const Home = ({ allWine, setAllWine, user }) => {
   >
     Sign Up
   </button>
+
 
 
 </div>

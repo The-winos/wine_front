@@ -34,15 +34,15 @@ const FooterAboutUs = () => {
                 src="/images/jessy.png"
                 alt="Jessica Picture"
                 className="img-fluid rounded-circle"
-                style={{ width: "150px", height: "150px" }}
+                style={{ width: "150px", height: "150px", paddingBottom: "10px" }}
                 title="Jessy's LinkedIn"
+
               />
             </a>
 
             <h5 className="bio">
-              Jessy is an amazing mother to a delightful four-year-old. She's a
-              proud geek through and through. She finds passion in figuring out
-              issues and problem-solving.
+
+            Jessy, the brains behind this app, was tired of trying new wines and not enjoying them. She envisioned a platform where people could share wine reviews. With a passion for all things geeky, Jessy pours her enthusiasm into this project.
             </h5>
             <h6>Favorite Wine: Apothic Dark</h6>
           </div>
@@ -55,7 +55,7 @@ const FooterAboutUs = () => {
                 src="/images/jenn.png"
                 alt="Jen Picture"
                 className="img-fluid rounded-circle"
-                style={{ width: "150px", height: "150px" }}
+                style={{ width: "150px", height: "150px", paddingBottom: "10px" }}
                 title="Jen's LinkedIn"
               />
             </a>
@@ -82,7 +82,7 @@ const FooterAboutUs = () => {
                 src="/images/kyla.png"
                 alt="Kyla Picture"
                 className="img-fluid rounded-circle"
-                style={{ width: "150px", height: "150px" }}
+                style={{ width: "150px", height: "150px", paddingBottom: "10px" }}
                 title="Kyla's LinkedIn"
               />
             </a>
@@ -100,13 +100,13 @@ const FooterAboutUs = () => {
                 src="/images/justin.png"
                 alt="Justin Picture"
                 className="img-fluid rounded-circle"
-                style={{ width: "150px", height: "150px" }}
+                style={{ width: "150px", height: "150px", paddingBottom: "10px" }}
                 title="Justin's LinkedIn"
               />
             </a>
 
             <h5 className="bio">
-            Justin is a one-of-a-kind artist who effortlessly blends his distinctive style with his passion for creativity. Alongside his love for his 4-year-old daughter, he finds solace in listening to Wu-Tang Clan's beats or hitting the basketball court for a game of hoops.
+            Justin is a one-of-a-kind artist who effortlessly blends his distinctive style with his passion for creativity.  He finds solace in listening to Wu-Tang Clan's beats or hitting the basketball court for a game of hoops.
             </h5>
             <h6>Favorite Wine: Apothic Dark</h6>
           </div>
