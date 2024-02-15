@@ -44,7 +44,8 @@ const AdminUser = ({
   const [avatar, setAvatar] = useState("");
   const [allReviews, setAllReviews] = useState([]);
   const [searchUsername, setSearchUsername]= useState("");
-  const [filteredUsers, setFilteredUsers]=useState([])
+  const [filteredUsers, setFilteredUsers]=useState([]);
+  const [dateJoined, setDateJoined]=useState(null)
 
   useEffect(() => {
     async function fetchAllReview() {
@@ -97,6 +98,7 @@ const AdminUser = ({
     setUsername(userToUpdate.username);
     setName(userToUpdate.name);
     setBirthday(userToUpdate.birthday ? new Date(userToUpdate.birthday) : null);
+    setDateJoined(userToUpdate.join_date ? new Date(userToUpdate.join_date) : null);
     setRole(userToUpdate.role);
     setEmail(userToUpdate.email);
     setState(userToUpdate.state);
@@ -314,9 +316,14 @@ const AdminUser = ({
             onSubmit={handleSubmit}
             className="admin-form border p-2 m-3 mb-4"
           >
-            <h3 className="d-flex justify-content-center pb-3">
+            <h3 className="d-flex justify-content-center pb-1">
               You are updating {updatingUser.username}
+
             </h3>
+            <h4 className="d-flex justify-content-center pb-3">
+
+              joined on {new Date(updatingUser.join_date).toLocaleDateString()}
+            </h4>
 
             <div className="row">
               <div className="col">

@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./API/index";
 import OptionsStates from "./OptionsStates";
 import PasswordChecklist from "./PasswordChecklist";
+import ProfaneWords from "./ProfaneWords"
+import { ToastContainer, toast } from "react-toastify";
 
 const Register = ({ user = null, setLoggedIn = () => {} }) => {
   const navigate = useNavigate();
@@ -25,13 +27,13 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
 
   const isValidBirthday = (birthday) => {
     // Check if the birthday matches the "DD-MM-YYYY" format
-    const datePattern = /^\d{2}-\d{2}-\d{4}$/;
+    const datePattern = /^\d{2}[/-]\d{2}[/-]\d{4}$/;
     if (!datePattern.test(birthday)) {
       return false; // Invalid format
     }
 
     // Extract day, month, and year from the input string
-    const [day, month, year] = birthday.split("-").map(Number);
+    const [day, month, year] = birthday.split("/").map(Number);
 
     // Create a Date object from the input
     const userBirthday = new Date(year, month - 1, day); // Note: Months are 0-indexed in JavaScript (0 = January, 1 = February, ...)
@@ -54,6 +56,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
 
   async function handleRegister(event) {
     event.preventDefault();
+    const profaneWords = ProfaneWords;
 
     if (password !== confirmPasswordValue) {
       if (setError) {
@@ -70,12 +73,13 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
     }
 
     const formattedBirthday = (() => {
-      const [month, day, year] = birthday.split("-");
+      const [month, day, year] = birthday.split(/[-/]/);
       return `${year}-${month}-${day}`;
     })();
 
     if (!isValidBirthday(birthday)) {
       setError("Invalid birthday format or age.");
+      console.log(formattedBirthday, "formbday")
       return;
     }
 
@@ -90,12 +94,26 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
       // Format the date as "YYYY-MM-DD"
       return `${year}-${month}-${day}`;
 
-      console.log("Formatted Date:", formattedDate);
+
     })();
 
-    console.log("Birthday:", formattedBirthday);
+
 
     try {
+      const containsProfaneWords = profaneWords.some((word) => {
+        return (
+          username.toLowerCase().includes(word) ||
+          name.toLowerCase().includes(word) ||
+          email.toLowerCase().includes(word)
+        );
+      });
+
+      if (containsProfaneWords) {
+        toast.error(
+          "Your name, username and email cannot have inappropriate language. Please update to remove. "
+        );
+        return;
+      }
       const response = await registerUser(
         username,
         password,
@@ -111,8 +129,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
         formattedCurrentDate
       );
 
-      console.log("response from registerUser:", response);
-      console.log("this is date", formattedCurrentDate);
+
 
       if (response.error) {
         setError(response.message);
@@ -130,7 +147,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
     <div className="register-container mt-1 pb-5">
       <div className="bg-light">
         <div className="container">
-          <div className="row mt-5">
+          <div className="row">
             <div className="col-lg-4 bg-white m-auto">
               <h3 className="text-center pt-3">Sign up</h3>
               <div>
@@ -255,7 +272,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="MM-DD-YYYY"
+                    placeholder="MM/DD/YYYY"
                     required
                     value={birthday}
                     onChange={function (event) {
@@ -299,6 +316,11 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
         <div className="row justify-content-center">
           <div className="col-sm-8 col-md-6 col-lg-4">
             <div>
+              {error && (
+              <div className="alert alert-danger custom-alert" role="alert">
+                {error}
+              </div>
+            )}
               <h3 className="row justify-content-center">
                 Already have an account?
               </h3>
@@ -309,14 +331,11 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
                 </a>
               </span>
             </div>
-            {error && (
-              <div className="alert alert-danger custom-alert" role="alert">
-                {error}
-              </div>
-            )}
+
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

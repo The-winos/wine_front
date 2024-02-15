@@ -114,7 +114,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
   }
 
   return (
-    <>
+    <div className="reviewDetails">
       {!updateReviews ? (
         <>
           <div
@@ -129,8 +129,8 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
                 <img
                   src={`/images/${reviewWine.image_url}`}
                   alt="wine image"
-                  className="img-fluid"
-                  style={{ maxHeight: "250px", maxWidth: "100%", padding: "1rem" }}
+                  className="img-fluid wine-image"
+
                 />
                 <div
                   className="savedFavs d-flex flex-column align-items-end"
@@ -383,7 +383,7 @@ const ReviewDetails = ({ review, user, favorites, saved, handleNewReview, curren
           handleNewReview={handleNewReview}
         />
       )}
-    </>
+    </div>
   );
 };
 

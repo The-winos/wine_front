@@ -47,6 +47,24 @@ body {
   position: absolute;
   padding-right: 1rem;
 }
+.ProfileAvatar {
+  top: 50%;
+  left: 50%;
+
+  text-align: center;
+}
+
+.change-avatar-text {
+  position: relative;
+  bottom: 50px;
+  left: 50%;
+  max-width: fit-content;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.5); /* Foggy background color */
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
 
 @media (max-width: 768px) {
   .custom-navbar {
@@ -121,7 +139,7 @@ body {
 }
 
 .aboutfooter {
-  padding-bottom: 5rem;
+  padding-bottom: 6rem;
 }
 
 .content {
@@ -205,7 +223,7 @@ button {
 /* This is the sidebar on Profile */
 
 .profileElements {
-  padding-left: 2rem !important;
+
   width: calc(100vw - 255px);
   /* background-color: white; */
 }
@@ -368,6 +386,7 @@ button {
 }
 
 /* follow button */
+
 /* HOME START*/
 .home-header {
   display: flex;
@@ -380,6 +399,9 @@ button {
   width: 15px;
   height: auto;
   margin: 0 10px;
+}
+#Home{
+  padding-bottom: 8rem !important;
 }
 /* HOME END*/
 
@@ -614,6 +636,28 @@ button {
 
 .profileReviews{
   padding-bottom: 5rem !important;
+}
+.wine-image{
+  max-height: 225px;
+  max-width: 100%;
+  padding: 1rem;
+}
+@media (max-width: 768px) {
+  .wine-image {
+    max-height: 190px; /* Adjust as needed */
+    padding: 0.5rem; /* Adjust padding as needed */
+    margin-left: -20px;
+  }
+  .reviewDetails{
+    min-width: 300px;
+  }
+  .card {
+    max-width: 80% !important;
+  }
+  .user-data-container {
+
+   margin-left: -30px;
+  }
 }
 
 .wine-image-button {
