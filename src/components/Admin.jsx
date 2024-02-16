@@ -8,16 +8,17 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AdminUser from "./AdminUser";
 import AdminWine from "./AdminWine";
+import AdminStats from "./AdminStats";
 
 
-const Admin = ({ user, allReviews }) => {
+const Admin = ({ user, allReviews, allWine, setAllWine }) => {
 
-  const [allWine, setAllWine]= useState([]);
   const [filteredWines, setFilteredWines]=useState([])
   const [userButton, setUserButton]=useState(false);
   const [updateTheUser, setUpdateTheUser] = useState(false);
   const [wineButton, setWineButton]=useState(false);
   const [updatingTheWine, setUpdatingTheWine] = useState(false);
+  const [statsButton, setStatsButton]=useState(true);
 
 
 
@@ -46,6 +47,7 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setUserButton(true);
         setWineButton(false);
+        setStatsButton(false)
         setUpdatingTheWine(false);
       }}
       className="btn btn-primary mx-2"
@@ -73,6 +75,7 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setWineButton(true);
         setUserButton(false);
+        setStatsButton(false)
         setUpdateTheUser(false);
       }}
       className="btn btn-primary mx-2"
@@ -94,6 +97,34 @@ const Admin = ({ user, allReviews }) => {
 
     </>
   )}
+    {!statsButton ? (
+    <>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUserButton(false);
+        setStatsButton(true)
+        setUpdateTheUser(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Open stats
+    </button>
+
+    </>
+  ) : (<>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUpdatingTheWine(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Close stats
+    </button>
+
+    </>
+  )}
 </div>
 
 
@@ -103,7 +134,7 @@ const Admin = ({ user, allReviews }) => {
 
             <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton} filteredWines={filteredWines} setFilteredWines={setFilteredWines} allReviews={allReviews}/>
 
-
+            <AdminStats user={user} allWine={allWine} statsButton={statsButton} setStatsButton={setStatsButton}/>
 
       </>
       <ToastContainer />

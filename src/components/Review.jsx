@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Autosuggest from "react-autosuggest";
 import { checkExistingWine, createReview, createWine, getAllWine } from "./API";
+import ProfaneWords from "./ProfaneWords"
 
 const Review = ({ user, handleNewReview }) => {
   const navigate = useNavigate();
@@ -80,22 +81,7 @@ const Review = ({ user, handleNewReview }) => {
   function handleCreateWine(e) {
     e.preventDefault();
 
-    const profaneWords = [
-      "fuck",
-      "shit",
-      "cunt",
-      "nigga",
-      "nigger",
-      "whore",
-      "slut",
-      "faggot",
-      "rape",
-      "5hit",
-      "ejaculation",
-      "fagot",
-      "gangbang",
-      "masterbate",
-    ];
+    const profaneWords = ProfaneWords;
 
     const containsProfaneWords = profaneWords.some((word) => {
       return wineName.toLowerCase().includes(word);
@@ -105,6 +91,7 @@ const Review = ({ user, handleNewReview }) => {
       toast.error("Your wine name contains inappropriate language.");
       return;
     }
+    console.log(flavor, "what's it saying")
     if (
       flavor == "Cabernet" ||
       flavor == "Syrah" ||
@@ -119,7 +106,7 @@ const Review = ({ user, handleNewReview }) => {
     ) {
       setWineImg("3-reddish-purple_wine.png");
     }
-    if (
+    else if (
       flavor == "White Zinfandel" ||
       flavor == "Rose" ||
       flavor == "Champagne" ||
@@ -155,22 +142,7 @@ const Review = ({ user, handleNewReview }) => {
 
   async function handleReview(e) {
     e.preventDefault();
-    const profaneWords = [
-      "fuck",
-      "shit",
-      "cunt",
-      "nigga",
-      "nigger",
-      "whore",
-      "slut",
-      "faggot",
-      "rape",
-      "5hit",
-      "ejaculation",
-      "fagot",
-      "gangbang",
-      "masterbate",
-    ];
+    const profaneWords = ProfaneWords
 
     const containsProfaneWords = profaneWords.some((word) => {
       return (

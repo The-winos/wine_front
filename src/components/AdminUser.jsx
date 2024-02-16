@@ -46,6 +46,8 @@ const AdminUser = ({
   const [searchUsername, setSearchUsername]= useState("");
   const [filteredUsers, setFilteredUsers]=useState([]);
   const [dateJoined, setDateJoined]=useState(null)
+  const [sortColumn, setSortColumn] = useState("join_date");
+  const [sortDirection, setSortDirection] = useState("desc");
 
   useEffect(() => {
     async function fetchAllReview() {
@@ -78,6 +80,34 @@ const AdminUser = ({
     };
     filterUsers();
   }, [searchUsername]);
+
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      // If the same column is clicked, toggle the sort direction
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // If a different column is clicked, set it as the new sorting column and default to ascending
+      setSortColumn(column);
+      setSortDirection("asc");
+    }
+  };
+
+  const sortedUsers = allUsers.slice().sort((a, b) => {
+    // Perform sorting based on sortColumn and sortDirection
+    switch (sortColumn) {
+      case "username":
+      case "name":
+      case "state":
+        return sortDirection === "asc" ? a[sortColumn].localeCompare(b[sortColumn]) : b[sortColumn].localeCompare(a[sortColumn]);
+      case "join_date":
+        return sortDirection === "asc" ? new Date(a.join_date) - new Date(b.join_date) : new Date(b.join_date) - new Date(a.join_date);
+      case "reviews":
+      case "wines_entered":
+        return sortDirection === "asc" ? a[sortColumn] - b[sortColumn] : b[sortColumn] - a[sortColumn];
+      default:
+        return 0; // No sorting applied
+    }
+  });
 
 
   function calculateReviews(userId) {
@@ -276,7 +306,7 @@ const AdminUser = ({
         }
 
         const followers = await getFollowersById(id);
-        console.log(followers, "followers");
+
         if (followers.length) {
           await Promise.all(
             followers.map((follow) => {
@@ -286,7 +316,7 @@ const AdminUser = ({
         }
 
         const followings = await getFollowingById(id);
-        console.log(followings, "following");
+
         if (followings.length) {
           await Promise.all(
             followings.map((follow) => {
@@ -297,7 +327,7 @@ const AdminUser = ({
 
         // Make API call to delete the user
         const result = await deleteItem(type, id);
-        console.log(result);
+
         setUpdateTheUser(false);
         toast.success(`${updatingUser.username} deleted`);
       } else {
@@ -481,7 +511,7 @@ const AdminUser = ({
             <button type="submit" className="btn btn-primary">
               Save Changes
             </button>
-            {console.log(updatingUser.username, updatingUser.id)}
+
             <button
               type="button"
               className="btn btn-danger ml-2"
@@ -528,15 +558,16 @@ const AdminUser = ({
               <table className="table m-4">
                 <thead>
                   <tr>
-                    <th>Username</th>
-                    <th>Name</th>
-                    <th>Date Joined</th>
-                    <th>Reviews</th>
-                    <th>Wines Entered</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("username")}>Username</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("name")} >Name</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("state")} >State</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("join_date")}>Date Joined</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("reviews")}>Reviews</th>
+                    <th style={{cursor: "pointer"}} onClick={() => handleSort("wines_entered")}>Wines Entered</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredUsers
+                  {sortedUsers
                     .filter((user) => user.username !== "Deleted User")
                     .sort((a, b) => a.username.localeCompare(b.username))
                     .map((user) => (
@@ -557,6 +588,7 @@ const AdminUser = ({
                           {user.username}
                         </td>
                         <td>{user.name}</td>
+                        <td>{user.state}</td>
                         <td>
                           {new Date(user.join_date).toLocaleDateString("en-US")}
                         </td>

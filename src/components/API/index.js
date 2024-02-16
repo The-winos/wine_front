@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://corks-back-81cc6da903db.herokuapp.com/api";
 
 export async function authUser(token) {
   try {
@@ -283,7 +283,7 @@ export async function createWine(
   try {
     const response = await fetch(`${BASE_URL}/wines`, options);
     const result = await response.json();
-    console.log(result, "api result");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -322,7 +322,7 @@ export async function createReview({
   try {
     const response = await fetch(`${BASE_URL}/reviews`, options);
     const result = await response.json();
-    console.log(result, "api result from Review");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -349,7 +349,7 @@ export async function checkExistingWine(wineName) {
 export async function checkToken(token) {
   try {
     const response = await fetch(`${BASE_URL}/users/check-reset-token/${token}`);
-    console.log(response, "response in api");
+
     return response;
   } catch (error) {
     console.error("Error in API call:", error);
@@ -404,7 +404,7 @@ export async function updateUser(
 
     const response = await fetch(`${BASE_URL}/users/${username}`, options);
     const result = await response.json();
-    console.log(result, "result");
+
 
     return result;
   } catch (error) {
@@ -571,7 +571,7 @@ export async function updateUserPassword(userId, password, newPassword) {
       options
     );
     const result = await response.text();
-    console.log(result, "result in updatepass");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -728,7 +728,7 @@ export async function addSaved(user_id, wine_id) {
     };
     const response = await fetch(`${BASE_URL}/saved/`, options);
     const result = await response.json();
-    console.log(result, "result");
+
     return result;
   } catch (error) {
     console.error(error);
@@ -758,7 +758,7 @@ export async function removeFavorite(favoriteId) {
 }
 
 export async function removeSaved(savedId) {
-  console.log(savedId, "saved ID in removedSaved");
+
   try {
     const options = {
       method: "DELETE",
@@ -776,7 +776,7 @@ export async function removeSaved(savedId) {
 }
 
 export async function deleteItem(routeType, itemId) {
-  console.log(routeType, "RouteType");
+
   try {
     const options = {
       method: "DELETE",
@@ -789,7 +789,7 @@ export async function deleteItem(routeType, itemId) {
     const response = await fetch(`${BASE_URL}/${routeType}/${itemId}`, options);
 
     const result = await response.json();
-    console.log(result, "deleteItem");
+
     return result;
   } catch (error) {
     console.error(error);

@@ -24,7 +24,7 @@ const UserIdReviewDetails = ({ userReviews, userProfile, setUserReviews }) => {
 
   useEffect(() => {
     async function fetchUserWineDetails() {
-      console.log(userReviews, "what's this?")
+
       const userWineDetail = await getWineById(userReviews.wine_id);
       setUserWineDetails(userWineDetail);
     }
