@@ -92,6 +92,12 @@ const AdminStats = ({user, allWine, statsButton, setStatsButoon}) => {
       .attr("height", 10)
       .attr("fill", (d) => colorScale(d.flavor));
 
+      arcs.append("path")
+      .attr("d", arc)
+      .attr("fill", (d) => colorScale(d.data.flavor))
+      .append("title") // Add a tooltip with the count
+      .text((d) => `${d.data.value} ${d.data.flavor}`);
+
     key
       .selectAll(".legend")
       .append("text")
@@ -162,6 +168,12 @@ const AdminStats = ({user, allWine, statsButton, setStatsButoon}) => {
         .attr("width", 10)
         .attr("height", 10)
         .attr("fill", (d) => colorScale(d.state));
+
+        arcs.append("path")
+        .attr("d", arc)
+        .attr("fill", (d) => colorScale(d.data.state))
+        .append("title") // Add a tooltip with the count
+        .text((d) => `${d.data.value} ${d.data.state}`);
 
     key
         .selectAll(".legend")

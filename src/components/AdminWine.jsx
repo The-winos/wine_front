@@ -371,7 +371,7 @@ const handleSort = (column) => {
   />
 </div>
 
-
+<p colSpan="6" style={{ textAlign: "center" }}>{allWine.length} Total Wines</p>
       <table className="table m-4">
         <thead>
         <tr>

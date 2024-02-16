@@ -92,7 +92,7 @@ const AdminUser = ({
     }
   };
 
-  const sortedUsers = allUsers.slice().sort((a, b) => {
+  const sortedUsers = filteredUsers.slice().sort((a, b) => {
     // Perform sorting based on sortColumn and sortDirection
     switch (sortColumn) {
       case "username":
@@ -555,7 +555,9 @@ const AdminUser = ({
             />
             </div>
               </div>
+              <p colSpan="6" style={{ textAlign: "center" }}>{allUsers.length-1} Total Users</p>
               <table className="table m-4">
+
                 <thead>
                   <tr>
                     <th style={{cursor: "pointer"}} onClick={() => handleSort("username")}>Username</th>
@@ -568,9 +570,8 @@ const AdminUser = ({
                 </thead>
                 <tbody>
                   {sortedUsers
-                    .filter((user) => user.username !== "Deleted User")
-                    .sort((a, b) => a.username.localeCompare(b.username))
-                    .map((user) => (
+  .filter((user) => user.username !== "Deleted User")
+  .map((user) => (
                       <tr key={`userlist-${user.id}`}>
                         <td
                           style={{
