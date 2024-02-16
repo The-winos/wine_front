@@ -11,7 +11,7 @@ const LoginForgotPass = () => {
     try {
       // Make an API request to your backend to validate the token
       const response = await checkToken(resetToken)
-      console.log(response, "response")
+
       if (response.ok) {
         // Token is valid, update state accordingly
         setTokenValid(true);

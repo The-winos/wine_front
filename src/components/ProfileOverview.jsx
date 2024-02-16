@@ -206,7 +206,7 @@ const ProfileOverview = ({
                     What Types of Wine I Review
                   </h6>
                 </div>
-                {console.log(userReviews, "in parent")}
+
                 <UserData userReviews={userReviews} />
               </div>
               <div className="bottom-right container-box">

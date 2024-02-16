@@ -88,7 +88,7 @@ const ReviewUpdate = ({
       }
 
       const result = await deleteItem(type, reviewId);
-      console.log(result);
+
       setUpdateReview(false);
       toast.success(`Review deleted`);
     } catch (error) {}

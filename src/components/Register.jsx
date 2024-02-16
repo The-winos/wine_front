@@ -79,7 +79,7 @@ const Register = ({ user = null, setLoggedIn = () => {} }) => {
 
     if (!isValidBirthday(birthday)) {
       setError("Invalid birthday format or age.");
-      console.log(formattedBirthday, "formbday")
+
       return;
     }
 

@@ -90,7 +90,7 @@ const ProfileAccountSettings = ({
           user.join_date
         );
       } else {
-        console.log("This is name", name);
+
         const updateUserInfo = await updateUser(
           user.username,
           undefined,

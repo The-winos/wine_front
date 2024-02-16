@@ -8,16 +8,19 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AdminUser from "./AdminUser";
 import AdminWine from "./AdminWine";
+import AdminStats from "./AdminStats";
+import AdminReviews from "./AdminReviews";
 
 
-const Admin = ({ user, allReviews }) => {
+const Admin = ({ user, allReviews, allWine, setAllWine }) => {
 
-  const [allWine, setAllWine]= useState([]);
   const [filteredWines, setFilteredWines]=useState([])
   const [userButton, setUserButton]=useState(false);
   const [updateTheUser, setUpdateTheUser] = useState(false);
   const [wineButton, setWineButton]=useState(false);
   const [updatingTheWine, setUpdatingTheWine] = useState(false);
+  const [statsButton, setStatsButton]=useState(true);
+  const [reviewsButton, setReviewsButton]=useState(false);
 
 
 
@@ -46,6 +49,7 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setUserButton(true);
         setWineButton(false);
+        setStatsButton(false)
         setUpdatingTheWine(false);
       }}
       className="btn btn-primary mx-2"
@@ -59,6 +63,7 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setUserButton(false);
         setUpdateTheUser(false);
+        setStatsButton(true)
       }}
       className="btn btn-primary mx-2"
     >
@@ -73,6 +78,7 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setWineButton(true);
         setUserButton(false);
+        setStatsButton(false)
         setUpdateTheUser(false);
       }}
       className="btn btn-primary mx-2"
@@ -86,10 +92,70 @@ const Admin = ({ user, allReviews }) => {
       onClick={() => {
         setWineButton(false);
         setUpdatingTheWine(false);
+        setStatsButton(true)
       }}
       className="btn btn-primary mx-2"
     >
       Close Wines
+    </button>
+
+    </>
+  )}
+    {!statsButton ? (
+    <>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUserButton(false);
+        setStatsButton(true)
+        setUpdateTheUser(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Open Stats
+    </button>
+
+    </>
+  ) : (<>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUpdatingTheWine(false);
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Close Stats
+    </button>
+
+    </>
+  )}
+
+{!reviewsButton ? (
+    <>
+    <button
+      onClick={() => {
+        setWineButton(false);
+        setUserButton(false);
+        setStatsButton(false)
+        setUpdateTheUser(false);
+        setReviewsButton(true)
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Open Reviews
+    </button>
+
+    </>
+  ) : (<>
+    <button
+      onClick={() => {
+        setReviewsButton(false);
+        setUpdatingTheWine(false);
+        setStatsButton(true)
+      }}
+      className="btn btn-primary mx-2"
+    >
+      Close Reviews
     </button>
 
     </>
@@ -103,7 +169,9 @@ const Admin = ({ user, allReviews }) => {
 
             <AdminWine allWine={allWine} updatingTheWine={updatingTheWine} setUpdatingTheWine={setUpdatingTheWine} wineButton={wineButton} setWineButton={setWineButton} filteredWines={filteredWines} setFilteredWines={setFilteredWines} allReviews={allReviews}/>
 
+            <AdminStats user={user} allWine={allWine} statsButton={statsButton} setStatsButton={setStatsButton}/>
 
+            <AdminReviews user={user} allWine={allWine} reviewsButton={reviewsButton} setReviewsButton={setReviewsButton} allReviews={allReviews}/>
 
       </>
       <ToastContainer />

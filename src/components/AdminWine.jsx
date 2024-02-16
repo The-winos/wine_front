@@ -130,7 +130,7 @@ const handleSort = (column) => {
       await Promise.all(reviews.map((review) => deleteItem("reviews", review.id)));
 
       const favorites= await getFavoritesByWine(id)
-      console.log(favorites, "any favorites?")
+
       if(favorites.length){
       await Promise.all(favorites.map((favorite)=>{
         deleteItem("favorites", favorite.id)
@@ -143,7 +143,7 @@ const handleSort = (column) => {
       }))}
 
       const result = await deleteItem(type, id);
-      console.log(result);
+
       setUpdatingTheWine(false)
       toast.success(`${updatingWine.name} deleted`)
 
@@ -257,6 +257,60 @@ const handleSort = (column) => {
                   }}
                 />
                 </div>
+                {changeImage && (
+                <div className="avatar-grid">
+                  <h6>Choose Wine Image</h6>
+                  <br />
+                  <img
+        src="/images/1-green_wine.png"
+        alt="image"
+        className={`image ${image === "1-green_wine.png" ? "selected" : ""}`}
+        onClick={() => setImage("1-green_wine.png")}
+        style={{
+          height: "50px",
+          width: "50px",
+          objectFit: "contain",
+          objectPosition: "center center",
+          cursor: "pointer",
+        }}
+      />
+      <img
+        src="/images/2-purple_wine.png"
+        alt="image"
+        className={`image ${image === "2-purple_wine.png" ? "selected" : ""}`}
+        onClick={() => setImage("2-purple_wine.png")}
+        style={{
+          height: "50px",
+          width: "50px",
+          objectFit: "contain",
+          objectPosition: "center center",
+          cursor: "pointer",
+        }}
+      />
+      <img
+        src="/images/3-reddish-purple_wine.png"
+        alt="image"
+        className={`image ${image === "3-reddish-purple_wine.png" ? "selected" : ""}`}
+        onClick={() => setImage("3-reddish-purple_wine.png")}
+        style={{
+          height: "50px",
+          width: "50px",
+          objectFit: "contain",
+          objectPosition: "center center",
+          cursor: "pointer",
+        }}
+      />
+                  <button
+                    onClick={() => {
+                      setChangeImage(false);
+                    }}
+                    variant="outline-secondary"
+                    size="sm"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
             <br />
             <button type="submit" className="btn btn-primary">
@@ -317,7 +371,7 @@ const handleSort = (column) => {
   />
 </div>
 
-
+<p colSpan="6" style={{ textAlign: "center" }}>{allWine.length} Total Wines</p>
       <table className="table m-4">
         <thead>
         <tr>

@@ -14,7 +14,7 @@ const LoginEnterEmail = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("entered handleSubmit")
+
     try {
       const result = await sendResetEmail(email); // Call your API function
       if (result.message === "Password reset email sent") {
