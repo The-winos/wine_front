@@ -2,7 +2,6 @@ export { default as Main } from "./Main";
 export { default as Navbar } from "./Navbar";
 export { default as Admin } from "./Admin";
 export { default as Followers } from "./Followers";
-export { default as Following } from "./Following";
 export { default as Login } from "./Login";
 export { default as Merchant } from "./Merchant";
 export { default as Profile } from "./Profile";
