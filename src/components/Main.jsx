@@ -4,7 +4,6 @@ import {
   Admin,
 FavoritesUserId,
 Followers,
-Following,
 Footer,
 FooterAboutUs,
 FooterContact,
@@ -144,7 +143,7 @@ const Main = () => {
           path="/followers"
           element={<Followers user={user} favorites={favorites} saved={saved} />}
         ></Route>
-        <Route path="/following" element={<Following />}></Route>
+
         <Route path="/merchant" element={<Merchant />}></Route>
         <Route
           path="/profile"

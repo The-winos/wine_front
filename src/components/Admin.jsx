@@ -1,8 +1,8 @@
 //same as profile but add admin functions to receive user reports, edit posts, edit users, edit badges?
 import React from "react";
 import { useEffect, useState } from "react";
-import { getAllUsers, getAllWine } from "./API";
-import { ToastContainer, toast } from 'react-toastify';
+import {  getAllWine } from "./API";
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

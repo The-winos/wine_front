@@ -2,12 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {
   deleteItem,
-  getFavorites,
-  getSaved,
-  getWineById,
-  updateWine,
-  getReviewsByWineId,
-  getFavoritesByWine,
   getReviewById,
   updateReview,
   getUserById,
@@ -18,10 +12,10 @@ import { handleSearch } from "./SearchBar";
 
 const AdminReviews = ({
   allReviews,
-  setReviewsButton,
+
   reviewsButton,
-  user,
-  allWine,
+
+
 }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");

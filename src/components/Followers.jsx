@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { NavLink } from "react-router-dom";
 import { getReviewsByFollowers, getWineById, getUserById } from "./API";
@@ -12,95 +11,73 @@ const LazyFriendReview = lazy(() => import("./FriendReview"));
 
 const Followers = ({ user, favorites, saved }) => {
   const [reviewFollowers, setReviewFollowers] = useState([]);
-
-  const [searchOpen, setSearchOpen] = useState(false);
   const [filteredReviews, setFilteredReviews] = useState([]);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchCriteria, setSearchCriteria] = useState({
+    searchName: "",
+    searchRegion: "",
+    searchType: "",
+    searchUsername: "",
+  });
   const [selectedRating, setSelectedRating] = useState("all");
-  const [searchName, setSearchName] = useState("");
-  const [searchRegion, setSearchRegion] = useState("");
-  const [searchType, setSearchType] = useState("");
-  const [searchUsername, setSearchUsername] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchFollowerRev() {
+    const fetchReviews = async () => {
       const followerReview = await getReviewsByFollowers(user.id);
       setReviewFollowers(followerReview);
-      setFilteredReviews(followerReview);
-    }
+    };
+
     if (user) {
-      fetchFollowerRev();
+      fetchReviews();
     }
   }, [user]);
 
   useEffect(() => {
-    const filterReviews = async () => {
-      const results = await Promise.all(
-        reviewFollowers.map(async (wine) => {
-          const wineObj = await getWineById(wine.wine_id);
-          if (wineObj.name.toLowerCase().includes(searchName.toLowerCase())) {
-            return wine;
-          }
-        })
-      );
-      setFilteredReviews(results.filter((wine) => wine !== undefined));
+    const applyFilters = async () => {
+      let filteredResults = [...reviewFollowers];
+
+      // Apply search filters
+      for (const [key, value] of Object.entries(searchCriteria)) {
+        if (value.trim() !== "") {
+          filteredResults = filteredResults.filter((wine) =>
+            wineFilter(wine, key, value)
+          );
+        }
+      }
+
+      // Apply rating filter
+      if (selectedRating !== "all") {
+        filteredResults = filteredResults.filter(
+          (wine) => wine.rating === selectedRating
+        );
+      }
+
+      setFilteredReviews(filteredResults);
     };
 
-    filterReviews();
-  }, [searchName]);
+    applyFilters();
+  }, [reviewFollowers, searchCriteria, selectedRating]);
 
-  useEffect(() => {
-    const filterReviews = async () => {
-      const results = await Promise.all(
-        reviewFollowers.map(async (wine) => {
-          const userObj = await getUserById(wine.user_id);
-          if (
-            userObj.username
-              .toLowerCase()
-              .includes(searchUsername.toLowerCase())
-          ) {
-            return wine;
-          }
-        })
-      );
-      setFilteredReviews(results.filter((wine) => wine !== undefined));
-    };
-    filterReviews();
-  }, [searchUsername]);
+  const wineFilter = (wine, key, value) => {
+    switch (key) {
+      case "searchName":
+        return wine.name.toLowerCase().includes(value.toLowerCase());
+      case "searchRegion":
+        return wine.region.toLowerCase().includes(value.toLowerCase());
+      case "searchType":
+        return wine.flavor.toLowerCase().includes(value.toLowerCase());
+      case "searchUsername":
+        return wine.username.toLowerCase().includes(value.toLowerCase());
+      default:
+        return true;
+    }
+  };
 
-  useEffect(() => {
-    const filterReviews = async () => {
-      const results = await Promise.all(
-        reviewFollowers.map(async (wine) => {
-          const wineObj = await getWineById(wine.wine_id);
-          if (
-            wineObj.region.toLowerCase().includes(searchRegion.toLowerCase())
-          ) {
-            return wine;
-          }
-        })
-      );
-      setFilteredReviews(results.filter((wine) => wine !== undefined));
-    };
-
-    filterReviews();
-  }, [searchRegion]);
-
-  useEffect(() => {
-    const filterReviews = async () => {
-      const results = await Promise.all(
-        reviewFollowers.map(async (wine) => {
-          const wineObj = await getWineById(wine.wine_id);
-          if (wineObj.flavor.toLowerCase().includes(searchType.toLowerCase())) {
-            return wine;
-          }
-        })
-      );
-      setFilteredReviews(results.filter((wine) => wine !== undefined));
-    };
-
-    filterReviews();
-  }, [searchType]);
+  const handleSearchChange = (event, setter) => {
+    handleSearch(event, setter);
+    setSearchOpen(true);
+  };
 
   return (
     <div id="friendFeed" className="friendFeed">
@@ -120,47 +97,40 @@ const Followers = ({ user, favorites, saved }) => {
                   they're made
                 </h3>
                 <label htmlFor="name-filter">Find a wine by name: </label>
-                <input
-                  type="text"
-                  id="name-filter"
-                  name="search-name"
-                  value={searchName}
-                  onChange={(event) => {
-                    handleSearch(event, setSearchName);
-                  }}
-                />
-                <label htmlFor="region-filter">Find a wine by region: </label>
-                <input
-                  type="text"
-                  id="region-filter"
-                  name="search-region"
-                  value={searchRegion}
-                  onChange={(event) => {
-                    handleSearch(event, setSearchRegion);
-                  }}
-                />
-                <label htmlFor="type-filter">Wine by type: </label>
-                <input
-                  type="text"
-                  id="type-filter"
-                  name="search-type"
-                  value={searchType}
-                  onChange={(event) => {
-                    handleSearch(event, setSearchType);
-                  }}
-                />
-                <label htmlFor="type-filter">
-                  Search Reviews by Username:{" "}
-                </label>
-                <input
-                  type="text"
-                  id="type-filter"
-                  name="search-user"
-                  value={searchUsername}
-                  onChange={(event) => {
-                    handleSearch(event, setSearchUsername);
-                  }}
-                />
+<input
+  type="text"
+  id="name-filter"
+  name="search-name"
+  value={searchCriteria.searchName}
+  onChange={(event) => handleSearchChange(event, setSearchCriteria)}
+/>
+
+<label htmlFor="region-filter">Find a wine by region: </label>
+<input
+  type="text"
+  id="region-filter"
+  name="search-region"
+  value={searchCriteria.searchRegion}
+  onChange={(event) => handleSearchChange(event, setSearchCriteria)}
+/>
+
+<label htmlFor="type-filter">Wine by type: </label>
+<input
+  type="text"
+  id="type-filter"
+  name="search-type"
+  value={searchCriteria.searchType}
+  onChange={(event) => handleSearchChange(event, setSearchCriteria)}
+/>
+
+<label htmlFor="type-filter">Search Reviews by Username: </label>
+<input
+  type="text"
+  id="user-filter"
+  name="search-user"
+  value={searchCriteria.searchUsername}
+  onChange={(event) => handleSearchChange(event, setSearchCriteria)}
+/>
               </div>
               <div className="sort-filter-box p-3">
                 <h3>Or you can search by price or rating</h3>
@@ -243,14 +213,19 @@ const Followers = ({ user, favorites, saved }) => {
         )}
       </div>
       <div id="freview" className="frev pb-5 mt-5">
-        {user && filteredReviews.length ? (
+        {filteredReviews.length ? (
           filteredReviews
             .sort((a, b) => new Date(b.review_date) - new Date(a.review_date))
             .map((reviews) => {
               return (
                 <div key={`followerReview-${reviews.id}`}>
                   <Suspense fallback={<div>Loading...</div>}>
-                  <LazyFriendReview reviews={reviews} user={user} favorites={favorites} saved={saved} />
+                    <LazyFriendReview
+                      reviews={reviews}
+                      user={user}
+                      favorites={favorites}
+                      saved={saved}
+                    />
                   </Suspense>
                 </div>
               );
