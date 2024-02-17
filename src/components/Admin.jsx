@@ -51,6 +51,7 @@ const Admin = ({ user, allReviews, allWine, setAllWine }) => {
         setWineButton(false);
         setStatsButton(false)
         setUpdatingTheWine(false);
+        setReviewsButton(false);
       }}
       className="btn btn-primary mx-2"
     >
@@ -63,6 +64,7 @@ const Admin = ({ user, allReviews, allWine, setAllWine }) => {
       onClick={() => {
         setUserButton(false);
         setUpdateTheUser(false);
+        setReviewsButton(false);
         setStatsButton(true)
       }}
       className="btn btn-primary mx-2"
@@ -80,6 +82,7 @@ const Admin = ({ user, allReviews, allWine, setAllWine }) => {
         setUserButton(false);
         setStatsButton(false)
         setUpdateTheUser(false);
+        setReviewsButton(false);
       }}
       className="btn btn-primary mx-2"
     >
@@ -109,6 +112,7 @@ const Admin = ({ user, allReviews, allWine, setAllWine }) => {
         setUserButton(false);
         setStatsButton(true)
         setUpdateTheUser(false);
+        setReviewsButton(false);
       }}
       className="btn btn-primary mx-2"
     >
@@ -151,6 +155,7 @@ const Admin = ({ user, allReviews, allWine, setAllWine }) => {
       onClick={() => {
         setReviewsButton(false);
         setUpdatingTheWine(false);
+
         setStatsButton(true)
       }}
       className="btn btn-primary mx-2"

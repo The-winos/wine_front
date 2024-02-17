@@ -598,6 +598,9 @@ button {
 }
 
 /* admin */
+#admin{
+  padding-bottom: 8rem !important;
+}
 .avatar {
   border: none;
 }
