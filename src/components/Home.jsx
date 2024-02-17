@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getWineById, getAllWine } from "./API";
+import { getAllWine } from "./API";
 import Rating from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
@@ -44,13 +44,13 @@ const Home = ({ allWine, setAllWine, user }) => {
     <div id="Home" className="text-center pt-5 pb-5">
       <div className="home-header">
         <img
-          src="/public/images/4-wine_glass.png"
+          src="/images/4-wine_glass.png"
           alt="Wine Glass"
           className="home-image"
         />
         <h2>C.O.R.K.S</h2>
         <img
-          src="public/images/4-wine_glass.png"
+          src="/images/4-wine_glass.png"
           alt="Wine Glass"
           className="home-image"
         />
